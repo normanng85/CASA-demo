@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Child Demographics Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f5f4f0;
+      --surface:   #ffffff;
+      --surface2:  #f0efe9;
+      --border:    rgba(0,0,0,0.1);
+      --text:      #1a1a18;
+      --text2:     #5f5e5a;
+      --text3:     #888780;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:       #1a1a18;
+        --surface:  #242422;
+        --surface2: #2e2e2b;
+        --border:   rgba(255,255,255,0.1);
+        --text:     #e8e7e1;
+        --text2:    #b4b2a9;
+        --text3:    #73726c;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 0.5px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    header span {
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3rem;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .metric {
+      background: var(--surface2);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+    }
+
+    .metric .label {
+      font-size: 12px;
+      color: var(--text3);
+      margin-bottom: 4px;
+    }
+
+    .metric .val {
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .metric .sub {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 3px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 2rem 0 .85rem;
+      padding-bottom: 6px;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: .85rem;
+    }
+
+    .cw { position: relative; width: 100%; }
+
+    .two   { display: grid; grid-template-columns: 1fr 1fr;       gap: 12px; }
+    .three { display: grid; grid-template-columns: 1fr 1fr 1fr;   gap: 12px; }
+
+    .leg {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    .leg span { display: flex; align-items: center; gap: 5px; }
+    .leg i    { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text3);
+      padding: 2rem 0 1rem;
+    }
+
+    @media (max-width: 800px) {
+      .three { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      header { padding: 1rem; }
+      main   { padding: 1rem 1rem 2rem; }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .two, .three { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Child Demographics Dashboard</h1>
+    <span>Active cases · Jul 2025 – Feb 2026</span>
+  </header>
+
+  <main>
+
+    <!-- Summary metrics -->
+    <div class="metric-grid">
+      <div class="metric">
+        <div class="label">Avg monthly census</div>
+        <div class="val">123</div>
+        <div class="sub">Active children</div>
+      </div>
+      <div class="metric">
+        <div class="label">Peak month</div>
+        <div class="val">128</div>
+        <div class="sub">Aug 2025</div>
+      </div>
+      <div class="metric">
+        <div class="label">Low month</div>
+        <div class="val">117</div>
+        <div class="sub">Jan 2026</div>
+      </div>
+      <div class="metric">
+        <div class="label">Avg gender split</div>
+        <div class="val">51/49</div>
+        <div class="sub">F / M</div>
+      </div>
+    </div>
+
+    <!-- Census -->
+    <div class="section-title">Census</div>
+    <div class="card">
+      <div class="card-title">Monthly active children — Jul 2025 to Feb 2026</div>
+      <div class="cw" style="height:220px"><canvas id="c1"></canvas></div>
+    </div>
+
+    <!-- Race / Ethnicity -->
+    <div class="section-title">Race / Ethnicity</div>
+    <div class="two">
+      <div class="card">
+        <div class="card-title">Race/ethnicity over time (stacked)</div>
+        <div class="leg" id="rleg"></div>
+        <div class="cw" style="height:240px"><canvas id="c2"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Race/ethnicity — Feb 2026</div>
+        <div class="cw" style="height:240px"><canvas id="c3"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Age -->
+    <div class="section-title">Age Distribution</div>
+    <div class="three">
+      <div class="card">
+        <div class="card-title">Age groups — Jul 2025</div>
+        <div class="cw" style="height:220px"><canvas id="c4"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Age groups — Jan 2026</div>
+        <div class="cw" style="height:220px"><canvas id="c5"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Age groups — Feb 2026</div>
+        <div class="cw" style="height:220px"><canvas id="c6"></canvas></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Age group trend over time — 4-year bands</div>
+      <div class="leg" id="agleg"></div>
+      <div class="cw" style="height:240px"><canvas id="c7"></canvas></div>
+    </div>
+
+    <!-- Petitions -->
+    <div class="section-title">Petition Types</div>
+    <div class="two">
+      <div class="card">
+        <div class="card-title">Petition types over time (stacked)</div>
+        <div class="leg" id="pleg"></div>
+        <div class="cw" style="height:240px"><canvas id="c8"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">FN vs FG trend</div>
+        <div class="cw" style="height:240px"><canvas id="c9"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Gender -->
+    <div class="section-title">Gender</div>
+    <div class="two">
+      <div class="card">
+        <div class="card-title">Gender split — Feb 2026</div>
+        <div class="cw" style="height:200px"><canvas id="c10"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Female vs male over time</div>
+        <div class="cw" style="height:200px"><canvas id="c11"></canvas></div>
+      </div>
+    </div>
+
+    <footer>Data source: Child Demographics Summary – Active Cases &nbsp;·&nbsp; Generated from monthly XLS reports</footer>
+
+  </main>
+
+  <script>
+    var months = ['Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26'];
+    var total  = [127,128,126,121,121,121,117,126];
+    var female = [65,64,63,60,59,56,54,58];
+    var male   = [62,64,63,61,62,65,63,68];
+
+    var raceKeys   = ['Asian','Black/Afr. Am.','Hispanic/Latino','Two or More','Unknown','White'];
+    var raceColors = ['#3B8BD4','#A32D2D','#BA7517','#534AB7','#888780','#0F6E56'];
+    var raceData   = [
+      [8,8,8,8,8,8,8,8],
+      [34,35,32,30,31,35,38,42],
+      [24,25,26,23,22,22,21,23],
+      [18,18,18,18,18,17,12,12],
+      [3,5,6,5,5,4,5,6],
+      [40,37,36,37,37,35,33,35]
+    ];
+
+    var petKeys   = ['Adoption','FC/Avail adopt','FC/court id','FC/18+','FG','FN'];
+    var petColors = ['#3B8BD4','#185FA5','#639922','#3B6D11','#BA7517','#A32D2D'];
+    var petData   = [
+      [1,1,1,1,1,1,1,1],
+      [12,13,14,15,15,13,12,15],
+      [25,24,26,25,25,24,18,19],
+      [6,6,6,6,6,7,8,7],
+      [14,13,13,15,19,19,22,22],
+      [89,90,92,85,83,77,72,77]
+    ];
+
+    // Raw age data per month [0-11mo, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 18+]
+    var rawAge = [
+      [8,10,7,8,8,3,6,3,9,5,5,6,5,9,8,6,6,7,4,4],
+      [10,9,8,9,7,3,6,3,9,3,5,6,3,10,9,3,10,6,4,5],
+      [11,11,6,10,6,4,4,4,7,3,4,5,4,9,8,5,6,10,4,5],
+      [12,9,7,10,6,4,4,3,6,3,5,5,4,7,9,5,3,10,4,5],
+      [11,10,7,10,6,4,3,4,3,6,5,4,5,7,9,5,3,9,5,5],
+      [12,9,6,8,7,6,1,5,3,5,5,5,7,5,11,4,3,8,6,5],
+      [13,8,6,7,7,7,2,4,4,4,4,3,7,5,9,5,4,7,5,6],
+      [14,8,6,7,8,6,3,6,4,4,6,3,7,5,9,8,4,8,5,5]
+    ];
+
+    var ageBandLabels = ['0–3','4–7','8–11','12–15','16–18+'];
+    var ageBandColors = ['#3B8BD4','#0F6E56','#BA7517','#534AB7','#A32D2D'];
+
+    function bandRow(r) {
+      return [
+        r[0]+r[1]+r[2]+r[3],
+        r[4]+r[5]+r[6]+r[7],
+        r[8]+r[9]+r[10]+r[11],
+        r[12]+r[13]+r[14]+r[15],
+        r[16]+r[17]+r[18]+r[19]
+      ];
+    }
+
+    var ageBandsByMonth = rawAge.map(bandRow);
+    var ageBandSeries   = ageBandLabels.map(function(_,bi){
+      return ageBandsByMonth.map(function(m){ return m[bi]; });
+    });
+
+    var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var gridColor  = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+    var tickColor  = isDark ? '#73726c' : '#888780';
+    var P = { responsive: true, maintainAspectRatio: false };
+
+    function leg(id, keys, colors) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = keys.map(function(k, i) {
+        return '<span><i style="background:' + colors[i] + '"></i>' + k + '</span>';
+      }).join('');
+    }
+
+    function ageBarChart(id, monthIdx) {
+      new Chart(document.getElementById(id), {
+        type: 'bar',
+        data: {
+          labels: ageBandLabels,
+          datasets: [{
+            label: 'Children',
+            data: bandRow(rawAge[monthIdx]),
+            backgroundColor: ageBandColors,
+            borderRadius: 4,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          ...P,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: tickColor, font: { size: 12 } }, grid: { display: false } },
+            y: { ticks: { color: tickColor, stepSize: 5 }, grid: { color: gridColor }, beginAtZero: true }
+          }
+        }
+      });
+    }
+
+    // Census line
+    new Chart(document.getElementById('c1'), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Children', data: total,
+          borderColor: '#3B8BD4', backgroundColor: 'rgba(59,139,212,0.1)',
+          fill: true, tension: 0.35,
+          pointRadius: 5, pointBackgroundColor: '#3B8BD4', pointBorderColor: '#fff', pointBorderWidth: 1.5
+        }]
+      },
+      options: {
+        ...P,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { min: 110, max: 135, ticks: { color: tickColor, stepSize: 5 }, grid: { color: gridColor } },
+          x: { ticks: { color: tickColor }, grid: { display: false } }
+        }
+      }
+    });
+
+    // Race stacked bar
+    leg('rleg', raceKeys, raceColors);
+    new Chart(document.getElementById('c2'), {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: raceKeys.map(function(k, i) {
+          return { label: k, data: raceData[i], backgroundColor: raceColors[i], stack: 's' };
+        })
+      },
+      options: {
+        ...P,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { stacked: true, ticks: { color: tickColor }, grid: { display: false } },
+          y: { stacked: true, ticks: { color: tickColor }, grid: { color: gridColor } }
+        }
+      }
+    });
+
+    // Race doughnut Feb 2026
+    new Chart(document.getElementById('c3'), {
+      type: 'doughnut',
+      data: {
+        labels: raceKeys,
+        datasets: [{
+          data: raceData.map(function(d) { return d[7]; }),
+          backgroundColor: raceColors,
+          borderWidth: 2,
+          borderColor: isDark ? '#242422' : '#ffffff'
+        }]
+      },
+      options: {
+        ...P,
+        plugins: {
+          legend: { position: 'right', labels: { font: { size: 11 }, padding: 10, color: tickColor } }
+        }
+      }
+    });
+
+    // Age bar charts
+    ageBarChart('c4', 0);
+    ageBarChart('c5', 6);
+    ageBarChart('c6', 7);
+
+    // Age band trend line
+    leg('agleg', ageBandLabels, ageBandColors);
+    new Chart(document.getElementById('c7'), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: ageBandLabels.map(function(k, i) {
+          return {
+            label: k, data: ageBandSeries[i],
+            borderColor: ageBandColors[i], backgroundColor: 'transparent',
+            tension: 0.3, pointRadius: 4, pointBackgroundColor: ageBandColors[i]
+          };
+        })
+      },
+      options: {
+        ...P,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { ticks: { color: tickColor }, grid: { color: gridColor }, beginAtZero: true },
+          x: { ticks: { color: tickColor }, grid: { display: false } }
+        }
+      }
+    });
+
+    // Petition stacked bar
+    leg('pleg', petKeys, petColors);
+    new Chart(document.getElementById('c8'), {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: petKeys.map(function(k, i) {
+          return { label: k, data: petData[i], backgroundColor: petColors[i], stack: 's' };
+        })
+      },
+      options: {
+        ...P,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { stacked: true, ticks: { color: tickColor }, grid: { display: false } },
+          y: { stacked: true, ticks: { color: tickColor }, grid: { color: gridColor } }
+        }
+      }
+    });
+
+    // FN vs FG line
+    new Chart(document.getElementById('c9'), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          { label: 'FN', data: petData[5], borderColor: '#A32D2D', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#A32D2D' },
+          { label: 'FG', data: petData[4], borderColor: '#BA7517', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#BA7517' }
+        ]
+      },
+      options: {
+        ...P,
+        plugins: { legend: { position: 'top', labels: { font: { size: 12 }, color: tickColor } } },
+        scales: {
+          y: { ticks: { color: tickColor }, grid: { color: gridColor } },
+          x: { ticks: { color: tickColor }, grid: { display: false } }
+        }
+      }
+    });
+
+    // Gender doughnut
+    new Chart(document.getElementById('c10'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Female', 'Male'],
+        datasets: [{
+          data: [female[7], male[7]],
+          backgroundColor: ['#534AB7', '#3B8BD4'],
+          borderWidth: 2,
+          borderColor: isDark ? '#242422' : '#ffffff'
+        }]
+      },
+      options: {
+        ...P,
+        plugins: { legend: { position: 'bottom', labels: { font: { size: 13 }, color: tickColor, padding: 14 } } }
+      }
+    });
+
+    // Gender line
+    new Chart(document.getElementById('c11'), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          { label: 'Female', data: female, borderColor: '#534AB7', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#534AB7' },
+          { label: 'Male',   data: male,   borderColor: '#3B8BD4', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3B8BD4' }
+        ]
+      },
+      options: {
+        ...P,
+        plugins: { legend: { position: 'top', labels: { font: { size: 12 }, color: tickColor } } },
+        scales: {
+          y: { min: 50, max: 75, ticks: { color: tickColor }, grid: { color: gridColor } },
+          x: { ticks: { color: tickColor }, grid: { display: false } }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
