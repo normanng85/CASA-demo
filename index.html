@@ -170,19 +170,6 @@
     <div class="section-title">Census</div>
     <div class="card"><div class="card-title">Monthly active children — Jul 2025 to Feb 2026</div><div class="cw" style="height:220px"><canvas id="d_c1"></canvas></div></div>
 
-    <!-- DEMOGRAPHICS DRILL PANEL -->
-    <div id="d_drillpanel" style="display:none; margin-bottom:1rem;">
-      <div class="card" style="border-color:#534AB7; border-width:1px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-          <div>
-            <div id="d_drill_title" style="font-size:14px; font-weight:500; color:var(--text);"></div>
-            <div id="d_drill_sub" style="font-size:12px; color:var(--text3); margin-top:2px;"></div>
-          </div>
-          <button onclick="closeDemoDrill()" style="font-size:12px; color:var(--text3); background:var(--surface2); border:0.5px solid var(--border); border-radius:var(--radius-md); padding:5px 12px; cursor:pointer;">✕ Close</button>
-        </div>
-        <div id="d_drill_body"></div>
-      </div>
-    </div>
 
     <div class="section-title">Race / Ethnicity</div>
     <div class="two">
@@ -250,35 +237,6 @@
       <div class="metric"><div class="label">Active donors FY24/25</div><div class="val">278</div><div class="up">▲ 157% vs FY23/24</div></div>
     </div>
 
-    <!-- DRILL-DOWN PANEL -->
-    <div id="f_drillpanel" style="display:none; margin-bottom:1rem;">
-      <div class="card" style="border-color:#3B8BD4; border-width:1px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-          <div>
-            <div id="f_drill_title" style="font-size:14px; font-weight:500; color:var(--text);"></div>
-            <div id="f_drill_sub" style="font-size:12px; color:var(--text3); margin-top:2px;"></div>
-          </div>
-          <button onclick="closeDrill()" style="font-size:12px; color:var(--text3); background:var(--surface2); border:0.5px solid var(--border); border-radius:var(--radius-md); padding:5px 12px; cursor:pointer;">✕ Close</button>
-        </div>
-        <div class="two">
-          <div>
-            <div style="font-size:12px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">Gift amount breakdown</div>
-            <div class="cw" style="height:200px"><canvas id="f_drill_amount"></canvas></div>
-          </div>
-          <div>
-            <div style="font-size:12px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">Number of donors by range</div>
-            <div class="cw" style="height:200px"><canvas id="f_drill_count"></canvas></div>
-          </div>
-        </div>
-        <div style="margin-top:1rem;">
-          <div style="font-size:12px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">Individual vs organization split</div>
-          <div class="two">
-            <div class="cw" style="height:160px"><canvas id="f_drill_type_amt"></canvas></div>
-            <div class="cw" style="height:160px"><canvas id="f_drill_type_cnt"></canvas></div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="section-title">Total Giving Overview</div>
     <div class="card">
@@ -438,15 +396,60 @@ var fDrillIkOrgN = [1, 3, 2, 16, 30];
 
 var drillCharts = {};
 
+/* ── Shared drill panel builder ──
+   Creates a panel div, inserts it after `anchorEl`, and returns the panel.
+   anchorEl should be the chart's parent card or wrapper. */
+function createDrillPanel(anchorEl, title, sub, borderColor, closeFn) {
+  var panel = document.createElement('div');
+  panel.id = 'active_drill_panel';
+  panel.style.cssText = 'margin-top:-0.5rem; margin-bottom:1rem;';
+  panel.innerHTML =
+    '<div class="card" style="border-color:'+borderColor+'; border-width:1px;">'
+    + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">'
+    +   '<div>'
+    +     '<div id="drill_title" style="font-size:14px;font-weight:500;color:var(--text);">'+title+'</div>'
+    +     '<div id="drill_sub" style="font-size:12px;color:var(--text3);margin-top:2px;">'+sub+'</div>'
+    +   '</div>'
+    +   '<button id="drill_close_btn" style="font-size:12px;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:5px 12px;cursor:pointer;">✕ Close</button>'
+    + '</div>'
+    + '<div id="drill_body"></div>'
+    + '</div>';
+  anchorEl.insertAdjacentElement('afterend', panel);
+  panel.querySelector('#drill_close_btn').addEventListener('click', closeFn);
+  return panel;
+}
+
+function removeActiveDrillPanel() {
+  var existing = document.getElementById('active_drill_panel');
+  if (existing) existing.remove();
+}
+
+/* ── Demographics drill ── */
+var demoDrillChart = null;
+
+function closeDemoDrill() {
+  removeActiveDrillPanel();
+  if (demoDrillChart) { demoDrillChart.destroy(); demoDrillChart = null; }
+}
+
+function openDemoDrill(anchorEl, title, sub, buildFn) {
+  closeDemoDrill();
+  closeDrill();
+  var panel = createDrillPanel(anchorEl, title, sub, '#534AB7', closeDemoDrill);
+  demoDrillChart = buildFn(panel.querySelector('#drill_body'));
+}
+
+/* ── Fundraising drill ── */
 function closeDrill() {
-  document.getElementById('f_drillpanel').style.display = 'none';
-  Object.keys(drillCharts).forEach(function(k){
-    if(drillCharts[k]){ drillCharts[k].destroy(); drillCharts[k]=null; }
+  removeActiveDrillPanel();
+  Object.keys(drillCharts).forEach(function(k) {
+    if (drillCharts[k]) { drillCharts[k].destroy(); drillCharts[k] = null; }
   });
 }
 
-function openDrill(fyIdx, type) {
+function openDrill(fyIdx, type, anchorEl) {
   closeDrill();
+  closeDemoDrill();
   var drill  = type === 'inkind' ? fDrillInkind[fyIdx] : fDrillCash[fyIdx];
   var drill2 = type === 'combined' ? fDrillInkind[fyIdx] : null;
   var amounts = drill.map(function(b,i){ return b.sum + (drill2 ? drill2[i].sum : 0); });
@@ -459,10 +462,24 @@ function openDrill(fyIdx, type) {
   else if(type==='inkind'){indAmt=fII[fyIdx];orgAmt=fIO[fyIdx];indN=fDrillIkIndN[fyIdx];orgN=fDrillIkOrgN[fyIdx];}
   else{indAmt=fCI[fyIdx]+fII[fyIdx];orgAmt=fCO[fyIdx]+fIO[fyIdx];indN=fDrillIndN[fyIdx]+fDrillIkIndN[fyIdx];orgN=fDrillOrgN[fyIdx]+fDrillIkOrgN[fyIdx];}
 
-  document.getElementById('f_drill_title').textContent = fY[fyIdx]+' — '+typeLabel+' Drill-Down';
-  document.getElementById('f_drill_sub').textContent = dollarFmt(totalAmt)+' total · '+totalN+' donors';
-  document.getElementById('f_drillpanel').style.display = 'block';
-  document.getElementById('f_drillpanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  var panel = createDrillPanel(
+    anchorEl,
+    fY[fyIdx]+' — '+typeLabel+' Drill-Down',
+    dollarFmt(totalAmt)+' total · '+totalN+' donors',
+    '#3B8BD4',
+    closeDrill
+  );
+  var body = panel.querySelector('#drill_body');
+  body.innerHTML =
+    '<div class="two"><div>'
+    +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Gift amount breakdown</div>'
+    +'<div class="cw" style="height:200px"><canvas id="f_drill_amount"></canvas></div></div><div>'
+    +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Number of donors by range</div>'
+    +'<div class="cw" style="height:200px"><canvas id="f_drill_count"></canvas></div></div></div>'
+    +'<div style="margin-top:1rem;">'
+    +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Individual vs organization split</div>'
+    +'<div class="two"><div class="cw" style="height:160px"><canvas id="f_drill_type_amt"></canvas></div>'
+    +'<div class="cw" style="height:160px"><canvas id="f_drill_type_cnt"></canvas></div></div></div>';
 
   drillCharts.amount = new Chart(document.getElementById('f_drill_amount'),{type:'bar',
     data:{labels:fBL,datasets:[{label:'Amount raised',data:amounts,backgroundColor:fBC,borderRadius:4,borderSkipped:false}]},
@@ -487,28 +504,11 @@ function openDrill(fyIdx, type) {
       tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors ('+Math.round(c.raw/(indN+orgN)*100)+'%)';}}}}}});
 }
 
+
 function init() {
   if (typeof Chart === 'undefined') { setTimeout(init,100); return; }
 
   /* ─── DEMOGRAPHICS ─── */
-
-  /* Shared demo drill panel state */
-  var demoDrillChart = null;
-
-  function closeDemoDrill() {
-    document.getElementById('d_drillpanel').style.display = 'none';
-    document.getElementById('d_drill_body').innerHTML = '';
-    if(demoDrillChart){ demoDrillChart.destroy(); demoDrillChart = null; }
-  }
-
-  function openDemoDrill(title, sub, buildFn) {
-    closeDemoDrill();
-    document.getElementById('d_drill_title').textContent = title;
-    document.getElementById('d_drill_sub').textContent = sub;
-    document.getElementById('d_drillpanel').style.display = 'block';
-    document.getElementById('d_drillpanel').scrollIntoView({behavior:'smooth', block:'nearest'});
-    demoDrillChart = buildFn();
-  }
 
   /* ── d_c1: Census line ── */
   new Chart(document.getElementById('d_c1'),{type:'line',data:{labels:dM,datasets:[{label:'Children',data:dT,borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,tension:0.35,pointRadius:5,pointBackgroundColor:'#3B8BD4',pointBorderColor:'#fff',pointBorderWidth:1.5}]},options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},scales:{y:{min:110,max:135,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}}});
@@ -527,11 +527,12 @@ function init() {
     var monthLabel=dM[mi];
     var total=dT[mi];
     var vals=dRK.map(function(_,i){return dRD[i][mi];});
+    var anchor=e.target.closest('.card')||e.target.parentElement;
     openDemoDrill(
+      anchor,
       monthLabel+' — Race/ethnicity breakdown',
       'Total census: '+total+' children',
-      function(){
-        var body=document.getElementById('d_drill_body');
+      function(body){
         body.innerHTML='<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Composition</div><div class="cw" style="height:220px"><canvas id="d_drill_c1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Count by group</div><div class="cw" style="height:220px"><canvas id="d_drill_c2"></canvas></div></div></div>';
         new Chart(document.getElementById('d_drill_c1'),{type:'doughnut',
           data:{labels:dRK,datasets:[{data:vals,backgroundColor:dRC,borderWidth:2,borderColor:BC}]},
@@ -570,11 +571,12 @@ function init() {
     var total=dT[mi];
     var rawAges=dRA[mi];
     var colors=['#3B8BD4','#3B8BD4','#3B8BD4','#3B8BD4','#0F6E56','#0F6E56','#0F6E56','#0F6E56','#BA7517','#BA7517','#BA7517','#BA7517','#534AB7','#534AB7','#534AB7','#534AB7','#A32D2D','#A32D2D','#A32D2D','#A32D2D'];
+    var anchor=e.target.closest('.card')||e.target.parentElement;
     openDemoDrill(
+      anchor,
       monthLabel+' — Full age breakdown (all ages)',
       'Total census: '+total+' children  ·  4-year bands color-coded',
-      function(){
-        var body=document.getElementById('d_drill_body');
+      function(body){
         body.innerHTML='<div class="cw" style="height:280px"><canvas id="d_drill_age"></canvas></div>';
         return new Chart(document.getElementById('d_drill_age'),{type:'bar',
           data:{labels:dAgeAllLabels,datasets:[{label:'Children',data:rawAges,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},
@@ -602,11 +604,12 @@ function init() {
     var total=vals.reduce(function(a,b){return a+b;},0);
     // Sort by value descending for ranked view
     var sorted=dPK.map(function(k,i){return{k:k,v:vals[i],c:dPC[i]};}).sort(function(a,b){return b.v-a.v;});
+    var anchor=e.target.closest('.card')||e.target.parentElement;
     openDemoDrill(
+      anchor,
       monthLabel+' — Petition types breakdown',
       'Total petitions: '+total,
-      function(){
-        var body=document.getElementById('d_drill_body');
+      function(body){
         body.innerHTML='<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Ranked by count</div><div class="cw" style="height:220px"><canvas id="d_drill_pet1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Share of total</div><div class="cw" style="height:220px"><canvas id="d_drill_pet2"></canvas></div></div></div>';
         new Chart(document.getElementById('d_drill_pet1'),{type:'bar',
           data:{labels:sorted.map(function(d){return d.k;}),datasets:[{data:sorted.map(function(d){return d.v;}),backgroundColor:sorted.map(function(d){return d.c;}),borderRadius:4,borderSkipped:false}]},
@@ -646,11 +649,12 @@ function init() {
     var monthLabel=dM[mi];
     var female=dF[mi], male=dMa[mi], total=dT[mi];
     var femPct=Math.round(female/total*100), malePct=Math.round(male/total*100);
+    var anchor=e.target.closest('.card')||e.target.parentElement;
     openDemoDrill(
+      anchor,
       monthLabel+' — Census gender split',
       'Total active: '+total+' children',
-      function(){
-        var body=document.getElementById('d_drill_body');
+      function(body){
         body.innerHTML='<div class="two"><div><div class="cw" style="height:180px"><canvas id="d_drill_gend1"></canvas></div></div><div style="display:flex;flex-direction:column;justify-content:center;gap:16px;padding:1rem 0;">'
           +'<div style="background:rgba(83,74,183,0.1);border-left:3px solid #534AB7;border-radius:var(--radius-md);padding:.85rem 1rem;">'
           +'<div style="font-size:12px;color:#534AB7;font-weight:500;margin-bottom:4px;">Female</div>'
@@ -669,12 +673,15 @@ function init() {
   });
 
   /* ─── FUNDRAISING ─── */
-  // Helper: chart click → openDrill
+  // Helper: chart click → openDrill with anchor
   function addDrillClick(chart, type) {
     document.getElementById(chart.canvas.id).style.cursor = 'pointer';
     chart.canvas.addEventListener('click', function(e) {
       var pts = chart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
-      if(pts.length) openDrill(pts[0].index, type);
+      if(pts.length) {
+        var anchor = e.target.closest('.card') || e.target.parentElement;
+        openDrill(pts[0].index, type, anchor);
+      }
     });
   }
 
@@ -720,10 +727,8 @@ function init() {
     var pts=donorChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
     if(!pts.length)return;
     var fi=pts[0].index;
-    var indN=fDrillIndN[fi], orgN=fDrillOrgN[fi];
-    var ikIndN=fDrillIkIndN[fi], ikOrgN=fDrillIkOrgN[fi];
-    var totalCash=indN+orgN, totalIk=ikIndN+ikOrgN, totalAll=fD[fi];
-    openDrill(fi,'combined');
+    var anchor=e.target.closest('.card')||e.target.parentElement;
+    openDrill(fi,'combined',anchor);
   });
 
   var retTotal=249;
@@ -752,11 +757,19 @@ function init() {
     var cashN=fDrillCash[4][bi].n, cashAmt=fDrillCash[4][bi].sum;
     var ikN=fDrillInkind[4][bi].n, ikAmt=fDrillInkind[4][bi].sum;
     var totalN=cashN+ikN, totalAmt=cashAmt+ikAmt;
-    closeDrill();
-    document.getElementById('f_drill_title').textContent = 'FY24/25 '+bucket+' — Cash vs in-kind breakdown';
-    document.getElementById('f_drill_sub').textContent   = totalN+' donors · '+dollarFmt(totalAmt)+' total raised in this range';
-    document.getElementById('f_drillpanel').style.display='block';
-    document.getElementById('f_drillpanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+    closeDrill(); closeDemoDrill();
+    var anchor=e.target.closest('.card')||e.target.parentElement;
+    var panel=createDrillPanel(anchor,'FY24/25 '+bucket+' — Cash vs in-kind breakdown',totalN+' donors · '+dollarFmt(totalAmt)+' total raised in this range','#3B8BD4',closeDrill);
+    var body=panel.querySelector('#drill_body');
+    body.innerHTML=
+      '<div class="two"><div>'
+      +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Amount raised</div>'
+      +'<div class="cw" style="height:200px"><canvas id="f_drill_amount"></canvas></div></div><div>'
+      +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Number of donors</div>'
+      +'<div class="cw" style="height:200px"><canvas id="f_drill_count"></canvas></div></div></div>'
+      +'<div style="margin-top:1rem;"><div class="two">'
+      +'<div class="cw" style="height:160px"><canvas id="f_drill_type_amt"></canvas></div>'
+      +'<div class="cw" style="height:160px"><canvas id="f_drill_type_cnt"></canvas></div></div></div>';
     drillCharts.amount=new Chart(document.getElementById('f_drill_amount'),{type:'bar',
       data:{labels:['Cash gifts','In-kind gifts'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
       options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw)+' ('+Math.round(c.raw/totalAmt*100)+'% of range total)';}}}},
@@ -765,7 +778,6 @@ function init() {
       data:{labels:['Cash donors','In-kind donors'],datasets:[{data:[cashN,ikN],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
       options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
         scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});
-    var indAmt=fCI[4]+fII[4], orgAmt=fCO[4]+fIO[4], indN2=fDrillIndN[4]+fDrillIkIndN[4], orgN2=fDrillOrgN[4]+fDrillIkOrgN[4];
     drillCharts.typeAmt=new Chart(document.getElementById('f_drill_type_amt'),{type:'doughnut',
       data:{labels:['Cash','In-kind'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderWidth:2,borderColor:BC}]},
       options:{...P,plugins:{title:{display:true,text:'Amount: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
