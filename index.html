@@ -44,13 +44,10 @@
     .nav-btn.active-demo .icon { background:#3B8BD4; color:#fff; }
     .nav-btn.active-fund { background:#e8f4ef; color:#0B5240; border-color:#0F6E56; box-shadow:0 0 0 3px rgba(15,110,86,0.12); }
     .nav-btn.active-fund .icon { background:#0F6E56; color:#fff; }
-    .nav-btn.active-strat { background:#f3f0fd; color:#3B2F9E; border-color:#534AB7; box-shadow:0 0 0 3px rgba(83,74,183,0.12); }
-    .nav-btn.active-strat .icon { background:#534AB7; color:#fff; }
 
     @media (prefers-color-scheme: dark) {
       .nav-btn.active-demo  { background:rgba(59,139,212,0.15); color:#85B7EB; border-color:#3B8BD4; }
       .nav-btn.active-fund  { background:rgba(15,110,86,0.15);  color:#5DCAA5; border-color:#0F6E56; }
-      .nav-btn.active-strat { background:rgba(83,74,183,0.15);  color:#AFA9EC; border-color:#534AB7; }
     }
 
     /* LAYOUT */
@@ -88,23 +85,6 @@
     .metric .sub   { font-size:11px; color:var(--text3); margin-top:3px; }
     .metric .up    { font-size:11px; color:#0F6E56; margin-top:3px; }
     .metric .dn    { font-size:11px; color:#A32D2D; margin-top:3px; }
-    .metric .warn  { font-size:11px; color:#BA7517; margin-top:3px; }
-
-    /* GOAL PROGRESS BARS */
-    .goal-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-bottom:1rem; }
-    .goal-card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1rem 1.25rem; }
-    .goal-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
-    .goal-label { font-size:13px; font-weight:500; color:var(--text); }
-    .goal-value { font-size:13px; color:var(--text2); }
-    .goal-bar-bg { background:var(--surface2); border-radius:20px; height:8px; overflow:hidden; margin-bottom:5px; }
-    .goal-bar-fill { height:100%; border-radius:20px; transition:width 0.6s ease; }
-    .goal-meta { font-size:11px; color:var(--text3); }
-    .goal-met    .goal-bar-fill { background:#0F6E56; }
-    .goal-close  .goal-bar-fill { background:#BA7517; }
-    .goal-behind .goal-bar-fill { background:#A32D2D; }
-    .goal-met    .goal-meta-badge { color:#0F6E56; font-weight:500; }
-    .goal-close  .goal-meta-badge { color:#BA7517; font-weight:500; }
-    .goal-behind .goal-meta-badge { color:#A32D2D; font-weight:500; }
 
     /* SECTION / CARD */
     .section-title { font-size:12px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:0.06em; margin:2rem 0 .85rem; padding-bottom:6px; border-bottom:0.5px solid var(--border); }
@@ -128,12 +108,9 @@
 
     .chart-hint { font-size:11px; color:var(--text3); margin-bottom:8px; font-style:italic; }
 
-    /* GOAL TARGET LINE annotation label */
-    .goal-ref-label { font-size:11px; color:var(--text3); margin-top:4px; text-align:right; }
-
     footer { text-align:center; font-size:12px; color:var(--text3); padding:2rem 0 1rem; border-top:0.5px solid var(--border); margin-top:2rem; }
 
-    @media (max-width:900px) { .three{grid-template-columns:1fr 1fr;} .insight-grid{grid-template-columns:1fr 1fr;} .goal-grid{grid-template-columns:1fr;} }
+    @media (max-width:900px) { .three{grid-template-columns:1fr 1fr;} .insight-grid{grid-template-columns:1fr 1fr;} }
     @media (max-width:600px) {
       nav .brand{display:none;} .metric-grid{grid-template-columns:repeat(2,1fr);}
       .two,.three{grid-template-columns:1fr;} .insight-grid{grid-template-columns:1fr;}
@@ -150,9 +127,7 @@
   <a class="nav-btn" onclick="return showPage('fundraising',this,'active-fund')" href="#">
     <span class="icon">💰</span> Fundraising
   </a>
-  <a class="nav-btn" onclick="return showPage('strategic',this,'active-strat')" href="#">
-    <span class="icon">🎯</span> Strategic Plan
-  </a>
+
 </nav>
 
 
@@ -195,9 +170,23 @@
     <div class="section-title">Census</div>
     <div class="card"><div class="card-title">Monthly active children — Jul 2025 to Feb 2026</div><div class="cw" style="height:220px"><canvas id="d_c1"></canvas></div></div>
 
+    <!-- DEMOGRAPHICS DRILL PANEL -->
+    <div id="d_drillpanel" style="display:none; margin-bottom:1rem;">
+      <div class="card" style="border-color:#534AB7; border-width:1px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <div>
+            <div id="d_drill_title" style="font-size:14px; font-weight:500; color:var(--text);"></div>
+            <div id="d_drill_sub" style="font-size:12px; color:var(--text3); margin-top:2px;"></div>
+          </div>
+          <button onclick="closeDemoDrill()" style="font-size:12px; color:var(--text3); background:var(--surface2); border:0.5px solid var(--border); border-radius:var(--radius-md); padding:5px 12px; cursor:pointer;">✕ Close</button>
+        </div>
+        <div id="d_drill_body"></div>
+      </div>
+    </div>
+
     <div class="section-title">Race / Ethnicity</div>
     <div class="two">
-      <div class="card"><div class="card-title">Race/ethnicity over time</div><div class="chart-hint">Click legend pills to show/hide groups</div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
+      <div class="card"><div class="card-title">Race/ethnicity over time</div><div class="chart-hint">Click legend pills to show/hide &nbsp;·&nbsp; <strong>Click a bar to see that month's breakdown</strong></div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
       <div class="card"><div class="card-title">Race/ethnicity — Feb 2026</div><div class="cw" style="height:240px"><canvas id="d_c3"></canvas></div></div>
     </div>
 
@@ -207,18 +196,18 @@
       <div class="card"><div class="card-title">Age groups — Jan 2026</div><div class="cw" style="height:220px"><canvas id="d_c5"></canvas></div></div>
       <div class="card"><div class="card-title">Age groups — Feb 2026</div><div class="cw" style="height:220px"><canvas id="d_c6"></canvas></div></div>
     </div>
-    <div class="card"><div class="card-title">Age group trend over time — 4-year bands</div><div class="chart-hint">Click legend pills to show/hide age bands</div><div class="tleg" id="d_agleg"></div><div class="cw" style="height:260px"><canvas id="d_c7"></canvas></div></div>
+    <div class="card"><div class="card-title">Age group trend over time — 4-year bands</div><div class="chart-hint">Click legend pills to show/hide &nbsp;·&nbsp; <strong>Click a data point to see that month's full age breakdown</strong></div><div class="tleg" id="d_agleg"></div><div class="cw" style="height:260px"><canvas id="d_c7"></canvas></div></div>
 
     <div class="section-title">Petition Types</div>
     <div class="two">
-      <div class="card"><div class="card-title">Petition types over time</div><div class="chart-hint">Click legend pills to show/hide types</div><div class="tleg" id="d_pleg"></div><div class="cw" style="height:240px"><canvas id="d_c8"></canvas></div></div>
+      <div class="card"><div class="card-title">Petition types over time</div><div class="chart-hint">Click legend pills to show/hide &nbsp;·&nbsp; <strong>Click a bar to see that month's petition breakdown</strong></div><div class="tleg" id="d_pleg"></div><div class="cw" style="height:240px"><canvas id="d_c8"></canvas></div></div>
       <div class="card"><div class="card-title">FN vs FG trend</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_fnfg_leg"></div><div class="cw" style="height:240px"><canvas id="d_c9"></canvas></div></div>
     </div>
 
     <div class="section-title">Gender</div>
     <div class="two">
       <div class="card"><div class="card-title">Gender split — Feb 2026</div><div class="cw" style="height:200px"><canvas id="d_c10"></canvas></div></div>
-      <div class="card"><div class="card-title">Female vs male over time</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_gleg"></div><div class="cw" style="height:200px"><canvas id="d_c11"></canvas></div></div>
+      <div class="card"><div class="card-title">Female vs male over time</div><div class="chart-hint">Click legend pills to show/hide &nbsp;·&nbsp; <strong>Click a data point to see that month's census split</strong></div><div class="tleg" id="d_gleg"></div><div class="cw" style="height:200px"><canvas id="d_c11"></canvas></div></div>
     </div>
     <footer>Child Demographics Summary – Active Cases &nbsp;·&nbsp; Jul 2025 – Feb 2026</footer>
   </main>
@@ -321,13 +310,14 @@
 
     <div class="section-title">Donor Analysis</div>
     <div class="two">
-      <div class="card"><div class="card-title">Active donor count by fiscal year</div><div class="cw" style="height:220px"><canvas id="f_c6"></canvas></div></div>
+      <div class="card"><div class="card-title">Active donor count by fiscal year</div><div class="chart-hint">Click a bar to drill into that year's giving breakdown</div><div class="cw" style="height:220px"><canvas id="f_c6"></canvas></div></div>
       <div class="card"><div class="card-title">Donor retention FY23/24 → FY24/25</div><div class="cw" style="height:220px; position:relative;"><canvas id="f_c7"></canvas><div id="f_c7_center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;"></div></div></div>
     </div>
 
     <div class="section-title">Gift Size Distribution — FY24/25</div>
     <div class="card">
       <div class="card-title">Number of donors by gift size range — FY24/25 (cash + in-kind combined)</div>
+      <div class="chart-hint">Click a bar to see cash vs in-kind breakdown for that gift range</div>
       <div class="chart-hint">Click a bar to see amount raised in that range</div>
       <div class="cw" style="height:220px"><canvas id="f_c8"></canvas></div>
     </div>
@@ -336,170 +326,13 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════
-     PAGE 3 — STRATEGIC PLAN
-══════════════════════════════════════════ -->
-<div id="strategic" class="page">
-  <main>
-
-    <div class="summary-block">
-      <h2>FY25 Strategic Plan — Summary &amp; Insights</h2>
-      <p class="lead">
-        CASA's FY25 strategic plan tracked progress across four action areas: Volunteer Advocates, Peer Coordinators, Staff &amp; Board, and Fundraising. Of the measurable quantitative goals, <strong>3 of 6 were met or exceeded</strong> by year end — new advocate training (+8% above goal), peer coordinator attrition (well below the 20% ceiling), and bilingual advocate representation. Children served grew to 171 but fell short of the 200 target. Fundraising reached $121.8K against a $128K goal as of May, with June data pending. Advocate diversity results were mixed — Hispanic/Latino representation ended below its 11% goal, while Black advocate representation finished above its 17% target.
-      </p>
-      <div class="insight-grid">
-        <div class="insight positive"><div class="itag">Met — new advocate training</div><p>27 new advocates were trained and sworn in by June, exceeding the goal of 25. This is particularly notable given that training was paused early in the year, with all progress front-loaded between August–December and the final push in June.</p></div>
-        <div class="insight alert"><div class="itag">Missed — children served</div><p>The program ended FY25 serving 171 children — 85.5% of the 200-child goal. This continues a multi-year downward trend (FY23: 202, FY24: 190, FY25: 171), suggesting structural headwinds from declining out-of-home placements rather than operational failure.</p></div>
-        <div class="insight watch"><div class="itag">Watch — advocate retention</div><p>Two-year retention was 54% as of December — well below the 78% goal and down from 58% at the start of FY25. Retention dropped from 75% in FY23 to 58% in FY24 and continued declining. This is the most concerning trend in the data.</p></div>
-        <div class="insight positive"><div class="itag">Met — peer coordinator health</div><p>Peer coordinator 1-year attrition fell from 15% in July to just 7% by June — well below the 20% ceiling. This reflects strong stability in a critical support role. The trained cohort reached 3 by year end, meeting the minimum target.</p></div>
-        <div class="insight watch"><div class="itag">Watch — Hispanic/Latino advocates</div><p>Hispanic/Latino advocate representation ended at 8% in May and June — below the 11% target. After touching 12% in October and November, representation declined in the second half of the year. This warrants review of spring training class composition.</p></div>
-        <div class="insight positive"><div class="itag">Met — Black advocate representation</div><p>Black advocate representation ended FY25 at 20%, consistently meeting or exceeding the 17% goal throughout the year and reaching a high of 21% in April. This is one of the clearest diversity wins in the dataset.</p></div>
-      </div>
-      <div class="dive-title">Questions to explore further</div>
-      <div class="dive-list">
-        <span class="dive-pill">Root cause of declining children served (FY23–FY25)</span>
-        <span class="dive-pill">What's driving the two-year retention decline?</span>
-        <span class="dive-pill">Why did Hispanic/Latino % drop in H2 of FY25?</span>
-        <span class="dive-pill">Advocate-to-child ratio trend over time</span>
-        <span class="dive-pill">June fundraising — did goal of $128K get reached?</span>
-        <span class="dive-pill">Board Hispanic/Latino membership — was goal met?</span>
-        <span class="dive-pill">CDBG grant application outcomes</span>
-        <span class="dive-pill">Male advocate % — declining trend toward 14%</span>
-        <span class="dive-pill">Bilingual advocate trend — holding strong at 13%?</span>
-      </div>
-    </div>
-
-    <!-- GOAL PROGRESS SUMMARY -->
-    <div class="metric-grid">
-      <div class="metric"><div class="label">Children served (YE)</div><div class="val">171</div><div class="warn">▼ 85.5% of 200 goal</div></div>
-      <div class="metric"><div class="label">New advocates trained</div><div class="val">27</div><div class="up">✓ Exceeded goal of 25</div></div>
-      <div class="metric"><div class="label">Unrestricted fundraising</div><div class="val">$122K</div><div class="warn">95% of $128K goal (May YTD)</div></div>
-      <div class="metric"><div class="label">PC attrition (June)</div><div class="val">7%</div><div class="up">✓ Well below 20% ceiling</div></div>
-    </div>
-
-    <!-- GOAL PROGRESS BARS -->
-    <div class="section-title">Goal Progress at Year End</div>
-    <div class="goal-grid">
-      <div class="goal-card goal-behind">
-        <div class="goal-header"><span class="goal-label">Children served</span><span class="goal-value">171 / 200</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:85.5%"></div></div>
-        <div class="goal-meta">85.5% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">29 short</span></div>
-      </div>
-      <div class="goal-card goal-met">
-        <div class="goal-header"><span class="goal-label">New advocates trained</span><span class="goal-value">27 / 25</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:100%"></div></div>
-        <div class="goal-meta">108% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">Goal met ✓</span></div>
-      </div>
-      <div class="goal-card goal-behind">
-        <div class="goal-header"><span class="goal-label">% of children in care served</span><span class="goal-value">73% / 75%</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:97.3%"></div></div>
-        <div class="goal-meta">97.3% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">2 pts short</span></div>
-      </div>
-      <div class="goal-card goal-close">
-        <div class="goal-header"><span class="goal-label">Unrestricted fundraising (May YTD)</span><span class="goal-value">$121.8K / $128K</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:95.1%"></div></div>
-        <div class="goal-meta">95.1% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">June data pending</span></div>
-      </div>
-      <div class="goal-card goal-behind">
-        <div class="goal-header"><span class="goal-label">Hispanic/Latino advocates</span><span class="goal-value">8% / 11%</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:72.7%"></div></div>
-        <div class="goal-meta">72.7% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">3 pts short at year end</span></div>
-      </div>
-      <div class="goal-card goal-met">
-        <div class="goal-header"><span class="goal-label">Black advocates</span><span class="goal-value">20% / 17%</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:100%"></div></div>
-        <div class="goal-meta">117.6% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">Goal exceeded ✓</span></div>
-      </div>
-      <div class="goal-card goal-met">
-        <div class="goal-header"><span class="goal-label">Bilingual Spanish advocates</span><span class="goal-value">13% / 12%</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:100%"></div></div>
-        <div class="goal-meta">108.3% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">Goal exceeded ✓</span></div>
-      </div>
-      <div class="goal-card goal-close">
-        <div class="goal-header"><span class="goal-label">Male advocates</span><span class="goal-value">14% / 17%</span></div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:82.4%"></div></div>
-        <div class="goal-meta">82.4% of goal &nbsp;·&nbsp; <span class="goal-meta-badge">Declining trend</span></div>
-      </div>
-    </div>
-
-    <!-- CHILDREN SERVED -->
-    <div class="section-title">Children Served</div>
-    <div class="two">
-      <div class="card">
-        <div class="card-title">Children served YTD — cumulative (goal: 200)</div>
-        <div class="cw" style="height:240px"><canvas id="s_c1"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Children served — 3-year comparison</div>
-        <div class="cw" style="height:240px"><canvas id="s_c2"></canvas></div>
-      </div>
-    </div>
-
-    <!-- ADVOCATE TRAINING & RETENTION -->
-    <div class="section-title">Volunteer Advocate Training &amp; Retention</div>
-    <div class="two">
-      <div class="card">
-        <div class="card-title">New advocates trained — cumulative (goal: 25)</div>
-        <div class="cw" style="height:220px"><canvas id="s_c3"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Two-year retention rate vs goal (78%)</div>
-        <div class="cw" style="height:220px"><canvas id="s_c4"></canvas></div>
-      </div>
-    </div>
-
-    <!-- ADVOCATE DIVERSITY -->
-    <div class="section-title">Advocate Diversity — Monthly % (Point-in-Time)</div>
-    <div class="card">
-      <div class="card-title">Advocate diversity metrics vs goals — all groups</div>
-      <div class="chart-hint">Click legend pills to show/hide groups</div>
-      <div class="tleg" id="s_divleg"></div>
-      <div class="cw" style="height:280px"><canvas id="s_c5"></canvas></div>
-    </div>
-    <div class="two">
-      <div class="card">
-        <div class="card-title">Hispanic/Latino advocates % (goal: 11%)</div>
-        <div class="cw" style="height:200px"><canvas id="s_c6"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Black advocates % (goal: 17%)</div>
-        <div class="cw" style="height:200px"><canvas id="s_c7"></canvas></div>
-      </div>
-    </div>
-    <div class="two">
-      <div class="card">
-        <div class="card-title">Male advocates % (goal: 17%)</div>
-        <div class="cw" style="height:200px"><canvas id="s_c8"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Bilingual Spanish advocates % (goal: 12%)</div>
-        <div class="cw" style="height:200px"><canvas id="s_c9"></canvas></div>
-      </div>
-    </div>
-
-    <!-- PEER COORDINATOR -->
-    <div class="section-title">Peer Coordinator Health</div>
-    <div class="two">
-      <div class="card">
-        <div class="card-title">PC 1-year attrition rate (goal: ≤20%)</div>
-        <div class="cw" style="height:200px"><canvas id="s_c10"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Fundraising — cumulative unrestricted (goal: $128K)</div>
-        <div class="cw" style="height:200px"><canvas id="s_c11"></canvas></div>
-      </div>
-    </div>
-
-    <footer>FY25 Strategic Plan Tracker &nbsp;·&nbsp; CASA &nbsp;·&nbsp; July 2024 – June 2025</footer>
-  </main>
-</div>
 
 
 <script>
 /* ═══ NAV ═══ */
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-strat'); });
+  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
   return false;
@@ -654,34 +487,11 @@ function openDrill(fyIdx, type) {
       tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors ('+Math.round(c.raw/(indN+orgN)*100)+'%)';}}}}}});
 }
 
-/* ═══ STRATEGIC PLAN DATA ═══ */
-var sM = ['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
 
-// Children served (cumulative YTD)
-var sChildren = [125,126,131,134,135,142,152,157,160,166,166,171];
+}
 
-// New advocates trained (cumulative)
-var sAdvocates = [0,13,13,13,13,19,19,19,19,19,19,27];
-
-// Advocate diversity % (monthly)
-var sHisp  = [10,11,10,12,12,10,10,10, 9,10, 8, 8];
-var sBilin = [10,11,10,13,13,13,13,12,12,13,13,13];
-var sMale  = [18,17,17,16,17,19,16,16,16,16,14,14];
-var sBlack = [19,18,18,17,18,19,18,18,20,21,20,20];
-
-// Peer coordinator attrition (sparse — only Jul/Dec/Jun)
-var sPCAttr = [15,null,null,null,null,11,null,null,null,null,null,7];
-
-// Fundraising cumulative
-var sFund = [1956,2268,8074,13444,20859,37951,48761,50460,86183,null,121774.91,null];
-
-// Historical children served by fiscal year
-var sHistYears  = ['FY23','FY24','FY25'];
-var sHistKids   = [202, 190, 171];
-var sHistGoal   = [200, 200, 200];
-
-// Retention (sparse)
-var sRetention = [58,null,null,null,null,null,54,null,null,null,null,null];
+init();
+</script>
 
 
 /* ═══════════════════════════════════
@@ -691,29 +501,182 @@ function init() {
   if (typeof Chart === 'undefined') { setTimeout(init,100); return; }
 
   /* ─── DEMOGRAPHICS ─── */
+
+  /* Shared demo drill panel state */
+  var demoDrillChart = null;
+
+  function closeDemoDrill() {
+    document.getElementById('d_drillpanel').style.display = 'none';
+    document.getElementById('d_drill_body').innerHTML = '';
+    if(demoDrillChart){ demoDrillChart.destroy(); demoDrillChart = null; }
+  }
+
+  function openDemoDrill(title, sub, buildFn) {
+    closeDemoDrill();
+    document.getElementById('d_drill_title').textContent = title;
+    document.getElementById('d_drill_sub').textContent = sub;
+    document.getElementById('d_drillpanel').style.display = 'block';
+    document.getElementById('d_drillpanel').scrollIntoView({behavior:'smooth', block:'nearest'});
+    demoDrillChart = buildFn();
+  }
+
+  /* ── d_c1: Census line ── */
   new Chart(document.getElementById('d_c1'),{type:'line',data:{labels:dM,datasets:[{label:'Children',data:dT,borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,tension:0.35,pointRadius:5,pointBackgroundColor:'#3B8BD4',pointBorderColor:'#fff',pointBorderWidth:1.5}]},options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},scales:{y:{min:110,max:135,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}}});
 
-  var rc2=new Chart(document.getElementById('d_c2'),{type:'bar',data:{labels:dM,datasets:dRK.map(function(k,i){return{label:k,data:dRD[i],backgroundColor:dRC[i],stack:'s'};})},options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw;}}}},scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC},grid:{color:GC}}}}});
+  /* ── d_c2: Race stacked bar — click month → doughnut snapshot ── */
+  var rc2=new Chart(document.getElementById('d_c2'),{type:'bar',
+    data:{labels:dM,datasets:dRK.map(function(k,i){return{label:k,data:dRD[i],backgroundColor:dRC[i],stack:'s'};})},
+    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/dT[c.dataIndex]*100)+'%)';}}}},
+      scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC},grid:{color:GC}}}}});
   mkToggleLeg('d_rleg',rc2,dRK,dRC);
+  document.getElementById('d_c2').style.cursor='pointer';
+  document.getElementById('d_c2').addEventListener('click',function(e){
+    var pts=rc2.getElementsAtEventForMode(e,'index',{intersect:false},false);
+    if(!pts.length)return;
+    var mi=pts[0].index;
+    var monthLabel=dM[mi];
+    var total=dT[mi];
+    var vals=dRK.map(function(_,i){return dRD[i][mi];});
+    openDemoDrill(
+      monthLabel+' — Race/ethnicity breakdown',
+      'Total census: '+total+' children',
+      function(){
+        var body=document.getElementById('d_drill_body');
+        body.innerHTML='<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Composition</div><div class="cw" style="height:220px"><canvas id="d_drill_c1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Count by group</div><div class="cw" style="height:220px"><canvas id="d_drill_c2"></canvas></div></div></div>';
+        new Chart(document.getElementById('d_drill_c1'),{type:'doughnut',
+          data:{labels:dRK,datasets:[{data:vals,backgroundColor:dRC,borderWidth:2,borderColor:BC}]},
+          options:{...P,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
+            tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
+        return new Chart(document.getElementById('d_drill_c2'),{type:'bar',
+          data:{labels:dRK,datasets:[{label:'Children',data:vals,backgroundColor:dRC,borderRadius:4,borderSkipped:false}]},
+          options:{...P,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},
+            scales:{x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},y:{ticks:{color:TC,font:{size:11}},grid:{display:false}}}}});
+      }
+    );
+  });
 
+  /* ── d_c3: Race doughnut Feb 2026 ── */
   new Chart(document.getElementById('d_c3'),{type:'doughnut',data:{labels:dRK,datasets:[{data:dRD.map(function(d){return d[7];}),backgroundColor:dRC,borderWidth:2,borderColor:BC}]},options:{...P,plugins:{legend:{position:'right',labels:{font:{size:11},padding:10,color:TC}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
 
+  /* ── d_c4/5/6: Age band snapshots ── */
   function ageBar(id,mi){var total=dT[mi];new Chart(document.getElementById(id),{type:'bar',data:{labels:dABL,datasets:[{label:'Children',data:band(dRA[mi]),backgroundColor:dABC,borderRadius:4,borderSkipped:false}]},options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},scales:{x:{ticks:{color:TC,font:{size:12}},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});}
   ageBar('d_c4',0);ageBar('d_c5',6);ageBar('d_c6',7);
 
-  var ageTrend=new Chart(document.getElementById('d_c7'),{type:'line',data:{labels:dM,datasets:dABL.map(function(k,i){return{label:k,data:dBS[i],borderColor:dABC[i],backgroundColor:'transparent',tension:0.3,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:dABC[i],borderWidth:2.5};})},options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}},scales:{y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
+  /* ── d_c7: Age trend — click point → full 20-age breakdown ── */
+  // Full age labels for drill
+  var dAgeAllLabels=['0–11mo','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','18+'];
+  var ageTrend=new Chart(document.getElementById('d_c7'),{type:'line',
+    data:{labels:dM,datasets:dABL.map(function(k,i){return{label:k,data:dBS[i],borderColor:dABC[i],backgroundColor:'transparent',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:dABC[i],borderWidth:2.5};})},
+    options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}},
+      scales:{y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},x:{ticks:{color:TC},grid:{display:false}}},
+      interaction:{mode:'index',intersect:false}}});
   mkToggleLeg('d_agleg',ageTrend,dABL,dABC);
+  document.getElementById('d_c7').style.cursor='pointer';
+  document.getElementById('d_c7').addEventListener('click',function(e){
+    var pts=ageTrend.getElementsAtEventForMode(e,'index',{intersect:false},false);
+    if(!pts.length)return;
+    var mi=pts[0].index;
+    var monthLabel=dM[mi];
+    var total=dT[mi];
+    var rawAges=dRA[mi];
+    var colors=['#3B8BD4','#3B8BD4','#3B8BD4','#3B8BD4','#0F6E56','#0F6E56','#0F6E56','#0F6E56','#BA7517','#BA7517','#BA7517','#BA7517','#534AB7','#534AB7','#534AB7','#534AB7','#A32D2D','#A32D2D','#A32D2D','#A32D2D'];
+    openDemoDrill(
+      monthLabel+' — Full age breakdown (all ages)',
+      'Total census: '+total+' children  ·  4-year bands color-coded',
+      function(){
+        var body=document.getElementById('d_drill_body');
+        body.innerHTML='<div class="cw" style="height:280px"><canvas id="d_drill_age"></canvas></div>';
+        return new Chart(document.getElementById('d_drill_age'),{type:'bar',
+          data:{labels:dAgeAllLabels,datasets:[{label:'Children',data:rawAges,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},
+          options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children ('+Math.round(c.raw/total*100)+'%)';}}}},
+            scales:{x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},y:{ticks:{color:TC,stepSize:2},grid:{color:GC},beginAtZero:true}}}});
+      }
+    );
+  });
 
-  var petChart=new Chart(document.getElementById('d_c8'),{type:'bar',data:{labels:dM,datasets:dPK.map(function(k,i){return{label:k,data:dPD[i],backgroundColor:dPC[i],stack:'s'};})},options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw;}}}},scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC},grid:{color:GC}}}}});
+  /* ── d_c8: Petition stacked bar — click month → ranked bar ── */
+  var petChart=new Chart(document.getElementById('d_c8'),{type:'bar',
+    data:{labels:dM,datasets:dPK.map(function(k,i){return{label:k,data:dPD[i],backgroundColor:dPC[i],stack:'s'};})},
+    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
+      var total=dPK.reduce(function(sum,_,i){return sum+dPD[i][c.dataIndex];},0);
+      return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';
+    }}}},scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC},grid:{color:GC}}}}});
   mkToggleLeg('d_pleg',petChart,dPK,dPC);
+  document.getElementById('d_c8').style.cursor='pointer';
+  document.getElementById('d_c8').addEventListener('click',function(e){
+    var pts=petChart.getElementsAtEventForMode(e,'index',{intersect:false},false);
+    if(!pts.length)return;
+    var mi=pts[0].index;
+    var monthLabel=dM[mi];
+    var vals=dPK.map(function(_,i){return dPD[i][mi];});
+    var total=vals.reduce(function(a,b){return a+b;},0);
+    // Sort by value descending for ranked view
+    var sorted=dPK.map(function(k,i){return{k:k,v:vals[i],c:dPC[i]};}).sort(function(a,b){return b.v-a.v;});
+    openDemoDrill(
+      monthLabel+' — Petition types breakdown',
+      'Total petitions: '+total,
+      function(){
+        var body=document.getElementById('d_drill_body');
+        body.innerHTML='<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Ranked by count</div><div class="cw" style="height:220px"><canvas id="d_drill_pet1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Share of total</div><div class="cw" style="height:220px"><canvas id="d_drill_pet2"></canvas></div></div></div>';
+        new Chart(document.getElementById('d_drill_pet1'),{type:'bar',
+          data:{labels:sorted.map(function(d){return d.k;}),datasets:[{data:sorted.map(function(d){return d.v;}),backgroundColor:sorted.map(function(d){return d.c;}),borderRadius:4,borderSkipped:false}]},
+          options:{...P,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},
+            scales:{x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},y:{ticks:{color:TC,font:{size:11}},grid:{display:false}}}}});
+        return new Chart(document.getElementById('d_drill_pet2'),{type:'doughnut',
+          data:{labels:dPK,datasets:[{data:vals,backgroundColor:dPC,borderWidth:2,borderColor:BC}]},
+          options:{...P,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
+            tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
+      }
+    );
+  });
 
+  /* ── d_c9: FN vs FG line ── */
   var fnfgChart=new Chart(document.getElementById('d_c9'),{type:'line',data:{labels:dM,datasets:[{label:'FN',data:dPD[5],borderColor:'#A32D2D',tension:0.3,pointRadius:4,pointBackgroundColor:'#A32D2D',borderWidth:2.5},{label:'FG',data:dPD[4],borderColor:'#BA7517',tension:0.3,pointRadius:4,pointBackgroundColor:'#BA7517',borderWidth:2.5}]},options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' petitions';}}}},scales:{y:{ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
   mkToggleLeg('d_fnfg_leg',fnfgChart,['FN','FG'],['#A32D2D','#BA7517']);
 
+  /* ── d_c10: Gender doughnut ── */
   new Chart(document.getElementById('d_c10'),{type:'doughnut',data:{labels:['Female','Male'],datasets:[{data:[dF[7],dMa[7]],backgroundColor:['#534AB7','#3B8BD4'],borderWidth:2,borderColor:BC}]},options:{...P,plugins:{legend:{position:'bottom',labels:{font:{size:13},color:TC,padding:14}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
 
-  var gLineChart=new Chart(document.getElementById('d_c11'),{type:'line',data:{labels:dM,datasets:[{label:'Female',data:dF,borderColor:'#534AB7',tension:0.3,pointRadius:4,pointBackgroundColor:'#534AB7',borderWidth:2.5},{label:'Male',data:dMa,borderColor:'#3B8BD4',tension:0.3,pointRadius:4,pointBackgroundColor:'#3B8BD4',borderWidth:2.5}]},options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw;}}}},scales:{y:{min:50,max:75,ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
+  /* ── d_c11: Gender line — click month → census split panel ── */
+  var gLineChart=new Chart(document.getElementById('d_c11'),{type:'line',
+    data:{labels:dM,datasets:[
+      {label:'Female',data:dF,borderColor:'#534AB7',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#534AB7',borderWidth:2.5},
+      {label:'Male',  data:dMa,borderColor:'#3B8BD4',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#3B8BD4',borderWidth:2.5}
+    ]},
+    options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
+      var total=dT[c.dataIndex];
+      return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';
+    }}}},scales:{y:{min:50,max:75,ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
   mkToggleLeg('d_gleg',gLineChart,['Female','Male'],['#534AB7','#3B8BD4']);
+  document.getElementById('d_c11').style.cursor='pointer';
+  document.getElementById('d_c11').addEventListener('click',function(e){
+    var pts=gLineChart.getElementsAtEventForMode(e,'index',{intersect:false},false);
+    if(!pts.length)return;
+    var mi=pts[0].index;
+    var monthLabel=dM[mi];
+    var female=dF[mi], male=dMa[mi], total=dT[mi];
+    var femPct=Math.round(female/total*100), malePct=Math.round(male/total*100);
+    openDemoDrill(
+      monthLabel+' — Census gender split',
+      'Total active: '+total+' children',
+      function(){
+        var body=document.getElementById('d_drill_body');
+        body.innerHTML='<div class="two"><div><div class="cw" style="height:180px"><canvas id="d_drill_gend1"></canvas></div></div><div style="display:flex;flex-direction:column;justify-content:center;gap:16px;padding:1rem 0;">'
+          +'<div style="background:rgba(83,74,183,0.1);border-left:3px solid #534AB7;border-radius:var(--radius-md);padding:.85rem 1rem;">'
+          +'<div style="font-size:12px;color:#534AB7;font-weight:500;margin-bottom:4px;">Female</div>'
+          +'<div style="font-size:24px;font-weight:500;color:var(--text);">'+female+'</div>'
+          +'<div style="font-size:12px;color:var(--text3);">'+femPct+'% of census</div></div>'
+          +'<div style="background:rgba(59,139,212,0.1);border-left:3px solid #3B8BD4;border-radius:var(--radius-md);padding:.85rem 1rem;">'
+          +'<div style="font-size:12px;color:#3B8BD4;font-weight:500;margin-bottom:4px;">Male</div>'
+          +'<div style="font-size:24px;font-weight:500;color:var(--text);">'+male+'</div>'
+          +'<div style="font-size:12px;color:var(--text3);">'+malePct+'% of census</div></div></div></div>';
+        return new Chart(document.getElementById('d_drill_gend1'),{type:'doughnut',
+          data:{labels:['Female','Male'],datasets:[{data:[female,male],backgroundColor:['#534AB7','#3B8BD4'],borderWidth:2,borderColor:BC}]},
+          options:{...P,cutout:'60%',plugins:{legend:{position:'bottom',labels:{font:{size:12},color:TC,padding:12}},
+            tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
+      }
+    );
+  });
 
   /* ─── FUNDRAISING ─── */
   // Helper: chart click → openDrill
@@ -758,10 +721,20 @@ function init() {
   mkToggleLeg('f_iktyp',ikTypChart,['Individual','Organization'],['#3B8BD4','#BA7517']);
   addDrillClick(ikTypChart,'inkind');
 
-  new Chart(document.getElementById('f_c6'),{type:'bar',
-    data:{labels:fY,datasets:[{label:'Active donors',data:fD,backgroundColor:'rgba(83,74,183,0.75)',borderRadius:4}]},
+  var donorChart = new Chart(document.getElementById('f_c6'),{type:'bar',
+    data:{labels:fY,datasets:[{label:'Active donors',data:fD,backgroundColor:fY.map(function(_,i){return i===4?'rgba(83,74,183,0.9)':'rgba(83,74,183,0.5)';}),borderRadius:4}]},
     options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
       scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:50},grid:{color:GC},beginAtZero:true}}}});
+  document.getElementById('f_c6').style.cursor='pointer';
+  document.getElementById('f_c6').addEventListener('click',function(e){
+    var pts=donorChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
+    if(!pts.length)return;
+    var fi=pts[0].index;
+    var indN=fDrillIndN[fi], orgN=fDrillOrgN[fi];
+    var ikIndN=fDrillIkIndN[fi], ikOrgN=fDrillIkOrgN[fi];
+    var totalCash=indN+orgN, totalIk=ikIndN+ikOrgN, totalAll=fD[fi];
+    openDrill(fi,'combined');
+  });
 
   var retTotal=249;
   document.getElementById('f_c7_center').innerHTML='<div style="font-size:22px;font-weight:500;color:var(--text);">'+retTotal+'</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">total donors</div>';
@@ -772,134 +745,52 @@ function init() {
 
   // FY24/25 combined bucket counts for overview bar
   var fBD24=[98,113,36,33,6];
-  new Chart(document.getElementById('f_c8'),{type:'bar',
+  var fBDAmounts24=[2788.40+959.98, 17252.23+2474, 14966.82+6311, 51179.86+16113, 21088.50+16119.28];
+  var giftSizeChart=new Chart(document.getElementById('f_c8'),{type:'bar',
     data:{labels:fBL,datasets:[{label:'Donors',data:fBD24,backgroundColor:fBC,borderRadius:4,borderSkipped:false}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){var t=fBD24.reduce(function(a,b){return a+b;},0);return ' '+c.raw+' donors ('+Math.round(c.raw/t*100)+'% of total)';}}}},
-      scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:20},grid:{color:GC},beginAtZero:true}}}});
+    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
+      var t=fBD24.reduce(function(a,b){return a+b;},0);
+      return [' '+c.raw+' donors ('+Math.round(c.raw/t*100)+'% of total)',' Amount raised: '+dollarFmt(fBDAmounts24[c.dataIndex])];
+    }}}},scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:20},grid:{color:GC},beginAtZero:true}}},
+  });
+  document.getElementById('f_c8').style.cursor='pointer';
+  document.getElementById('f_c8').addEventListener('click',function(e){
+    var pts=giftSizeChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
+    if(!pts.length)return;
+    var bi=pts[0].index;
+    var bucket=fBL[bi];
+    var cashN=fDrillCash[4][bi].n, cashAmt=fDrillCash[4][bi].sum;
+    var ikN=fDrillInkind[4][bi].n, ikAmt=fDrillInkind[4][bi].sum;
+    var totalN=cashN+ikN, totalAmt=cashAmt+ikAmt;
+    closeDrill();
+    document.getElementById('f_drill_title').textContent = 'FY24/25 '+bucket+' — Cash vs in-kind breakdown';
+    document.getElementById('f_drill_sub').textContent   = totalN+' donors · '+dollarFmt(totalAmt)+' total raised in this range';
+    document.getElementById('f_drillpanel').style.display='block';
+    document.getElementById('f_drillpanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+    drillCharts.amount=new Chart(document.getElementById('f_drill_amount'),{type:'bar',
+      data:{labels:['Cash gifts','In-kind gifts'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
+      options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw)+' ('+Math.round(c.raw/totalAmt*100)+'% of range total)';}}}},
+        scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
+    drillCharts.count=new Chart(document.getElementById('f_drill_count'),{type:'bar',
+      data:{labels:['Cash donors','In-kind donors'],datasets:[{data:[cashN,ikN],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
+      options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
+        scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});
+    var indAmt=fCI[4]+fII[4], orgAmt=fCO[4]+fIO[4], indN2=fDrillIndN[4]+fDrillIkIndN[4], orgN2=fDrillOrgN[4]+fDrillIkOrgN[4];
+    drillCharts.typeAmt=new Chart(document.getElementById('f_drill_type_amt'),{type:'doughnut',
+      data:{labels:['Cash','In-kind'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderWidth:2,borderColor:BC}]},
+      options:{...P,plugins:{title:{display:true,text:'Amount: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
+        legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
+        tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+dollarFmt(c.raw);}}}}}});
+    drillCharts.typeCnt=new Chart(document.getElementById('f_drill_type_cnt'),{type:'doughnut',
+      data:{labels:['Cash donors','In-kind donors'],datasets:[{data:[cashN,ikN],backgroundColor:['#3B8BD4','#0F6E56'],borderWidth:2,borderColor:BC}]},
+      options:{...P,plugins:{title:{display:true,text:'Donors: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
+        legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
+        tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors';}}}}}});
+  });
 
   /* ─── STRATEGIC PLAN CHARTS ─── */
 
-  /* s_c1: Children served cumulative with goal line */
-  new Chart(document.getElementById('s_c1'), {
-    type:'line',
-    data:{labels:sM, datasets:[
-      {label:'Children served', data:sChildren, borderColor:'#534AB7', backgroundColor:'rgba(83,74,183,0.08)', fill:true, tension:0.3, pointRadius:5, pointBackgroundColor:'#534AB7', pointBorderColor:'#fff', pointBorderWidth:1.5, borderWidth:2.5},
-      {label:'Goal (200)', data:Array(12).fill(200), borderColor:'#A32D2D', borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false, tension:0}
-    ]},
-    options:{...P,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+(c.datasetIndex===0?' children':'');}}}},
-      scales:{y:{min:0,max:220,ticks:{color:TC,stepSize:50},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},
-      interaction:{mode:'index',intersect:false}
-    }
-  });
 
-  /* s_c2: Historical children served 3-year bar */
-  new Chart(document.getElementById('s_c2'), {
-    type:'bar',
-    data:{labels:sHistYears, datasets:[
-      {label:'Children served', data:sHistKids, backgroundColor:['rgba(83,74,183,0.6)','rgba(83,74,183,0.75)','rgba(83,74,183,0.9)'], borderRadius:4},
-      {label:'Goal', data:sHistGoal, type:'line', borderColor:'#A32D2D', borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false}
-    ]},
-    options:{...P,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw;}}}},
-      scales:{y:{min:0,max:220,ticks:{color:TC,stepSize:50},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}
-    }
-  });
-
-  /* s_c3: Advocates trained cumulative with goal */
-  new Chart(document.getElementById('s_c3'), {
-    type:'line',
-    data:{labels:sM, datasets:[
-      {label:'Advocates trained', data:sAdvocates, borderColor:'#0F6E56', backgroundColor:'rgba(15,110,86,0.08)', fill:true, tension:0.3, pointRadius:5, pointBackgroundColor:'#0F6E56', pointBorderColor:'#fff', pointBorderWidth:1.5, borderWidth:2.5},
-      {label:'Goal (25)', data:Array(12).fill(25), borderColor:'#A32D2D', borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false, tension:0}
-    ]},
-    options:{...P,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw;}}}},
-      scales:{y:{min:0,max:32,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},
-      interaction:{mode:'index',intersect:false}
-    }
-  });
-
-  /* s_c4: Two-year retention (sparse point chart) */
-  new Chart(document.getElementById('s_c4'), {
-    type:'line',
-    data:{labels:sM, datasets:[
-      {label:'Retention rate', data:sRetention, borderColor:'#BA7517', backgroundColor:'rgba(186,117,23,0.1)', fill:false, tension:0, pointRadius:function(ctx){return ctx.raw !== null ? 7 : 0;}, pointBackgroundColor:'#BA7517', pointBorderColor:'#fff', pointBorderWidth:2, borderWidth:2.5, spanGaps:true},
-      {label:'Goal (78%)', data:Array(12).fill(78), borderColor:'#A32D2D', borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false, tension:0}
-    ]},
-    options:{...P,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){if(c.raw===null)return null;return ' '+c.dataset.label+': '+c.raw+'%';}}}},
-      scales:{y:{min:0,max:100,ticks:{color:TC,stepSize:20,callback:function(v){return v+'%';}},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}
-    }
-  });
-
-  /* s_c5: All diversity lines on one chart with toggle */
-  var divKeys   = ['Hispanic/Latino (goal 11%)','Bilingual Spanish (goal 12%)','Male (goal 17%)','Black (goal 17%)'];
-  var divColors = ['#3B8BD4','#0F6E56','#BA7517','#A32D2D'];
-  var divData   = [sHisp, sBilin, sMale, sBlack];
-  var divGoals  = [11, 12, 17, 17];
-  var allDivDatasets = divKeys.map(function(k,i){return{label:k,data:divData[i],borderColor:divColors[i],backgroundColor:'transparent',tension:0.3,pointRadius:4,pointBackgroundColor:divColors[i],borderWidth:2.5,fill:false};});
-  divGoals.forEach(function(g,i){
-    allDivDatasets.push({label:'',data:Array(12).fill(g),borderColor:divColors[i],borderDash:[4,3],borderWidth:1,pointRadius:0,fill:false,tension:0});
-  });
-  var divChart = new Chart(document.getElementById('s_c5'), {
-    type:'line',
-    data:{labels:sM, datasets:allDivDatasets},
-    options:{...P,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){if(!c.dataset.label)return null;return ' '+c.dataset.label+': '+c.raw+'%';}}}},
-      scales:{y:{min:0,max:25,ticks:{color:TC,stepSize:5,callback:function(v){return v+'%';}},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},
-      interaction:{mode:'index',intersect:false}
-    }
-  });
-  // Only toggle the first 4 (actual data lines, not dashed goals)
-  mkToggleLeg('s_divleg', divChart, divKeys, divColors);
-
-  /* helper: single diversity metric with goal line */
-  function divBar(id, data, color, goalVal, yMax) {
-    new Chart(document.getElementById(id), {
-      type:'line',
-      data:{labels:sM, datasets:[
-        {label:'Actual', data:data, borderColor:color, backgroundColor:color.replace(')',',0.08)').replace('rgb','rgba'), fill:true, tension:0.3, pointRadius:4, pointBackgroundColor:color, pointBorderColor:'#fff', pointBorderWidth:1.5, borderWidth:2.5},
-        {label:'Goal ('+goalVal+'%)', data:Array(12).fill(goalVal), borderColor:'#A32D2D', borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false, tension:0}
-      ]},
-      options:{...P,
-        plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+'%';}}}},
-        scales:{y:{min:0,max:yMax,ticks:{color:TC,stepSize:5,callback:function(v){return v+'%';}},grid:{color:GC}},x:{ticks:{color:TC,font:{size:11}},grid:{display:false}}},
-        interaction:{mode:'index',intersect:false}
-      }
-    });
-  }
-  divBar('s_c6', sHisp,  '#3B8BD4', 11, 20);
-  divBar('s_c7', sBlack, '#A32D2D', 17, 25);
-  divBar('s_c8', sMale,  '#BA7517', 17, 25);
-  divBar('s_c9', sBilin, '#0F6E56', 12, 20);
-
-  /* s_c10: PC attrition (sparse) */
-  new Chart(document.getElementById('s_c10'), {
-    type:'line',
-    data:{labels:sM, datasets:[
-      {label:'PC attrition', data:sPCAttr, borderColor:'#534AB7', fill:false, tension:0, spanGaps:true, pointRadius:function(ctx){return ctx.raw!==null?7:0;}, pointBackgroundColor:'#534AB7', pointBorderColor:'#fff', pointBorderWidth:2, borderWidth:2.5},
-      {label:'Ceiling (20%)', data:Array(12).fill(20), borderColor:'#A32D2D', borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false, tension:0}
-    ]},
-    options:{...P,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){if(c.raw===null)return null;return ' '+c.dataset.label+': '+c.raw+'%';}}}},
-      scales:{y:{min:0,max:30,ticks:{color:TC,stepSize:5,callback:function(v){return v+'%';}},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}
-    }
-  });
-
-  /* s_c11: Fundraising cumulative with goal line */
-  new Chart(document.getElementById('s_c11'), {
-    type:'line',
-    data:{labels:sM, datasets:[
-      {label:'Unrestricted raised', data:sFund, borderColor:'#0F6E56', backgroundColor:'rgba(15,110,86,0.08)', fill:true, tension:0.3, spanGaps:false, pointRadius:function(ctx){return ctx.raw!==null?5:0;}, pointBackgroundColor:'#0F6E56', pointBorderColor:'#fff', pointBorderWidth:1.5, borderWidth:2.5},
-      {label:'Goal ($128K)', data:Array(12).fill(128000), borderColor:'#A32D2D', borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false, tension:0}
-    ]},
-    options:{...P,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){if(c.raw===null)return null;return ' '+c.dataset.label+': '+(c.datasetIndex===0?dollarFmt(c.raw):dollarFmt(128000));}}}},
-      scales:{y:{min:0,max:145000,ticks:{color:TC,callback:dollarTick},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},
-      interaction:{mode:'index',intersect:false}
-    }
-  });
 }
 
 init();
