@@ -400,9 +400,18 @@ var drillCharts = {};
    Creates a panel div, inserts it after `anchorEl`, and returns the panel.
    anchorEl should be the chart's parent card or wrapper. */
 function createDrillPanel(anchorEl, title, sub, borderColor, closeFn) {
+  /* Walk up past any grid container (.two / .three) so the panel
+     always inserts as a full-width block below the entire row,
+     not as an extra cell inside the grid. */
+  var insertAfter = anchorEl;
+  var parent = insertAfter.parentElement;
+  while (parent && (parent.classList.contains('two') || parent.classList.contains('three'))) {
+    insertAfter = parent;
+    parent = insertAfter.parentElement;
+  }
   var panel = document.createElement('div');
   panel.id = 'active_drill_panel';
-  panel.style.cssText = 'margin-top:-0.5rem; margin-bottom:1rem;';
+  panel.style.cssText = 'margin-top:0.5rem; margin-bottom:1rem;';
   panel.innerHTML =
     '<div class="card" style="border-color:'+borderColor+'; border-width:1px;">'
     + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">'
@@ -414,7 +423,7 @@ function createDrillPanel(anchorEl, title, sub, borderColor, closeFn) {
     + '</div>'
     + '<div id="drill_body"></div>'
     + '</div>';
-  anchorEl.insertAdjacentElement('afterend', panel);
+  insertAfter.insertAdjacentElement('afterend', panel);
   panel.querySelector('#drill_close_btn').addEventListener('click', closeFn);
   return panel;
 }
@@ -424,7 +433,34 @@ function removeActiveDrillPanel() {
   if (existing) existing.remove();
 }
 
-/* ── Demographics drill ── */
+/* ── Helper: get chart index from a click event ──
+   Tries data elements first (bar/point click), then falls back
+   to the x-axis label area so clicking a month label also works. */
+function getClickIndex(chart, e) {
+  // Try hitting a data element first
+  var pts = chart.getElementsAtEventForMode(e, 'index', {intersect: false}, false);
+  if (pts.length) return pts[0].index;
+  // Fall back: check if click is in x-axis label zone and find nearest label
+  var ca = chart.canvas;
+  var rect = ca.getBoundingClientRect();
+  var x = e.clientX - rect.left;
+  var y = e.clientY - rect.top;
+  // Only trigger if click is below the chart area (in label zone)
+  var chartArea = chart.chartArea;
+  if (!chartArea) return -1;
+  if (y < chartArea.bottom) return -1; // not in label zone
+  // Find nearest x-axis tick
+  var xScale = chart.scales.x || chart.scales['x'];
+  if (!xScale) return -1;
+  var best = -1, bestDist = Infinity;
+  var count = chart.data.labels.length;
+  for (var i = 0; i < count; i++) {
+    var px = xScale.getPixelForValue(i);
+    var dist = Math.abs(px - x);
+    if (dist < bestDist) { bestDist = dist; best = i; }
+  }
+  return best;
+}
 var demoDrillChart = null;
 
 function closeDemoDrill() {
@@ -521,9 +557,8 @@ function init() {
   mkToggleLeg('d_rleg',rc2,dRK,dRC);
   document.getElementById('d_c2').style.cursor='pointer';
   document.getElementById('d_c2').addEventListener('click',function(e){
-    var pts=rc2.getElementsAtEventForMode(e,'index',{intersect:false},false);
-    if(!pts.length)return;
-    var mi=pts[0].index;
+    var mi=getClickIndex(rc2,e);
+    if(mi<0)return;
     var monthLabel=dM[mi];
     var total=dT[mi];
     var vals=dRK.map(function(_,i){return dRD[i][mi];});
@@ -564,9 +599,8 @@ function init() {
   mkToggleLeg('d_agleg',ageTrend,dABL,dABC);
   document.getElementById('d_c7').style.cursor='pointer';
   document.getElementById('d_c7').addEventListener('click',function(e){
-    var pts=ageTrend.getElementsAtEventForMode(e,'index',{intersect:false},false);
-    if(!pts.length)return;
-    var mi=pts[0].index;
+    var mi=getClickIndex(ageTrend,e);
+    if(mi<0)return;
     var monthLabel=dM[mi];
     var total=dT[mi];
     var rawAges=dRA[mi];
@@ -596,9 +630,8 @@ function init() {
   mkToggleLeg('d_pleg',petChart,dPK,dPC);
   document.getElementById('d_c8').style.cursor='pointer';
   document.getElementById('d_c8').addEventListener('click',function(e){
-    var pts=petChart.getElementsAtEventForMode(e,'index',{intersect:false},false);
-    if(!pts.length)return;
-    var mi=pts[0].index;
+    var mi=getClickIndex(petChart,e);
+    if(mi<0)return;
     var monthLabel=dM[mi];
     var vals=dPK.map(function(_,i){return dPD[i][mi];});
     var total=vals.reduce(function(a,b){return a+b;},0);
@@ -643,9 +676,8 @@ function init() {
   mkToggleLeg('d_gleg',gLineChart,['Female','Male'],['#534AB7','#3B8BD4']);
   document.getElementById('d_c11').style.cursor='pointer';
   document.getElementById('d_c11').addEventListener('click',function(e){
-    var pts=gLineChart.getElementsAtEventForMode(e,'index',{intersect:false},false);
-    if(!pts.length)return;
-    var mi=pts[0].index;
+    var mi=getClickIndex(gLineChart,e);
+    if(mi<0)return;
     var monthLabel=dM[mi];
     var female=dF[mi], male=dMa[mi], total=dT[mi];
     var femPct=Math.round(female/total*100), malePct=Math.round(male/total*100);
@@ -673,15 +705,14 @@ function init() {
   });
 
   /* ─── FUNDRAISING ─── */
-  // Helper: chart click → openDrill with anchor
+  // Helper: chart click → openDrill with anchor (bars + x-axis labels)
   function addDrillClick(chart, type) {
     document.getElementById(chart.canvas.id).style.cursor = 'pointer';
     chart.canvas.addEventListener('click', function(e) {
-      var pts = chart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
-      if(pts.length) {
-        var anchor = e.target.closest('.card') || e.target.parentElement;
-        openDrill(pts[0].index, type, anchor);
-      }
+      var mi = getClickIndex(chart, e);
+      if (mi < 0) return;
+      var anchor = e.target.closest('.card') || e.target.parentElement;
+      openDrill(mi, type, anchor);
     });
   }
 
@@ -724,9 +755,8 @@ function init() {
       scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:50},grid:{color:GC},beginAtZero:true}}}});
   document.getElementById('f_c6').style.cursor='pointer';
   document.getElementById('f_c6').addEventListener('click',function(e){
-    var pts=donorChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
-    if(!pts.length)return;
-    var fi=pts[0].index;
+    var fi=getClickIndex(donorChart,e);
+    if(fi<0)return;
     var anchor=e.target.closest('.card')||e.target.parentElement;
     openDrill(fi,'combined',anchor);
   });
@@ -750,9 +780,8 @@ function init() {
   });
   document.getElementById('f_c8').style.cursor='pointer';
   document.getElementById('f_c8').addEventListener('click',function(e){
-    var pts=giftSizeChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
-    if(!pts.length)return;
-    var bi=pts[0].index;
+    var bi=getClickIndex(giftSizeChart,e);
+    if(bi<0)return;
     var bucket=fBL[bi];
     var cashN=fDrillCash[4][bi].n, cashAmt=fDrillCash[4][bi].sum;
     var ikN=fDrillInkind[4][bi].n, ikAmt=fDrillInkind[4][bi].sum;
