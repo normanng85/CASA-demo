@@ -487,16 +487,6 @@ function openDrill(fyIdx, type) {
       tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors ('+Math.round(c.raw/(indN+orgN)*100)+'%)';}}}}}});
 }
 
-
-}
-
-init();
-</script>
-
-
-/* ═══════════════════════════════════
-   BUILD ALL CHARTS
-═══════════════════════════════════ */
 function init() {
   if (typeof Chart === 'undefined') { setTimeout(init,100); return; }
 
@@ -787,9 +777,6 @@ function init() {
         legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
         tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors';}}}}}});
   });
-
-  /* ─── STRATEGIC PLAN CHARTS ─── */
-
 
 }
 
