@@ -288,6 +288,42 @@
     .dtp-dn { color:#A32D2D; font-weight:500; }
     .dtp-fl { color:var(--text3); }
 
+    /* ── COLLAPSIBLE SECTIONS ── */
+    .collapse-section { border-top:0.5px solid var(--border); margin-top:0.25rem; }
+    .collapse-section:first-of-type { margin-top:0.75rem; }
+    .collapse-btn {
+      width:100%; display:flex; align-items:center; gap:10px;
+      padding:0.7rem 0; background:none; border:none; cursor:pointer;
+      text-align:left; color:var(--text);
+    }
+    .collapse-btn:hover .collapse-label { color:var(--text); }
+    .collapse-label {
+      font-size:13px; font-weight:500; color:var(--text2); flex:1;
+      transition:color .15s;
+    }
+    .collapse-count {
+      font-size:11px; font-weight:500; color:var(--text3);
+      background:var(--surface2); border:0.5px solid var(--border);
+      border-radius:20px; padding:2px 9px;
+    }
+    .collapse-chev {
+      width:22px; height:22px; flex-shrink:0;
+      display:inline-flex; align-items:center; justify-content:center;
+      background:var(--surface2); border:0.5px solid var(--border); border-radius:50%;
+      color:var(--text3); transition:background .15s, transform .3s ease;
+    }
+    .collapse-btn:hover .collapse-chev { background:var(--bg); }
+    .collapse-btn.open .collapse-chev { transform:rotate(180deg); }
+    .collapse-body {
+      max-height:0; overflow:hidden;
+      transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .collapse-body > * { padding-bottom:0.25rem; }
+    /* remove redundant borders/margins when nested inside collapse */
+    .collapse-body .national-block { margin-top:0; padding-top:0.5rem; border-top:none; }
+    .collapse-body .insight-grid { margin-bottom:0.5rem; }
+    .collapse-body .dive-list { padding-bottom:0.75rem; }
+
     /* ── CARD HOVER ── */
     .card { transition:box-shadow .15s; }
     .card:hover { box-shadow:0 2px 14px rgba(0,0,0,0.08); }
@@ -340,85 +376,89 @@
     <div class="summary-block">
       <h2>Child Demographics — Summary &amp; Insights</h2>
       <p class="lead">The active caseload averaged <strong>123 children</strong> per month from July 2025 through February 2026, peaking at 128 in August and dipping to 117 in January before recovering. The population is racially diverse, nearly balanced by gender, and skewed toward younger children — with infants and toddlers (0–3) representing the single largest age band and growing steadily throughout the period. Foster care petitions (FN) dominate the case mix but are declining, while guardianship (FG) petitions are on a clear upward trajectory.</p>
-      <div class="insight-grid">
-        <div class="insight watch"><div class="itag">Watch — rising disparity</div><p>Black/African American children increased from 34 to 42 over 8 months (+24%), now the second-largest racial group at 33% of the census. White representation declined from 31% to 28% over the same period. This growing disparity warrants review of referral and intake patterns.</p></div>
-        <div class="insight positive"><div class="itag">Trend — infant surge</div><p>Infants (0–11 months) rose from 8 to 14 — a 75% increase — the steepest growth of any age band. This signals a need to assess infant-specific placement capacity, foster parent training for young children, and early intervention service availability.</p></div>
-        <div class="insight positive"><div class="itag">Trend — guardianship growth</div><p>FG (guardianship) petitions grew from 14 to 22 (+57%), suggesting more children are moving toward permanent family placements. This is a positive permanency indicator and may reflect successful casework or policy emphasis on kinship care.</p></div>
-        <div class="insight alert"><div class="itag">Flag — FN petition decline</div><p>FN (standard foster care) petitions fell from 89 to 77 (-13%) while total census stayed relatively stable. Monitor whether this reflects genuine permanency progress or a shift in petition classification practices.</p></div>
-        <div class="insight neutral"><div class="itag">Stable — gender balance</div><p>The caseload has maintained a near-equal gender split throughout (51% female, 49% male in July; shifting to 46% female, 54% male by February). The gradual male-skew trend is worth tracking across future months.</p></div>
-        <div class="insight neutral"><div class="itag">Stable — Asian representation</div><p>Asian children have remained fixed at exactly 8 throughout all 8 months — an unusual pattern that may reflect a data ceiling, classification boundary, or genuine demographic stability worth confirming with intake staff.</p></div>
-      </div>
-
-      <div class="national-block">
-        <div class="national-title">How this compares nationally — AFCARS FY2024 benchmarks</div>
-        <div class="nat-grid">
-          <div class="nat-card above">
-            <div class="nat-label">Black/African American representation</div>
-            <div class="nat-compare">
-              <span class="nat-yours">33%</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">↑ ~23% nationally</span>
-            </div>
-            <div class="nat-note">CASA's caseload is 10 pts above the national average — consistent with longstanding AFCARS data showing Black children are overrepresented in child welfare systems nationally (1 in 9 vs 1 in 17 for all children).</div>
-          </div>
-          <div class="nat-card inline">
-            <div class="nat-label">Gender split</div>
-            <div class="nat-compare">
-              <span class="nat-yours">49–54% male</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">~51% male nationally</span>
-            </div>
-            <div class="nat-note">AFCARS reports a near-even gender split nationally (51% boys, 49% girls). CASA's Feb 2026 skew toward male (54%) is a slight divergence worth monitoring over future months.</div>
-          </div>
-          <div class="nat-card above">
-            <div class="nat-label">Infant representation (0–11 mo)</div>
-            <div class="nat-compare">
-              <span class="nat-yours">11% Feb 2026</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">~7% nationally</span>
-            </div>
-            <div class="nat-note">AFCARS FY2024 shows only 7% of children nationally are under one year old. CASA's 11% in February — and growing — suggests local infant placement rates are meaningfully above the national norm.</div>
-          </div>
-          <div class="nat-card positive">
-            <div class="nat-label">Guardianship exits (FG trend)</div>
-            <div class="nat-compare">
-              <span class="nat-yours">+57% FG growth</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">11% of exits nationally</span>
-            </div>
-            <div class="nat-note">Nationally, 11% of foster care exits in FY2024 were through guardianship. CASA's rising FG petitions align with this positive national trend toward kinship and permanent placements over standard foster care.</div>
-          </div>
-          <div class="nat-card inline">
-            <div class="nat-label">Overall caseload direction</div>
-            <div class="nat-compare">
-              <span class="nat-yours">Stable ~121–128</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">↓ 6th year of national decline</span>
-            </div>
-            <div class="nat-note">Nationally, children in foster care declined for the 6th consecutive year to 328,947 in FY2024 (down from 437,000 in 2018). CASA's stable-to-slight-decline census mirrors this systemic trend, though local demand drivers matter more than national averages for planning.</div>
-          </div>
-          <div class="nat-card watch">
-            <div class="nat-label">Racial disparity trajectory</div>
-            <div class="nat-compare">
-              <span class="nat-yours">Black % rising</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">Persistent nationally</span>
-            </div>
-            <div class="nat-note">Child Trends and AFCARS data confirm racial disparities persist in nearly every state. CASA's upward trend in Black representation (34→42) over just 8 months is a signal requiring active monitoring and equity-focused intake review.</div>
+      <!-- ▸ KEY INSIGHTS -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Key Insights</span>
+          <span class="collapse-count">6 insights</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="insight-grid">
+            <div class="insight watch"><div class="itag">Watch — rising disparity</div><p>Black/African American children increased from 34 to 42 over 8 months (+24%), now the second-largest racial group at 33% of the census. White representation declined from 31% to 28% over the same period. This growing disparity warrants review of referral and intake patterns.</p></div>
+            <div class="insight positive"><div class="itag">Trend — infant surge</div><p>Infants (0–11 months) rose from 8 to 14 — a 75% increase — the steepest growth of any age band. This signals a need to assess infant-specific placement capacity, foster parent training for young children, and early intervention service availability.</p></div>
+            <div class="insight positive"><div class="itag">Trend — guardianship growth</div><p>FG (guardianship) petitions grew from 14 to 22 (+57%), suggesting more children are moving toward permanent family placements. This is a positive permanency indicator and may reflect successful casework or policy emphasis on kinship care.</p></div>
+            <div class="insight alert"><div class="itag">Flag — FN petition decline</div><p>FN (standard foster care) petitions fell from 89 to 77 (-13%) while total census stayed relatively stable. Monitor whether this reflects genuine permanency progress or a shift in petition classification practices.</p></div>
+            <div class="insight neutral"><div class="itag">Stable — gender balance</div><p>The caseload has maintained a near-equal gender split throughout (51% female, 49% male in July; shifting to 46% female, 54% male by February). The gradual male-skew trend is worth tracking across future months.</p></div>
+            <div class="insight neutral"><div class="itag">Stable — Asian representation</div><p>Asian children have remained fixed at exactly 8 throughout all 8 months — an unusual pattern that may reflect a data ceiling, classification boundary, or genuine demographic stability worth confirming with intake staff.</p></div>
           </div>
         </div>
       </div>
 
-      <div class="dive-title" style="margin-top:1.25rem;">Questions to explore further</div>
-      <div class="dive-list">
-        <span class="dive-pill">What's driving infant placements?</span>
-        <span class="dive-pill">Kinship vs non-kinship placement split</span>
-        <span class="dive-pill">Average length of stay by age band</span>
-        <span class="dive-pill">Reunification rates by race/ethnicity</span>
-        <span class="dive-pill">Language service utilization (62% "not entered")</span>
-        <span class="dive-pill">FC/18+ trajectory — youth aging out</span>
-        <span class="dive-pill">Two or More Races decline (18 → 12)</span>
-        <span class="dive-pill">Geographic distribution of cases</span>
+      <!-- ▸ NATIONAL COMPARISON -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">National Comparison</span>
+          <span class="collapse-count">AFCARS FY2024</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="national-block">
+            <div class="nat-grid">
+              <div class="nat-card above">
+                <div class="nat-label">Black/African American representation</div>
+                <div class="nat-compare"><span class="nat-yours">33%</span><span class="nat-vs">vs</span><span class="nat-nat">↑ ~23% nationally</span></div>
+                <div class="nat-note">CASA's caseload is 10 pts above the national average — consistent with longstanding AFCARS data showing Black children are overrepresented in child welfare systems nationally (1 in 9 vs 1 in 17 for all children).</div>
+              </div>
+              <div class="nat-card inline">
+                <div class="nat-label">Gender split</div>
+                <div class="nat-compare"><span class="nat-yours">49–54% male</span><span class="nat-vs">vs</span><span class="nat-nat">~51% male nationally</span></div>
+                <div class="nat-note">AFCARS reports a near-even gender split nationally (51% boys, 49% girls). CASA's Feb 2026 skew toward male (54%) is a slight divergence worth monitoring over future months.</div>
+              </div>
+              <div class="nat-card above">
+                <div class="nat-label">Infant representation (0–11 mo)</div>
+                <div class="nat-compare"><span class="nat-yours">11% Feb 2026</span><span class="nat-vs">vs</span><span class="nat-nat">~7% nationally</span></div>
+                <div class="nat-note">AFCARS FY2024 shows only 7% of children nationally are under one year old. CASA's 11% in February — and growing — suggests local infant placement rates are meaningfully above the national norm.</div>
+              </div>
+              <div class="nat-card positive">
+                <div class="nat-label">Guardianship exits (FG trend)</div>
+                <div class="nat-compare"><span class="nat-yours">+57% FG growth</span><span class="nat-vs">vs</span><span class="nat-nat">11% of exits nationally</span></div>
+                <div class="nat-note">Nationally, 11% of foster care exits in FY2024 were through guardianship. CASA's rising FG petitions align with this positive national trend toward kinship and permanent placements over standard foster care.</div>
+              </div>
+              <div class="nat-card inline">
+                <div class="nat-label">Overall caseload direction</div>
+                <div class="nat-compare"><span class="nat-yours">Stable ~121–128</span><span class="nat-vs">vs</span><span class="nat-nat">↓ 6th year of national decline</span></div>
+                <div class="nat-note">Nationally, children in foster care declined for the 6th consecutive year to 328,947 in FY2024 (down from 437,000 in 2018). CASA's stable-to-slight-decline census mirrors this systemic trend, though local demand drivers matter more than national averages for planning.</div>
+              </div>
+              <div class="nat-card watch">
+                <div class="nat-label">Racial disparity trajectory</div>
+                <div class="nat-compare"><span class="nat-yours">Black % rising</span><span class="nat-vs">vs</span><span class="nat-nat">Persistent nationally</span></div>
+                <div class="nat-note">Child Trends and AFCARS data confirm racial disparities persist in nearly every state. CASA's upward trend in Black representation (34→42) over just 8 months is a signal requiring active monitoring and equity-focused intake review.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ▸ QUESTIONS TO EXPLORE -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Questions to Explore</span>
+          <span class="collapse-count">8 questions</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="dive-list" style="padding-top:0.5rem;">
+            <span class="dive-pill">What's driving infant placements?</span>
+            <span class="dive-pill">Kinship vs non-kinship placement split</span>
+            <span class="dive-pill">Average length of stay by age band</span>
+            <span class="dive-pill">Reunification rates by race/ethnicity</span>
+            <span class="dive-pill">Language service utilization (62% "not entered")</span>
+            <span class="dive-pill">FC/18+ trajectory — youth aging out</span>
+            <span class="dive-pill">Two or More Races decline (18 → 12)</span>
+            <span class="dive-pill">Geographic distribution of cases</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -493,85 +533,89 @@
     <div class="summary-block">
       <h2>Fundraising — Summary &amp; Insights</h2>
       <p class="lead">Fiscal year FY25 (Jul 2024–Jun 2025) was the strongest fundraising year in the 5-year dataset, with <strong>$149,253</strong> raised across cash gifts and in-kind contributions — a 15% increase over FY24's $129,526. Cash giving surged 58% to $107K, driven by a dramatic expansion in the donor base from 108 to 278 active donors. However, in-kind giving fell 32% from $61.5K to $42K. The organization is increasingly reliant on individual donors, who contributed 75% of all cash gifts, while organizational in-kind giving remains the single largest in-kind category.</p>
-      <div class="insight-grid">
-        <div class="insight positive"><div class="itag">Strength — donor growth</div><p>Active donors jumped from 108 in FY24 to 278 in FY25 — a 157% increase in one year. This is the most significant growth signal in the dataset and suggests either a successful campaign, expanded outreach, or a major new cultivation effort. Understanding what drove this is critical to repeating it.</p></div>
-        <div class="insight watch"><div class="itag">Watch — new vs retained</div><p>Of FY25's donors, 159 (57%) are brand new — they gave nothing in FY24. Only 71 (26%) were retained from the prior year. First-year donors typically have low retention rates, meaning next year's total could drop sharply without a strong stewardship strategy.</p></div>
-        <div class="insight alert"><div class="itag">Risk — in-kind volatility</div><p>In-kind gifts swung from $7.7K (FY23) to $61.5K (FY24) to $42K (FY25). The FY24 spike was almost entirely organizational in-kind ($55K from just 16 org donors). That has since fallen to $30K. Without understanding what drove FY24's spike, in-kind projections are unreliable.</p></div>
-        <div class="insight positive"><div class="itag">Strength — cash momentum</div><p>Cash giving has grown in 3 of the last 4 fiscal years, from a low of $36K in FY22 to $107K in FY25 — nearly a 3× increase. Individual cash donors drove $80.8K (75%) of the total, showing strong grassroots giving momentum.</p></div>
-        <div class="insight neutral"><div class="itag">Breadth — mid-range donors</div><p>The $100–$499 cash gift range has the most donors (97 in FY25), making it the backbone of the donor base. The $1–$99 range had 78 donors. Together these 175 donors make up 76% of cash donor count — significant upgrade potential exists in this group.</p></div>
-        <div class="insight watch"><div class="itag">Watch — major gift concentration</div><p>Just 4 cash donors gave $5,000+ in FY25, yet their gifts totaled $21K — 20% of all cash revenue. Two more in-kind donors gave $5K+ (totaling $16K). This concentration creates real vulnerability. A major gifts cultivation pipeline is worth building now.</p></div>
-      </div>
-
-      <div class="national-block">
-        <div class="national-title">How this compares nationally — FEP &amp; Giving USA 2024–2025 benchmarks</div>
-        <div class="nat-grid">
-          <div class="nat-card above">
-            <div class="nat-label">Donor growth rate FY25</div>
-            <div class="nat-compare">
-              <span class="nat-yours">+157%</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">↓ -1.3% nationally</span>
-            </div>
-            <div class="nat-note">The Fundraising Effectiveness Project reports the sector saw a 1.3% decline in donor counts in early 2025. CASA's 157% donor surge is a dramatic outlier — far outpacing the national trend and likely driven by a specific campaign or event worth documenting.</div>
-          </div>
-          <div class="nat-card below">
-            <div class="nat-label">New donor retention risk</div>
-            <div class="nat-compare">
-              <span class="nat-yours">57% new donors</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">~19% retention nationally</span>
-            </div>
-            <div class="nat-note">FEP data shows only 19% of first-time donors nationally return to give again. With 159 new donors in FY25, CASA could realistically lose 130+ of them next year without targeted stewardship. This is the single highest-risk metric in the fundraising data.</div>
-          </div>
-          <div class="nat-card inline">
-            <div class="nat-label">Cash giving growth</div>
-            <div class="nat-compare">
-              <span class="nat-yours">+58% YoY</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">+3.6% nationally</span>
-            </div>
-            <div class="nat-note">The sector raised only 3.6% more in 2024 per FEP benchmarks. CASA's 58% cash growth vastly outperforms this, though some of that growth is likely donor-base expansion rather than average gift size improvement.</div>
-          </div>
-          <div class="nat-card above">
-            <div class="nat-label">Repeat donor reliance</div>
-            <div class="nat-compare">
-              <span class="nat-yours">26% retained</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">60%+ of $ from repeat donors</span>
-            </div>
-            <div class="nat-note">Nationally, repeat donors now account for over 60% of total fundraising dollars (FEP 2025). CASA's 71 retained donors are a valuable core — but at 26% of the donor base they're doing heavy lifting. Growing this group is a top priority.</div>
-          </div>
-          <div class="nat-card watch">
-            <div class="nat-label">Small donor ($1–$99) risk</div>
-            <div class="nat-compare">
-              <span class="nat-yours">28% of donors</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">↓ -10–12% nationally</span>
-            </div>
-            <div class="nat-note">FEP reports micro-donors (under $100) declined 10–12% in 2024–2025, a multi-year trend. CASA's 78 donors in this range represent over a quarter of the donor base. Sector-wide, this group is shrinking and their giving raises less per dollar of effort than mid-range donors.</div>
-          </div>
-          <div class="nat-card above">
-            <div class="nat-label">Major gift concentration</div>
-            <div class="nat-compare">
-              <span class="nat-yours">20% from 4 donors</span>
-              <span class="nat-vs">vs</span>
-              <span class="nat-nat">~50% from top donors nationally</span>
-            </div>
-            <div class="nat-note">FEP and Giving USA confirm supersize donors ($50K+) contribute roughly half of all nonprofit dollars nationally. CASA's concentration is less extreme — but with just 4 donors contributing 20% of cash, the structural vulnerability is real and mirrors the sector-wide trend.</div>
+      <!-- ▸ KEY INSIGHTS -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Key Insights</span>
+          <span class="collapse-count">6 insights</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="insight-grid">
+            <div class="insight positive"><div class="itag">Strength — donor growth</div><p>Active donors jumped from 108 in FY24 to 278 in FY25 — a 157% increase in one year. This is the most significant growth signal in the dataset and suggests either a successful campaign, expanded outreach, or a major new cultivation effort. Understanding what drove this is critical to repeating it.</p></div>
+            <div class="insight watch"><div class="itag">Watch — new vs retained</div><p>Of FY25's donors, 159 (57%) are brand new — they gave nothing in FY24. Only 71 (26%) were retained from the prior year. First-year donors typically have low retention rates, meaning next year's total could drop sharply without a strong stewardship strategy.</p></div>
+            <div class="insight alert"><div class="itag">Risk — in-kind volatility</div><p>In-kind gifts swung from $7.7K (FY23) to $61.5K (FY24) to $42K (FY25). The FY24 spike was almost entirely organizational in-kind ($55K from just 16 org donors). That has since fallen to $30K. Without understanding what drove FY24's spike, in-kind projections are unreliable.</p></div>
+            <div class="insight positive"><div class="itag">Strength — cash momentum</div><p>Cash giving has grown in 3 of the last 4 fiscal years, from a low of $36K in FY22 to $107K in FY25 — nearly a 3× increase. Individual cash donors drove $80.8K (75%) of the total, showing strong grassroots giving momentum.</p></div>
+            <div class="insight neutral"><div class="itag">Breadth — mid-range donors</div><p>The $100–$499 cash gift range has the most donors (97 in FY25), making it the backbone of the donor base. The $1–$99 range had 78 donors. Together these 175 donors make up 76% of cash donor count — significant upgrade potential exists in this group.</p></div>
+            <div class="insight watch"><div class="itag">Watch — major gift concentration</div><p>Just 4 cash donors gave $5,000+ in FY25, yet their gifts totaled $21K — 20% of all cash revenue. Two more in-kind donors gave $5K+ (totaling $16K). This concentration creates real vulnerability. A major gifts cultivation pipeline is worth building now.</p></div>
           </div>
         </div>
       </div>
 
-      <div class="dive-title" style="margin-top:1.25rem;">Questions to explore further</div>
-      <div class="dive-list">
-        <span class="dive-pill">What campaign drove FY25 donor surge?</span>
-        <span class="dive-pill">Year-2 retention rate for FY25 new donors</span>
-        <span class="dive-pill">Upgrade path: $1–$99 donors → $100+</span>
-        <span class="dive-pill">Top 10 donors by lifetime giving value</span>
-        <span class="dive-pill">Which organizations drove FY24 in-kind spike?</span>
-        <span class="dive-pill">Monthly giving / recurring donor count</span>
-        <span class="dive-pill">Lapsed donor re-engagement opportunity (19 donors)</span>
-        <span class="dive-pill">Average gift size trend over 5 fiscal years</span>
+      <!-- ▸ NATIONAL COMPARISON -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">National Comparison</span>
+          <span class="collapse-count">FEP &amp; Giving USA 2024–25</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="national-block">
+            <div class="nat-grid">
+              <div class="nat-card above">
+                <div class="nat-label">Donor growth rate FY25</div>
+                <div class="nat-compare"><span class="nat-yours">+157%</span><span class="nat-vs">vs</span><span class="nat-nat">↓ -1.3% nationally</span></div>
+                <div class="nat-note">The Fundraising Effectiveness Project reports the sector saw a 1.3% decline in donor counts in early 2025. CASA's 157% donor surge is a dramatic outlier — far outpacing the national trend and likely driven by a specific campaign or event worth documenting.</div>
+              </div>
+              <div class="nat-card below">
+                <div class="nat-label">New donor retention risk</div>
+                <div class="nat-compare"><span class="nat-yours">57% new donors</span><span class="nat-vs">vs</span><span class="nat-nat">~19% retention nationally</span></div>
+                <div class="nat-note">FEP data shows only 19% of first-time donors nationally return to give again. With 159 new donors in FY25, CASA could realistically lose 130+ of them next year without targeted stewardship. This is the single highest-risk metric in the fundraising data.</div>
+              </div>
+              <div class="nat-card inline">
+                <div class="nat-label">Cash giving growth</div>
+                <div class="nat-compare"><span class="nat-yours">+58% YoY</span><span class="nat-vs">vs</span><span class="nat-nat">+3.6% nationally</span></div>
+                <div class="nat-note">The sector raised only 3.6% more in 2024 per FEP benchmarks. CASA's 58% cash growth vastly outperforms this, though some of that growth is likely donor-base expansion rather than average gift size improvement.</div>
+              </div>
+              <div class="nat-card above">
+                <div class="nat-label">Repeat donor reliance</div>
+                <div class="nat-compare"><span class="nat-yours">26% retained</span><span class="nat-vs">vs</span><span class="nat-nat">60%+ of $ from repeat donors</span></div>
+                <div class="nat-note">Nationally, repeat donors now account for over 60% of total fundraising dollars (FEP 2025). CASA's 71 retained donors are a valuable core — but at 26% of the donor base they're doing heavy lifting. Growing this group is a top priority.</div>
+              </div>
+              <div class="nat-card watch">
+                <div class="nat-label">Small donor ($1–$99) risk</div>
+                <div class="nat-compare"><span class="nat-yours">28% of donors</span><span class="nat-vs">vs</span><span class="nat-nat">↓ -10–12% nationally</span></div>
+                <div class="nat-note">FEP reports micro-donors (under $100) declined 10–12% in 2024–2025, a multi-year trend. CASA's 78 donors in this range represent over a quarter of the donor base. Sector-wide, this group is shrinking and their giving raises less per dollar of effort than mid-range donors.</div>
+              </div>
+              <div class="nat-card above">
+                <div class="nat-label">Major gift concentration</div>
+                <div class="nat-compare"><span class="nat-yours">20% from 4 donors</span><span class="nat-vs">vs</span><span class="nat-nat">~50% from top donors nationally</span></div>
+                <div class="nat-note">FEP and Giving USA confirm supersize donors ($50K+) contribute roughly half of all nonprofit dollars nationally. CASA's concentration is less extreme — but with just 4 donors contributing 20% of cash, the structural vulnerability is real and mirrors the sector-wide trend.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ▸ QUESTIONS TO EXPLORE -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Questions to Explore</span>
+          <span class="collapse-count">8 questions</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="dive-list" style="padding-top:0.5rem;">
+            <span class="dive-pill">What campaign drove FY25 donor surge?</span>
+            <span class="dive-pill">Year-2 retention rate for FY25 new donors</span>
+            <span class="dive-pill">Upgrade path: $1–$99 donors → $100+</span>
+            <span class="dive-pill">Top 10 donors by lifetime giving value</span>
+            <span class="dive-pill">Which organizations drove FY24 in-kind spike?</span>
+            <span class="dive-pill">Monthly giving / recurring donor count</span>
+            <span class="dive-pill">Lapsed donor re-engagement opportunity (19 donors)</span>
+            <span class="dive-pill">Average gift size trend over 5 fiscal years</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -725,6 +769,30 @@
 </div>
 
 <script>
+/* ═══ COLLAPSIBLE SECTIONS ═══ */
+function toggleSection(btn) {
+  var body = btn.nextElementSibling;
+  var opening = !btn.classList.contains('open');
+  btn.classList.toggle('open');
+  if (opening) {
+    // animate open: 0 → scrollHeight, then release to 'none' so content can resize freely
+    body.style.maxHeight = body.scrollHeight + 'px';
+    body.addEventListener('transitionend', function done() {
+      body.style.maxHeight = 'none';
+      body.removeEventListener('transitionend', done);
+    });
+  } else {
+    // animate close: pin to current height first, then animate to 0
+    body.style.maxHeight = body.scrollHeight + 'px';
+    // double rAF ensures browser registers the pinned height before transitioning
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        body.style.maxHeight = '0';
+      });
+    });
+  }
+}
+
 /* ═══ NAV ═══ */
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
