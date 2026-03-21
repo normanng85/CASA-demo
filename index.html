@@ -44,10 +44,13 @@
     .nav-btn.active-demo .icon { background:#3B8BD4; color:#fff; }
     .nav-btn.active-fund { background:#e8f4ef; color:#0B5240; border-color:#0F6E56; box-shadow:0 0 0 3px rgba(15,110,86,0.12); }
     .nav-btn.active-fund .icon { background:#0F6E56; color:#fff; }
+    .nav-btn.active-expl { background:#fdf3e8; color:#7A3D00; border-color:#BA7517; box-shadow:0 0 0 3px rgba(186,117,23,0.12); }
+    .nav-btn.active-expl .icon { background:#BA7517; color:#fff; }
 
     @media (prefers-color-scheme: dark) {
       .nav-btn.active-demo  { background:rgba(59,139,212,0.15); color:#85B7EB; border-color:#3B8BD4; }
       .nav-btn.active-fund  { background:rgba(15,110,86,0.15);  color:#5DCAA5; border-color:#0F6E56; }
+      .nav-btn.active-expl  { background:rgba(186,117,23,0.15); color:#FAC775; border-color:#BA7517; }
     }
 
     /* LAYOUT */
@@ -161,23 +164,169 @@
 
     footer { text-align:center; font-size:12px; color:var(--text3); padding:2rem 0 1rem; border-top:0.5px solid var(--border); margin-top:2rem; }
 
-    @media (max-width:900px) { .three{grid-template-columns:1fr 1fr;} .insight-grid{grid-template-columns:1fr 1fr;} }
+    /* ── EXPORT / PRINT TOOLBAR ── */
+    .chart-toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:.6rem; }
+    .chart-toolbar .card-title { margin-bottom:0; }
+    .toolbar-btns { display:flex; gap:6px; flex-shrink:0; }
+    .icon-btn {
+      display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:500;
+      color:var(--text3); background:var(--surface2); border:0.5px solid var(--border);
+      border-radius:var(--radius-md); padding:4px 9px; cursor:pointer;
+      transition:background .15s,color .15s; white-space:nowrap;
+    }
+    .icon-btn:hover { background:var(--bg); color:var(--text); }
+    .print-btn {
+      display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500;
+      color:var(--text2); background:var(--surface); border:0.5px solid var(--border);
+      border-radius:var(--radius-md); padding:7px 14px; cursor:pointer;
+      transition:background .15s; margin-left:auto;
+    }
+    .print-btn:hover { background:var(--surface2); }
+
+    /* ── DATE FILTER ── */
+    .date-filter { display:flex; align-items:center; gap:8px; margin-bottom:1rem; flex-wrap:wrap; }
+    .date-filter label { font-size:12px; color:var(--text3); white-space:nowrap; }
+    .month-chip {
+      font-size:11px; font-weight:500; padding:3px 10px; border-radius:20px; cursor:pointer;
+      border:1px solid var(--border); background:var(--surface2); color:var(--text2);
+      transition:background .12s, color .12s, border-color .12s;
+    }
+    .month-chip.on { background:#3B8BD4; color:#fff; border-color:#3B8BD4; }
+
+    /* ── EXPLORER PAGE ── */
+    .expl-controls {
+      background:var(--surface); border:0.5px solid var(--border); border-radius:var(--radius-lg);
+      padding:1.25rem 1.5rem; margin-bottom:1rem;
+    }
+    .expl-row { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:12px; align-items:end; margin-bottom:1rem; }
+    .expl-row2 { display:grid; grid-template-columns:1fr 1fr auto; gap:12px; align-items:end; }
+    .expl-field label { display:block; font-size:12px; color:var(--text3); margin-bottom:5px; }
+    .expl-field select, .expl-field input {
+      width:100%; padding:7px 10px; font-size:13px; border-radius:var(--radius-md);
+      border:0.5px solid var(--border); background:var(--surface2); color:var(--text);
+      appearance:none; -webkit-appearance:none;
+    }
+    .expl-field select:focus, .expl-field input:focus { outline:none; border-color:#3B8BD4; }
+    .expl-build-btn {
+      padding:8px 20px; font-size:13px; font-weight:500; border-radius:var(--radius-md);
+      background:#3B8BD4; color:#fff; border:none; cursor:pointer; white-space:nowrap;
+      transition:background .15s;
+    }
+    .expl-build-btn:hover { background:#185FA5; }
+
+    .stat-bar {
+      display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-bottom:1rem;
+    }
+    .stat-item { background:var(--surface2); border-radius:var(--radius-md); padding:.6rem .9rem; }
+    .stat-item .slabel { font-size:11px; color:var(--text3); margin-bottom:2px; }
+    .stat-item .sval   { font-size:18px; font-weight:500; color:var(--text); }
+    .stat-item .strend { font-size:11px; margin-top:1px; }
+    .strend.up { color:#0F6E56; } .strend.dn { color:#A32D2D; } .strend.flat { color:var(--text3); }
+
+    .expl-chart-wrap { position:relative; }
+
+    /* ── ANNOTATION MARKERS ── */
+    .anno-marker {
+      position:absolute; pointer-events:none; z-index:10;
+      background:#534AB7; color:#fff; font-size:10px; font-weight:500;
+      padding:2px 6px; border-radius:4px; white-space:nowrap; transform:translateX(-50%);
+    }
+    .anno-marker::after {
+      content:''; position:absolute; bottom:-4px; left:50%; transform:translateX(-50%);
+      border:4px solid transparent; border-top-color:#534AB7; border-bottom:none;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      nav, .print-btn, .icon-btn, .toolbar-btns, .drill-badge, .tleg, .date-filter,
+      .expl-controls, .stat-bar, footer { display:none !important; }
+      .page { display:block !important; }
+      .card { break-inside:avoid; }
+      body { font-size:12px; }
+    }
+
+    @media (max-width:900px) { .three{grid-template-columns:1fr 1fr;} .insight-grid{grid-template-columns:1fr 1fr;} .expl-row{grid-template-columns:1fr 1fr;} .stat-bar{grid-template-columns:repeat(3,1fr);} }
     @media (max-width:600px) {
       nav .brand{display:none;} .metric-grid{grid-template-columns:repeat(2,1fr);}
       .two,.three{grid-template-columns:1fr;} .insight-grid{grid-template-columns:1fr;}
+      .expl-row,.expl-row2{grid-template-columns:1fr;} .stat-bar{grid-template-columns:repeat(2,1fr);}
+    }
+
+    /* ── DATA TABLE TOGGLE ── */
+    .data-table-wrap { display:none; overflow-x:auto; padding:2px 0 4px; }
+    .data-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .data-table thead th { font-size:11px; font-weight:500; color:var(--text3); text-transform:uppercase; letter-spacing:.05em; padding:6px 8px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; }
+    .data-table thead th.num { text-align:right; }
+    .data-table tbody td { padding:5px 8px; border-bottom:0.5px solid var(--border); color:var(--text2); font-size:12px; }
+    .data-table tbody tr:last-child td { border-bottom:none; }
+    .data-table tbody tr:hover td { background:var(--surface2); }
+    .data-table tbody td.num { text-align:right; font-variant-numeric:tabular-nums; }
+    .data-table tbody td.row-label { font-weight:500; color:var(--text); white-space:nowrap; }
+
+    /* ── DRILL KPI BAR ── */
+    .drill-kpi-bar { display:grid; gap:8px; margin-bottom:1rem; }
+    .drill-kpi-bar.n2 { grid-template-columns:1fr 1fr; }
+    .drill-kpi-bar.n3 { grid-template-columns:repeat(3,1fr); }
+    .drill-kpi-bar.n4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .drill-kpi { background:var(--surface2); border-radius:var(--radius-md); padding:.6rem .9rem; }
+    .drill-kpi .dk-lbl { font-size:11px; color:var(--text3); margin-bottom:3px; }
+    .drill-kpi .dk-val { font-size:17px; font-weight:500; color:var(--text); line-height:1.1; }
+    .drill-kpi .dk-sub { font-size:11px; color:var(--text3); margin-top:3px; }
+    .drill-kpi .dk-up  { font-size:11px; color:#0F6E56; margin-top:3px; }
+    .drill-kpi .dk-dn  { font-size:11px; color:#A32D2D; margin-top:3px; }
+    @media (max-width:600px) { .drill-kpi-bar.n4{grid-template-columns:1fr 1fr;} .drill-kpi-bar.n3{grid-template-columns:1fr 1fr;} }
+
+    /* ── DRILL CALLOUT ── */
+    .drill-callout { background:var(--surface2); border-left:3px solid #534AB7; border-radius:0 var(--radius-md) var(--radius-md) 0; padding:.75rem 1rem; margin-bottom:1rem; font-size:13px; color:var(--text2); line-height:1.6; }
+    .drill-callout strong { color:var(--text); }
+
+    /* ── TREND PILLS (inside drills) ── */
+    .drill-trend-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:1rem; }
+    .drill-trend-pill { font-size:12px; padding:3px 10px 3px 8px; border-radius:20px; background:var(--surface2); border:0.5px solid var(--border); color:var(--text2); display:inline-flex; align-items:center; gap:5px; }
+    .dtp-dot { width:8px; height:8px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .dtp-up { color:#0F6E56; font-weight:500; }
+    .dtp-dn { color:#A32D2D; font-weight:500; }
+    .dtp-fl { color:var(--text3); }
+
+    /* ── CARD HOVER ── */
+    .card { transition:box-shadow .15s; }
+    .card:hover { box-shadow:0 2px 14px rgba(0,0,0,0.08); }
+
+    /* ── PRINT HEADER ── */
+    .print-header { display:none; justify-content:space-between; align-items:baseline; padding-bottom:.85rem; margin-bottom:1.5rem; border-bottom:1.5px solid #ccc; }
+    .print-header .ph-org { font-size:15px; font-weight:600; }
+    .print-header .ph-date { font-size:12px; color:#666; }
+
+    /* ── ENHANCED PRINT STYLES ── */
+    @media print {
+      nav, .print-btn, .icon-btn, .toolbar-btns, .drill-badge, .tleg, .date-filter,
+      .expl-controls, .stat-bar, footer, #active_drill_panel { display:none !important; }
+      .page { display:none !important; }
+      body[data-print-page="demographics"] #demographics { display:block !important; }
+      body[data-print-page="fundraising"]  #fundraising  { display:block !important; }
+      body[data-print-page="explorer"]     #explorer     { display:block !important; }
+      body:not([data-print-page]) .page.on { display:block !important; }
+      .card { break-inside:avoid; box-shadow:none !important; }
+      .print-header { display:flex !important; }
+      body { font-size:12px; }
+      main { padding:0; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="brand">Dashboard</div>
+  <div class="brand">CASA Dashboard</div>
   <a class="nav-btn active-demo" onclick="return showPage('demographics',this,'active-demo')" href="#">
     <span class="icon">👶</span> Child Demographics
   </a>
   <a class="nav-btn" onclick="return showPage('fundraising',this,'active-fund')" href="#">
     <span class="icon">💰</span> Fundraising
   </a>
+  <a class="nav-btn" onclick="return showPage('explorer',this,'active-expl')" href="#">
+    <span class="icon">📊</span> Explorer
+  </a>
+  <button class="print-btn" onclick="printCurrentPage()" style="margin-left:auto;">🖨 Print / PDF</button>
 
 </nav>
 
@@ -187,6 +336,7 @@
 ══════════════════════════════════════════ -->
 <div id="demographics" class="page on">
   <main>
+    <div class="print-header"><span class="ph-org">CASA — Child Demographics Dashboard</span><span class="ph-date" id="ph_date_demo"></span></div>
     <div class="summary-block">
       <h2>Child Demographics — Summary &amp; Insights</h2>
       <p class="lead">The active caseload averaged <strong>123 children</strong> per month from July 2025 through February 2026, peaking at 128 in August and dipping to 117 in January before recovering. The population is racially diverse, nearly balanced by gender, and skewed toward younger children — with infants and toddlers (0–3) representing the single largest age band and growing steadily throughout the period. Foster care petitions (FN) dominate the case mix but are declining, while guardianship (FG) petitions are on a clear upward trajectory.</p>
@@ -280,22 +430,43 @@
     </div>
 
     <div class="section-title">Census</div>
-    <div class="card"><div class="card-title">Monthly active children — Jul 2025 to Feb 2026</div><div class="cw" style="height:220px"><canvas id="d_c1"></canvas></div></div>
+
+    <!-- Month filter -->
+    <div class="date-filter">
+      <label>Filter months:</label>
+      <span id="df_all" class="month-chip on" onclick="toggleMonth(-1)">All</span>
+      <span class="month-chip on" data-mi="0" onclick="toggleMonth(0)">Jul</span>
+      <span class="month-chip on" data-mi="1" onclick="toggleMonth(1)">Aug</span>
+      <span class="month-chip on" data-mi="2" onclick="toggleMonth(2)">Sep</span>
+      <span class="month-chip on" data-mi="3" onclick="toggleMonth(3)">Oct</span>
+      <span class="month-chip on" data-mi="4" onclick="toggleMonth(4)">Nov</span>
+      <span class="month-chip on" data-mi="5" onclick="toggleMonth(5)">Dec</span>
+      <span class="month-chip on" data-mi="6" onclick="toggleMonth(6)">Jan</span>
+      <span class="month-chip on" data-mi="7" onclick="toggleMonth(7)">Feb</span>
+    </div>
+
+    <div class="card">
+      <div class="chart-toolbar">
+        <div class="card-title">Monthly active children — Jul 2025 to Feb 2026</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c1','census')">⬇ PNG</button></div>
+      </div>
+      <div class="cw" style="height:220px"><canvas id="d_c1"></canvas></div>
+    </div>
 
 
     <div class="section-title">Race / Ethnicity</div>
     <div class="two">
-      <div class="card"><div class="card-title">Race/ethnicity over time</div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Race/ethnicity over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c2','race-over-time')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
       <div class="card"><div class="card-title">Race/ethnicity — Feb 2026</div><div class="cw" style="height:240px"><canvas id="d_c3"></canvas></div></div>
     </div>
 
     <div class="section-title">Age Distribution</div>
     <div class="three">
-      <div class="card"><div class="card-title">Age groups — Jul 2025</div><div class="cw" style="height:220px"><canvas id="d_c4"></canvas></div></div>
-      <div class="card"><div class="card-title">Age groups — Jan 2026</div><div class="cw" style="height:220px"><canvas id="d_c5"></canvas></div></div>
-      <div class="card"><div class="card-title">Age groups — Feb 2026</div><div class="cw" style="height:220px"><canvas id="d_c6"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jul 2025</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c4','age-jul-2025')">⬇ PNG</button></div></div><div class="cw" style="height:220px"><canvas id="d_c4"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jan 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c5','age-jan-2026')">⬇ PNG</button></div></div><div class="cw" style="height:220px"><canvas id="d_c5"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c6','age-feb-2026')">⬇ PNG</button></div></div><div class="cw" style="height:220px"><canvas id="d_c6"></canvas></div></div>
     </div>
-    <div class="card"><div class="card-title">Age group trend over time — 4-year bands</div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_agleg"></div><div class="cw" style="height:260px"><canvas id="d_c7"></canvas></div></div>
+    <div class="card"><div class="chart-toolbar"><div class="card-title">Age group trend over time — 4-year bands</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c7','age-trend')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_agleg"></div><div class="cw" style="height:260px"><canvas id="d_c7"></canvas></div></div>
 
     <div class="section-title">Petition Types</div>
     <div class="two">
@@ -318,6 +489,7 @@
 ══════════════════════════════════════════ -->
 <div id="fundraising" class="page">
   <main>
+    <div class="print-header"><span class="ph-org">CASA — Fundraising Dashboard</span><span class="ph-date" id="ph_date_fund"></span></div>
     <div class="summary-block">
       <h2>Fundraising — Summary &amp; Insights</h2>
       <p class="lead">Fiscal year FY25 (Jul 2024–Jun 2025) was the strongest fundraising year in the 5-year dataset, with <strong>$149,253</strong> raised across cash gifts and in-kind contributions — a 15% increase over FY24's $129,526. Cash giving surged 58% to $107K, driven by a dramatic expansion in the donor base from 108 to 278 active donors. However, in-kind giving fell 32% from $61.5K to $42K. The organization is increasingly reliant on individual donors, who contributed 75% of all cash gifts, while organizational in-kind giving remains the single largest in-kind category.</p>
@@ -413,7 +585,10 @@
 
     <div class="section-title">Total Giving Overview</div>
     <div class="card">
-      <div class="card-title">Combined giving by fiscal year — cash + in-kind</div>
+      <div class="chart-toolbar">
+        <div class="card-title">Combined giving by fiscal year — cash + in-kind</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c1','combined-giving')">⬇ PNG</button></div>
+      </div>
       <div class="drill-badge"><span class="dot"></span>Click a bar to drill into that fiscal year</div>
       <div class="chart-hint">Click legend pills to show/hide</div>
       <div class="tleg" id="f_totleg"></div>
@@ -460,11 +635,100 @@
 
 
 
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 — EXPLORER
+══════════════════════════════════════════ -->
+<div id="explorer" class="page">
+  <main>
+    <div class="summary-block" style="margin-bottom:1.25rem;">
+      <h2>Chart Explorer</h2>
+      <p class="lead">Build your own chart by selecting any combination of variables from the demographics and fundraising datasets. Mix datasets, compare trends, and export anything you build.</p>
+    </div>
+
+    <!-- Controls -->
+    <div class="expl-controls">
+      <div class="expl-row">
+        <div class="expl-field">
+          <label>Dataset</label>
+          <select id="expl_dataset" onchange="updateExplVars()">
+            <option value="demo">Child Demographics (monthly)</option>
+            <option value="fund">Fundraising (annual)</option>
+          </select>
+        </div>
+        <div class="expl-field">
+          <label>Y-axis — primary series</label>
+          <select id="expl_y1"></select>
+        </div>
+        <div class="expl-field">
+          <label>Y-axis — optional second series</label>
+          <select id="expl_y2"><option value="">None</option></select>
+        </div>
+        <div class="expl-field">
+          <label>Chart type</label>
+          <select id="expl_type">
+            <option value="line">Line</option>
+            <option value="bar">Bar</option>
+            <option value="scatter">Scatter</option>
+          </select>
+        </div>
+      </div>
+      <div class="expl-row2">
+        <div class="expl-field">
+          <label>View mode</label>
+          <select id="expl_mode">
+            <option value="abs">Absolute values</option>
+            <option value="pct">% of monthly total</option>
+          </select>
+        </div>
+        <div class="expl-field">
+          <label>Second axis for series 2</label>
+          <select id="expl_dualaxis">
+            <option value="no">Same axis</option>
+            <option value="yes">Separate right axis</option>
+          </select>
+        </div>
+        <button class="expl-build-btn" onclick="buildExplChart()">Build chart →</button>
+      </div>
+    </div>
+
+    <!-- Stat summary bar -->
+    <div class="stat-bar" id="expl_stats" style="display:none;">
+      <div class="stat-item"><div class="slabel">Min</div><div class="sval" id="es_min">—</div></div>
+      <div class="stat-item"><div class="slabel">Max</div><div class="sval" id="es_max">—</div></div>
+      <div class="stat-item"><div class="slabel">Average</div><div class="sval" id="es_avg">—</div></div>
+      <div class="stat-item"><div class="slabel">Total / Sum</div><div class="sval" id="es_sum">—</div></div>
+      <div class="stat-item"><div class="slabel">Trend</div><div class="sval" id="es_trend">—</div><div class="strend" id="es_trend_dir"></div></div>
+    </div>
+
+    <!-- Chart output -->
+    <div class="card" id="expl_card" style="display:none;">
+      <div class="chart-toolbar">
+        <div class="card-title" id="expl_chart_title">Custom Chart</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('expl_canvas','custom-chart')">⬇ PNG</button></div>
+      </div>
+      <div class="expl-chart-wrap">
+        <div id="expl_annotations"></div>
+        <div class="cw" style="height:320px"><canvas id="expl_canvas"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div id="expl_empty" class="card" style="text-align:center; padding:3rem 1.5rem; color:var(--text3);">
+      <div style="font-size:32px; margin-bottom:1rem;">📊</div>
+      <div style="font-size:15px; font-weight:500; color:var(--text2); margin-bottom:0.5rem;">Select variables and click Build chart</div>
+      <div style="font-size:13px;">Mix any variables from demographics or fundraising to explore relationships in your data.</div>
+    </div>
+
+    <footer>Chart Explorer — combine any variables from Child Demographics &amp; Fundraising datasets</footer>
+  </main>
+</div>
+
 <script>
 /* ═══ NAV ═══ */
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund'); });
+  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
   return false;
@@ -475,8 +739,6 @@ var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 var GC = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
 var TC = isDark ? '#73726c' : '#888780';
 var BC = isDark ? '#242422' : '#ffffff';
-var P  = { responsive:true, maintainAspectRatio:false };
-
 function dollarTick(v){ return '$'+Math.round(v/1000)+'k'; }
 function dollarFmt(v){ return '$'+v.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
 function pctFmt(v){ return v+'%'; }
@@ -680,8 +942,17 @@ function openDrill(fyIdx, type, anchorEl) {
     closeDrill
   );
   var body = panel.querySelector('#drill_body');
+  var avgGift = totalN > 0 ? Math.round(totalAmt/totalN) : 0;
+  var largestAmt = Math.max.apply(null, amounts);
+  var largestBucket = fBL[amounts.indexOf(largestAmt)];
   body.innerHTML =
-    '<div class="two"><div>'
+    '<div class="drill-kpi-bar n3">'
+    +kpi('Total raised', dollarFmt(totalAmt), fY[fyIdx]+' · '+typeLabel, null, null)
+    +kpi('Avg gift', '$'+avgGift.toLocaleString(), 'per '+totalN+' donors', null, null)
+    +kpi('Top gift range', largestBucket, dollarFmt(largestAmt)+' raised in this tier', null, null)
+    +'</div>'
+    +'<div class="drill-callout">'+fyCallouts[fyIdx]+'</div>'
+    +'<div class="two"><div>'
     +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Gift amount breakdown</div>'
     +'<div class="cw" style="height:200px"><canvas id="f_drill_amount"></canvas></div></div><div>'
     +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Number of donors by range</div>'
@@ -693,27 +964,383 @@ function openDrill(fyIdx, type, anchorEl) {
 
   drillCharts.amount = new Chart(document.getElementById('f_drill_amount'),{type:'bar',
     data:{labels:fBL,datasets:[{label:'Amount raised',data:amounts,backgroundColor:fBC,borderRadius:4,borderSkipped:false}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw)+' ('+Math.round(c.raw/totalAmt*100)+'% of total)';}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw)+' ('+Math.round(c.raw/totalAmt*100)+'% of total)';}}}}
       ,scales:{x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
 
   drillCharts.count = new Chart(document.getElementById('f_drill_count'),{type:'bar',
     data:{labels:fBL,datasets:[{label:'Donors',data:counts,backgroundColor:fBC,borderRadius:4,borderSkipped:false}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors ('+Math.round(c.raw/totalN*100)+'%)';}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors ('+Math.round(c.raw/totalN*100)+'%)';}}}}
       ,scales:{x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});
 
   drillCharts.typeAmt = new Chart(document.getElementById('f_drill_type_amt'),{type:'doughnut',
     data:{labels:['Individual','Organization'],datasets:[{data:[indAmt,orgAmt],backgroundColor:['#3B8BD4','#BA7517'],borderWidth:2,borderColor:BC}]},
-    options:{...P,plugins:{title:{display:true,text:'Amount by type',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Amount by type',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
       legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
       tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+dollarFmt(c.raw)+' ('+Math.round(c.raw/(indAmt+orgAmt)*100)+'%)';}}}}}});
 
   drillCharts.typeCnt = new Chart(document.getElementById('f_drill_type_cnt'),{type:'doughnut',
     data:{labels:['Individual','Organization'],datasets:[{data:[indN,orgN],backgroundColor:['#3B8BD4','#BA7517'],borderWidth:2,borderColor:BC}]},
-    options:{...P,plugins:{title:{display:true,text:'Donors by type',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Donors by type',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
       legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
       tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors ('+Math.round(c.raw/(indN+orgN)*100)+'%)';}}}}}});
 }
 
+/* ═══ EXPORT ═══ */
+function exportChart(canvasId, filename) {
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  var link = document.createElement('a');
+  link.download = (filename || 'chart') + '.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+/* ═══ DATE FILTER ═══ */
+var activeMonths = [0,1,2,3,4,5,6,7]; // all 8 months active
+var allDemoCharts = {}; // store refs for filter updates
+
+function toggleMonth(mi) {
+  if (mi === -1) {
+    // "All" button — reset
+    activeMonths = [0,1,2,3,4,5,6,7];
+    document.querySelectorAll('.month-chip').forEach(function(c){ c.classList.add('on'); });
+  } else {
+    var idx = activeMonths.indexOf(mi);
+    if (idx >= 0 && activeMonths.length > 1) {
+      activeMonths.splice(idx, 1);
+      document.querySelector('[data-mi="'+mi+'"]').classList.remove('on');
+    } else if (idx < 0) {
+      activeMonths.push(mi);
+      activeMonths.sort(function(a,b){return a-b;});
+      document.querySelector('[data-mi="'+mi+'"]').classList.add('on');
+    }
+    // Update "All" chip state
+    var allOn = activeMonths.length === 8;
+    document.getElementById('df_all').classList.toggle('on', allOn);
+  }
+  applyMonthFilter();
+}
+
+function applyMonthFilter() {
+  var labels = activeMonths.map(function(i){ return dM[i]; });
+  Object.keys(allDemoCharts).forEach(function(key) {
+    var chart = allDemoCharts[key];
+    if (!chart || !chart.data) return;
+    chart.data.labels = labels;
+    chart.data.datasets.forEach(function(ds, di) {
+      if (ds._fullData) ds.data = activeMonths.map(function(i){ return ds._fullData[i]; });
+    });
+    chart.update();
+  });
+}
+
+function storeFullData(datasets) {
+  datasets.forEach(function(ds) { ds._fullData = ds.data.slice(); });
+  return datasets;
+}
+
+/* ═══ ANNOTATIONS ═══ */
+function addAnnotations(chartId, annotations) {
+  // annotations: [{mi: monthIndex, label: 'text'}]
+  // Called after chart renders, positions markers above notable points
+  setTimeout(function() {
+    var canvas = document.getElementById(chartId);
+    if (!canvas) return;
+    var chart = Chart.getChart(canvas);
+    if (!chart || !chart.chartArea) return;
+    var wrap = canvas.closest('.expl-chart-wrap') || canvas.parentElement;
+    var existing = wrap.querySelectorAll('.anno-marker');
+    existing.forEach(function(e){ e.remove(); });
+    var xScale = chart.scales.x;
+    var yScale = chart.scales.y || chart.scales['y'];
+    if (!xScale || !yScale) return;
+    annotations.forEach(function(a) {
+      var px = xScale.getPixelForValue(a.mi);
+      var py = yScale.getPixelForValue(a.val || yScale.max * 0.9);
+      var marker = document.createElement('div');
+      marker.className = 'anno-marker';
+      marker.textContent = a.label;
+      marker.style.left = px + 'px';
+      marker.style.top = (py - 28) + 'px';
+      wrap.style.position = 'relative';
+      wrap.appendChild(marker);
+    });
+  }, 100);
+}
+
+/* ═══ EXPLORER ═══ */
+var explorerChart = null;
+
+var explVars = {
+  demo: [
+    {key:'total',    label:'Total census',        data: function(){ return dT; }},
+    {key:'female',   label:'Female count',         data: function(){ return dF; }},
+    {key:'male',     label:'Male count',           data: function(){ return dMa; }},
+    {key:'black',    label:'Black/Afr. Am.',       data: function(){ return dRD[1]; }},
+    {key:'hisp',     label:'Hispanic/Latino',      data: function(){ return dRD[2]; }},
+    {key:'white',    label:'White',                data: function(){ return dRD[5]; }},
+    {key:'asian',    label:'Asian',                data: function(){ return dRD[0]; }},
+    {key:'twomore',  label:'Two or More Races',    data: function(){ return dRD[3]; }},
+    {key:'unknown',  label:'Unknown race',         data: function(){ return dRD[4]; }},
+    {key:'fn',       label:'FN petitions',         data: function(){ return dPD[5]; }},
+    {key:'fg',       label:'FG petitions',         data: function(){ return dPD[4]; }},
+    {key:'fcourt',   label:'FC/court id petitions',data: function(){ return dPD[2]; }},
+    {key:'fc18',     label:'FC/18+ petitions',     data: function(){ return dPD[3]; }},
+    {key:'adoption', label:'Adoption petitions',   data: function(){ return dPD[0]; }},
+    {key:'age03',    label:'Age 0–3 (count)',       data: function(){ return dBS[0]; }},
+    {key:'age47',    label:'Age 4–7 (count)',       data: function(){ return dBS[1]; }},
+    {key:'age811',   label:'Age 8–11 (count)',      data: function(){ return dBS[2]; }},
+    {key:'age1215',  label:'Age 12–15 (count)',     data: function(){ return dBS[3]; }},
+    {key:'age1618',  label:'Age 16–18+ (count)',    data: function(){ return dBS[4]; }}
+  ],
+  fund: [
+    {key:'total',  label:'Total raised ($)',       data: function(){ return fC.map(function(v,i){return v+fIK[i];}); }},
+    {key:'cash',   label:'Cash gifts ($)',         data: function(){ return fC; }},
+    {key:'inkind', label:'In-kind gifts ($)',      data: function(){ return fIK; }},
+    {key:'donors', label:'Active donors',          data: function(){ return fD; }},
+    {key:'cashind',label:'Individual cash ($)',    data: function(){ return fCI; }},
+    {key:'cashorg',label:'Org cash ($)',           data: function(){ return fCO; }},
+    {key:'ikind',  label:'Individual in-kind ($)', data: function(){ return fII; }},
+    {key:'ikorg',  label:'Org in-kind ($)',        data: function(){ return fIO; }}
+  ]
+};
+
+function updateExplVars() {
+  var ds = document.getElementById('expl_dataset').value;
+  var vars = explVars[ds];
+  function buildOpts(selId, withNone) {
+    var sel = document.getElementById(selId);
+    sel.innerHTML = withNone ? '<option value="">None</option>' : '';
+    vars.forEach(function(v) {
+      sel.innerHTML += '<option value="'+v.key+'">'+v.label+'</option>';
+    });
+  }
+  buildOpts('expl_y1', false);
+  buildOpts('expl_y2', true);
+  var modeField = document.getElementById('expl_mode').parentElement;
+  modeField.style.display = ds === 'demo' ? '' : 'none';
+}
+
+function buildExplChart() {
+  if (explorerChart) { explorerChart.destroy(); explorerChart = null; }
+  document.getElementById('expl_annotations').innerHTML = '';
+
+  var ds    = document.getElementById('expl_dataset').value;
+  var y1key = document.getElementById('expl_y1').value;
+  var y2key = document.getElementById('expl_y2').value;
+  var ctype = document.getElementById('expl_type').value;
+  var mode  = document.getElementById('expl_mode').value;
+  var dual  = document.getElementById('expl_dualaxis').value === 'yes';
+
+  var vars = explVars[ds];
+  var v1 = vars.find(function(v){ return v.key === y1key; });
+  if (!v1) return;
+  var v2 = y2key ? vars.find(function(v){ return v.key === y2key; }) : null;
+
+  var labels = ds === 'demo' ? dM : fY;
+  var d1 = v1.data().slice();
+  var d2 = v2 ? v2.data().slice() : null;
+
+  // % mode (demo only)
+  if (mode === 'pct' && ds === 'demo') {
+    d1 = d1.map(function(v,i){ return dT[i] ? Math.round(v/dT[i]*1000)/10 : 0; });
+    if (d2) d2 = d2.map(function(v,i){ return dT[i] ? Math.round(v/dT[i]*1000)/10 : 0; });
+  }
+
+  var isMoney = ds === 'fund' && ['total','cash','inkind','cashind','cashorg','ikind','ikorg'].indexOf(y1key) >= 0;
+  var isMoney2= v2 && ds === 'fund' && ['total','cash','inkind','cashind','cashorg','ikind','ikorg'].indexOf(y2key) >= 0;
+
+  // Stats for primary series
+  var validD1 = d1.filter(function(v){ return v !== null && !isNaN(v); });
+  var mn = Math.min.apply(null,validD1), mx = Math.max.apply(null,validD1);
+  var avg = validD1.reduce(function(a,b){return a+b;},0)/validD1.length;
+  var sum = validD1.reduce(function(a,b){return a+b;},0);
+  var first = validD1[0], last = validD1[validD1.length-1];
+  var trendPct = first ? Math.round((last-first)/Math.abs(first)*100) : 0;
+
+  function fmt(v){ return isMoney ? '$'+Math.round(v).toLocaleString() : mode==='pct' ? v.toFixed(1)+'%' : Math.round(v*10)/10; }
+
+  document.getElementById('es_min').textContent   = fmt(mn);
+  document.getElementById('es_max').textContent   = fmt(mx);
+  document.getElementById('es_avg').textContent   = fmt(avg);
+  document.getElementById('es_sum').textContent   = isMoney ? '$'+Math.round(sum).toLocaleString() : Math.round(sum);
+  document.getElementById('es_trend').textContent = (trendPct >= 0 ? '+' : '') + trendPct + '%';
+  var tdir = document.getElementById('es_trend_dir');
+  tdir.textContent = trendPct > 2 ? '▲ Upward' : trendPct < -2 ? '▼ Downward' : '→ Flat';
+  tdir.className   = 'strend ' + (trendPct > 2 ? 'up' : trendPct < -2 ? 'dn' : 'flat');
+
+  document.getElementById('expl_stats').style.display = '';
+  document.getElementById('expl_card').style.display  = '';
+  document.getElementById('expl_empty').style.display = 'none';
+
+  var title = v1.label + (v2 ? ' vs ' + v2.label : '') + ' — ' + (ds === 'demo' ? 'Monthly' : 'By Fiscal Year');
+  document.getElementById('expl_chart_title').textContent = title;
+
+  var colors1 = ['#3B8BD4','#185FA5','#0F6E56','#BA7517','#534AB7','#A32D2D'];
+  var c1 = '#3B8BD4', c2 = '#BA7517';
+
+  var ds1 = {
+    label: v1.label + (mode === 'pct' ? ' (% of census)' : ''),
+    data: ctype === 'scatter' ? d1.map(function(v,i){return{x:i,y:v};}) : d1,
+    borderColor: c1, backgroundColor: ctype === 'bar' ? c1+'bb' : 'rgba(59,139,212,0.12)',
+    fill: ctype === 'line', tension: 0.3,
+    pointRadius: 5, pointHoverRadius: 8, pointBackgroundColor: c1,
+    borderWidth: 2.5, borderRadius: ctype === 'bar' ? 4 : 0,
+    yAxisID: 'y'
+  };
+
+  var datasets = [ds1];
+  var scales = {
+    x: { ticks:{color:TC}, grid:{display:false} },
+    y: {
+      ticks:{ color:TC, callback: function(v){ return isMoney ? '$'+Math.round(v/1000)+'k' : mode==='pct' ? v+'%' : v; } },
+      grid:{ color:GC }, beginAtZero: true
+    }
+  };
+
+  if (d2) {
+    var ds2 = {
+      label: v2.label + (mode === 'pct' ? ' (% of census)' : ''),
+      data: ctype === 'scatter' ? d2.map(function(v,i){return{x:i,y:v};}) : d2,
+      borderColor: c2, backgroundColor: ctype === 'bar' ? c2+'bb' : 'rgba(186,117,23,0.12)',
+      fill: false, tension: 0.3,
+      pointRadius: 5, pointHoverRadius: 8, pointBackgroundColor: c2,
+      borderWidth: 2.5, borderRadius: ctype === 'bar' ? 4 : 0,
+      yAxisID: dual ? 'y2' : 'y'
+    };
+    datasets.push(ds2);
+    if (dual) {
+      scales.y2 = {
+        position:'right', ticks:{ color:c2, callback: function(v){ return isMoney2 ? '$'+Math.round(v/1000)+'k' : v; }},
+        grid:{ display:false }, beginAtZero:true
+      };
+    }
+  }
+
+  explorerChart = new Chart(document.getElementById('expl_canvas'), {
+    type: ctype === 'scatter' ? 'scatter' : ctype,
+    data: { labels: ctype === 'scatter' ? undefined : labels, datasets: datasets },
+    options: {
+      responsive:true,maintainAspectRatio:false,
+      plugins: {
+        legend: { position:'top', labels:{ font:{size:12}, color:TC, padding:14 } },
+        tooltip: { mode: ctype === 'scatter' ? 'nearest' : 'index', intersect: ctype === 'scatter',
+          callbacks: { label: function(c){
+            var val = ctype === 'scatter' ? c.raw.y : c.raw;
+            return ' '+c.dataset.label+': '+(isMoney ? '$'+Math.round(val).toLocaleString() : mode==='pct' ? val.toFixed(1)+'%' : val);
+          }}
+        }
+      },
+      scales: scales,
+      interaction: { mode: ctype === 'scatter' ? 'nearest' : 'index', intersect: false }
+    }
+  });
+
+  // Auto-annotate notable points (max, min) on primary series
+  var annoArr = [];
+  var maxIdx = d1.indexOf(mx);
+  var minIdx = d1.indexOf(mn);
+  if (maxIdx >= 0 && maxIdx !== minIdx) annoArr.push({mi: maxIdx, val: mx, label: '▲ '+fmt(mx)});
+  if (minIdx >= 0 && mx !== mn) annoArr.push({mi: minIdx, val: mn, label: '▼ '+fmt(mn)});
+  if (annoArr.length) addAnnotations('expl_canvas', annoArr);
+}
+
+// Initialise Explorer dropdowns on load
+function initExplorer() {
+  updateExplVars();
+}
+
+/* ═══ PRINT ═══ */
+function printCurrentPage() {
+  var activePage = document.querySelector('.page.on');
+  if (activePage) document.body.dataset.printPage = activePage.id;
+  window.print();
+  delete document.body.dataset.printPage;
+}
+
+/* ═══ KPI HELPER ═══ */
+function kpi(label, val, sub, trend, trendDir) {
+  var trendCls = trendDir === 'up' ? 'dk-up' : trendDir === 'dn' ? 'dk-dn' : 'dk-sub';
+  var trendHtml = trend ? '<div class="'+trendCls+'">'+trend+'</div>' : '';
+  return '<div class="drill-kpi">'
+    + '<div class="dk-lbl">'+label+'</div>'
+    + '<div class="dk-val">'+val+'</div>'
+    + (sub ? '<div class="dk-sub">'+sub+'</div>' : '')
+    + trendHtml
+    + '</div>';
+}
+
+/* ═══ DATA TABLE TOGGLE ═══ */
+function setupTableToggle(canvasId, headers, rows) {
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  var cw = canvas.closest('.cw');
+  if (!cw) return;
+  var card = cw.closest('.card');
+  if (!card) return;
+  var tbBtns = card.querySelector('.toolbar-btns');
+  if (!tbBtns) return;
+
+  var tableWrap = document.createElement('div');
+  tableWrap.className = 'data-table-wrap';
+  cw.insertAdjacentElement('afterend', tableWrap);
+
+  function buildTableHTML() {
+    var html = '<table class="data-table"><thead><tr><th>'+headers[0]+'</th>';
+    for (var h = 1; h < headers.length; h++) html += '<th class="num">'+headers[h]+'</th>';
+    html += '</tr></thead><tbody>';
+    rows.forEach(function(row) {
+      html += '<tr><td class="row-label">'+row.label+'</td>';
+      row.values.forEach(function(v) { html += '<td class="num">'+v+'</td>'; });
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+  }
+
+  var btn = document.createElement('button');
+  btn.className = 'icon-btn';
+  btn.textContent = '⊞ Table';
+  var showing = false;
+  btn.addEventListener('click', function() {
+    showing = !showing;
+    if (showing) {
+      if (!tableWrap.innerHTML) tableWrap.innerHTML = buildTableHTML();
+      tableWrap.style.display = 'block';
+      cw.style.display = 'none';
+      btn.textContent = '📊 Chart';
+    } else {
+      tableWrap.style.display = 'none';
+      cw.style.display = '';
+      btn.textContent = '⊞ Table';
+    }
+  });
+  tbBtns.appendChild(btn);
+}
+
+/* ═══ FUNDRAISING CALLOUTS ═══ */
+var fyCallouts = [
+  '<strong>FY21</strong> — First full year post-COVID disruptions. Cash giving totaled $42K across 76 donors. In-kind was minimal at $7K. A stable foundation year.',
+  '<strong>FY22</strong> — The low point: donor base contracted to 66 and cash dipped to $36K. Small donors ($1–$99) fell sharply to just 15 givers. Three-year recovery began here.',
+  '<strong>FY23</strong> — Strong cash recovery (+79% over FY22) led by organizational cash nearly tripling. Donor count returned to 75. In-kind remained modest at $7.8K.',
+  '<strong>FY24</strong> — Dominated by an anomalous in-kind surge: $55K from 16 organizational in-kind donors (vs $900 in FY23). Cash grew modestly (+4%). This spike may not repeat.',
+  '<strong>FY25</strong> — Strongest year in the dataset. Donor base surged to 278 (+157%), cash hit $107K (+58%). Critical risk: 57% of donors are first-time givers — sector retention for new donors is ~19%.'
+];
+
+/* ═══ ANNOTATIONS ═══ */
+function initAnnotations() {
+  addAnnotations('d_c1', [
+    {mi:1, val:128, label:'▲ Peak 128'},
+    {mi:6, val:117, label:'▼ Low 117'}
+  ]);
+  addAnnotations('d_c9', [
+    {mi:7, val:22, label:'FG +57% vs Jul'},
+    {mi:7, val:77, label:'FN −13% vs Jul'}
+  ]);
+  addAnnotations('f_c6', [
+    {mi:4, val:278, label:'▲ +157% donors'}
+  ]);
+}
 
 function init() {
   if (typeof Chart === 'undefined') { setTimeout(init,100); return; }
@@ -721,12 +1348,12 @@ function init() {
   /* ─── DEMOGRAPHICS ─── */
 
   /* ── d_c1: Census line ── */
-  new Chart(document.getElementById('d_c1'),{type:'line',data:{labels:dM,datasets:[{label:'Children',data:dT,borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,tension:0.35,pointRadius:5,pointBackgroundColor:'#3B8BD4',pointBorderColor:'#fff',pointBorderWidth:1.5}]},options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},scales:{y:{min:110,max:135,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}}});
+  allDemoCharts['c1'] = new Chart(document.getElementById('d_c1'),{type:'line',data:{labels:dM,datasets:storeFullData([{label:'Children',data:dT.slice(),borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,tension:0.35,pointRadius:5,pointBackgroundColor:'#3B8BD4',pointBorderColor:'#fff',pointBorderWidth:1.5}])},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},scales:{y:{min:110,max:135,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}}});
 
   /* ── d_c2: Race stacked bar — click month → doughnut snapshot ── */
   var rc2=new Chart(document.getElementById('d_c2'),{type:'bar',
     data:{labels:dM,datasets:dRK.map(function(k,i){return{label:k,data:dRD[i],backgroundColor:dRC[i],stack:'s'};})},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/dT[c.dataIndex]*100)+'%)';}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/dT[c.dataIndex]*100)+'%)';}}}},
       scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC},grid:{color:GC}}}}});
   mkToggleLeg('d_rleg',rc2,dRK,dRC);
   document.getElementById('d_c2').style.cursor='pointer';
@@ -737,29 +1364,46 @@ function init() {
     var total=dT[mi];
     var vals=dRK.map(function(_,i){return dRD[i][mi];});
     var anchor=e.target.closest('.card')||e.target.parentElement;
+    var julVals = dRK.map(function(_,i){return dRD[i][0];});
+    var blackCur=vals[1],blackJul=julVals[1],blackChg=blackCur-blackJul,blackPct=Math.round(blackCur/total*100);
+    var maxVal=Math.max.apply(null,vals),maxGrpIdx=vals.indexOf(maxVal);
+    var trendPills=dRK.map(function(k,i){
+      var diff=vals[i]-julVals[i],sign=diff>0?'+':'',cls=diff>0?'dtp-up':diff<0?'dtp-dn':'dtp-fl',arr=diff>0?'↑':diff<0?'↓':'→';
+      return '<span class="drill-trend-pill"><span class="dtp-dot" style="background:'+dRC[i]+'"></span>'+k+': <strong>'+vals[i]+'</strong> <span class="'+cls+'">'+arr+' '+(sign+diff)+'</span></span>';
+    }).join('');
     openDemoDrill(
       anchor,
       monthLabel+' — Race/ethnicity breakdown',
       'Total census: '+total+' children',
       function(body){
-        body.innerHTML='<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Composition</div><div class="cw" style="height:220px"><canvas id="d_drill_c1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Count by group</div><div class="cw" style="height:220px"><canvas id="d_drill_c2"></canvas></div></div></div>';
+        body.innerHTML=
+          '<div class="drill-kpi-bar n4">'
+          +kpi('Total census',total,monthLabel,null,null)
+          +kpi('Black/Afr. Am.',blackCur,blackPct+'% of census',(blackChg>=0?'+':'')+blackChg+' since Jul 25',blackChg>0?'up':blackChg<0?'dn':null)
+          +kpi('Largest group',dRK[maxGrpIdx],maxVal+' children ('+Math.round(maxVal/total*100)+'%)',null,null)
+          +kpi('National avg (Black)','~23%','AFCARS FY2024 benchmark',blackPct>23?'This caseload '+blackPct+'% ↑ above avg':null,blackPct>23?'dn':null)
+          +'</div>'
+          +'<div class="drill-callout">Black/African American children represent <strong>'+blackPct+'%</strong> of the '+monthLabel+' caseload'+(mi>0?' — '+(blackChg>0?blackChg+' more':Math.abs(blackChg)+' fewer')+' than July 2025':'')+'. The AFCARS FY2024 national benchmark is ~23%.'+(blackChg>2?' This growing gap warrants review of referral and intake patterns.':'')+' CASA is consistently 10+ points above the national average.</div>'
+          +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Change from Jul 25</div>'
+          +'<div class="drill-trend-row">'+trendPills+'</div>'
+          +'<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Composition</div><div class="cw" style="height:200px"><canvas id="d_drill_c1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Count by group</div><div class="cw" style="height:200px"><canvas id="d_drill_c2"></canvas></div></div></div>';
         new Chart(document.getElementById('d_drill_c1'),{type:'doughnut',
           data:{labels:dRK,datasets:[{data:vals,backgroundColor:dRC,borderWidth:2,borderColor:BC}]},
-          options:{...P,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
+          options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
             tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
         return new Chart(document.getElementById('d_drill_c2'),{type:'bar',
           data:{labels:dRK,datasets:[{label:'Children',data:vals,backgroundColor:dRC,borderRadius:4,borderSkipped:false}]},
-          options:{...P,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},
+          options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},
             scales:{x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},y:{ticks:{color:TC,font:{size:11}},grid:{display:false}}}}});
       }
     );
   });
 
   /* ── d_c3: Race doughnut Feb 2026 ── */
-  new Chart(document.getElementById('d_c3'),{type:'doughnut',data:{labels:dRK,datasets:[{data:dRD.map(function(d){return d[7];}),backgroundColor:dRC,borderWidth:2,borderColor:BC}]},options:{...P,plugins:{legend:{position:'right',labels:{font:{size:11},padding:10,color:TC}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
+  new Chart(document.getElementById('d_c3'),{type:'doughnut',data:{labels:dRK,datasets:[{data:dRD.map(function(d){return d[7];}),backgroundColor:dRC,borderWidth:2,borderColor:BC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:10,color:TC}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
 
   /* ── d_c4/5/6: Age band snapshots ── */
-  function ageBar(id,mi){var total=dT[mi];new Chart(document.getElementById(id),{type:'bar',data:{labels:dABL,datasets:[{label:'Children',data:band(dRA[mi]),backgroundColor:dABC,borderRadius:4,borderSkipped:false}]},options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},scales:{x:{ticks:{color:TC,font:{size:12}},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});}
+  function ageBar(id,mi){var total=dT[mi];new Chart(document.getElementById(id),{type:'bar',data:{labels:dABL,datasets:[{label:'Children',data:band(dRA[mi]),backgroundColor:dABC,borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},scales:{x:{ticks:{color:TC,font:{size:12}},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});}
   ageBar('d_c4',0);ageBar('d_c5',6);ageBar('d_c6',7);
 
   /* ── d_c7: Age trend — click point → full 20-age breakdown ── */
@@ -767,7 +1411,7 @@ function init() {
   var dAgeAllLabels=['0–11mo','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','18+'];
   var ageTrend=new Chart(document.getElementById('d_c7'),{type:'line',
     data:{labels:dM,datasets:dABL.map(function(k,i){return{label:k,data:dBS[i],borderColor:dABC[i],backgroundColor:'transparent',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:dABC[i],borderWidth:2.5};})},
-    options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}},
       scales:{y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},x:{ticks:{color:TC},grid:{display:false}}},
       interaction:{mode:'index',intersect:false}}});
   mkToggleLeg('d_agleg',ageTrend,dABL,dABC);
@@ -780,15 +1424,30 @@ function init() {
     var rawAges=dRA[mi];
     var colors=['#3B8BD4','#3B8BD4','#3B8BD4','#3B8BD4','#0F6E56','#0F6E56','#0F6E56','#0F6E56','#BA7517','#BA7517','#BA7517','#BA7517','#534AB7','#534AB7','#534AB7','#534AB7','#A32D2D','#A32D2D','#A32D2D','#A32D2D'];
     var anchor=e.target.closest('.card')||e.target.parentElement;
+    var curBands=band(rawAges),julBands=band(dRA[0]);
+    var infants=rawAges[0],infantPct=Math.round(infants/total*100);
+    var maxBandVal=Math.max.apply(null,curBands),maxBandIdx=curBands.indexOf(maxBandVal);
+    var chg03=curBands[0]-julBands[0];
     openDemoDrill(
       anchor,
       monthLabel+' — Full age breakdown (all ages)',
       'Total census: '+total+' children  ·  4-year bands color-coded',
       function(body){
-        body.innerHTML='<div class="cw" style="height:280px"><canvas id="d_drill_age"></canvas></div>';
+        var calloutText = infants>=12
+          ? 'Infants (0–11 months) are at <strong>'+infants+'</strong> in '+monthLabel+' — up from 8 in July 2025 (+75%). At '+infantPct+'% of the caseload, this exceeds the national rate of ~7% (AFCARS FY2024). Infant-specific placement capacity and specialized foster parent training may need review.'
+          : 'The <strong>0–3 age band</strong> ('+curBands[0]+' children, '+Math.round(curBands[0]/total*100)+'% of census) remains the single largest age grouping in '+monthLabel+'. The '+dABL[maxBandIdx]+' band leads at '+maxBandVal+' children.';
+        body.innerHTML=
+          '<div class="drill-kpi-bar n4">'
+          +kpi('Total census',total,monthLabel,null,null)
+          +kpi('Infants (0–11mo)',infants,infantPct+'% of census',infants>8?'▲ Up from 8 in Jul 25':null,infants>8?'up':null)
+          +kpi('Largest band',dABL[maxBandIdx],maxBandVal+' children ('+Math.round(maxBandVal/total*100)+'%)',null,null)
+          +kpi('Ages 0–3',curBands[0],Math.round(curBands[0]/total*100)+'% of census',(chg03>=0?'+':'')+chg03+' since Jul 25',chg03>0?'up':chg03<0?'dn':null)
+          +'</div>'
+          +'<div class="drill-callout">'+calloutText+'</div>'
+          +'<div class="cw" style="height:260px"><canvas id="d_drill_age"></canvas></div>';
         return new Chart(document.getElementById('d_drill_age'),{type:'bar',
           data:{labels:dAgeAllLabels,datasets:[{label:'Children',data:rawAges,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},
-          options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children ('+Math.round(c.raw/total*100)+'%)';}}}},
+          options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children ('+Math.round(c.raw/total*100)+'%)';}}}},
             scales:{x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},y:{ticks:{color:TC,stepSize:2},grid:{color:GC},beginAtZero:true}}}});
       }
     );
@@ -797,7 +1456,7 @@ function init() {
   /* ── d_c8: Petition stacked bar — click month → ranked bar ── */
   var petChart=new Chart(document.getElementById('d_c8'),{type:'bar',
     data:{labels:dM,datasets:dPK.map(function(k,i){return{label:k,data:dPD[i],backgroundColor:dPC[i],stack:'s'};})},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
       var total=dPK.reduce(function(sum,_,i){return sum+dPD[i][c.dataIndex];},0);
       return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';
     }}}},scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC},grid:{color:GC}}}}});
@@ -812,30 +1471,42 @@ function init() {
     // Sort by value descending for ranked view
     var sorted=dPK.map(function(k,i){return{k:k,v:vals[i],c:dPC[i]};}).sort(function(a,b){return b.v-a.v;});
     var anchor=e.target.closest('.card')||e.target.parentElement;
+    var fnCount=vals[5],fgCount=vals[4],fnJul=dPD[5][0],fgJul=dPD[4][0];
+    var fnChg=fnCount-fnJul,fgChg=fgCount-fgJul;
+    var ratio=(fnCount/Math.max(fgCount,1)).toFixed(1);
     openDemoDrill(
       anchor,
       monthLabel+' — Petition types breakdown',
       'Total petitions: '+total,
       function(body){
-        body.innerHTML='<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Ranked by count</div><div class="cw" style="height:220px"><canvas id="d_drill_pet1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Share of total</div><div class="cw" style="height:220px"><canvas id="d_drill_pet2"></canvas></div></div></div>';
+        var calloutText='In '+monthLabel+', FN (foster care) petitions stand at <strong>'+fnCount+'</strong>'+(fnChg<=0?' — down '+Math.abs(fnChg)+' from July 2025':'+ '+fnChg+' from July 2025')+'. FG (guardianship) petitions '+(fgChg>0?'have grown to <strong>'+fgCount+'</strong> (+'+fgChg+' from Jul) — a positive permanency indicator suggesting more children moving toward permanent placements.':'are at '+fgCount+'.')+(fnChg<0&&fgChg>0?' The FN decline paired with FG growth may reflect genuine permanency progress.':'');
+        body.innerHTML=
+          '<div class="drill-kpi-bar n4">'
+          +kpi('Total petitions',total,monthLabel,null,null)
+          +kpi('FN (foster care)',fnCount,Math.round(fnCount/total*100)+'% of total',(fnChg>=0?'+':'')+fnChg+' since Jul 25',fnChg>0?'up':'dn')
+          +kpi('FG (guardianship)',fgCount,Math.round(fgCount/total*100)+'% of total',(fgChg>=0?'+':'')+fgChg+' since Jul 25',fgChg>0?'up':'dn')
+          +kpi('FN / FG ratio',ratio+'×','FN petitions per FG',null,null)
+          +'</div>'
+          +'<div class="drill-callout">'+calloutText+'</div>'
+          +'<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Ranked by count</div><div class="cw" style="height:200px"><canvas id="d_drill_pet1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Share of total</div><div class="cw" style="height:200px"><canvas id="d_drill_pet2"></canvas></div></div></div>';
         new Chart(document.getElementById('d_drill_pet1'),{type:'bar',
           data:{labels:sorted.map(function(d){return d.k;}),datasets:[{data:sorted.map(function(d){return d.v;}),backgroundColor:sorted.map(function(d){return d.c;}),borderRadius:4,borderSkipped:false}]},
-          options:{...P,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},
+          options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},
             scales:{x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},y:{ticks:{color:TC,font:{size:11}},grid:{display:false}}}}});
         return new Chart(document.getElementById('d_drill_pet2'),{type:'doughnut',
           data:{labels:dPK,datasets:[{data:vals,backgroundColor:dPC,borderWidth:2,borderColor:BC}]},
-          options:{...P,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
+          options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
             tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
       }
     );
   });
 
   /* ── d_c9: FN vs FG line ── */
-  var fnfgChart=new Chart(document.getElementById('d_c9'),{type:'line',data:{labels:dM,datasets:[{label:'FN',data:dPD[5],borderColor:'#A32D2D',tension:0.3,pointRadius:4,pointBackgroundColor:'#A32D2D',borderWidth:2.5},{label:'FG',data:dPD[4],borderColor:'#BA7517',tension:0.3,pointRadius:4,pointBackgroundColor:'#BA7517',borderWidth:2.5}]},options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' petitions';}}}},scales:{y:{ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
+  var fnfgChart=new Chart(document.getElementById('d_c9'),{type:'line',data:{labels:dM,datasets:[{label:'FN',data:dPD[5],borderColor:'#A32D2D',tension:0.3,pointRadius:4,pointBackgroundColor:'#A32D2D',borderWidth:2.5},{label:'FG',data:dPD[4],borderColor:'#BA7517',tension:0.3,pointRadius:4,pointBackgroundColor:'#BA7517',borderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' petitions';}}}},scales:{y:{ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
   mkToggleLeg('d_fnfg_leg',fnfgChart,['FN','FG'],['#A32D2D','#BA7517']);
 
   /* ── d_c10: Gender doughnut ── */
-  new Chart(document.getElementById('d_c10'),{type:'doughnut',data:{labels:['Female','Male'],datasets:[{data:[dF[7],dMa[7]],backgroundColor:['#534AB7','#3B8BD4'],borderWidth:2,borderColor:BC}]},options:{...P,plugins:{legend:{position:'bottom',labels:{font:{size:13},color:TC,padding:14}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
+  new Chart(document.getElementById('d_c10'),{type:'doughnut',data:{labels:['Female','Male'],datasets:[{data:[dF[7],dMa[7]],backgroundColor:['#534AB7','#3B8BD4'],borderWidth:2,borderColor:BC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:13},color:TC,padding:14}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
 
   /* ── d_c11: Gender line — click month → census split panel ── */
   var gLineChart=new Chart(document.getElementById('d_c11'),{type:'line',
@@ -843,7 +1514,7 @@ function init() {
       {label:'Female',data:dF,borderColor:'#534AB7',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#534AB7',borderWidth:2.5},
       {label:'Male',  data:dMa,borderColor:'#3B8BD4',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#3B8BD4',borderWidth:2.5}
     ]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
       var total=dT[c.dataIndex];
       return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';
     }}}},scales:{y:{min:50,max:75,ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
@@ -856,24 +1527,48 @@ function init() {
     var female=dF[mi], male=dMa[mi], total=dT[mi];
     var femPct=Math.round(female/total*100), malePct=Math.round(male/total*100);
     var anchor=e.target.closest('.card')||e.target.parentElement;
+    var femAvg=Math.round(dF.reduce(function(a,b){return a+b;},0)/dF.length);
+    var maleAvg=Math.round(dMa.reduce(function(a,b){return a+b;},0)/dMa.length);
+    var femAvgPct=Math.round(femAvg/(femAvg+maleAvg)*100);
     openDemoDrill(
       anchor,
       monthLabel+' — Census gender split',
       'Total active: '+total+' children',
       function(body){
-        body.innerHTML='<div class="two"><div><div class="cw" style="height:180px"><canvas id="d_drill_gend1"></canvas></div></div><div style="display:flex;flex-direction:column;justify-content:center;gap:16px;padding:1rem 0;">'
+        var callout = 'The 8-month average is <strong>'+femAvgPct+'% female / '+(100-femAvgPct)+'% male</strong>. '
+          +(malePct>femPct
+            ? 'In '+monthLabel+', male ('+male+') has pulled ahead of female ('+female+'), a gradual shift from the 51% female baseline in July 2025. AFCARS FY2024 shows ~51% male nationally.'
+            : 'The split in '+monthLabel+' ('+femPct+'% female, '+malePct+'% male) aligns closely with the AFCARS FY2024 national average of ~49% female.');
+        body.innerHTML=
+          '<div class="two"><div><div class="cw" style="height:180px"><canvas id="d_drill_gend1"></canvas></div></div>'
+          +'<div style="display:flex;flex-direction:column;justify-content:center;gap:16px;padding:1rem 0;">'
           +'<div style="background:rgba(83,74,183,0.1);border-left:3px solid #534AB7;border-radius:var(--radius-md);padding:.85rem 1rem;">'
           +'<div style="font-size:12px;color:#534AB7;font-weight:500;margin-bottom:4px;">Female</div>'
           +'<div style="font-size:24px;font-weight:500;color:var(--text);">'+female+'</div>'
-          +'<div style="font-size:12px;color:var(--text3);">'+femPct+'% of census</div></div>'
+          +'<div style="font-size:12px;color:var(--text3);">'+femPct+'% of census · 8-mo avg '+femAvg+'</div></div>'
           +'<div style="background:rgba(59,139,212,0.1);border-left:3px solid #3B8BD4;border-radius:var(--radius-md);padding:.85rem 1rem;">'
           +'<div style="font-size:12px;color:#3B8BD4;font-weight:500;margin-bottom:4px;">Male</div>'
           +'<div style="font-size:24px;font-weight:500;color:var(--text);">'+male+'</div>'
-          +'<div style="font-size:12px;color:var(--text3);">'+malePct+'% of census</div></div></div></div>';
-        return new Chart(document.getElementById('d_drill_gend1'),{type:'doughnut',
+          +'<div style="font-size:12px;color:var(--text3);">'+malePct+'% of census · 8-mo avg '+maleAvg+'</div></div></div></div>'
+          +'<div style="margin-top:1rem;">'
+          +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">8-month gender trend</div>'
+          +'<div class="cw" style="height:140px"><canvas id="d_drill_gend2"></canvas></div></div>'
+          +'<div class="drill-callout" style="margin-top:1rem;">'+callout+'</div>';
+        var gd1=new Chart(document.getElementById('d_drill_gend1'),{type:'doughnut',
           data:{labels:['Female','Male'],datasets:[{data:[female,male],backgroundColor:['#534AB7','#3B8BD4'],borderWidth:2,borderColor:BC}]},
-          options:{...P,cutout:'60%',plugins:{legend:{position:'bottom',labels:{font:{size:12},color:TC,padding:12}},
+          options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{font:{size:12},color:TC,padding:12}},
             tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
+        new Chart(document.getElementById('d_drill_gend2'),{type:'line',
+          data:{labels:dM,datasets:[
+            {label:'Female',data:dF,borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,0.08)',fill:true,tension:0.3,pointRadius:3,pointBackgroundColor:'#534AB7',borderWidth:2},
+            {label:'Male',  data:dMa,borderColor:'#3B8BD4',backgroundColor:'transparent',fill:false,tension:0.3,pointRadius:3,pointBackgroundColor:'#3B8BD4',borderWidth:2}
+          ]},
+          options:{responsive:true,maintainAspectRatio:false,
+            plugins:{legend:{position:'top',labels:{font:{size:11},color:TC,padding:10}},
+              tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/dT[c.dataIndex]*100)+'%)';}}}},
+            scales:{y:{min:50,max:75,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC,font:{size:11}},grid:{display:false}}},
+            interaction:{mode:'index',intersect:false}}});
+        return gd1;
       }
     );
   });
@@ -892,40 +1587,40 @@ function init() {
 
   var totChart = new Chart(document.getElementById('f_c1'),{type:'bar',
     data:{labels:fY,datasets:[{label:'Cash gifts',data:fC,backgroundColor:'#3B8BD4',stack:'s',borderRadius:4},{label:'In-kind',data:fIK,backgroundColor:'#0F6E56',stack:'s',borderRadius:4}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
       scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC,callback:dollarTick},grid:{color:GC}}}}});
   mkToggleLeg('f_totleg',totChart,['Cash gifts','In-kind'],['#3B8BD4','#0F6E56']);
   addDrillClick(totChart,'combined');
 
   var cashChart = new Chart(document.getElementById('f_c2'),{type:'bar',
     data:{labels:fY,datasets:[{label:'Cash gifts',data:fC,backgroundColor:fY.map(function(_,i){return i===4?'#3B8BD4':'rgba(59,139,212,0.55)';}),borderRadius:4}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw);}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw);}}}},
       scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
   addDrillClick(cashChart,'cash');
 
   var ikChart = new Chart(document.getElementById('f_c3'),{type:'bar',
     data:{labels:fY,datasets:[{label:'In-kind',data:fIK,backgroundColor:fY.map(function(_,i){return i===4?'#0F6E56':'rgba(15,110,86,0.55)';}),borderRadius:4}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw);}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw);}}}},
       scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
   addDrillClick(ikChart,'inkind');
 
   var cashTypChart=new Chart(document.getElementById('f_c4'),{type:'bar',
     data:{labels:fY,datasets:[{label:'Individual',data:fCI,backgroundColor:'#3B8BD4',stack:'s',borderRadius:4},{label:'Organization',data:fCO,backgroundColor:'#BA7517',stack:'s',borderRadius:4}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
       scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC,callback:dollarTick},grid:{color:GC}}}}});
   mkToggleLeg('f_typleg',cashTypChart,['Individual','Organization'],['#3B8BD4','#BA7517']);
   addDrillClick(cashTypChart,'cash');
 
   var ikTypChart=new Chart(document.getElementById('f_c5'),{type:'bar',
     data:{labels:fY,datasets:[{label:'Individual',data:fII,backgroundColor:'#3B8BD4',stack:'s',borderRadius:4},{label:'Organization',data:fIO,backgroundColor:'#BA7517',stack:'s',borderRadius:4}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
       scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC,callback:dollarTick},grid:{color:GC}}}}});
   mkToggleLeg('f_iktyp',ikTypChart,['Individual','Organization'],['#3B8BD4','#BA7517']);
   addDrillClick(ikTypChart,'inkind');
 
   var donorChart = new Chart(document.getElementById('f_c6'),{type:'bar',
     data:{labels:fY,datasets:[{label:'Active donors',data:fD,backgroundColor:fY.map(function(_,i){return i===4?'rgba(83,74,183,0.9)':'rgba(83,74,183,0.5)';}),borderRadius:4}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
       scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:50},grid:{color:GC},beginAtZero:true}}}});
   document.getElementById('f_c6').style.cursor='pointer';
   document.getElementById('f_c6').addEventListener('click',function(e){
@@ -939,7 +1634,7 @@ function init() {
   document.getElementById('f_c7_center').innerHTML='<div style="font-size:22px;font-weight:500;color:var(--text);">'+retTotal+'</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">total donors</div>';
   new Chart(document.getElementById('f_c7'),{type:'doughnut',
     data:{labels:['Retained (both FYs)','New donors','Lapsed donors'],datasets:[{data:[71,159,19],backgroundColor:['#0F6E56','#3B8BD4','#A32D2D'],borderWidth:2,borderColor:BC}]},
-    options:{...P,cutout:'60%',plugins:{legend:{position:'right',labels:{font:{size:12},color:TC,padding:12}},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{font:{size:12},color:TC,padding:12}},
       tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/retTotal*100)+'%)';}}}}}});
 
   // FY25 combined bucket counts for overview bar
@@ -947,7 +1642,7 @@ function init() {
   var fBDAmounts24=[2788.40+959.98, 17252.23+2474, 14966.82+6311, 51179.86+16113, 21088.50+16119.28];
   var giftSizeChart=new Chart(document.getElementById('f_c8'),{type:'bar',
     data:{labels:fBL,datasets:[{label:'Donors',data:fBD24,backgroundColor:fBC,borderRadius:4,borderSkipped:false}]},
-    options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
       var t=fBD24.reduce(function(a,b){return a+b;},0);
       return [' '+c.raw+' donors ('+Math.round(c.raw/t*100)+'% of total)',' Amount raised: '+dollarFmt(fBDAmounts24[c.dataIndex])];
     }}}},scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:20},grid:{color:GC},beginAtZero:true}}},
@@ -975,27 +1670,63 @@ function init() {
       +'<div class="cw" style="height:160px"><canvas id="f_drill_type_cnt"></canvas></div></div></div>';
     drillCharts.amount=new Chart(document.getElementById('f_drill_amount'),{type:'bar',
       data:{labels:['Cash gifts','In-kind gifts'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
-      options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw)+' ('+Math.round(c.raw/totalAmt*100)+'% of range total)';}}}},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw)+' ('+Math.round(c.raw/totalAmt*100)+'% of range total)';}}}},
         scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
     drillCharts.count=new Chart(document.getElementById('f_drill_count'),{type:'bar',
       data:{labels:['Cash donors','In-kind donors'],datasets:[{data:[cashN,ikN],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
-      options:{...P,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
         scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});
     drillCharts.typeAmt=new Chart(document.getElementById('f_drill_type_amt'),{type:'doughnut',
       data:{labels:['Cash','In-kind'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderWidth:2,borderColor:BC}]},
-      options:{...P,plugins:{title:{display:true,text:'Amount: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Amount: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
         legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
         tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+dollarFmt(c.raw);}}}}}});
     drillCharts.typeCnt=new Chart(document.getElementById('f_drill_type_cnt'),{type:'doughnut',
       data:{labels:['Cash donors','In-kind donors'],datasets:[{data:[cashN,ikN],backgroundColor:['#3B8BD4','#0F6E56'],borderWidth:2,borderColor:BC}]},
-      options:{...P,plugins:{title:{display:true,text:'Donors: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Donors: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
         legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
         tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors';}}}}}});
   });
 
+  /* ── TABLE TOGGLES ── */
+  // headers[0] = row-label column header; headers[1..n] = value column headers
+  setupTableToggle('d_c1', [''].concat(dM),
+    [{label:'Active children',values:dT}]
+  );
+  setupTableToggle('d_c2', ['Race/Ethnicity'].concat(dM),
+    dRK.map(function(k,i){return {label:k,values:dRD[i]};})
+  );
+  setupTableToggle('d_c7', ['Age band'].concat(dM),
+    dABL.map(function(k,i){return {label:k,values:dBS[i]};})
+  );
+  setupTableToggle('d_c9', ['Petition'].concat(dM),
+    [{label:'FN',values:dPD[5]},{label:'FG',values:dPD[4]}]
+  );
+  setupTableToggle('d_c11', ['Gender'].concat(dM),
+    [{label:'Female',values:dF},{label:'Male',values:dMa},{label:'Total',values:dT}]
+  );
+  setupTableToggle('f_c1', [''].concat(fY),
+    [{label:'Cash gifts',values:fC.map(function(v){return '$'+Math.round(v).toLocaleString();})},
+     {label:'In-kind',values:fIK.map(function(v){return '$'+Math.round(v).toLocaleString();})},
+     {label:'Total',values:fC.map(function(v,i){return '$'+Math.round(v+fIK[i]).toLocaleString();})}]
+  );
+  setupTableToggle('f_c6', [''].concat(fY),
+    [{label:'Active donors',values:fD}]
+  );
+
+  /* ── PRINT DATE LABELS ── */
+  var today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  ['ph_date_demo','ph_date_fund'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.textContent = 'Printed '+today;
+  });
+
+  /* ── ANNOTATIONS ── */
+  initAnnotations();
 }
 
 init();
+initExplorer();
 </script>
 </body>
 </html>
