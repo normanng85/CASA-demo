@@ -46,11 +46,17 @@
     .nav-btn.active-fund .icon { background:#0F6E56; color:#fff; }
     .nav-btn.active-expl { background:#fdf3e8; color:#7A3D00; border-color:#BA7517; box-shadow:0 0 0 3px rgba(186,117,23,0.12); }
     .nav-btn.active-expl .icon { background:#BA7517; color:#fff; }
+    .nav-btn.active-vol { background:#f2eefb; color:#3a2880; border-color:#534AB7; box-shadow:0 0 0 3px rgba(83,74,183,0.12); }
+    .nav-btn.active-vol .icon { background:#534AB7; color:#fff; }
+    .nav-btn.active-zip { background:#e5f6f8; color:#00535E; border-color:#00838F; box-shadow:0 0 0 3px rgba(0,131,143,0.12); }
+    .nav-btn.active-zip .icon { background:#00838F; color:#fff; }
 
     @media (prefers-color-scheme: dark) {
       .nav-btn.active-demo  { background:rgba(59,139,212,0.15); color:#85B7EB; border-color:#3B8BD4; }
       .nav-btn.active-fund  { background:rgba(15,110,86,0.15);  color:#5DCAA5; border-color:#0F6E56; }
       .nav-btn.active-expl  { background:rgba(186,117,23,0.15); color:#FAC775; border-color:#BA7517; }
+      .nav-btn.active-vol   { background:rgba(83,74,183,0.15);  color:#A89EDE; border-color:#534AB7; }
+      .nav-btn.active-zip   { background:rgba(0,131,143,0.15);  color:#4DD0E1; border-color:#00838F; }
     }
 
     /* LAYOUT */
@@ -359,6 +365,12 @@
   <a class="nav-btn" onclick="return showPage('fundraising',this,'active-fund')" href="#">
     <span class="icon">💰</span> Fundraising
   </a>
+  <a class="nav-btn" onclick="return showPage('volunteers',this,'active-vol')" href="#">
+    <span class="icon">🤝</span> Volunteer Demographics
+  </a>
+  <a class="nav-btn" onclick="return showPage('zipcodes',this,'active-zip')" href="#">
+    <span class="icon">📍</span> Removal Zip Codes
+  </a>
   <a class="nav-btn" onclick="return showPage('explorer',this,'active-expl')" href="#">
     <span class="icon">📊</span> Explorer
   </a>
@@ -490,36 +502,83 @@
         <div class="card-title">Monthly active children — Jul 2025 to Feb 2026</div>
         <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c1','census')">⬇ PNG</button></div>
       </div>
+      <div class="chart-hint">Averaged 123 children/month · peaked at 128 (Aug) · dipped to 117 (Jan) before recovering</div>
       <div class="cw" style="height:220px"><canvas id="d_c1"></canvas></div>
     </div>
 
+    <div class="section-title">Caseload Momentum</div>
+    <div class="two">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Month-over-month census change</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c12','census-mom')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">Net change from prior month — Jan→Feb recovery (+9) strongest single gain in the period</div>
+        <div class="cw" style="height:200px"><canvas id="d_c12"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Race/ethnicity change — Jul 2025 to Feb 2026</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c13','race-delta')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">Net headcount change from July 2025 baseline; positive = growth, negative = decline</div>
+        <div class="cw" style="height:200px"><canvas id="d_c13"></canvas></div>
+      </div>
+    </div>
 
     <div class="section-title">Race / Ethnicity</div>
     <div class="two">
       <div class="card"><div class="chart-toolbar"><div class="card-title">Race/ethnicity over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c2','race-over-time')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
-      <div class="card"><div class="card-title">Race/ethnicity — Feb 2026</div><div class="cw" style="height:240px"><canvas id="d_c3"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Race/ethnicity — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c3','race-feb-2026')">⬇ PNG</button></div></div><div class="chart-hint">Snapshot of racial composition in the most recent month</div><div class="cw" style="height:240px"><canvas id="d_c3"></canvas></div></div>
     </div>
 
     <div class="section-title">Age Distribution</div>
     <div class="three">
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jul 2025</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c4','age-jul-2025')">⬇ PNG</button></div></div><div class="cw" style="height:220px"><canvas id="d_c4"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jan 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c5','age-jan-2026')">⬇ PNG</button></div></div><div class="cw" style="height:220px"><canvas id="d_c5"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c6','age-feb-2026')">⬇ PNG</button></div></div><div class="cw" style="height:220px"><canvas id="d_c6"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jul 2025</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c4','age-jul-2025')">⬇ PNG</button></div></div><div class="chart-hint">Start-of-period snapshot — compare to Jan and Feb for age shift over time</div><div class="cw" style="height:220px"><canvas id="d_c4"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jan 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c5','age-jan-2026')">⬇ PNG</button></div></div><div class="chart-hint">Mid-year snapshot · infants (0–3) growing as the period progresses</div><div class="cw" style="height:220px"><canvas id="d_c5"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c6','age-feb-2026')">⬇ PNG</button></div></div><div class="chart-hint">Most recent snapshot · 0–3 is the largest and fastest-growing age band</div><div class="cw" style="height:220px"><canvas id="d_c6"></canvas></div></div>
     </div>
     <div class="card"><div class="chart-toolbar"><div class="card-title">Age group trend over time — 4-year bands</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c7','age-trend')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_agleg"></div><div class="cw" style="height:260px"><canvas id="d_c7"></canvas></div></div>
 
+    <div class="section-title">Age Detail — Individual Ages × Month</div>
+    <div class="card">
+      <div class="chart-toolbar">
+        <div class="card-title">Age heatmap — all 20 individual ages × 8 months</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c15','age-heatmap')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Each cell = child count. Darker blue = more children. Colored left bars mark 4-year bands (blue 0–3, green 4–7, amber 8–11, purple 12–15, red 16–18+).</div>
+      <div class="cw" style="height:480px"><canvas id="d_c15"></canvas></div>
+    </div>
+
     <div class="section-title">Petition Types</div>
     <div class="two">
-      <div class="card"><div class="card-title">Petition types over time</div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_pleg"></div><div class="cw" style="height:240px"><canvas id="d_c8"></canvas></div></div>
-      <div class="card"><div class="card-title">FN vs FG trend</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_fnfg_leg"></div><div class="cw" style="height:240px"><canvas id="d_c9"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Petition types over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c8','petition-types')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide · FN declining, FG rising</div><div class="tleg" id="d_pleg"></div><div class="cw" style="height:240px"><canvas id="d_c8"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">FN vs FG trend</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c9','fn-fg-trend')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide · guardianship (FG) on a clear upward trajectory</div><div class="tleg" id="d_fnfg_leg"></div><div class="cw" style="height:240px"><canvas id="d_c9"></canvas></div></div>
+    </div>
+    <div class="card">
+      <div class="chart-toolbar">
+        <div class="card-title">Foster care subtypes — FC/court id, FC/avail adopt, FC/18+</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c14','fc-subtypes')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Court-identified FC declining; avail-for-adoption and FC/18+ (aging out) rising — distinct trajectories within foster care</div>
+      <div class="tleg" id="d_fcleg"></div>
+      <div class="cw" style="height:220px"><canvas id="d_c14"></canvas></div>
     </div>
 
     <div class="section-title">Gender</div>
     <div class="two">
-      <div class="card"><div class="card-title">Gender split — Feb 2026</div><div class="cw" style="height:200px"><canvas id="d_c10"></canvas></div></div>
-      <div class="card"><div class="card-title">Female vs male over time</div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_gleg"></div><div class="cw" style="height:200px"><canvas id="d_c11"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Gender split — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c10','gender-feb-2026')">⬇ PNG</button></div></div><div class="chart-hint">Near-even split · 54% male in Feb 2026 vs ~51% nationally (AFCARS)</div><div class="cw" style="height:200px"><canvas id="d_c10"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Female vs male over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c11','gender-trend')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide · slight male skew persists across the period</div><div class="tleg" id="d_gleg"></div><div class="cw" style="height:200px"><canvas id="d_c11"></canvas></div></div>
     </div>
-    <footer>Child Demographics Summary – Active Cases &nbsp;·&nbsp; Jul 2025 – Feb 2026</footer>
+    <!-- ▸ ANNUAL TRENDS FY21–FY25 -->
+    <div class="section-title">Historical Trends — FY21 to FY25</div>
+    <div class="three">
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Census — Total Active Children</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c1','annual-census')">⬇ PNG</button></div></div><div class="chart-hint">FY21–FY25 annual active caseload</div><div class="cw" style="height:220px"><canvas id="cd_c1"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Race Distribution</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c2','annual-race')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c2"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Petition Types — Annual</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c3','annual-petitions')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c3"></canvas></div></div>
+    </div>
+
+    <footer>Child Demographics Summary – Active Cases &nbsp;·&nbsp; Jul 2025 – Feb 2026 &nbsp;·&nbsp; Historical FY21–FY25</footer>
   </main>
 </div>
 
@@ -642,34 +701,89 @@
     <div class="section-title">Cash vs In-Kind</div>
     <div class="two">
       <div class="card">
-        <div class="card-title">Cash gifts by fiscal year</div>
+        <div class="chart-toolbar"><div class="card-title">Cash gifts by fiscal year</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c2','cash-by-year')">⬇ PNG</button></div></div>
         <div class="drill-badge"><span class="dot"></span>Click a bar to drill into gift breakdown</div>
+        <div class="chart-hint">5-year trend: $36K (FY22) → $107K (FY25) · click any bar to see individual vs org breakdown</div>
         <div class="cw" style="height:220px"><canvas id="f_c2"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">In-kind gifts by fiscal year</div>
+        <div class="chart-toolbar"><div class="card-title">In-kind gifts by fiscal year</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c3','inkind-by-year')">⬇ PNG</button></div></div>
         <div class="drill-badge"><span class="dot"></span>Click a bar to drill into gift breakdown</div>
+        <div class="chart-hint">FY24 spike ($61.5K) driven by organizational in-kind; FY25 normalized to $42K</div>
         <div class="cw" style="height:220px"><canvas id="f_c3"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-title">Gift Economics</div>
+    <div class="two">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Avg &amp; median cash gift vs donor count by fiscal year</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c9','avg-gift-trend')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">FY25 donor surge diluted avg gift from $871 peak (FY23) to $386 — more donors, smaller average</div>
+        <div class="tleg" id="f_avgleg"></div>
+        <div class="cw" style="height:240px"><canvas id="f_c9"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">FY25 donor channel overlap — cash vs in-kind</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c14','channel-overlap')">⬇ PNG</button></div></div>
+        <div class="chart-hint">Only 9 donors gave in both channels; nearly all FY25 donors are single-channel</div>
+        <div class="cw" style="height:240px; position:relative;">
+          <canvas id="f_c14"></canvas>
+          <div id="f_c14_center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);text-align:center;pointer-events:none;"></div>
+        </div>
       </div>
     </div>
 
     <div class="section-title">Constituent Type Breakdown</div>
     <div class="two">
-      <div class="card"><div class="card-title">Cash giving — individuals vs organizations</div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="f_typleg"></div><div class="cw" style="height:240px"><canvas id="f_c4"></canvas></div></div>
-      <div class="card"><div class="card-title">In-kind giving — individuals vs organizations</div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="f_iktyp"></div><div class="cw" style="height:240px"><canvas id="f_c5"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Cash giving — individuals vs organizations</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c4','cash-by-type')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="f_typleg"></div><div class="cw" style="height:240px"><canvas id="f_c4"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">In-kind giving — individuals vs organizations</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c5','inkind-by-type')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="f_iktyp"></div><div class="cw" style="height:240px"><canvas id="f_c5"></canvas></div></div>
     </div>
 
     <div class="section-title">Donor Analysis</div>
     <div class="two">
-      <div class="card"><div class="card-title">Active donor count by fiscal year</div><div class="drill-badge"><span class="dot"></span>Click a bar to drill into that year's giving breakdown</div><div class="cw" style="height:220px"><canvas id="f_c6"></canvas></div></div>
-      <div class="card"><div class="card-title">Donor retention FY24 → FY25</div><div class="cw" style="height:220px; position:relative;"><canvas id="f_c7"></canvas><div id="f_c7_center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;"></div></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Active donor count by fiscal year</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c6','donor-count')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill into that year's giving breakdown</div><div class="chart-hint">FY25 donor surge (+157%): 108 → 278 active donors — far exceeding sector trends</div><div class="cw" style="height:220px"><canvas id="f_c6"></canvas></div></div>
+      <div class="card"><div class="chart-toolbar"><div class="card-title">Donor retention FY24 → FY25</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c7','donor-retention')">⬇ PNG</button></div></div><div class="chart-hint">26% retained · 57% new · 17% lapsed — new donor stewardship is the top priority</div><div class="cw" style="height:220px; position:relative;"><canvas id="f_c7"></canvas><div id="f_c7_center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;"></div></div></div>
+    </div>
+
+    <div class="section-title">Donor Health</div>
+    <div class="two">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Retained donor movement — FY24 → FY25 (72 donors)</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c11','donor-movement')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">Of 72 donors retained from FY24, 25 moved to a higher gift tier and 23 dropped down</div>
+        <div class="cw" style="height:200px"><canvas id="f_c11"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Donor tenure — consecutive years of giving</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c12','donor-tenure')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">180 first-year donors dominate; only 85 donors have 3+ consecutive years — retention is the critical priority</div>
+        <div class="cw" style="height:200px"><canvas id="f_c12"></canvas></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="chart-toolbar">
+        <div class="card-title">Lifetime donor value (LTV) concentration — cumulative giving all years</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c13','ltv-pareto')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Top 16 donors ($5K+ lifetime) hold 62% of all cumulative giving — classic Pareto concentration; right axis = cumulative %</div>
+      <div class="tleg" id="f_ltvleg"></div>
+      <div class="cw" style="height:240px"><canvas id="f_c13"></canvas></div>
     </div>
 
     <div class="section-title">Gift Size Distribution — FY25</div>
     <div class="card">
-      <div class="card-title">Number of donors by gift size range — FY25 (cash + in-kind combined)</div>
+      <div class="chart-toolbar">
+        <div class="card-title">Number of donors by gift size range — FY25 (cash + in-kind combined)</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c8','gift-size-dist')">⬇ PNG</button></div>
+      </div>
       <div class="drill-badge"><span class="dot"></span>Click a bar to see cash vs in-kind breakdown</div>
-      <div class="chart-hint">Click a bar to see amount raised in that range</div>
+      <div class="chart-hint">$100–$499 range has most donors (97) · click a bar to see amount raised in that range</div>
       <div class="cw" style="height:220px"><canvas id="f_c8"></canvas></div>
     </div>
     <footer>Gift data: Total Gifts By Year (cash + in-kind) &nbsp;·&nbsp; Fiscal years FY21 – FY25 (July–June)</footer>
@@ -697,7 +811,10 @@
           <label>Dataset</label>
           <select id="expl_dataset" onchange="updateExplVars()">
             <option value="demo">Child Demographics (monthly)</option>
-            <option value="fund">Fundraising (annual)</option>
+            <option value="fund">Fundraising (annual FY21–FY25)</option>
+            <option value="childannual">Child Demographics (annual FY21–FY25)</option>
+            <option value="volunteer">Volunteers (annual FY21–FY25)</option>
+            <option value="zipcode">Removal Zip Codes (annual FY21–FY25)</option>
           </select>
         </div>
         <div class="expl-field">
@@ -764,9 +881,312 @@
       <div style="font-size:13px;">Mix any variables from demographics or fundraising to explore relationships in your data.</div>
     </div>
 
-    <footer>Chart Explorer — combine any variables from Child Demographics &amp; Fundraising datasets</footer>
+    <footer>Chart Explorer — combine any variables from Child Demographics, Fundraising, Volunteer &amp; Removal Zip Code datasets</footer>
   </main>
 </div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 — VOLUNTEER DEMOGRAPHICS
+══════════════════════════════════════════ -->
+<div id="volunteers" class="page">
+  <main>
+    <div class="print-header"><span class="ph-org">CASA — Volunteer Demographics Dashboard</span><span class="ph-date" id="ph_date_vol"></span></div>
+
+    <div class="summary-block">
+      <h2>Volunteer Demographics — Summary &amp; Insights</h2>
+      <p class="lead">CASA's active volunteer corps has grown from <strong>111 volunteers in FY21</strong> to a peak of <strong>128 in FY24</strong>, with FY25 at 121 reflecting natural attrition and turnover. The corps is overwhelmingly female (~83%), highly educated (Bachelors or higher: ~76% in FY25), and meaningfully multilingual — with Hindi, Spanish, and Urdu speakers well-represented. Volunteer tenure has deepened year over year, with more advocates now in their 3–7-year range.</p>
+
+      <!-- ▸ KEY INSIGHTS -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Key Insights</span>
+          <span class="collapse-count">6 insights</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="insight-grid">
+            <div class="insight positive"><div class="itag">Strength — diversity trajectory</div><p>Non-white volunteers grew from 39% in FY21 to 52% in FY25 — a 13-point shift in four years. White volunteers fell from 61% to 48%, while Asian representation grew from 20% to 19% and Black/African American volunteers grew from 8% to 19%. This trajectory represents meaningful progress toward demographic alignment with the children CASA serves.</p></div>
+            <div class="insight watch"><div class="itag">Watch — headcount plateau</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. New cohort recruitment (0–1 year volunteers: 23 in FY25) needs to offset annual attrition to avoid a sustained downward trend. The 3–7 year tenure band (56 volunteers) is the largest segment and represents the core experienced corps.</p></div>
+            <div class="insight positive"><div class="itag">Strength — volunteer retention</div><p>81% of FY25 volunteers have 2+ years of service (98 of 121), and 18 volunteers have 10+ years. This deep bench of experienced advocates is a critical organizational asset — long-tenured volunteers typically carry the most complex cases and provide informal mentorship to newer recruits.</p></div>
+            <div class="insight neutral"><div class="itag">Stable — gender composition</div><p>The volunteer corps has maintained ~83% female since FY21, consistent with national CASA averages. While gender diversity is limited, this stability suggests reliable recruitment pipelines. The 21 male volunteers (17%) are slightly above the national CASA average of ~14% male.</p></div>
+            <div class="insight positive"><div class="itag">Strength — language assets</div><p>18 Spanish speakers, 10 Hindi speakers, 4 Urdu speakers, and 4 ASL users provide direct language access for a significant share of the caseload. With 17–18% of active children identified as Hispanic/Latino, Spanish language capacity among volunteers is particularly valuable for family communication and court advocacy.</p></div>
+            <div class="insight neutral"><div class="itag">Context — vs. National CASA averages</div><p>Nationally, CASA programs average ~84% female volunteers and ~16% male — this program's 83%/17% split is closely aligned. Non-white volunteer representation nationally is approximately 25–30% and growing; at 52% non-white in FY25, this program substantially exceeds the national average, reflecting intentional diversity recruitment. Nationally, ~65–70% of CASA volunteers hold a bachelor's degree or higher; this program's ~76% with Bachelors or higher in FY25 is above average. The national volunteer-to-child ratio averages roughly 1:1 to 1:2; this program's ratio supports its full caseload. (Source: National CASA/GAL Association annual data.)</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ▸ NATIONAL COMPARISON -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">National Comparison</span>
+          <span class="collapse-count">National CASA/GAL</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="national-block">
+            <div class="nat-grid">
+              <div class="nat-card inline">
+                <div class="nat-label">Gender composition — Female</div>
+                <div class="nat-compare"><span class="nat-yours">83% female (FY25)</span><span class="nat-vs">vs</span><span class="nat-nat">~84% nationally</span></div>
+                <div class="nat-note">Nationally, CASA/GAL programs average approximately 84% female volunteers. This program's 83% is closely aligned with the national norm, suggesting recruitment patterns typical of CASA programs across the country.</div>
+              </div>
+              <div class="nat-card above">
+                <div class="nat-label">Volunteer diversity — Non-white share</div>
+                <div class="nat-compare"><span class="nat-yours">52% non-white (FY25)</span><span class="nat-vs">vs</span><span class="nat-nat">↑ ~25–30% nationally</span></div>
+                <div class="nat-note">Non-white volunteer representation nationally sits around 25–30% and is growing. At 52%, this program is approximately 20–25 points above the national average — a meaningful achievement in aligning volunteer demographics with the children served.</div>
+              </div>
+              <div class="nat-card above">
+                <div class="nat-label">Educational attainment — Bachelor's or higher</div>
+                <div class="nat-compare"><span class="nat-yours">76% bachelors+ (FY25)</span><span class="nat-vs">vs</span><span class="nat-nat">↑ ~65–70% nationally</span></div>
+                <div class="nat-note">CASA programs nationally report approximately 65–70% of volunteers hold a bachelor's degree or higher. This program's 76% is above the national average, reflecting a highly educated advocate corps — often associated with stronger documentation and court communication skills.</div>
+              </div>
+              <div class="nat-card inline">
+                <div class="nat-label">Volunteer retention — 2+ year advocates</div>
+                <div class="nat-compare"><span class="nat-yours">81% retained 2+ yrs (FY25)</span><span class="nat-vs">vs</span><span class="nat-nat">~60–65% nationally</span></div>
+                <div class="nat-note">National CASA programs typically see 60–65% of active volunteers with two or more years of tenure. At 81%, this program's retention is well above average — indicating strong volunteer satisfaction, effective supervision, and organizational culture.</div>
+              </div>
+              <div class="nat-card above">
+                <div class="nat-label">Multilingual capacity</div>
+                <div class="nat-compare"><span class="nat-yours">~30% speak 2nd language</span><span class="nat-vs">vs</span><span class="nat-nat">Nationally uncommon</span></div>
+                <div class="nat-note">Multilingual volunteers are a significant asset nationally but are not common. With 18 Spanish, 10 Hindi, 4 Urdu, and 4 ASL speakers among 121 volunteers (~30%), this program has above-average capacity to serve linguistically diverse families without interpreter reliance.</div>
+              </div>
+              <div class="nat-card inline">
+                <div class="nat-label">Headcount trajectory</div>
+                <div class="nat-compare"><span class="nat-yours">121 FY25 (−5.5% FY24)</span><span class="nat-vs">vs</span><span class="nat-nat">National stabilization</span></div>
+                <div class="nat-note">Post-pandemic, many CASA programs nationally saw volunteer attrition and slower recovery. This program grew from 111 (FY21) to a peak of 128 (FY24) before a modest pullback to 121, generally outperforming the national trend of flat-to-declining headcounts.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ▸ QUESTIONS TO EXPLORE -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Questions to Explore</span>
+          <span class="collapse-count">5 questions</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="dive-list" style="padding-top:0.5rem;">
+            <span class="dive-pill">What's driving the FY24→FY25 headcount decline?</span>
+            <span class="dive-pill">Retention rate by age group and gender</span>
+            <span class="dive-pill">Case complexity by volunteer tenure band</span>
+            <span class="dive-pill">Geographic distribution of volunteer home zip codes</span>
+            <span class="dive-pill">Language match rate — Spanish-speaking volunteers vs. Spanish-speaking families</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HEADLINE STATS ── -->
+    <div class="drill-kpi-bar n4" style="margin:0 0 18px 0;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">Active Volunteers (FY25)</div>
+        <div class="dk-val">121</div>
+        <div class="dk-dn">↓ 5.5% vs FY24 peak (128)</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Female Share (FY25)</div>
+        <div class="dk-val">83%</div>
+        <div class="dk-sub">100 female · 21 male</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Non-White Volunteers (FY25)</div>
+        <div class="dk-val">52%</div>
+        <div class="dk-up">↑ from 39% in FY21</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Returning Volunteers (2+ yrs)</div>
+        <div class="dk-val">81%</div>
+        <div class="dk-sub">98 of 121 returning in FY25</div>
+      </div>
+    </div>
+
+    <!-- ── HEADCOUNT TREND ── -->
+    <div class="card full">
+      <div class="chart-toolbar">
+        <div class="card-title">Active Volunteer Headcount — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c1','vol-headcount')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Click a bar to see that year's full breakdown</div>
+      <div class="cw" style="height:220px"><canvas id="v_c1"></canvas></div>
+    </div>
+
+    <!-- ── AGE + GENDER ── -->
+    <div class="two">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Age Distribution by Fiscal Year</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c2','vol-age-dist')">⬇ PNG</button></div>
+        </div>
+        <div class="drill-badge"><span class="dot"></span>Click a bar to drill into a year</div>
+        <div class="chart-hint">Click legend pills to show/hide</div>
+        <div class="tleg" id="v_aleg"></div>
+        <div class="cw" style="height:240px"><canvas id="v_c2"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Gender Breakdown by Fiscal Year</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c3','vol-gender')">⬇ PNG</button></div>
+        </div>
+        <div class="drill-badge"><span class="dot"></span>Click a year to drill down</div>
+        <div class="cw" style="height:240px"><canvas id="v_c3"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ── RACE / ETHNICITY ── -->
+    <div class="card full">
+      <div class="chart-toolbar">
+        <div class="card-title">Race &amp; Ethnicity by Fiscal Year</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c4','vol-race')">⬇ PNG</button></div>
+      </div>
+      <div class="drill-badge"><span class="dot"></span>Click a bar to drill into a year</div>
+      <div class="chart-hint">Click legend pills to show/hide</div>
+      <div class="tleg" id="v_rleg"></div>
+      <div class="cw" style="height:260px"><canvas id="v_c4"></canvas></div>
+    </div>
+
+    <!-- ── EDUCATION + LANGUAGES ── -->
+    <div class="two">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Education Level Trend (FY21–FY25)</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c5','vol-education')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">Click legend pills to show/hide</div>
+        <div class="tleg" id="v_eleg"></div>
+        <div class="cw" style="height:240px"><canvas id="v_c5"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Non-English Languages Spoken (FY25)</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c6','vol-languages')">⬇ PNG</button></div>
+        </div>
+        <div class="cw" style="height:240px"><canvas id="v_c6"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ── YEARS OF SERVICE ── -->
+    <div class="card full">
+      <div class="chart-toolbar">
+        <div class="card-title">Years of Service Distribution (FY25)</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c7','vol-tenure')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Color bands: orange = new (0–2 yrs) · blue = developing (3–4) · green = experienced (5–8) · purple = veteran (9+)</div>
+      <div class="cw" style="height:220px"><canvas id="v_c7"></canvas></div>
+    </div>
+
+    <footer>Volunteer Demographics — Active volunteers FY2021–FY2025 · Source: Volunteer Demographics Summary reports</footer>
+  </main>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 5 — REMOVAL ZIP CODES
+══════════════════════════════════════════ -->
+<div id="zipcodes" class="page">
+  <main>
+    <div class="print-header"><span class="ph-org">CASA — Removal Zip Code Dashboard</span><span class="ph-date" id="ph_date_zip"></span></div>
+
+    <div class="summary-block">
+      <h2>Active Children — Removal Zip Codes</h2>
+      <p class="lead">Each row in the source data represents one child assigned to CASA, identified by removal zip code, case number, and original assigned-to-CASA date. <strong>Duplicate case numbers reflect multiple children on the same case</strong> — this is expected and correct. Removals are geographically concentrated in a Middlesex County corridor: Carteret (07008), New Brunswick (08901), and Perth Amboy (08861) are consistently the highest-volume zip codes, together representing roughly one-third of all cases each year. Total verified cases: FY21 = 168 · FY22 = 200 · FY23 = 203 · FY24 = 191 · FY25 = 167.</p>
+
+      <!-- ▸ KEY INSIGHTS -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Key Insights</span>
+          <span class="collapse-count">4 insights</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="insight-grid">
+            <div class="insight watch"><div class="itag">Watch — geographic concentration</div><p>The top 3 zip codes (07008 Carteret, 08901 New Brunswick, 08861 Perth Amboy) consistently account for 30–37% of all removals each year. Over five years, 07008 generated 130 child assignments and 08901 generated 115 — the two highest-volume zips by a wide margin. These are dense urban communities with elevated rates of family system involvement.</p></div>
+            <div class="insight watch"><div class="itag">Watch — 08817 rising trend</div><p>Metuchen/Edison (08817) shows the sharpest growth trajectory in the dataset: 8 cases in FY21, steady through FY23 (11), then accelerating to 18 in FY24 and 25 in FY25 — a 3× increase over five years. By FY25 it is the second-highest zip code. This emerging concentration warrants attention for volunteer placement and recruitment in the Edison area.</p></div>
+            <div class="insight positive"><div class="itag">Opportunity — targeted recruitment</div><p>Volunteer recruitment in the 07008 (Carteret), 08901 (New Brunswick), 08817 (Metuchen/Edison), and 08861 (Perth Amboy) corridors could improve geographic match between advocates and families. Spanish-speaking volunteers are especially valuable in Carteret and Perth Amboy, both of which have large Hispanic/Latino populations.</p></div>
+            <div class="insight neutral"><div class="itag">Context — 40+ zip codes served</div><p>Over the five-year period, more than 40 distinct zip codes appear across all years, spanning 07xxx (northern Middlesex/Union County) and 08xxx (central/southern Middlesex) ranges. The caseload peaked at 203 children in FY23 and has since declined to 167 in FY25 — a 18% reduction likely reflecting both systemic trends and natural case closure patterns.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ▸ QUESTIONS TO EXPLORE -->
+      <div class="collapse-section">
+        <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+          <span class="collapse-label">Questions to Explore</span>
+          <span class="collapse-count">4 questions</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body">
+          <div class="dive-list" style="padding-top:0.5rem;">
+            <span class="dive-pill">Do volunteers' home zip codes match removal zip codes?</span>
+            <span class="dive-pill">Which zip codes have the longest average case durations?</span>
+            <span class="dive-pill">What is driving the sustained 08817 (Edison) increase since FY23?</span>
+            <span class="dive-pill">Is the FY25 caseload decline (167) a systemic reduction or case closure timing?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HEADLINE STATS ── -->
+    <div class="drill-kpi-bar n4" style="margin:0 0 18px 0;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">Peak Caseload — FY23</div>
+        <div class="dk-val">203</div>
+        <div class="dk-up">↑ from 168 in FY21</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">FY25 Total Cases</div>
+        <div class="dk-val">167</div>
+        <div class="dk-dn">↓ 18% from FY23 peak</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Top 3 Zips Share (FY25)</div>
+        <div class="dk-val">41%</div>
+        <div class="dk-sub">07008 · 08817 · 08901</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Zip Codes Served (all years)</div>
+        <div class="dk-val">40+</div>
+        <div class="dk-sub">Middlesex County region</div>
+      </div>
+    </div>
+
+    <!-- ── TOP ZIP CODES BAR CHART ── -->
+    <div class="card full">
+      <div class="chart-toolbar">
+        <div class="card-title">Top 10 Zip Codes by Total Removals — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('z_c1','zip-top10')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Sorted by cumulative total across all 5 years · Duplicate case numbers = multiple children on the same case</div>
+      <div class="cw" style="height:300px"><canvas id="z_c1"></canvas></div>
+    </div>
+
+    <!-- ── TREND + DISTRIBUTION ── -->
+    <div class="two">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Year-over-Year Trend — Top 5 Zip Codes</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('z_c2','zip-trend')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">All years sourced from verified case records · 08817 (Edison) shows the steepest growth</div>
+        <div class="cw" style="height:260px"><canvas id="z_c2"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Annual Caseload Totals — FY21 to FY25</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('z_c3','zip-totals')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">Each bar = total children assigned that fiscal year · peaked FY23 at 203</div>
+        <div class="cw" style="height:260px"><canvas id="z_c3"></canvas></div>
+      </div>
+    </div>
+
+    <footer>Removal Zip Codes — Active children FY2021–FY2025 · Source: Active Children Removal Zip Code reports · Duplicate case numbers indicate multiple children on the same case</footer>
+  </main>
+</div>
+
 
 <script>
 /* ═══ COLLAPSIBLE SECTIONS ═══ */
@@ -796,7 +1216,7 @@ function toggleSection(btn) {
 /* ═══ NAV ═══ */
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl'); });
+  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
   return false;
@@ -863,6 +1283,29 @@ var dABC = ['#3B8BD4','#0F6E56','#BA7517','#534AB7','#A32D2D'];
 function band(r){ return [r[0]+r[1]+r[2]+r[3],r[4]+r[5]+r[6]+r[7],r[8]+r[9]+r[10]+r[11],r[12]+r[13]+r[14]+r[15],r[16]+r[17]+r[18]+r[19]]; }
 var dBS = dABL.map(function(_,bi){ return dRA.map(function(m){ return band(m)[bi]; }); });
 
+/* ═══ ANNUAL CHILD DEMOGRAPHICS (FY21–FY25) ═══ */
+// FY22 race data not recoverable from source file; shown as null
+var cdYears  = ['FY21','FY22','FY23','FY24','FY25'];
+var cdTotal  = [168, null, 203, 191, 167];  // null = not recoverable
+var cdFemale = [null, null, 97, 92, 84];
+var cdMale   = [null, null, 106, 99, 83];
+// Race: [Asian, Black/Afr.Am., Hispanic/Latino, Two or More, Unknown, White]
+var cdRace   = [
+  [12, 29, 34, 23, 4,  66],   // FY21
+  [null,null,null,null,null,null],  // FY22 — unrecoverable
+  [13, 43, 37, 31, 2,  77],   // FY23
+  [ 6, 45, 34, 31, 0,  75],   // FY24 (no Unknown row in source)
+  [ 9, 48, 27, 23, 4,  56],   // FY25
+];
+// Petitions: [Adoption, FC/Avail, FC/court id, FC/18+, FG, FN]
+var cdPets   = [
+  [1,  8, 96, 12, 34, 147],   // FY21
+  [null,null,null,null,null,null],  // FY22
+  [1, 25, 88, 12, 38, 160],   // FY23
+  [1, 22, 75, 12, 34, 157],   // FY24
+  [1, 16, 60,  9, 29, 134],   // FY25
+];
+
 /* ═══ FUNDRAISING DATA ═══ */
 // FY labels — fiscal year runs July–June
 var fY   = ['FY21','FY22','FY23','FY24','FY25'];
@@ -897,6 +1340,84 @@ var fDrillIndN   = [67,54,61,77,199];
 var fDrillOrgN   = [6, 6, 10,13, 31];
 var fDrillIkIndN = [3, 4, 3, 7,  26];
 var fDrillIkOrgN = [1, 3, 2, 16, 30];
+
+/* ═══ ADDITIONAL ANALYTICS DATA ═══ */
+// Month-over-month census change (Jul→Aug through Jan→Feb)
+var dMoMLabels=['Jul→Aug','Aug→Sep','Sep→Oct','Oct→Nov','Nov→Dec','Dec→Jan','Jan→Feb'];
+var dMoM=[1,-2,-5,0,0,-4,9];
+// Race change Jul 2025 → Feb 2026 delta (sorted descending)
+var dRDeltaK=['Black/Afr. Am.','Unknown','Asian','Hispanic/Latino','White','Two or More'];
+var dRDeltaC=['#A32D2D','#888780','#3B8BD4','#BA7517','#0F6E56','#534AB7'];
+var dRDeltaV=[8,3,0,-1,-5,-6];
+// FC subtypes trend (court id, avail adopt, FC/18+)
+var dFCSubK=['FC/court id','FC/avail adopt','FC/18+'];
+var dFCSubC=['#639922','#185FA5','#3B6D11'];
+// Average & median cash gift per year (cash total ÷ active donors)
+var fAvgCash=[555,551,871,629,386];
+var fMedCash=[129,150,258,250,150];
+// Donor tenure cohort (years of consecutive giving)
+var fTenureL=['5+ years','4 years','3 years','2 years','1st year'];
+var fTenureD=[32,27,26,41,180];
+// Lifetime value distribution across all unique donors
+var fLtvL=['$0–$99','$100–$499','$500–$999','$1K–$4,999','$5K+'];
+var fLtvN=[271,100,29,42,16];
+var fLtvV=[2787,20871,18540,80448,196452];
+// FY25 donor channel overlap: cash-only / in-kind-only / both
+var fOverlapL=['Cash only','In-kind only','Both'];
+var fOverlapD=[222,48,9];
+// Retained donor movement FY24→FY25 (of 72 retained donors)
+var fRetL=['Upgraded tier','Same tier','Downgraded tier'];
+var fRetD=[25,24,23];
+var fRetC=['#0F6E56','#3B8BD4','#A32D2D'];
+
+/* ── VOLUNTEER DATA ── */
+var vYears=['FY21','FY22','FY23','FY24','FY25'];
+var vTotal=[111,124,124,128,121];
+
+// Age bands (5 consistent groups; Under 21 lumped into 21-29 for FY23/24)
+var vAgeLabels=['21–29','30–39','40–49','50–59','60+'];
+var vAge=[
+  [19,13,20,26,33],  // FY21
+  [21,18,22,29,34],  // FY22
+  [22,19,24,25,34],  // FY23 (21+1 Under21 merged)
+  [25,14,25,28,36],  // FY24 (24+1)
+  [26,13,21,25,36]   // FY25
+];
+var vAgeC=['#3B8BD4','#0F6E56','#BA7517','#A32D2D','#534AB7'];
+
+// Gender
+var vFemale=[95,105,106,108,100];
+var vMale=[16,19,17,20,21];
+
+// Race (6 categories)
+var vRaceLabels=['White','Asian','Black/Afr. Am.','Hispanic/Latino','Two or More','Other'];
+var vRace=[
+  [68,22,9,4,5,3],   // FY21
+  [72,23,12,5,8,4],  // FY22
+  [65,24,17,7,7,4],  // FY23
+  [59,30,23,10,4,2], // FY24
+  [58,23,23,10,4,3]  // FY25
+];
+var vRaceC=['#2E78B8','#BA7517','#A32D2D','#0F6E56','#534AB7','#888780'];
+
+// Education (4 groups)
+var vEduLabels=['Bachelors','Masters','Unknown','Other'];
+var vEdu=[
+  [42,33,37,10],  // FY21
+  [50,33,34,17],  // FY22
+  [51,34,33,18],  // FY23
+  [53,38,27,22],  // FY24
+  [58,34,21,24]   // FY25
+];
+var vEduC=['#2E78B8','#0F6E56','#888780','#BA7517'];
+
+// Non-English languages FY25
+var vLangLabels=['Spanish','Hindi','Urdu','ASL','Arabic','Malayalam','Kannada','Russian','Other'];
+var vLangVals=[18,10,4,4,2,2,2,2,8];
+
+// Years of Service FY25 (grouped)
+var vYosLabels=['0 yrs','1 yr','2 yrs','3 yrs','4 yrs','5 yrs','6 yrs','7 yrs','8 yrs','9 yrs','10+ yrs'];
+var vYosVals=[2,21,25,21,8,7,11,11,5,3,7];
 
 var drillCharts = {};
 
@@ -1136,6 +1657,25 @@ function addAnnotations(chartId, annotations) {
   }, 100);
 }
 
+/* ═══════════════════════════════════════════════
+   ZIP CODE DATA — global scope (also used by Explorer)
+═══════════════════════════════════════════════ */
+/* Each row = one child; duplicate case numbers = multiple children on the same case */
+var zipYears  = ['FY21','FY22','FY23','FY24','FY25'];
+/* Top 10 zip codes by cumulative total FY21–FY25 */
+var zipCodes  = ['07008','08901','08861','08817','07001','08816','08859','08902','08879','07095'];
+var zipLocations = {
+  '07008':'Carteret','08901':'New Brunswick','08861':'Perth Amboy',
+  '08817':'Metuchen/Edison','07001':'Avenel','08816':'East Brunswick',
+  '08859':'Parlin/Sayreville','08902':'North Brunswick','08879':'South Amboy','07095':'Woodbridge'
+};
+/* Counts by year [FY21,FY22,FY23,FY24,FY25] — verified from source XLS */
+var zipCounts = [
+  [21,22,29,28,30],[27,27,27,20,14],[16,16,14,14,12],[8,8,11,18,25],[5,11,12,12,13],
+  [11,12,9,8,6],  [8,13,9,10,5],   [6,14,10,8,0],   [7,5,8,8,6],   [2,5,7,6,6]
+];
+var zipTotals = [168,200,203,191,167];
+
 /* ═══ EXPLORER ═══ */
 var explorerChart = null;
 
@@ -1170,7 +1710,48 @@ var explVars = {
     {key:'cashorg',label:'Org cash ($)',           data: function(){ return fCO; }},
     {key:'ikind',  label:'Individual in-kind ($)', data: function(){ return fII; }},
     {key:'ikorg',  label:'Org in-kind ($)',        data: function(){ return fIO; }}
-  ]
+  ],
+  childannual: [
+    {key:'total',   label:'Total active children',  data: function(){ return cdTotal; }},
+    {key:'female',  label:'Female count',            data: function(){ return cdFemale; }},
+    {key:'male',    label:'Male count',              data: function(){ return cdMale; }},
+    {key:'asian',   label:'Asian',                   data: function(){ return cdYears.map(function(_,i){return cdRace[i][0]===null?null:cdRace[i][0];}); }},
+    {key:'black',   label:'Black/Afr. Am.',          data: function(){ return cdYears.map(function(_,i){return cdRace[i][1]===null?null:cdRace[i][1];}); }},
+    {key:'hisp',    label:'Hispanic/Latino',         data: function(){ return cdYears.map(function(_,i){return cdRace[i][2]===null?null:cdRace[i][2];}); }},
+    {key:'twomore', label:'Two or More Races',       data: function(){ return cdYears.map(function(_,i){return cdRace[i][3]===null?null:cdRace[i][3];}); }},
+    {key:'unknown', label:'Unknown race',            data: function(){ return cdYears.map(function(_,i){return cdRace[i][4]===null?null:cdRace[i][4];}); }},
+    {key:'white',   label:'White',                   data: function(){ return cdYears.map(function(_,i){return cdRace[i][5]===null?null:cdRace[i][5];}); }},
+    {key:'adoption',label:'Adoption petitions',      data: function(){ return cdYears.map(function(_,i){return cdPets[i][0]===null?null:cdPets[i][0];}); }},
+    {key:'fcavail', label:'FC/Avail petitions',      data: function(){ return cdYears.map(function(_,i){return cdPets[i][1]===null?null:cdPets[i][1];}); }},
+    {key:'fcourt',  label:'FC/court id petitions',   data: function(){ return cdYears.map(function(_,i){return cdPets[i][2]===null?null:cdPets[i][2];}); }},
+    {key:'fc18',    label:'FC/18+ petitions',        data: function(){ return cdYears.map(function(_,i){return cdPets[i][3]===null?null:cdPets[i][3];}); }},
+    {key:'fg',      label:'FG (guardianship) petitions', data: function(){ return cdYears.map(function(_,i){return cdPets[i][4]===null?null:cdPets[i][4];}); }},
+    {key:'fn',      label:'FN (foster care) petitions',  data: function(){ return cdYears.map(function(_,i){return cdPets[i][5]===null?null:cdPets[i][5];}); }}
+  ],
+  volunteer: [
+    {key:'total',   label:'Active volunteers',       data: function(){ return vTotal; }},
+    {key:'female',  label:'Female volunteers',       data: function(){ return vFemale; }},
+    {key:'male',    label:'Male volunteers',         data: function(){ return vMale; }},
+    {key:'white',   label:'White volunteers',        data: function(){ return vRace.map(function(yr){return yr[0];}); }},
+    {key:'asian',   label:'Asian volunteers',        data: function(){ return vRace.map(function(yr){return yr[1];}); }},
+    {key:'black',   label:'Black/Afr. Am. volunteers', data: function(){ return vRace.map(function(yr){return yr[2];}); }},
+    {key:'hisp',    label:'Hispanic/Latino volunteers', data: function(){ return vRace.map(function(yr){return yr[3];}); }},
+    {key:'twomore', label:'Two or More Races volunteers', data: function(){ return vRace.map(function(yr){return yr[4];}); }},
+    {key:'age2129', label:'Age 21–29',               data: function(){ return vAge.map(function(yr){return yr[0];}); }},
+    {key:'age3039', label:'Age 30–39',               data: function(){ return vAge.map(function(yr){return yr[1];}); }},
+    {key:'age4049', label:'Age 40–49',               data: function(){ return vAge.map(function(yr){return yr[2];}); }},
+    {key:'age5059', label:'Age 50–59',               data: function(){ return vAge.map(function(yr){return yr[3];}); }},
+    {key:'age60p',  label:'Age 60+',                 data: function(){ return vAge.map(function(yr){return yr[4];}); }},
+    {key:'bach',    label:'Bachelor\'s degree',      data: function(){ return vEdu.map(function(yr){return yr[0];}); }},
+    {key:'masters', label:'Master\'s degree',        data: function(){ return vEdu.map(function(yr){return yr[1];}); }}
+  ],
+  zipcode: (function(){
+    var rows = [{key:'total',label:'Total children assigned',data:function(){return zipTotals;}}];
+    zipCodes.forEach(function(z,i){
+      rows.push({key:'z'+z, label:z+' – '+(zipLocations[z]||z), data:function(idx){return function(){return zipCounts[idx];};}(i)});
+    });
+    return rows;
+  })()
 };
 
 function updateExplVars() {
@@ -1205,7 +1786,7 @@ function buildExplChart() {
   if (!v1) return;
   var v2 = y2key ? vars.find(function(v){ return v.key === y2key; }) : null;
 
-  var labels = ds === 'demo' ? dM : fY;
+  var labels = ds === 'demo' ? dM : (ds === 'childannual' ? cdYears : (ds === 'volunteer' ? vYears : (ds === 'zipcode' ? zipYears : fY)));
   var d1 = v1.data().slice();
   var d2 = v2 ? v2.data().slice() : null;
 
@@ -1394,6 +1975,82 @@ var fyCallouts = [
   '<strong>FY24</strong> — Dominated by an anomalous in-kind surge: $55K from 16 organizational in-kind donors (vs $900 in FY23). Cash grew modestly (+4%). This spike may not repeat.',
   '<strong>FY25</strong> — Strongest year in the dataset. Donor base surged to 278 (+157%), cash hit $107K (+58%). Critical risk: 57% of donors are first-time givers — sector retention for new donors is ~19%.'
 ];
+
+/* ═══ AGE HEATMAP ═══ */
+function drawHeatmap(canvasId) {
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  var dpr = window.devicePixelRatio || 1;
+  var parent = canvas.parentElement || canvas;
+  var W = parent.offsetWidth || canvas.offsetWidth || 800;
+  var H = parent.offsetHeight || canvas.offsetHeight || 480;
+  canvas.width  = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  var ageLabels=['0–11mo','1yr','2yr','3yr','4yr','5yr','6yr','7yr','8yr','9yr','10yr','11yr','12yr','13yr','14yr','15yr','16yr','17yr','18yr','18+'];
+  var nR = ageLabels.length; // 20
+  var nC = dM.length;        // 8
+  var mL=56, mT=26, mR=12, mB=28;
+  var cellW=(W-mL-mR)/nC, cellH=(H-mT-mB)/nR;
+
+  // Find max value for color scaling
+  var maxV=0;
+  for(var ci=0;ci<nC;ci++) for(var ri=0;ri<nR;ri++) if(dRA[ci][ri]>maxV) maxV=dRA[ci][ri];
+
+  // Band definitions
+  var bandDefs=[{s:0,e:4,c:dABC[0]},{s:4,e:8,c:dABC[1]},{s:8,e:12,c:dABC[2]},{s:12,e:16,c:dABC[3]},{s:16,e:20,c:dABC[4]}];
+
+  // Draw cells
+  for(var ri2=0;ri2<nR;ri2++){
+    for(var ci2=0;ci2<nC;ci2++){
+      var v=dRA[ci2][ri2];
+      var t=maxV>0?v/maxV:0;
+      // Light (#eef5fc) → dark (#1d5fa8)
+      var r2=Math.round(238+(29-238)*t);
+      var g2=Math.round(245+(95-245)*t);
+      var b2=Math.round(252+(168-252)*t);
+      ctx.fillStyle='rgb('+r2+','+g2+','+b2+')';
+      ctx.fillRect(mL+ci2*cellW+0.5, mT+ri2*cellH+0.5, cellW-1, cellH-1);
+      // Cell count text
+      var fs=Math.min(cellH*0.52,10.5);
+      if(fs>=7 && cellW>=16){
+        ctx.font=fs+'px system-ui,-apple-system,sans-serif';
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillStyle=t>0.52?(isDark?'#e8e7e1':'#ffffff'):(isDark?'#b4b2a9':'#5f5e5a');
+        ctx.fillText(v, mL+(ci2+0.5)*cellW, mT+(ri2+0.5)*cellH);
+      }
+    }
+  }
+
+  // Month labels (X axis)
+  ctx.fillStyle=TC; ctx.font='11px system-ui,-apple-system,sans-serif';
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  for(var ci3=0;ci3<nC;ci3++) ctx.fillText(dM[ci3], mL+(ci3+0.5)*cellW, H-mB+5);
+
+  // Age labels (Y axis)
+  ctx.textAlign='right'; ctx.textBaseline='middle';
+  ctx.font='10px system-ui,-apple-system,sans-serif';
+  for(var ri3=0;ri3<nR;ri3++){
+    ctx.fillStyle=TC;
+    ctx.fillText(ageLabels[ri3], mL-8, mT+(ri3+0.5)*cellH);
+  }
+
+  // Band divider lines
+  ctx.strokeStyle=isDark?'rgba(255,255,255,0.18)':'rgba(0,0,0,0.14)';
+  ctx.lineWidth=1.5;
+  [4,8,12,16].forEach(function(bi){
+    var y=mT+bi*cellH;
+    ctx.beginPath(); ctx.moveTo(mL,y); ctx.lineTo(W-mR,y); ctx.stroke();
+  });
+
+  // Band color bars on left edge
+  bandDefs.forEach(function(bd){
+    ctx.fillStyle=bd.c;
+    ctx.fillRect(2, mT+bd.s*cellH+2, 5, (bd.e-bd.s)*cellH-4);
+  });
+}
 
 /* ═══ ANNOTATIONS ═══ */
 function initAnnotations() {
@@ -1641,6 +2298,55 @@ function init() {
     );
   });
 
+  /* ── d_c12: Month-over-month census change ── */
+  new Chart(document.getElementById('d_c12'),{type:'bar',
+    data:{labels:dMoMLabels,datasets:[{label:'MoM change',data:dMoM,
+      backgroundColor:dMoM.map(function(v){return v>=0?'rgba(15,110,86,0.75)':'rgba(163,45,45,0.75)';}),
+      borderColor:dMoM.map(function(v){return v>=0?'#0F6E56':'#A32D2D';}),
+      borderWidth:1.5,borderRadius:4,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.raw>=0?'+':'')+c.raw+' children vs prior month';}}}},
+      scales:{
+        x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},
+        y:{ticks:{color:TC,callback:function(v){return (v>=0?'+':'')+v;}},grid:{color:GC},
+          title:{display:true,text:'Net change',color:TC,font:{size:11}}}
+      }}
+  });
+
+  /* ── d_c13: Race delta diverging bar ── */
+  new Chart(document.getElementById('d_c13'),{type:'bar',
+    data:{labels:dRDeltaK,datasets:[{label:'Change from Jul 2025',data:dRDeltaV,
+      backgroundColor:dRDeltaV.map(function(v){return v>0?'rgba(163,45,45,0.75)':v<0?'rgba(15,110,86,0.75)':'rgba(136,135,128,0.45)';}),
+      borderColor:dRDeltaV.map(function(v){return v>0?'#A32D2D':v<0?'#0F6E56':'#888780';}),
+      borderWidth:1.5,borderRadius:3,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.raw>=0?'+':'')+c.raw+' children vs Jul 2025';}}}},
+      scales:{
+        x:{ticks:{color:TC,callback:function(v){return (v>=0?'+':'')+v;}},grid:{color:GC}},
+        y:{ticks:{color:TC,font:{size:12}},grid:{display:false}}
+      }}
+  });
+
+  /* ── d_c14: FC subtypes line ── */
+  var dFCSubData=[dPD[2],dPD[1],dPD[3]]; // court id, avail adopt, FC/18+
+  var fcSubChart=new Chart(document.getElementById('d_c14'),{type:'line',
+    data:{labels:dM,datasets:storeFullData(dFCSubK.map(function(k,i){
+      return {label:k,data:dFCSubData[i].slice(),
+        borderColor:dFCSubC[i],backgroundColor:'transparent',
+        tension:0.3,pointRadius:4,pointHoverRadius:7,
+        pointBackgroundColor:dFCSubC[i],borderWidth:2.5};
+    }))},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}},
+      scales:{y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},x:{ticks:{color:TC},grid:{display:false}}},
+      interaction:{mode:'index',intersect:false}}
+  });
+  mkToggleLeg('d_fcleg',fcSubChart,dFCSubK,dFCSubC);
+  allDemoCharts['c14']=fcSubChart;
+
+  /* ── d_c15: Age heatmap ── */
+  setTimeout(function(){ drawHeatmap('d_c15'); }, 80);
+
   /* ─── FUNDRAISING ─── */
   // Helper: chart click → openDrill with anchor (bars + x-axis labels)
   function addDrillClick(chart, type) {
@@ -1756,6 +2462,106 @@ function init() {
         tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors';}}}}}});
   });
 
+  /* ── f_c9: Avg gift + median gift trend (dual-axis with donor count) ── */
+  var avgGiftChart=new Chart(document.getElementById('f_c9'),{type:'line',
+    data:{labels:fY,datasets:[
+      {label:'Avg cash gift',data:fAvgCash,
+        borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,
+        tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#3B8BD4',
+        borderWidth:2.5,yAxisID:'y'},
+      {label:'Median cash gift',data:fMedCash,
+        borderColor:'#534AB7',backgroundColor:'transparent',fill:false,
+        tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#534AB7',
+        borderWidth:2,borderDash:[5,3],yAxisID:'y'},
+      {label:'Active donors',data:fD,
+        borderColor:'#BA7517',backgroundColor:'transparent',fill:false,
+        tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#BA7517',
+        borderWidth:2.5,yAxisID:'y2'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
+        if(c.datasetIndex===2) return ' Active donors: '+c.raw;
+        return ' '+c.dataset.label+': $'+c.raw.toLocaleString();
+      }}}},
+      scales:{
+        x:{ticks:{color:TC},grid:{display:false}},
+        y:{ticks:{color:TC,callback:function(v){return '$'+v;}},grid:{color:GC},beginAtZero:true,
+          title:{display:true,text:'$ per donor',color:TC,font:{size:11}}},
+        y2:{position:'right',ticks:{color:'#BA7517'},grid:{display:false},beginAtZero:true,
+          title:{display:true,text:'donors',color:'#BA7517',font:{size:11}}}
+      },
+      interaction:{mode:'index',intersect:false}}
+  });
+  mkToggleLeg('f_avgleg',avgGiftChart,['Avg cash gift','Median cash gift','Active donors'],['#3B8BD4','#534AB7','#BA7517']);
+
+  /* ── f_c14: FY25 cash vs in-kind overlap doughnut ── */
+  var overlapTotal=fOverlapD.reduce(function(a,b){return a+b;},0);
+  document.getElementById('f_c14_center').innerHTML='<div style="font-size:20px;font-weight:500;color:var(--text);">'+overlapTotal+'</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">unique donors</div>';
+  new Chart(document.getElementById('f_c14'),{type:'doughnut',
+    data:{labels:fOverlapL,datasets:[{data:fOverlapD,
+      backgroundColor:['#3B8BD4','#0F6E56','#534AB7'],borderWidth:2,borderColor:BC}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+      plugins:{legend:{position:'bottom',labels:{font:{size:12},color:TC,padding:12}},
+        tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/overlapTotal*100)+'%)';}}}}}
+  });
+
+  /* ── f_c11: Retained donor movement (upgrade / same / downgrade) ── */
+  new Chart(document.getElementById('f_c11'),{type:'bar',
+    data:{labels:fRetL,datasets:[{label:'Donors',data:fRetD,
+      backgroundColor:fRetC,borderRadius:4,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
+        return ' '+c.raw+' donors ('+Math.round(c.raw/72*100)+'% of retained)';
+      }}}},
+      scales:{
+        x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true,max:30},
+        y:{ticks:{color:TC,font:{size:12}},grid:{display:false}}
+      }}
+  });
+
+  /* ── f_c12: Donor tenure pyramid ── */
+  var tenureTotal=fTenureD.reduce(function(a,b){return a+b;},0);
+  new Chart(document.getElementById('f_c12'),{type:'bar',
+    data:{labels:fTenureL,datasets:[{label:'Donors',data:fTenureD,
+      backgroundColor:['#0F6E56','#3B8BD4','rgba(59,139,212,0.7)','rgba(59,139,212,0.5)','rgba(59,139,212,0.3)'],
+      borderRadius:4,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
+        return ' '+c.raw+' donors ('+Math.round(c.raw/tenureTotal*100)+'% of all)';
+      }}}},
+      scales:{
+        x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},
+        y:{ticks:{color:TC,font:{size:12}},grid:{display:false}}
+      }}
+  });
+
+  /* ── f_c13: LTV concentration Pareto (bar + cumulative line) ── */
+  var ltvTotal=fLtvV.reduce(function(a,b){return a+b;},0);
+  var ltvCumPct=[]; var cumSum=0;
+  fLtvV.forEach(function(v){ cumSum+=v; ltvCumPct.push(Math.round(cumSum/ltvTotal*100)); });
+  var ltvChart=new Chart(document.getElementById('f_c13'),{type:'bar',
+    data:{labels:fLtvL,datasets:[
+      {type:'bar',label:'Lifetime giving ($)',data:fLtvV,
+        backgroundColor:['rgba(59,139,212,0.25)','rgba(59,139,212,0.42)','rgba(59,139,212,0.6)','rgba(59,139,212,0.8)','#3B8BD4'],
+        borderRadius:4,borderSkipped:false,yAxisID:'y'},
+      {type:'line',label:'Cumulative %',data:ltvCumPct,
+        borderColor:'#534AB7',backgroundColor:'transparent',fill:false,
+        tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#534AB7',
+        borderWidth:2.5,yAxisID:'y2'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
+        if(c.datasetIndex===1) return ' Cumulative: '+c.raw+'% of all lifetime giving';
+        return ' Lifetime giving: '+dollarFmt(c.raw)+' ('+fLtvN[c.dataIndex]+' donors, '+Math.round(c.raw/ltvTotal*100)+'%)';
+      }}}},
+      scales:{
+        x:{ticks:{color:TC},grid:{display:false}},
+        y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true},
+        y2:{position:'right',ticks:{color:'#534AB7',callback:function(v){return v+'%';}},grid:{display:false},min:0,max:100}
+      }}
+  });
+  mkToggleLeg('f_ltvleg',ltvChart,['Lifetime giving ($)','Cumulative %'],['#3B8BD4','#534AB7']);
+
   /* ── TABLE TOGGLES ── */
   // headers[0] = row-label column header; headers[1..n] = value column headers
   setupTableToggle('d_c1', [''].concat(dM),
@@ -1781,10 +2587,355 @@ function init() {
   setupTableToggle('f_c6', [''].concat(fY),
     [{label:'Active donors',values:fD}]
   );
+  // New chart table toggles
+  setupTableToggle('d_c12', ['Month'].concat(dMoMLabels),
+    [{label:'Net change',values:dMoM}]
+  );
+  setupTableToggle('d_c13', ['Race/Ethnicity','Jul→Feb change'],
+    dRDeltaK.map(function(k,i){return {label:k,values:[(dRDeltaV[i]>=0?'+':'')+dRDeltaV[i]]};})
+  );
+  setupTableToggle('d_c14', ['Petition type'].concat(dM),
+    [{label:'FC/court id',values:dPD[2]},{label:'FC/avail adopt',values:dPD[1]},{label:'FC/18+',values:dPD[3]}]
+  );
+  setupTableToggle('f_c9', [''].concat(fY),
+    [{label:'Avg cash gift ($)',values:fAvgCash},{label:'Median cash gift ($)',values:fMedCash},{label:'Active donors',values:fD}]
+  );
+  setupTableToggle('f_c12', ['Tenure','Donors'],
+    fTenureL.map(function(k,i){return {label:k,values:[fTenureD[i]]};})
+  );
+  setupTableToggle('f_c13', ['LTV bucket','Donors','Lifetime giving ($)','Cumulative %'],
+    fLtvL.map(function(k,i){var c=ltvCumPct[i];return {label:k,values:[fLtvN[i],'$'+fLtvV[i].toLocaleString(),c+'%']};})
+  );
+
+  /* ─── ANNUAL CHILD DEMOGRAPHICS CHARTS (FY21–FY25) ─── */
+
+  /* ── cd_c1: Annual Census bar + line ── */
+  (function(){
+    var validIdx=[0,2,3,4]; // FY21,FY23,FY24,FY25 (skip FY22)
+    var labels=cdYears.map(function(y,i){return cdTotal[i]===null?y+' *':y;});
+    var vals=cdTotal.map(function(v){return v===null?null:v;});
+    new Chart(document.getElementById('cd_c1'),{type:'bar',
+      data:{labels:labels,datasets:[
+        {type:'bar',label:'Active Children',data:vals,
+          backgroundColor:vals.map(function(v,i){return v===null?'rgba(136,135,128,0.3)':'rgba(59,139,212,0.55)';}),
+          borderColor:vals.map(function(v,i){return v===null?'#888780':'#3B8BD4';}),
+          borderWidth:1.5,borderRadius:5},
+        {type:'line',label:'Trend',data:vals,
+          borderColor:'#0F6E56',backgroundColor:'transparent',fill:false,
+          tension:0.35,pointRadius:5,pointBackgroundColor:vals.map(function(v){return v===null?'transparent':'#0F6E56';}),
+          borderWidth:2.5,spanGaps:false}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw===null?' Data not available':' '+c.raw+' children';}}}},
+        scales:{x:{ticks:{color:TC}},y:{beginAtZero:false,min:100,ticks:{color:TC}}}}
+    });
+    setupTableToggle('cd_c1',['Year','Total Children'],
+      [{label:'',values:cdYears.map(function(y,i){return cdTotal[i]===null?'n/a':cdTotal[i];})}]
+    );
+  })();
+
+  /* ── cd_c2: Annual Race stacked bar (skip FY22) ── */
+  (function(){
+    var validLabels=['FY21','FY23','FY24','FY25'];
+    var validIdx=[0,2,3,4];
+    var raceData=dRK.map(function(k,ri){
+      return {
+        label:k,
+        data:validIdx.map(function(yi){return cdRace[yi][ri]===null?0:cdRace[yi][ri];}),
+        backgroundColor:dRC[ri],borderWidth:0.5,borderColor:'rgba(0,0,0,0.1)'
+      };
+    });
+    new Chart(document.getElementById('cd_c2'),{type:'bar',
+      data:{labels:validLabels,datasets:raceData},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},color:TC,padding:8}},
+          tooltip:{mode:'index',intersect:false}},
+        scales:{x:{stacked:true,ticks:{color:TC}},y:{stacked:true,ticks:{color:TC}}}}
+    });
+    setupTableToggle('cd_c2',['Race/Ethnicity'].concat(validLabels),
+      dRK.map(function(k,ri){return {label:k,values:validIdx.map(function(yi){return cdRace[yi][ri]===null?'n/a':cdRace[yi][ri];})};})
+    );
+  })();
+
+  /* ── cd_c3: Annual Petition types (skip FY22) ── */
+  (function(){
+    var validLabels=['FY21','FY23','FY24','FY25'];
+    var validIdx=[0,2,3,4];
+    var petKeys=['Adoption','FC/Avail','FC/Court','FC/18+','FG','FN'];
+    var petColors=['#3B8BD4','#185FA5','#639922','#3B6D11','#BA7517','#A32D2D'];
+    var petData=petKeys.map(function(k,pi){
+      return {
+        label:k,
+        data:validIdx.map(function(yi){return cdPets[yi][pi]===null?0:cdPets[yi][pi];}),
+        backgroundColor:petColors[pi],borderWidth:0.5,borderColor:'rgba(0,0,0,0.1)'
+      };
+    });
+    new Chart(document.getElementById('cd_c3'),{type:'bar',
+      data:{labels:validLabels,datasets:petData},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},color:TC,padding:8}},
+          tooltip:{mode:'index',intersect:false}},
+        scales:{x:{stacked:true,ticks:{color:TC}},y:{stacked:true,ticks:{color:TC}}}}
+    });
+    setupTableToggle('cd_c3',['Petition'].concat(validLabels),
+      petKeys.map(function(k,pi){return {label:k,values:validIdx.map(function(yi){return cdPets[yi][pi]===null?'n/a':cdPets[yi][pi];})};})
+    );
+  })();
+
+  /* ─── VOLUNTEER DEMOGRAPHICS CHARTS ─── */
+
+  /* ── v_c1: Headcount trend (bar + line) ── */
+  var vHeadChart=new Chart(document.getElementById('v_c1'),{type:'bar',
+    data:{labels:vYears,datasets:[
+      {type:'bar',label:'Active Volunteers',data:vTotal,
+        backgroundColor:'rgba(59,139,212,0.55)',borderColor:'#3B8BD4',borderWidth:1.5,borderRadius:5},
+      {type:'line',label:'Trend',data:vTotal,
+        borderColor:'#0F6E56',backgroundColor:'transparent',fill:false,
+        tension:0.35,pointRadius:5,pointBackgroundColor:'#0F6E56',borderWidth:2.5,borderDash:[]}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
+        if(c.datasetIndex===0) return ' '+c.raw+' volunteers';
+        return null;
+      }}}},
+      scales:{
+        x:{ticks:{color:TC},grid:{display:false}},
+        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,min:100,suggestedMax:140}
+      }}
+  });
+  document.getElementById('v_c1').style.cursor='pointer';
+  document.getElementById('v_c1').addEventListener('click',function(e){
+    var yi=getClickIndex(vHeadChart,e);
+    if(yi<0)return;
+    var yr=vYears[yi],tot=vTotal[yi];
+    var prevTot=yi>0?vTotal[yi-1]:null;
+    var chg=prevTot!==null?tot-prevTot:null;
+    var fem=vFemale[yi],mal=vMale[yi];
+    var femPct=Math.round(fem/tot*100);
+    var white=vRace[yi][0],nonWhite=tot-white;
+    var nonWPct=Math.round(nonWhite/tot*100);
+    var anchor=e.target.closest('.card')||e.target.parentElement;
+    openDemoDrill(anchor,yr+' — Volunteer snapshot','Active roster: '+tot+' volunteers',function(body){
+      body.innerHTML=
+        '<div class="drill-kpi-bar n4">'
+        +kpi('Active Volunteers',tot,yr,chg!==null?(chg>=0?'+'+chg:chg)+' vs prior year':null,chg!==null?(chg>=0?'up':'dn'):null)
+        +kpi('Female / Male',fem+' / '+mal,femPct+'% female',null,null)
+        +kpi('Non-White',nonWhite,nonWPct+'% of corps',null,nonWPct>50?'up':null)
+        +kpi('New Volunteers',yi===4?'23':'—','0–1 yr tenure (FY25)',null,null)
+        +'</div>'
+        +'<div class="drill-callout">In <strong>'+yr+'</strong>, CASA had <strong>'+tot+'</strong> active volunteers. The corps was '+femPct+'% female and '+nonWPct+'% non-white — reflecting '+(nonWPct>=50?'majority diverse composition, a milestone reached in FY25.':'growing diversity from '+Math.round((vTotal[0]-vRace[0][0])/vTotal[0]*100)+'% non-white in FY21.')+'</div>'
+        +'<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Race &amp; Ethnicity</div><div class="cw" style="height:200px"><canvas id="v_drill_race"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Age Distribution</div><div class="cw" style="height:200px"><canvas id="v_drill_age"></canvas></div></div></div>';
+      new Chart(document.getElementById('v_drill_race'),{type:'doughnut',
+        data:{labels:vRaceLabels,datasets:[{data:vRace[yi],backgroundColor:vRaceC,borderWidth:2,borderColor:BC}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
+          tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/tot*100)+'%)';}}}}}});
+      return new Chart(document.getElementById('v_drill_age'),{type:'bar',
+        data:{labels:vAgeLabels,datasets:[{data:vAge[yi],backgroundColor:vAgeC,borderRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' volunteers ('+Math.round(c.raw/tot*100)+'%)';}}}},
+          scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true}}}});
+    });
+  });
+
+  /* ── v_c2: Age distribution grouped bar ── */
+  var vAgeChart=new Chart(document.getElementById('v_c2'),{type:'bar',
+    data:{labels:vYears,datasets:vAgeLabels.map(function(lbl,i){return {
+      label:lbl,data:vAge.map(function(yr){return yr[i];}),
+      backgroundColor:vAgeC[i],borderRadius:3
+    };})},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{stacked:false,ticks:{color:TC},grid:{display:false}},
+        y:{stacked:false,ticks:{color:TC},grid:{color:GC},beginAtZero:true}
+      }}
+  });
+  mkToggleLeg('v_aleg',vAgeChart,vAgeLabels,vAgeC);
+  document.getElementById('v_c2').style.cursor='pointer';
+  document.getElementById('v_c2').addEventListener('click',function(e){
+    var yi=getClickIndex(vAgeChart,e);
+    if(yi<0)return;
+    var yr=vYears[yi],tot=vTotal[yi],ages=vAge[yi];
+    var dominant=vAgeLabels[ages.indexOf(Math.max.apply(null,ages))];
+    var anchor=e.target.closest('.card')||e.target.parentElement;
+    openDemoDrill(anchor,yr+' — Age distribution','Total volunteers: '+tot,function(body){
+      body.innerHTML=
+        '<div class="drill-callout">In <strong>'+yr+'</strong>, the largest age group was <strong>'+dominant+'</strong> with '+Math.max.apply(null,ages)+' volunteers ('+Math.round(Math.max.apply(null,ages)/tot*100)+'%). The 50+ cohort combined is '+( ages[3]+ages[4])+' volunteers — '+(Math.round((ages[3]+ages[4])/tot*100))+'% of the corps.</div>'
+        +'<div class="cw" style="height:220px"><canvas id="v_drill_agebar"></canvas></div>';
+      return new Chart(document.getElementById('v_drill_agebar'),{type:'bar',
+        data:{labels:vAgeLabels,datasets:[{data:ages,backgroundColor:vAgeC,borderRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' volunteers ('+Math.round(c.raw/tot*100)+'%)';}}}},
+          scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true}}}});
+    });
+  });
+
+  /* ── v_c3: Gender stacked bar ── */
+  var vGenderChart=new Chart(document.getElementById('v_c3'),{type:'bar',
+    data:{labels:vYears,datasets:[
+      {label:'Female',data:vFemale,backgroundColor:'#D4697A',borderRadius:3,stack:'g'},
+      {label:'Male',data:vMale,backgroundColor:'#3B8BD4',borderRadius:3,stack:'g'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:TC,boxWidth:14}},
+        tooltip:{mode:'index',intersect:false,callbacks:{
+          afterBody:function(items){
+            var total=items.reduce(function(s,it){return s+it.raw;},0);
+            var pct=Math.round(items[0].raw/total*100);
+            return 'Female: '+pct+'%  |  Male: '+(100-pct)+'%';
+          }
+        }}
+      },
+      scales:{
+        x:{stacked:true,ticks:{color:TC},grid:{display:false}},
+        y:{stacked:true,ticks:{color:TC},grid:{color:GC},beginAtZero:true}
+      }}
+  });
+  document.getElementById('v_c3').style.cursor='pointer';
+  document.getElementById('v_c3').addEventListener('click',function(e){
+    var yi=getClickIndex(vGenderChart,e);
+    if(yi<0)return;
+    var yr=vYears[yi],fem=vFemale[yi],mal=vMale[yi],tot=vTotal[yi];
+    var femPct=Math.round(fem/tot*100);
+    var natAvg=84; // ~84% female nationally for CASA
+    var anchor=e.target.closest('.card')||e.target.parentElement;
+    openDemoDrill(anchor,yr+' — Gender breakdown','Active volunteers: '+tot,function(body){
+      body.innerHTML=
+        '<div class="drill-kpi-bar n4">'
+        +kpi('Female',fem,femPct+'% of corps',null,null)
+        +kpi('Male',mal,(100-femPct)+'% of corps',null,null)
+        +kpi('vs. National Avg',natAvg+'% female','Typical CASA program',null,null)
+        +kpi('Year',yr,'FY snapshot',null,null)
+        +'</div>'
+        +'<div class="drill-callout">CASA\'s <strong>'+femPct+'% female</strong> composition in '+yr+' is '+(femPct<natAvg?'slightly below':'near')+ ' the national average for CASA programs (~'+natAvg+'% female). The '+mal+' male volunteers ('+(100-femPct)+'%) are '+(100-femPct>14?'above':'near')+ ' the national average of ~14% male.</div>'
+        +'<div class="cw" style="height:180px;max-width:300px;margin:0 auto;"><canvas id="v_drill_gendnut"></canvas></div>';
+      return new Chart(document.getElementById('v_drill_gendnut'),{type:'doughnut',
+        data:{labels:['Female','Male'],datasets:[{data:[fem,mal],backgroundColor:['#D4697A','#3B8BD4'],borderWidth:2,borderColor:BC}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:13},color:TC,padding:14}},
+          tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/tot*100)+'%)';}}}}}});
+    });
+  });
+
+  /* ── v_c4: Race/Ethnicity stacked bar ── */
+  var vRaceChart=new Chart(document.getElementById('v_c4'),{type:'bar',
+    data:{labels:vYears,datasets:vRaceLabels.map(function(lbl,i){return {
+      label:lbl,data:vRace.map(function(yr){return yr[i];}),
+      backgroundColor:vRaceC[i],stack:'r'
+    };})},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{mode:'index',intersect:false,callbacks:{
+          afterBody:function(items){
+            var total=items.reduce(function(s,it){return s+it.raw;},0);
+            return 'Total: '+total;
+          }
+        }}
+      },
+      scales:{
+        x:{stacked:true,ticks:{color:TC},grid:{display:false}},
+        y:{stacked:true,ticks:{color:TC},grid:{color:GC},beginAtZero:true}
+      }}
+  });
+  mkToggleLeg('v_rleg',vRaceChart,vRaceLabels,vRaceC);
+  document.getElementById('v_c4').style.cursor='pointer';
+  document.getElementById('v_c4').addEventListener('click',function(e){
+    var yi=getClickIndex(vRaceChart,e);
+    if(yi<0)return;
+    var yr=vYears[yi],races=vRace[yi],tot=vTotal[yi];
+    var white=races[0],nonWhite=tot-white,nonWPct=Math.round(nonWhite/tot*100);
+    var anchor=e.target.closest('.card')||e.target.parentElement;
+    openDemoDrill(anchor,yr+' — Race &amp; ethnicity breakdown','Active volunteers: '+tot,function(body){
+      var fy21nonW=Math.round((vTotal[0]-vRace[0][0])/vTotal[0]*100);
+      body.innerHTML=
+        '<div class="drill-kpi-bar n4">'
+        +kpi('Non-White',nonWhite,nonWPct+'% of corps',(nonWPct-fy21nonW>=0?'+':'')+(nonWPct-fy21nonW)+'pts vs FY21',nonWPct>=fy21nonW?'up':'dn')
+        +kpi('White',white,Math.round(white/tot*100)+'%',null,null)
+        +kpi('Largest non-White group',vRaceLabels[races.slice(1).indexOf(Math.max.apply(null,races.slice(1)))+1],Math.max.apply(null,races.slice(1))+' volunteers',null,null)
+        +kpi('Year',yr,'FY snapshot',null,null)
+        +'</div>'
+        +'<div class="drill-callout">In <strong>'+yr+'</strong>, non-white volunteers represent <strong>'+nonWPct+'%</strong> of the corps — up from '+fy21nonW+'% in FY21. This represents meaningful progress toward demographic alignment with the children CASA serves, where non-white children make up ~68% of the caseload.</div>'
+        +'<div class="cw" style="height:200px"><canvas id="v_drill_racenut"></canvas></div>';
+      return new Chart(document.getElementById('v_drill_racenut'),{type:'doughnut',
+        data:{labels:vRaceLabels,datasets:[{data:races,backgroundColor:vRaceC,borderWidth:2,borderColor:BC}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
+          tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/tot*100)+'%)';}}}}}});
+    });
+  });
+
+  /* ── v_c5: Education grouped bar ── */
+  var vEduChart=new Chart(document.getElementById('v_c5'),{type:'bar',
+    data:{labels:vYears,datasets:vEduLabels.map(function(lbl,i){return {
+      label:lbl,data:vEdu.map(function(yr){return yr[i];}),
+      backgroundColor:vEduC[i],borderRadius:3
+    };})},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{stacked:false,ticks:{color:TC},grid:{display:false}},
+        y:{stacked:false,ticks:{color:TC},grid:{color:GC},beginAtZero:true}
+      }}
+  });
+  mkToggleLeg('v_eleg',vEduChart,vEduLabels,vEduC);
+
+  /* ── v_c6: Non-English languages horizontal bar ── */
+  new Chart(document.getElementById('v_c6'),{type:'bar',
+    data:{labels:vLangLabels,datasets:[{
+      label:'Speakers',data:vLangVals,indexAxis:'y',
+      backgroundColor:['#0F6E56','#3B8BD4','#BA7517','#534AB7','#A32D2D','#BA7517','#3B8BD4','#888780','#888780'],
+      borderRadius:4
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' speakers';}}}},
+      scales:{
+        x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},
+        y:{ticks:{color:TC,font:{size:11}},grid:{display:false}}
+      }}
+  });
+
+  /* ── v_c7: Years of Service bar ── */
+  new Chart(document.getElementById('v_c7'),{type:'bar',
+    data:{labels:vYosLabels,datasets:[{
+      label:'Volunteers',data:vYosVals,
+      backgroundColor:vYosVals.map(function(v,i){
+        if(i<=2) return 'rgba(186,117,23,0.7)';
+        if(i<=4) return 'rgba(59,139,212,0.7)';
+        if(i<=7) return 'rgba(15,110,86,0.85)';
+        return 'rgba(83,74,183,0.7)';
+      }),
+      borderRadius:5
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' volunteers';}}}},
+      scales:{
+        x:{ticks:{color:TC},grid:{display:false}},
+        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true}
+      }}
+  });
+
+  /* ── Volunteer table toggles ── */
+  setupTableToggle('v_c1', ['Metric'].concat(vYears),
+    [{label:'Active Volunteers',values:vTotal}]
+  );
+  setupTableToggle('v_c2', ['Age Group'].concat(vYears),
+    vAgeLabels.map(function(lbl,i){return {label:lbl,values:vAge.map(function(yr){return yr[i];})};})
+  );
+  setupTableToggle('v_c3', ['Gender'].concat(vYears),
+    [{label:'Female',values:vFemale},{label:'Male',values:vMale}]
+  );
+  setupTableToggle('v_c4', ['Race/Ethnicity'].concat(vYears),
+    vRaceLabels.map(function(lbl,i){return {label:lbl,values:vRace.map(function(yr){return yr[i];})};})
+  );
+  setupTableToggle('v_c5', ['Education'].concat(vYears),
+    vEduLabels.map(function(lbl,i){return {label:lbl,values:vEdu.map(function(yr){return yr[i];})};})
+  );
+  setupTableToggle('v_c6', ['Language','Speakers (FY25)'],
+    vLangLabels.map(function(lbl,i){return {label:lbl,values:[vLangVals[i]]};})
+  );
+  setupTableToggle('v_c7', ['Years of Service','FY25 Count'],
+    vYosLabels.map(function(lbl,i){return {label:lbl,values:[vYosVals[i]]};})
+  );
 
   /* ── PRINT DATE LABELS ── */
   var today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-  ['ph_date_demo','ph_date_fund'].forEach(function(id){
+  ['ph_date_demo','ph_date_fund','ph_date_vol','ph_date_zip'].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.textContent = 'Printed '+today;
   });
@@ -1792,6 +2943,117 @@ function init() {
   /* ── ANNOTATIONS ── */
   initAnnotations();
 }
+
+/* ═══════════════════════════════════════════════
+   ZIP CODE CHARTS
+═══════════════════════════════════════════════ */
+(function initZipCharts(){
+  var TC = getComputedStyle(document.documentElement).getPropertyValue('--text') || '#1a1a2e';
+  var GC = 'rgba(128,128,128,0.12)';
+
+  /* Use global zip data */
+  var zYears   = zipYears;
+  var zLabels  = zipCodes;
+  var zAllYrs  = zipCounts;
+  var zTotYrs  = zipYears;
+  var zTotVals = zipTotals;
+
+  /* ── Trend chart — top 5 zips (all lines solid, all data verified) ── */
+  var zTrendZips   = ['07008','08901','08817','08861','07001'];
+  var zTrendVals   = {'07008':[21,22,29,28,30],'08901':[27,27,27,20,14],'08817':[8,8,11,18,25],'08861':[16,16,14,14,12],'07001':[5,11,12,12,13]};
+  var zTrendColors = ['#3B8BD4','#0F6E56','#00838F','#BA7517','#534AB7'];
+
+  /* ── Colour palette for 5 years ── */
+  var zYrColors = [
+    'rgba(59,139,212,0.65)',
+    'rgba(15,110,86,0.70)',
+    'rgba(0,131,143,0.70)',
+    'rgba(186,117,23,0.70)',
+    'rgba(83,74,183,0.75)'
+  ];
+
+  /* ── z_c1: Top 10 zips grouped bar (all 5 years) ── */
+  new Chart(document.getElementById('z_c1'),{type:'bar',
+    data:{labels:zLabels,datasets:zYears.map(function(yr,yi){
+      return {
+        label:yr,
+        data:zAllYrs.map(function(row){return row[yi];}),
+        backgroundColor:zYrColors[yi],
+        borderRadius:2
+      };
+    })},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:TC,font:{size:11},boxWidth:12}},
+        tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}
+      },
+      scales:{
+        x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},
+        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true,
+          title:{display:true,text:'Children Assigned',color:TC,font:{size:11}}}
+      }}
+  });
+
+  /* ── z_c2: YOY trend top 5 (all solid lines) ── */
+  var z2Datasets = zTrendZips.map(function(zip,i){
+    return {
+      label: zip,
+      data: zTrendVals[zip],
+      borderColor: zTrendColors[i],
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      pointRadius: 4,
+      pointBackgroundColor: zTrendColors[i],
+      tension: 0.3
+    };
+  });
+  new Chart(document.getElementById('z_c2'),{type:'line',
+    data:{labels:zTotYrs,datasets:z2Datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:TC,font:{size:11},boxWidth:14}},
+        tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}
+      },
+      scales:{
+        x:{ticks:{color:TC},grid:{display:false}},
+        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true,
+          title:{display:true,text:'Children Assigned',color:TC,font:{size:11}}}
+      }}
+  });
+
+  /* ── z_c3: Annual totals bar ── */
+  var zTotPeak = Math.max.apply(null, zTotVals);
+  new Chart(document.getElementById('z_c3'),{type:'bar',
+    data:{labels:zTotYrs,datasets:[{
+      label:'Total Children',
+      data:zTotVals,
+      backgroundColor:zTotVals.map(function(v){return v===zTotPeak?'rgba(0,131,143,0.9)':'rgba(0,131,143,0.55)';}),
+      borderRadius:5
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children assigned';}}}
+      },
+      scales:{
+        x:{ticks:{color:TC},grid:{display:false}},
+        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,
+          suggestedMin:140,
+          title:{display:true,text:'Children Assigned',color:TC,font:{size:11}}}
+      }}
+  });
+
+  /* ── table toggles for zip charts ── */
+  setupTableToggle('z_c1', ['Zip Code'].concat(zYears),
+    zLabels.map(function(z,i){return {label:z,values:zAllYrs[i]};})
+  );
+  setupTableToggle('z_c2', ['Zip Code'].concat(zTotYrs),
+    zTrendZips.map(function(zip){return {label:zip,values:zTrendVals[zip]};})
+  );
+  setupTableToggle('z_c3', ['Year','Children Assigned'],
+    zTotYrs.map(function(yr,i){return {label:yr,values:[zTotVals[i]]};})
+  );
+})();
 
 init();
 initExplorer();
