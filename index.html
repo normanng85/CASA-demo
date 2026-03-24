@@ -536,11 +536,6 @@
     </div>
 
     <div class="section-title">Age Distribution</div>
-    <div class="three">
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jul 2025</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c4','age-jul-2025')">⬇ PNG</button></div></div><div class="chart-hint">Start-of-period snapshot — compare to Jan and Feb for age shift over time</div><div class="cw" style="height:220px"><canvas id="d_c4"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Jan 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c5','age-jan-2026')">⬇ PNG</button></div></div><div class="chart-hint">Mid-year snapshot · infants (0–3) growing as the period progresses</div><div class="cw" style="height:220px"><canvas id="d_c5"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Age groups — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c6','age-feb-2026')">⬇ PNG</button></div></div><div class="chart-hint">Most recent snapshot · 0–3 is the largest and fastest-growing age band</div><div class="cw" style="height:220px"><canvas id="d_c6"></canvas></div></div>
-    </div>
     <div class="card"><div class="chart-toolbar"><div class="card-title">Age group trend over time — 4-year bands</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c7','age-trend')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_agleg"></div><div class="cw" style="height:260px"><canvas id="d_c7"></canvas></div></div>
 
     <div class="section-title">Age Detail — Individual Ages × Month</div>
@@ -579,6 +574,56 @@
       <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Census — Total Active Children</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c1','annual-census')">⬇ PNG</button></div></div><div class="chart-hint">FY21–FY25 annual active caseload</div><div class="cw" style="height:220px"><canvas id="cd_c1"></canvas></div></div>
       <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Race Distribution</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c2','annual-race')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c2"></canvas></div></div>
       <div class="card"><div class="chart-toolbar"><div class="card-title">Petition Types — Annual</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c3','annual-petitions')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c3"></canvas></div></div>
+    </div>
+
+    <!-- ▸ CASE CLOSURE OUTCOMES FY21–FY25 -->
+    <div class="section-title">Case Closure Outcomes — FY21 to FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">
+      Tracks how cases were resolved each fiscal year. A single "closed case" may cover multiple children. The totals below reflect cases closed, not individual children.
+    </p>
+
+    <div class="drill-kpi-bar n4" style="margin-bottom:16px;">
+      <div class="drill-kpi"><div class="dk-lbl">FY24 peak closures</div><div class="dk-val">67</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Total closed FY21–FY25</div><div class="dk-val">271</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Avg reunification rate</div><div class="dk-val">~46%</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Highest reunification (FY25)</div><div class="dk-val">62%</div></div>
+    </div>
+
+    <div class="two">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Closure reasons by year — stacked</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cc_c1','closure-stacked')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">Click legend pills to show/hide categories · hover for counts</div>
+        <div class="tleg" id="cc_leg1"></div>
+        <div class="cw" style="height:260px"><canvas id="cc_c1"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Top 3 closure reasons — trend lines</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cc_c2','closure-trends')">⬇ PNG</button></div>
+        </div>
+        <div class="chart-hint">Reunification dominates; Adoption surged in FY24; KLG declining</div>
+        <div class="tleg" id="cc_leg2"></div>
+        <div class="cw" style="height:260px"><canvas id="cc_c2"></canvas></div>
+      </div>
+    </div>
+
+    <div class="collapse-wrap">
+      <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
+        <span class="collapse-label">Key Insights — Case Closure Trends</span>
+        <span class="collapse-chev">▾</span>
+      </button>
+      <div class="collapse-body">
+        <ul style="margin:0;padding-left:1.2em;line-height:1.85;color:var(--text);font-size:13.5px;">
+          <li><strong>Reunification is the dominant outcome</strong> — consistently the most common closure reason across all five years, ranging from 34% (FY24) to 62% (FY25). The FY25 spike suggests stronger family stability outcomes.</li>
+          <li><strong>Adoption trended upward through FY24</strong>, reaching a five-year high of 22 cases (33% of closures), then declined to 8 in FY25. This may reflect a cohort of long-term cases that reached finalization.</li>
+          <li><strong>KLG / Guardian placements are declining</strong> — peaked at 14 cases (22%) in FY22 and have dropped to just 3 (6%) in FY25. This shift may reflect broader policy emphasis on family reunification.</li>
+          <li><strong>Total case closures fluctuate</strong> — from a low of 36 in FY21 to a high of 67 in FY24, then back to 50 in FY25. This reflects natural variation in caseload turnover, not a simple trend.</li>
+          <li><strong>"Judge Released CASA" cases are growing</strong> — 1 case in FY21 to 7 in FY24, suggesting judges are proactively releasing CASA oversight as families stabilize while cases remain legally open.</li>
+        </ul>
+      </div>
     </div>
 
     <footer>Child Demographics Summary – Active Cases &nbsp;·&nbsp; Jul 2025 – Feb 2026 &nbsp;·&nbsp; Historical FY21–FY25</footer>
@@ -910,8 +955,8 @@
         <div class="collapse-body">
           <div class="insight-grid">
             <div class="insight positive"><div class="itag">Strength — diversity trajectory</div><p>Non-white volunteers grew from 39% in FY21 to 52% in FY25 — a 13-point shift in four years. White volunteers fell from 61% to 48%, while Asian representation grew from 20% to 19% and Black/African American volunteers grew from 8% to 19%. This trajectory represents meaningful progress toward demographic alignment with the children CASA serves.</p></div>
-            <div class="insight watch"><div class="itag">Watch — headcount plateau</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. New cohort recruitment (0–1 year volunteers: 23 in FY25) needs to offset annual attrition to avoid a sustained downward trend. The 3–7 year tenure band (56 volunteers) is the largest segment and represents the core experienced corps.</p></div>
-            <div class="insight positive"><div class="itag">Strength — volunteer retention</div><p>81% of FY25 volunteers have 2+ years of service (98 of 121), and 18 volunteers have 10+ years. This deep bench of experienced advocates is a critical organizational asset — long-tenured volunteers typically carry the most complex cases and provide informal mentorship to newer recruits.</p></div>
+            <div class="insight watch"><div class="itag">Watch — headcount plateau</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. New cohort recruitment (0–1 year volunteers: 23 in FY25) needs to offset annual attrition to avoid a sustained downward trend. The 3–7 year tenure band (58 volunteers) is the largest segment and represents the core experienced corps.</p></div>
+            <div class="insight positive"><div class="itag">Strength — volunteer retention</div><p>81% of FY25 volunteers have 2+ years of service (98 of 121), and 7 volunteers have 10+ years. This deep bench of experienced advocates is a critical organizational asset — long-tenured volunteers typically carry the most complex cases and provide informal mentorship to newer recruits.</p></div>
             <div class="insight neutral"><div class="itag">Stable — gender composition</div><p>The volunteer corps has maintained ~83% female since FY21, consistent with national CASA averages. While gender diversity is limited, this stability suggests reliable recruitment pipelines. The 21 male volunteers (17%) are slightly above the national CASA average of ~14% male.</p></div>
             <div class="insight positive"><div class="itag">Strength — language assets</div><p>18 Spanish speakers, 10 Hindi speakers, 4 Urdu speakers, and 4 ASL users provide direct language access for a significant share of the caseload. With 17–18% of active children identified as Hispanic/Latino, Spanish language capacity among volunteers is particularly valuable for family communication and court advocacy.</p></div>
             <div class="insight neutral"><div class="itag">Context — vs. National CASA averages</div><p>Nationally, CASA programs average ~84% female volunteers and ~16% male — this program's 83%/17% split is closely aligned. Non-white volunteer representation nationally is approximately 25–30% and growing; at 52% non-white in FY25, this program substantially exceeds the national average, reflecting intentional diversity recruitment. Nationally, ~65–70% of CASA volunteers hold a bachelor's degree or higher; this program's ~76% with Bachelors or higher in FY25 is above average. The national volunteer-to-child ratio averages roughly 1:1 to 1:2; this program's ratio supports its full caseload. (Source: National CASA/GAL Association annual data.)</p></div>
@@ -1287,15 +1332,14 @@ function band(r){ return [r[0]+r[1]+r[2]+r[3],r[4]+r[5]+r[6]+r[7],r[8]+r[9]+r[10
 var dBS = dABL.map(function(_,bi){ return dRA.map(function(m){ return band(m)[bi]; }); });
 
 /* ═══ ANNUAL CHILD DEMOGRAPHICS (FY21–FY25) ═══ */
-// FY22 race data not recoverable from source file; shown as null
 var cdYears  = ['FY21','FY22','FY23','FY24','FY25'];
-var cdTotal  = [168, null, 203, 191, 167];  // null = not recoverable
-var cdFemale = [null, null, 97, 92, 84];
-var cdMale   = [null, null, 106, 99, 83];
+var cdTotal  = [168, 200, 203, 191, 167];
+var cdFemale = [null, 97, 97, 92, 84];
+var cdMale   = [null, 103, 106, 99, 83];
 // Race: [Asian, Black/Afr.Am., Hispanic/Latino, Two or More, Unknown, White]
 var cdRace   = [
   [12, 29, 34, 23, 4,  66],   // FY21
-  [null,null,null,null,null,null],  // FY22 — unrecoverable
+  [11, 39, 31, 26, 5,  88],   // FY22
   [13, 43, 37, 31, 2,  77],   // FY23
   [ 6, 45, 34, 31, 0,  75],   // FY24 (no Unknown row in source)
   [ 9, 48, 27, 23, 4,  56],   // FY25
@@ -1303,7 +1347,7 @@ var cdRace   = [
 // Petitions: [Adoption, FC/Avail, FC/court id, FC/18+, FG, FN]
 var cdPets   = [
   [1,  8, 96, 12, 34, 147],   // FY21
-  [null,null,null,null,null,null],  // FY22
+  [1, 13,112, 11, 37, 172],   // FY22
   [1, 25, 88, 12, 38, 160],   // FY23
   [1, 22, 75, 12, 34, 157],   // FY24
   [1, 16, 60,  9, 29, 134],   // FY25
@@ -2130,9 +2174,6 @@ function init() {
   /* ── d_c3: Race doughnut Feb 2026 ── */
   new Chart(document.getElementById('d_c3'),{type:'doughnut',data:{labels:dRK,datasets:[{data:dRD.map(function(d){return d[7];}),backgroundColor:dRC,borderWidth:2,borderColor:BC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:10,color:TC}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
 
-  /* ── d_c4/5/6: Age band snapshots ── */
-  function ageBar(id,mi){var total=dT[mi];new Chart(document.getElementById(id),{type:'bar',data:{labels:dABL,datasets:[{label:'Children',data:band(dRA[mi]),backgroundColor:dABC,borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},scales:{x:{ticks:{color:TC,font:{size:12}},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});}
-  ageBar('d_c4',0);ageBar('d_c5',6);ageBar('d_c6',7);
 
   /* ── d_c7: Age trend — click point → full 20-age breakdown ── */
   // Full age labels for drill
@@ -2614,74 +2655,145 @@ function init() {
 
   /* ── cd_c1: Annual Census bar + line ── */
   (function(){
-    var validIdx=[0,2,3,4]; // FY21,FY23,FY24,FY25 (skip FY22)
-    var labels=cdYears.map(function(y,i){return cdTotal[i]===null?y+' *':y;});
-    var vals=cdTotal.map(function(v){return v===null?null:v;});
+    var labels=cdYears;
+    var vals=cdTotal;
     new Chart(document.getElementById('cd_c1'),{type:'bar',
       data:{labels:labels,datasets:[
         {type:'bar',label:'Active Children',data:vals,
-          backgroundColor:vals.map(function(v,i){return v===null?'rgba(136,135,128,0.3)':'rgba(59,139,212,0.55)';}),
-          borderColor:vals.map(function(v,i){return v===null?'#888780':'#3B8BD4';}),
+          backgroundColor:'rgba(59,139,212,0.55)',borderColor:'#3B8BD4',
           borderWidth:1.5,borderRadius:5},
         {type:'line',label:'Trend',data:vals,
           borderColor:'#0F6E56',backgroundColor:'transparent',fill:false,
-          tension:0.35,pointRadius:5,pointBackgroundColor:vals.map(function(v){return v===null?'transparent':'#0F6E56';}),
-          borderWidth:2.5,spanGaps:false}
+          tension:0.35,pointRadius:5,pointBackgroundColor:'#0F6E56',
+          borderWidth:2.5}
       ]},
       options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw===null?' Data not available':' '+c.raw+' children';}}}},
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},
         scales:{x:{ticks:{color:TC}},y:{beginAtZero:false,min:100,ticks:{color:TC}}}}
     });
     setupTableToggle('cd_c1',['Year','Total Children'],
-      [{label:'',values:cdYears.map(function(y,i){return cdTotal[i]===null?'n/a':cdTotal[i];})}]
+      [{label:'',values:cdYears.map(function(y,i){return cdTotal[i];})}]
     );
   })();
 
-  /* ── cd_c2: Annual Race stacked bar (skip FY22) ── */
+  /* ── cd_c2: Annual Race stacked bar ── */
   (function(){
-    var validLabels=['FY21','FY23','FY24','FY25'];
-    var validIdx=[0,2,3,4];
     var raceData=dRK.map(function(k,ri){
       return {
         label:k,
-        data:validIdx.map(function(yi){return cdRace[yi][ri]===null?0:cdRace[yi][ri];}),
+        data:cdRace.map(function(yr){return yr[ri]===null?0:yr[ri];}),
         backgroundColor:dRC[ri],borderWidth:0.5,borderColor:'rgba(0,0,0,0.1)'
       };
     });
     new Chart(document.getElementById('cd_c2'),{type:'bar',
-      data:{labels:validLabels,datasets:raceData},
+      data:{labels:cdYears,datasets:raceData},
       options:{responsive:true,maintainAspectRatio:false,
         plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},color:TC,padding:8}},
           tooltip:{mode:'index',intersect:false}},
         scales:{x:{stacked:true,ticks:{color:TC}},y:{stacked:true,ticks:{color:TC}}}}
     });
-    setupTableToggle('cd_c2',['Race/Ethnicity'].concat(validLabels),
-      dRK.map(function(k,ri){return {label:k,values:validIdx.map(function(yi){return cdRace[yi][ri]===null?'n/a':cdRace[yi][ri];})};})
+    setupTableToggle('cd_c2',['Race/Ethnicity'].concat(cdYears),
+      dRK.map(function(k,ri){return {label:k,values:cdRace.map(function(yr){return yr[ri]===null?'n/a':yr[ri];})};})
     );
   })();
 
-  /* ── cd_c3: Annual Petition types (skip FY22) ── */
+  /* ── cd_c3: Annual Petition types ── */
   (function(){
-    var validLabels=['FY21','FY23','FY24','FY25'];
-    var validIdx=[0,2,3,4];
     var petKeys=['Adoption','FC/Avail','FC/Court','FC/18+','FG','FN'];
     var petColors=['#3B8BD4','#185FA5','#639922','#3B6D11','#BA7517','#A32D2D'];
     var petData=petKeys.map(function(k,pi){
       return {
         label:k,
-        data:validIdx.map(function(yi){return cdPets[yi][pi]===null?0:cdPets[yi][pi];}),
+        data:cdPets.map(function(yr){return yr[pi]===null?0:yr[pi];}),
         backgroundColor:petColors[pi],borderWidth:0.5,borderColor:'rgba(0,0,0,0.1)'
       };
     });
     new Chart(document.getElementById('cd_c3'),{type:'bar',
-      data:{labels:validLabels,datasets:petData},
+      data:{labels:cdYears,datasets:petData},
       options:{responsive:true,maintainAspectRatio:false,
         plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},color:TC,padding:8}},
           tooltip:{mode:'index',intersect:false}},
         scales:{x:{stacked:true,ticks:{color:TC}},y:{stacked:true,ticks:{color:TC}}}}
     });
-    setupTableToggle('cd_c3',['Petition'].concat(validLabels),
-      petKeys.map(function(k,pi){return {label:k,values:validIdx.map(function(yi){return cdPets[yi][pi]===null?'n/a':cdPets[yi][pi];})};})
+    setupTableToggle('cd_c3',['Petition'].concat(cdYears),
+      petKeys.map(function(k,pi){return {label:k,values:cdPets.map(function(yr){return yr[pi]===null?'n/a':yr[pi];})};})
+    );
+  })();
+
+  /* ─── CASE CLOSURE OUTCOME CHARTS ─── */
+  (function(){
+    var ccYears = ['FY21','FY22','FY23','FY24','FY25'];
+    var ccData = [
+      {label:'Reunification',        data:[16,33,19,23,31], color:'rgba(34,139,100,0.82)'},
+      {label:'Adoption',             data:[5, 8, 13,22, 8], color:'rgba(59,139,212,0.82)'},
+      {label:'KLG/Guardian',         data:[6, 14,13, 7, 3], color:'rgba(245,158,11,0.82)'},
+      {label:'Judge Released CASA',  data:[1,  2, 3, 7, 2], color:'rgba(139,92,246,0.82)'},
+      {label:'Aged Out at 21',       data:[1,  4, 0, 1, 6], color:'rgba(236,72,153,0.82)'},
+      {label:'Case Transferred',     data:[0,  2, 0, 4, 0], color:'rgba(14,165,233,0.82)'},
+      {label:'Signed Out',           data:[2,  0, 3, 3, 0], color:'rgba(239,68,68,0.72)'},
+      {label:'Other / Stabilization',data:[5,  2, 2, 0, 0], color:'rgba(148,163,184,0.72)'}
+    ];
+
+    /* cc_c1: Stacked bar */
+    var cc1 = new Chart(document.getElementById('cc_c1'),{
+      type:'bar',
+      data:{
+        labels:ccYears,
+        datasets:ccData.map(function(d){return{
+          label:d.label, data:d.data,
+          backgroundColor:d.color, borderColor:d.color.replace(/[\d.]+\)$/,'1)'),
+          borderWidth:1, borderRadius:3
+        };})
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{mode:'index',intersect:false,callbacks:{
+            footer:function(items){
+              var total=items.reduce(function(s,i){return s+(i.raw||0);},0);
+              return 'Total: '+total+' closures';
+            }
+          }}
+        },
+        scales:{
+          x:{stacked:true,ticks:{color:TC},grid:{display:false}},
+          y:{stacked:true,ticks:{color:TC},grid:{color:GC}}
+        }}
+    });
+    mkToggleLeg('cc_leg1', cc1, ccData.map(function(d){return d.label;}), ccData.map(function(d){return d.color.replace(/[\d.]+\)$/,'1)');}));
+
+    /* cc_c2: Trend lines — top 3 */
+    var top3 = ccData.slice(0,3);
+    var cc2 = new Chart(document.getElementById('cc_c2'),{
+      type:'line',
+      data:{
+        labels:ccYears,
+        datasets:top3.map(function(d){return{
+          label:d.label, data:d.data,
+          borderColor:d.color.replace(/[\d.]+\)$/,'1)'),
+          backgroundColor:d.color.replace(/[\d.]+\)$/,'0.12)'),
+          fill:false, tension:0.35,
+          pointRadius:5, pointBackgroundColor:d.color.replace(/[\d.]+\)$/,'1)'),
+          borderWidth:2.5
+        };})
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{mode:'index',intersect:false}
+        },
+        scales:{
+          x:{ticks:{color:TC},grid:{display:false}},
+          y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true}
+        }}
+    });
+    mkToggleLeg('cc_leg2', cc2, top3.map(function(d){return d.label;}), top3.map(function(d){return d.color.replace(/[\d.]+\)$/,'1)');}));
+
+    setupTableToggle('cc_c1',['Reason'].concat(ccYears),
+      ccData.map(function(d){return{label:d.label,values:d.data};})
+    );
+    setupTableToggle('cc_c2',['Reason'].concat(ccYears),
+      top3.map(function(d){return{label:d.label,values:d.data};})
     );
   })();
 
