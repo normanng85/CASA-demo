@@ -28,35 +28,37 @@
     body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:15px; line-height:1.5; }
 
     /* NAV */
-    nav { background:var(--surface); border-bottom:0.5px solid var(--border); display:flex; align-items:center; gap:10px; padding:0.75rem 1.5rem; position:sticky; top:0; z-index:100; flex-wrap:wrap; }
-    nav .brand { font-size:15px; font-weight:500; color:var(--text); white-space:nowrap; margin-right:4px; }
+    nav { background:var(--surface); border-bottom:2px solid var(--border); display:flex; align-items:center; gap:8px; padding:0.9rem 1.5rem; position:sticky; top:0; z-index:100; flex-wrap:wrap; box-shadow:0 2px 8px rgba(0,0,0,0.07); }
+    nav .brand { font-size:16px; font-weight:700; color:var(--text); white-space:nowrap; margin-right:8px; letter-spacing:-0.2px; }
+    nav .brand-sep { width:1px; height:28px; background:var(--border); margin-right:4px; }
 
     .nav-btn {
-      display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:500;
-      text-decoration:none; padding:7px 16px; border-radius:var(--radius-md);
-      border:1.5px solid var(--border); color:var(--text2); background:transparent;
+      display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600;
+      text-decoration:none; padding:9px 18px; border-radius:var(--radius-md);
+      border:2px solid var(--border); color:var(--text2); background:var(--surface2);
       cursor:pointer; transition:background .15s,color .15s,border-color .15s,box-shadow .15s; white-space:nowrap;
+      letter-spacing:0.1px;
     }
-    .nav-btn .icon { width:16px; height:16px; border-radius:4px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
-    .nav-btn:hover { background:var(--surface2); color:var(--text); border-color:rgba(0,0,0,0.2); }
+    .nav-btn .icon { width:20px; height:20px; border-radius:5px; background:var(--border); display:inline-flex; align-items:center; justify-content:center; font-size:12px; transition:background .15s; }
+    .nav-btn:hover { background:var(--surface); color:var(--text); border-color:rgba(0,0,0,0.25); box-shadow:0 2px 6px rgba(0,0,0,0.08); transform:translateY(-1px); }
 
-    .nav-btn.active-demo { background:#eef5fc; color:#185FA5; border-color:#3B8BD4; box-shadow:0 0 0 3px rgba(59,139,212,0.12); }
+    .nav-btn.active-demo { background:#ddeefa; color:#0d4a85; border-color:#3B8BD4; border-width:2px; box-shadow:0 2px 8px rgba(59,139,212,0.22),0 0 0 3px rgba(59,139,212,0.12); font-weight:700; }
     .nav-btn.active-demo .icon { background:#3B8BD4; color:#fff; }
-    .nav-btn.active-fund { background:#e8f4ef; color:#0B5240; border-color:#0F6E56; box-shadow:0 0 0 3px rgba(15,110,86,0.12); }
+    .nav-btn.active-fund { background:#d4eddf; color:#09402e; border-color:#0F6E56; border-width:2px; box-shadow:0 2px 8px rgba(15,110,86,0.22),0 0 0 3px rgba(15,110,86,0.12); font-weight:700; }
     .nav-btn.active-fund .icon { background:#0F6E56; color:#fff; }
-    .nav-btn.active-expl { background:#fdf3e8; color:#7A3D00; border-color:#BA7517; box-shadow:0 0 0 3px rgba(186,117,23,0.12); }
+    .nav-btn.active-expl { background:#faebd4; color:#5c2d00; border-color:#BA7517; border-width:2px; box-shadow:0 2px 8px rgba(186,117,23,0.22),0 0 0 3px rgba(186,117,23,0.12); font-weight:700; }
     .nav-btn.active-expl .icon { background:#BA7517; color:#fff; }
-    .nav-btn.active-vol { background:#f2eefb; color:#3a2880; border-color:#534AB7; box-shadow:0 0 0 3px rgba(83,74,183,0.12); }
+    .nav-btn.active-vol { background:#e8e2f8; color:#2a1a6e; border-color:#534AB7; border-width:2px; box-shadow:0 2px 8px rgba(83,74,183,0.22),0 0 0 3px rgba(83,74,183,0.12); font-weight:700; }
     .nav-btn.active-vol .icon { background:#534AB7; color:#fff; }
-    .nav-btn.active-zip { background:#e5f6f8; color:#00535E; border-color:#00838F; box-shadow:0 0 0 3px rgba(0,131,143,0.12); }
+    .nav-btn.active-zip { background:#cceff3; color:#003d47; border-color:#00838F; border-width:2px; box-shadow:0 2px 8px rgba(0,131,143,0.22),0 0 0 3px rgba(0,131,143,0.12); font-weight:700; }
     .nav-btn.active-zip .icon { background:#00838F; color:#fff; }
 
     @media (prefers-color-scheme: dark) {
-      .nav-btn.active-demo  { background:rgba(59,139,212,0.15); color:#85B7EB; border-color:#3B8BD4; }
-      .nav-btn.active-fund  { background:rgba(15,110,86,0.15);  color:#5DCAA5; border-color:#0F6E56; }
-      .nav-btn.active-expl  { background:rgba(186,117,23,0.15); color:#FAC775; border-color:#BA7517; }
-      .nav-btn.active-vol   { background:rgba(83,74,183,0.15);  color:#A89EDE; border-color:#534AB7; }
-      .nav-btn.active-zip   { background:rgba(0,131,143,0.15);  color:#4DD0E1; border-color:#00838F; }
+      .nav-btn.active-demo  { background:rgba(59,139,212,0.22); color:#85B7EB; border-color:#3B8BD4; }
+      .nav-btn.active-fund  { background:rgba(15,110,86,0.22);  color:#5DCAA5; border-color:#0F6E56; }
+      .nav-btn.active-expl  { background:rgba(186,117,23,0.22); color:#FAC775; border-color:#BA7517; }
+      .nav-btn.active-vol   { background:rgba(83,74,183,0.22);  color:#A89EDE; border-color:#534AB7; }
+      .nav-btn.active-zip   { background:rgba(0,131,143,0.22);  color:#4DD0E1; border-color:#00838F; }
     }
 
     /* LAYOUT */
@@ -359,6 +361,7 @@
 
 <nav>
   <div class="brand">CASA Dashboard</div>
+  <div class="brand-sep"></div>
   <a class="nav-btn active-demo" onclick="return showPage('demographics',this,'active-demo')" href="#">
     <span class="icon">👶</span> Child Demographics
   </a>
@@ -1010,7 +1013,7 @@
         <div class="card-title">Active Volunteer Headcount — FY21 to FY25</div>
         <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c1','vol-headcount')">⬇ PNG</button></div>
       </div>
-      <div class="chart-hint">Click a bar to see that year's full breakdown</div>
+      <div class="drill-badge"><span class="dot"></span>Click a bar to see that year's full breakdown</div>
       <div class="cw" style="height:220px"><canvas id="v_c1"></canvas></div>
     </div>
 
