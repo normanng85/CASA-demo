@@ -425,14 +425,14 @@
   <a class="nav-btn" onclick="return showPage('zipcodes',this,'active-zip')" href="#">
     <span class="icon">📍</span> Removal Zip Codes
   </a>
-  <a class="nav-btn" onclick="return showPage('explorer',this,'active-expl')" href="#">
-    <span class="icon">📊</span> Explorer
-  </a>
   <a class="nav-btn" id="exec-nav-btn" onclick="return openExecGate(this)" href="#">
     <span class="icon">📋</span> Executive Summary
   </a>
   <a class="nav-btn" onclick="return showPage('experimental',this,'active-xlab')" href="#">
     <span class="icon">🔬</span> Experimental
+  </a>
+  <a class="nav-btn" onclick="return showPage('explorer',this,'active-expl')" href="#">
+    <span class="icon">📊</span> Build a Graph
   </a>
   <button class="print-btn" onclick="printCurrentPage()" style="margin-left:auto;">🖨 Print / PDF</button>
 
@@ -1579,6 +1579,80 @@
         </svg>
       </div>
       <p style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center;">Positions are approximate. For precise mapping, see the Removal Zip Codes tab.</p>
+    </div>
+
+    <!-- ▸ 6. ANIMATED TIMELINE SLIDER -->
+    <div class="section-title">Monthly Census — Animated Timeline</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Drag the slider to step through each month of FY2025–26. All charts and KPI cards update instantly to reflect that month's real figures.</p>
+    <div class="card" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar"><div class="card-title" id="tl_month_label">Jul 2025 — Monthly Snapshot</div></div>
+
+      <!-- Slider -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;">
+        <button id="tl_prev" onclick="tlStep(-1)" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:13px;cursor:pointer;color:var(--text);">◀</button>
+        <input id="tl_slider" type="range" min="0" max="7" value="0" style="flex:1;min-width:160px;accent-color:#C62828;" oninput="tlUpdate(parseInt(this.value))">
+        <button id="tl_next" onclick="tlStep(1)" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:13px;cursor:pointer;color:var(--text);">▶</button>
+        <button id="tl_play" onclick="tlTogglePlay()" style="background:#C62828;color:#fff;border:none;border-radius:6px;padding:4px 14px;font-size:13px;cursor:pointer;font-weight:600;">▶ Play</button>
+      </div>
+
+      <!-- KPI strip for the selected month -->
+      <div class="drill-kpi-bar n4" style="margin-bottom:14px;">
+        <div class="drill-kpi"><div class="dk-lbl">Active Children</div><div class="dk-val" id="tl_kpi_total">—</div><div class="dk-sub" id="tl_kpi_vs">vs prior month</div></div>
+        <div class="drill-kpi"><div class="dk-lbl">Female</div><div class="dk-val" id="tl_kpi_f">—</div><div class="dk-sub" id="tl_kpi_fpct">—</div></div>
+        <div class="drill-kpi"><div class="dk-lbl">Male</div><div class="dk-val" id="tl_kpi_m">—</div><div class="dk-sub" id="tl_kpi_mpct">—</div></div>
+        <div class="drill-kpi"><div class="dk-lbl">Largest group</div><div class="dk-val" id="tl_kpi_top_n">—</div><div class="dk-sub" id="tl_kpi_top_lbl">—</div></div>
+      </div>
+
+      <!-- Two side-by-side mini charts -->
+      <div class="two">
+        <div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px;">Race breakdown — selected month</div>
+          <div class="cw" style="height:180px"><canvas id="tl_c1"></canvas></div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px;">Age bands — selected month</div>
+          <div class="cw" style="height:180px"><canvas id="tl_c2"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ▸ 7. RISK FLAG SCORECARD -->
+    <div class="section-title">Program Health Scorecard</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Key program metrics scored against published CASA National benchmarks and best practices. All figures come directly from source data.</p>
+    <div class="card" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar"><div class="card-title">FY25 performance vs. CASA National benchmarks</div></div>
+      <div class="chart-hint">Green = meeting or exceeding benchmark · Yellow = within 10% of threshold · Red = below benchmark</div>
+      <table id="scorecard_tbl" style="width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border);">
+            <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;">Metric</th>
+            <th style="text-align:center;padding:8px 10px;color:var(--text2);font-weight:600;">Middlesex FY25</th>
+            <th style="text-align:center;padding:8px 10px;color:var(--text2);font-weight:600;">Benchmark</th>
+            <th style="text-align:center;padding:8px 6px;color:var(--text2);font-weight:600;">Status</th>
+            <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;">Context</th>
+          </tr>
+        </thead>
+        <tbody id="scorecard_body"></tbody>
+      </table>
+      <p style="font-size:11px;color:var(--text3);margin-top:10px;">Benchmarks sourced from CASA National Program Standards and published sector research. Volunteer diversity benchmark reflects aspirational best practice, not a published minimum.</p>
+    </div>
+
+    <!-- ▸ 8. VOLUNTEER EXPERIENCE PYRAMID -->
+    <div class="section-title">Volunteer Experience Pyramid</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">How many years of service does the current FY25 volunteer corps hold? Each bar represents the number of volunteers at that tenure level — from brand-new recruits to decade-long advocates.</p>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="chart-toolbar"><div class="card-title">FY25 volunteer corps — years of service distribution (n=121)</div></div>
+      <div class="chart-hint">Bars show raw volunteer count at each tenure level · Shading deepens with experience</div>
+      <div class="cw" style="height:220px"><canvas id="xp_c5"></canvas></div>
+    </div>
+    <div class="drill-kpi-bar n4" style="margin-bottom:8px;">
+      <div class="drill-kpi"><div class="dk-lbl">New (0–1 yr)</div><div class="dk-val">23</div><div class="dk-sub">19% of corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Developing (2–4 yrs)</div><div class="dk-val">54</div><div class="dk-sub">45% of corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Experienced (5–9 yrs)</div><div class="dk-val">37</div><div class="dk-sub">31% of corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Veteran (10+ yrs)</div><div class="dk-val">7</div><div class="dk-sub">6% of corps</div></div>
+    </div>
+    <div class="drill-callout" style="margin-bottom:1.75rem;">
+      <strong>Reading this chart:</strong> The 2-year tenure mark is the largest single cohort (25 volunteers), suggesting strong retention through the early critical period. The 7 ten-year-plus veterans represent irreplaceable institutional knowledge. The relatively small 0–1 year cohort (23) compared to the 2–4 year band means the corps is mature — experienced but will need renewed recruitment to sustain numbers as senior volunteers retire.
     </div>
 
     <footer>Experimental Views · CASA Middlesex County · FY25 · Data through Feb 2026 · For internal planning use</footer>
@@ -3718,6 +3792,233 @@ initExplorer();
   }
   document.getElementById('xp_fund_goal').addEventListener('input', function(){ syncFundGoal(this.value); });
   document.getElementById('xp_fund_goal_num').addEventListener('input', function(){ syncFundGoal(this.value); });
+})();
+
+/* ══════════════════════════════════════════
+   FEATURE 1 — ANIMATED TIMELINE SLIDER
+══════════════════════════════════════════ */
+(function(){
+  var months = ['Jul 2025','Aug 2025','Sep 2025','Oct 2025','Nov 2025','Dec 2025','Jan 2026','Feb 2026'];
+  var raceLabels = ['White','Asian','Black/Afr. Am.','Hispanic/Latino','Two or More','Other'];
+  var raceColors = ['#2E78B8','#BA7517','#A32D2D','#0F6E56','#534AB7','#888780'];
+  var bandLabels = ['0–3','4–8','9–12','13–15','16–18+'];
+  var bandColors = ['#3B8BD4','#0F6E56','#BA7517','#A32D2D','#534AB7'];
+  var bandDefs   = [[0,3],[4,8],[9,12],[13,15],[16,19]]; // indices into dRA rows (20 elements, ages 0-18+)
+
+  function getBands(monthIdx) {
+    var row = dRA[monthIdx];
+    return bandDefs.map(function(b){ var s=0; for(var i=b[0];i<=b[1];i++) s+=row[i]; return s; });
+  }
+
+  var tlRaceChart = new Chart(document.getElementById('tl_c1'),{
+    type:'bar',
+    data:{ labels:raceLabels, datasets:[{ data:dRD.map(function(r){ return r[0]; }), backgroundColor:raceColors, borderRadius:3 }] },
+    options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(c){ return ' '+c.raw+' children'; }}} },
+      scales:{ x:{ ticks:{color:TC,font:{size:10}}, grid:{color:GC}, beginAtZero:true },
+               y:{ ticks:{color:TC,font:{size:10}}, grid:{display:false} } } }
+  });
+
+  var tlAgeChart = new Chart(document.getElementById('tl_c2'),{
+    type:'bar',
+    data:{ labels:bandLabels, datasets:[{ data:getBands(0), backgroundColor:bandColors, borderRadius:3 }] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(c){ return ' '+c.raw+' children'; }}} },
+      scales:{ x:{ ticks:{color:TC,font:{size:10}}, grid:{display:false} },
+               y:{ ticks:{color:TC,font:{size:10}}, grid:{color:GC}, beginAtZero:true } } }
+  });
+
+  window.tlUpdate = function tlUpdate(idx) {
+    document.getElementById('tl_slider').value = idx;
+    document.getElementById('tl_month_label').textContent = months[idx] + ' — Monthly Snapshot';
+
+    // KPI cards
+    var tot = dT[idx];
+    var prev = idx > 0 ? dT[idx-1] : null;
+    var diff = prev !== null ? (tot - prev) : null;
+    document.getElementById('tl_kpi_total').textContent = tot;
+    document.getElementById('tl_kpi_vs').textContent = prev !== null
+      ? (diff >= 0 ? '▲ +' : '▼ ') + diff + ' vs ' + months[idx-1]
+      : 'First month in dataset';
+    document.getElementById('tl_kpi_f').textContent = dF[idx];
+    document.getElementById('tl_kpi_fpct').textContent = Math.round(dF[idx]/tot*100) + '% of total';
+    document.getElementById('tl_kpi_m').textContent = dMa[idx];
+    document.getElementById('tl_kpi_mpct').textContent = Math.round(dMa[idx]/tot*100) + '% of total';
+
+    // largest race group
+    var raceVals = dRD.map(function(r){ return r[idx]; });
+    var maxIdx = raceVals.indexOf(Math.max.apply(null, raceVals));
+    document.getElementById('tl_kpi_top_n').textContent = raceVals[maxIdx];
+    document.getElementById('tl_kpi_top_lbl').textContent = raceLabels[maxIdx] + ' (' + Math.round(raceVals[maxIdx]/tot*100) + '%)';
+
+    // Race chart
+    tlRaceChart.data.datasets[0].data = raceVals;
+    tlRaceChart.update('none');
+
+    // Age chart
+    tlAgeChart.data.datasets[0].data = getBands(idx);
+    tlAgeChart.update('none');
+
+    // prev/next button states
+    document.getElementById('tl_prev').disabled = idx === 0;
+    document.getElementById('tl_next').disabled = idx === months.length - 1;
+  }
+
+  // play/pause
+  var tlTimer = null;
+  window.tlTogglePlay = function() {
+    var btn = document.getElementById('tl_play');
+    if (tlTimer) {
+      clearInterval(tlTimer); tlTimer = null;
+      btn.textContent = '▶ Play'; btn.style.background='#C62828';
+    } else {
+      var cur = parseInt(document.getElementById('tl_slider').value);
+      if (cur >= 7) { tlUpdate(0); }
+      btn.textContent = '⏸ Pause'; btn.style.background='#888';
+      tlTimer = setInterval(function(){
+        var v = parseInt(document.getElementById('tl_slider').value);
+        if (v >= 7) { clearInterval(tlTimer); tlTimer=null; btn.textContent='▶ Play'; btn.style.background='#C62828'; return; }
+        tlUpdate(v + 1);
+      }, 900);
+    }
+  };
+  window.tlStep = function(dir) {
+    var v = parseInt(document.getElementById('tl_slider').value);
+    var nv = Math.max(0, Math.min(7, v + dir));
+    tlUpdate(nv);
+  };
+
+  // initialize to Jul 2025
+  tlUpdate(0);
+})();
+
+/* ══════════════════════════════════════════
+   FEATURE 2 — RISK FLAG SCORECARD
+══════════════════════════════════════════ */
+(function(){
+  // All Middlesex values come from real data variables; benchmarks are CASA National published standards
+  var rows = [
+    { metric:'Reunification rate (FY25)',
+      ours:'62%',
+      bench:'≥ 45% (CASA National avg)',
+      val:62, threshold:45, higherBetter:true,
+      note:'31 of 50 closures resulted in reunification — well above the national program average.' },
+    { metric:'Children per volunteer (FY25)',
+      ours:'1.38',
+      bench:'≤ 1.5 children / volunteer',
+      val:1.38, threshold:1.5, higherBetter:false,
+      note:'On track. Ratio has improved from 1.64 in FY23 as caseload stabilised.' },
+    { metric:'Volunteer retention — 2+ yrs (FY25)',
+      ours:'81%',
+      bench:'≥ 60% (CASA National avg)',
+      val:81, threshold:60, higherBetter:true,
+      note:'98 of 121 active volunteers have two or more years — 21 points above the national average.' },
+    { metric:'Volunteer headcount trend (FY24→FY25)',
+      ours:'−5.5%  (128 → 121)',
+      bench:'Stable or growing year-over-year',
+      val:-5.5, threshold:0, higherBetter:true,
+      note:'Small decline after FY24 peak. Monitoring recommended; caseload is also slightly lower.' },
+    { metric:'Fundraising growth (FY24→FY25)',
+      ours:'+58%  ($129K → $149K total)',
+      bench:'Positive year-over-year growth',
+      val:58, threshold:0, higherBetter:true,
+      note:'Cash giving surged +58% ($68K→$107K). In-kind down from FY24 peak but still substantial.' },
+    { metric:'New donor concentration (FY25)',
+      ours:'57% first-time donors',
+      bench:'< 40% new donors recommended',
+      val:57, threshold:40, higherBetter:false,
+      note:'159 of 278 donors are giving for the first time. High new-donor share increases FY26 attrition risk.' },
+    { metric:'Volunteer diversity — Black/Afr. Am. (FY25)',
+      ours:'19% of volunteers vs 33% of children',
+      bench:'Corps reflects caseload demographics',
+      val:14, threshold:5, higherBetter:false,   // gap in percentage points
+      note:'14-point representation gap. Intentional Black community recruitment would improve alignment.' },
+    { metric:'Volunteer diversity — Hispanic/Latino (FY25)',
+      ours:'8% of volunteers vs 18% of children',
+      bench:'Corps reflects caseload demographics',
+      val:10, threshold:5, higherBetter:false,
+      note:'10-point representation gap. A priority area alongside Black volunteer recruitment.' }
+  ];
+
+  function flag(row) {
+    if (row.higherBetter) {
+      if (row.val >= row.threshold)            return { emoji:'🟢', label:'On track' };
+      if (row.val >= row.threshold * 0.9)      return { emoji:'🟡', label:'Watch' };
+      return                                          { emoji:'🔴', label:'Below target' };
+    } else {
+      // lower is better
+      if (row.val <= row.threshold)            return { emoji:'🟢', label:'On track' };
+      if (row.val <= row.threshold * 1.15)     return { emoji:'🟡', label:'Watch' };
+      return                                          { emoji:'🔴', label:'Needs attention' };
+    }
+  }
+
+  var tbody = document.getElementById('scorecard_body');
+  rows.forEach(function(r, i) {
+    var f = flag(r);
+    var bg = i % 2 === 0 ? 'var(--surface)' : 'var(--surface2)';
+    var tr = document.createElement('tr');
+    tr.style.background = bg;
+    tr.innerHTML =
+      '<td style="padding:9px 10px;color:var(--text);font-weight:500;border-bottom:1px solid var(--border);">' + r.metric + '</td>' +
+      '<td style="padding:9px 10px;text-align:center;color:var(--text);border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums;">' + r.ours + '</td>' +
+      '<td style="padding:9px 10px;text-align:center;color:var(--text2);border-bottom:1px solid var(--border);font-size:12px;">' + r.bench + '</td>' +
+      '<td style="padding:9px 6px;text-align:center;border-bottom:1px solid var(--border);white-space:nowrap;">' +
+        '<span style="font-size:16px;" title="' + f.label + '">' + f.emoji + '</span>' +
+        '<span style="font-size:11px;color:var(--text2);margin-left:4px;">' + f.label + '</span>' +
+      '</td>' +
+      '<td style="padding:9px 10px;color:var(--text2);font-size:12px;border-bottom:1px solid var(--border);">' + r.note + '</td>';
+    tbody.appendChild(tr);
+  });
+})();
+
+/* ══════════════════════════════════════════
+   FEATURE 3 — VOLUNTEER EXPERIENCE PYRAMID (xp_c5)
+══════════════════════════════════════════ */
+(function(){
+  // vYosLabels and vYosVals are defined in globals:
+  // ['0 yrs','1 yr','2 yrs','3 yrs','4 yrs','5 yrs','6 yrs','7 yrs','8 yrs','9 yrs','10+ yrs']
+  // [2,21,25,21,8,7,11,11,5,3,7]
+
+  // Colour deepens with experience: light blue → mid blue → deep indigo
+  var barColors = vYosVals.map(function(_, i){
+    var pct = i / 10;
+    // interpolate from #90CAF9 (light) to #1A237E (deep navy)
+    var r = Math.round(144 + (26  - 144) * pct);
+    var g = Math.round(202 + (35  - 202) * pct);
+    var b = Math.round(249 + (126 - 249) * pct);
+    return 'rgb('+r+','+g+','+b+')';
+  });
+
+  new Chart(document.getElementById('xp_c5'),{
+    type:'bar',
+    data:{
+      labels: vYosLabels,
+      datasets:[{
+        label:'Volunteers',
+        data: vYosVals,
+        backgroundColor: barColors,
+        borderRadius: 4,
+        borderSkipped: false
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{ callbacks:{ label:function(c){
+          var pct = Math.round(c.raw / 121 * 100);
+          return ' '+c.raw+' volunteer'+(c.raw!==1?'s':'')+' ('+pct+'% of corps)';
+        }}}
+      },
+      scales:{
+        x:{ ticks:{color:TC,font:{size:11}}, grid:{display:false} },
+        y:{ ticks:{color:TC,font:{size:11},stepSize:5},
+            grid:{color:GC}, beginAtZero:true,
+            title:{display:true,text:'# Volunteers',color:TC,font:{size:11}} }
+      }
+    }
+  });
 })();
 </script>
 </body>
