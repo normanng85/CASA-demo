@@ -3799,8 +3799,9 @@ initExplorer();
 ══════════════════════════════════════════ */
 (function(){
   var months = ['Jul 2025','Aug 2025','Sep 2025','Oct 2025','Nov 2025','Dec 2025','Jan 2026','Feb 2026'];
-  var raceLabels = ['White','Asian','Black/Afr. Am.','Hispanic/Latino','Two or More','Other'];
-  var raceColors = ['#2E78B8','#BA7517','#A32D2D','#0F6E56','#534AB7','#888780'];
+  // dRD order: [0]=Asian [1]=Black [2]=Hispanic [3]=Two+ [4]=Unknown [5]=White
+  var raceLabels = ['Asian','Black/Afr. Am.','Hispanic/Latino','Two or More','Other/Unknown','White'];
+  var raceColors = ['#BA7517','#A32D2D','#0F6E56','#534AB7','#888780','#2E78B8'];
   var bandLabels = ['0–3','4–8','9–12','13–15','16–18+'];
   var bandColors = ['#3B8BD4','#0F6E56','#BA7517','#A32D2D','#534AB7'];
   var bandDefs   = [[0,3],[4,8],[9,12],[13,15],[16,19]]; // indices into dRA rows (20 elements, ages 0-18+)
