@@ -52,6 +52,10 @@
     .nav-btn.active-vol .icon { background:#534AB7; color:#fff; }
     .nav-btn.active-zip { background:#cceff3; color:#003d47; border-color:#00838F; border-width:2px; box-shadow:0 2px 8px rgba(0,131,143,0.22),0 0 0 3px rgba(0,131,143,0.12); font-weight:700; }
     .nav-btn.active-zip .icon { background:#00838F; color:#fff; }
+    .nav-btn.active-exec { background:#fde8ed; color:#7b0c25; border-color:#C62828; border-width:2px; box-shadow:0 2px 8px rgba(198,40,40,0.22),0 0 0 3px rgba(198,40,40,0.12); font-weight:700; }
+    .nav-btn.active-exec .icon { background:#C62828; color:#fff; }
+    .nav-btn.active-xlab { background:#f0e8f8; color:#3a0a5a; border-color:#7B1FA2; border-width:2px; box-shadow:0 2px 8px rgba(123,31,162,0.22),0 0 0 3px rgba(123,31,162,0.12); font-weight:700; }
+    .nav-btn.active-xlab .icon { background:#7B1FA2; color:#fff; }
 
     @media (prefers-color-scheme: dark) {
       .nav-btn.active-demo  { background:rgba(59,139,212,0.22); color:#85B7EB; border-color:#3B8BD4; }
@@ -59,6 +63,8 @@
       .nav-btn.active-expl  { background:rgba(186,117,23,0.22); color:#FAC775; border-color:#BA7517; }
       .nav-btn.active-vol   { background:rgba(83,74,183,0.22);  color:#A89EDE; border-color:#534AB7; }
       .nav-btn.active-zip   { background:rgba(0,131,143,0.22);  color:#4DD0E1; border-color:#00838F; }
+      .nav-btn.active-exec  { background:rgba(198,40,40,0.22);  color:#F48FB1; border-color:#C62828; }
+      .nav-btn.active-xlab  { background:rgba(123,31,162,0.22); color:#CE93D8; border-color:#7B1FA2; }
     }
 
     /* LAYOUT */
@@ -377,10 +383,121 @@
   <a class="nav-btn" onclick="return showPage('explorer',this,'active-expl')" href="#">
     <span class="icon">📊</span> Explorer
   </a>
+  <a class="nav-btn" onclick="return showPage('executive',this,'active-exec')" href="#">
+    <span class="icon">📋</span> Executive Summary
+  </a>
+  <a class="nav-btn" onclick="return showPage('experimental',this,'active-xlab')" href="#">
+    <span class="icon">🔬</span> Experimental
+  </a>
   <button class="print-btn" onclick="printCurrentPage()" style="margin-left:auto;">🖨 Print / PDF</button>
 
 </nav>
 
+
+<!-- ══════════════════════════════════════════
+     PAGE 6 — EXECUTIVE SUMMARY
+══════════════════════════════════════════ -->
+<div id="executive" class="page">
+  <main>
+    <div class="summary-block">
+      <h2>Executive Summary — CASA Middlesex County</h2>
+      <p class="lead">Program snapshot through February 2026, covering monthly caseload (Jul 2025–Feb 2026), volunteer corps (FY25), fundraising (FY25), and case outcomes (FY21–FY25). Use the nav above to drill into any area.</p>
+    </div>
+
+    <!-- 8 headline KPIs -->
+    <div class="drill-kpi-bar n4" style="margin-bottom:12px;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">Active Children (Feb 2026)</div>
+        <div class="dk-val">126</div>
+        <div class="dk-sub">avg 123/month · peaked 128 (Aug)</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Active Volunteers (FY25)</div>
+        <div class="dk-val">121</div>
+        <div class="dk-dn">↓ 5.5% vs FY24 peak (128)</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Children per Volunteer</div>
+        <div class="dk-val">1.38</div>
+        <div class="dk-up">↓ from 1.64 in FY23 — improving</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Total Raised FY25</div>
+        <div class="dk-val">$149K</div>
+        <div class="dk-up">↑ 15% vs FY24 ($130K)</div>
+      </div>
+    </div>
+    <div class="drill-kpi-bar n4" style="margin-bottom:1.75rem;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">Active Donors FY25</div>
+        <div class="dk-val">278</div>
+        <div class="dk-up">↑ 157% vs FY24 (108)</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">FY25 Reunification Rate</div>
+        <div class="dk-val">62%</div>
+        <div class="dk-up">↑ from 34% in FY24 — 5-yr high</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Volunteer Retention (2+ yrs)</div>
+        <div class="dk-val">81%</div>
+        <div class="dk-sub">98 of 121 with 2+ years service</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Volunteer Diversity</div>
+        <div class="dk-val">52%</div>
+        <div class="dk-up">non-white ↑ from 39% in FY21</div>
+      </div>
+    </div>
+
+    <!-- 4 mini trend charts -->
+    <div class="two" style="margin-bottom:1.25rem;">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Monthly child census — Jul 2025–Feb 2026</div>
+        </div>
+        <div class="chart-hint">8-month snapshot · avg 123 children/month</div>
+        <div class="cw" style="height:160px"><canvas id="ex_c1"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Annual fundraising — FY21–FY25</div>
+        </div>
+        <div class="chart-hint">Cash + in-kind · $149K total in FY25</div>
+        <div class="cw" style="height:160px"><canvas id="ex_c2"></canvas></div>
+      </div>
+    </div>
+    <div class="two" style="margin-bottom:1.75rem;">
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Volunteer headcount — FY21–FY25</div>
+        </div>
+        <div class="chart-hint">FY24 peak 128 · FY25 at 121 · 81% with 2+ yrs</div>
+        <div class="cw" style="height:160px"><canvas id="ex_c3"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar">
+          <div class="card-title">Case closures — reunification vs other — FY21–FY25</div>
+        </div>
+        <div class="chart-hint">FY25 reunification rate 62% — 5-year high</div>
+        <div class="cw" style="height:160px"><canvas id="ex_c4"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Key signals -->
+    <div class="section-title" style="margin-bottom:12px;">Key Signals</div>
+    <div class="insight-grid">
+      <div class="insight positive"><div class="itag">Strength — Program Outcomes</div><p>62% of FY25 case closures resulted in family reunification, up from 34% in FY24 and the best rate in five years. This is the single strongest program effectiveness signal in the dataset.</p></div>
+      <div class="insight positive"><div class="itag">Strength — Fundraising Momentum</div><p>Active donors jumped 157% (108→278) in FY25, driving a 15% total revenue increase to $149K. Cash giving alone surged 58% to $107K. Understanding what drove this campaign is the top FY26 planning priority.</p></div>
+      <div class="insight positive"><div class="itag">Strength — Volunteer Diversity</div><p>Non-white volunteers grew from 39% (FY21) to 52% (FY25), substantially exceeding the national CASA average of 25–30% and tracking toward demographic alignment with the children CASA serves.</p></div>
+      <div class="insight watch"><div class="itag">Watch — Volunteer Headcount</div><p>Volunteers declined 5.5% from the FY24 peak of 128 to 121 in FY25. New cohort recruitment (23 in FY25) needs to accelerate to offset attrition and return toward the peak.</p></div>
+      <div class="insight watch"><div class="itag">Watch — Donor Retention Risk</div><p>57% of FY25 donors (159 of 278) are giving for the first time. National first-year donor retention is ~19%, meaning ~130 could lapse without active stewardship — the most urgent FY26 fundraising risk.</p></div>
+      <div class="insight alert"><div class="itag">Risk — Revenue Concentration</div><p>4 cash donors gave $5K+ in FY25, representing 20% of all cash revenue ($21K of $107K). Two in-kind donors gave $5K+. This concentration creates real vulnerability if major donors lapse.</p></div>
+    </div>
+
+    <footer>Executive Summary · CASA Middlesex County · FY25 · Data through Feb 2026</footer>
+  </main>
+</div>
 
 <!-- ══════════════════════════════════════════
      PAGE 1 — CHILD DEMOGRAPHICS
@@ -1235,6 +1352,178 @@
   </main>
 </div>
 
+<!-- ══════════════════════════════════════════
+     PAGE 7 — EXPERIMENTAL
+══════════════════════════════════════════ -->
+<div id="experimental" class="page">
+  <main>
+    <div class="summary-block">
+      <h2>Experimental Views</h2>
+      <p class="lead">Prototype analyses exploring volunteer coverage, demographic equity, goal tracking, donor retention risk, and geographic caseload distribution. These views are in development — numbers are calculated from existing source data.</p>
+    </div>
+
+    <!-- ▸ 1. COVERAGE RATIO -->
+    <div class="section-title">Volunteer-to-Child Coverage</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">How many active children does each volunteer carry? CASA programs nationally target a 1:1 to 1:2 ratio. A lower ratio means more capacity per volunteer.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:16px;">
+      <div class="drill-kpi"><div class="dk-lbl">FY25 ratio</div><div class="dk-val">1.38</div><div class="dk-up">↓ from 1.64 in FY23</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">FY25 children</div><div class="dk-val">167</div><div class="dk-sub">annual active caseload</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">FY25 volunteers</div><div class="dk-val">121</div><div class="dk-sub">active corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">vs. national target</div><div class="dk-val">✓ On track</div><div class="dk-sub">target ≤ 1.5 children/vol</div></div>
+    </div>
+    <div class="card" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar"><div class="card-title">Children per volunteer — FY21–FY25</div></div>
+      <div class="chart-hint">Lower = more volunteer capacity per child · dashed line = 1.5 target threshold</div>
+      <div class="cw" style="height:200px"><canvas id="xp_c1"></canvas></div>
+    </div>
+
+    <!-- ▸ 2. EQUITY LENS -->
+    <div class="section-title">Demographic Equity Lens</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Comparing the racial composition of children served against the volunteer corps. Alignment between these groups is a best-practice indicator for child advocacy programs.</p>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="chart-toolbar"><div class="card-title">Race composition — children served (Feb 2026) vs. volunteers (FY25)</div></div>
+      <div class="chart-hint">Grouped bars show % of each group · Asian volunteers (19%) far exceed Asian children served (6%)</div>
+      <div class="cw" style="height:220px"><canvas id="xp_c2"></canvas></div>
+    </div>
+    <div class="drill-callout" style="margin-bottom:1.75rem;">
+      <strong>Key observation:</strong> Black/African American children make up 33% of the caseload but 19% of volunteers — the largest representation gap. Hispanic/Latino children (18%) and volunteers (8%) show a similar gap. Asian volunteers are substantially over-represented relative to children served. Continued intentional recruitment in Black and Hispanic communities would improve alignment.
+    </div>
+
+    <!-- ▸ 3. GOAL TRACKING -->
+    <div class="section-title">Goal Tracking — Set FY26 Targets</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 16px;line-height:1.6;">Enter aspirational FY26 targets below to see how they compare to the five-year trend. Adjust the sliders or type directly in the boxes.</p>
+    <div class="two" style="margin-bottom:8px;">
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Volunteer headcount — with FY26 goal</div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+          <label style="font-size:12px;color:var(--text2);">FY26 volunteer target:</label>
+          <input id="xp_vol_goal" type="range" min="100" max="175" value="135" style="flex:1;min-width:80px;accent-color:#534AB7;">
+          <input id="xp_vol_goal_num" type="number" min="100" max="175" value="135" style="width:60px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
+          <span style="font-size:12px;color:var(--text3);">volunteers</span>
+        </div>
+        <div class="cw" style="height:180px"><canvas id="xp_c3"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Total raised — with FY26 goal</div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+          <label style="font-size:12px;color:var(--text2);">FY26 fundraising target:</label>
+          <input id="xp_fund_goal" type="range" min="100000" max="300000" step="5000" value="175000" style="flex:1;min-width:80px;accent-color:#0F6E56;">
+          <input id="xp_fund_goal_num" type="number" min="100000" max="300000" step="5000" value="175000" style="width:80px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
+          <span style="font-size:12px;color:var(--text3);">dollars</span>
+        </div>
+        <div class="cw" style="height:180px"><canvas id="xp_c4"></canvas></div>
+      </div>
+    </div>
+    <div class="drill-callout" style="margin-bottom:1.75rem;"><strong>How to use:</strong> Drag the sliders or type numbers to update the FY26 goal bar in real time. These are planning tools only — targets are not saved.</div>
+
+    <!-- ▸ 4. DONOR RETENTION PROJECTION -->
+    <div class="section-title">Donor Retention Projection — FY26 Outlook</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Applying national benchmark retention rates to FY25's donor composition to project FY26 active donor count under different stewardship scenarios.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:12px;">
+      <div class="drill-kpi"><div class="dk-lbl">FY25 total donors</div><div class="dk-val">278</div><div class="dk-sub">71 retained · 159 new · 48 lapsed</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Conservative FY26 est.</div><div class="dk-val">~76</div><div class="dk-dn">if 19% first-year + 65% multi-year retention</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Strong stewardship est.</div><div class="dk-val">~106</div><div class="dk-sub">if 35% first-year + 70% multi-year retention</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">New donors needed to hit 278</div><div class="dk-val">~172+</div><div class="dk-dn">requires major new acquisition effort</div></div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight alert"><div class="itag">Risk — First-Year Cohort</div><p>159 of 278 FY25 donors are giving for the first time. At the national 19% first-year retention rate, only ~30 are likely to give again in FY26 without intervention. This single group poses the greatest attrition risk.</p></div>
+      <div class="insight watch"><div class="itag">Opportunity — Multi-Year Core</div><p>The 71 retained donors (those who gave in both FY24 and FY25) are the most valuable segment. Multi-year donors nationally retain at 60–70%. Prioritizing personal stewardship for this group protects the stable revenue base.</p></div>
+      <div class="insight positive"><div class="itag">Strategy — Upgrade Mid-Range</div><p>175 of 278 FY25 donors gave under $500 (the $1–$99 and $100–$499 tiers). These donors represent significant upgrade potential — moving just 20 of them up one gift tier would add ~$10K to FY26 revenue.</p></div>
+    </div>
+
+    <!-- ▸ 5. GEOGRAPHIC MAP -->
+    <div class="section-title">Geographic Caseload Distribution — FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Approximate positions of top 10 removal zip codes within Middlesex County, NJ. Bubble size represents FY25 children assigned. North is up.</p>
+    <div class="card" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar"><div class="card-title">Removal zip code map — Middlesex County, NJ · FY25 caseload</div></div>
+      <div class="chart-hint">Bubble size = FY25 children assigned · darker fill = higher volume · approximate positions</div>
+      <div style="position:relative;width:100%;max-width:600px;margin:0 auto;">
+        <svg viewBox="0 0 500 360" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block;">
+          <!-- County background -->
+          <rect x="0" y="0" width="500" height="360" rx="8" fill="var(--surface2)"/>
+          <!-- Rough county border polygon (approximate Middlesex County NJ) -->
+          <polygon points="80,20 420,20 460,80 470,160 440,240 380,310 280,340 160,330 80,280 50,200 60,120" fill="none" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <!-- Compass rose -->
+          <text x="470" y="35" font-size="11" fill="var(--text3)" text-anchor="middle">N</text>
+          <text x="470" y="28" font-size="14" fill="var(--text3)" text-anchor="middle">↑</text>
+          <!-- Water body hint (Raritan Bay area, bottom right) -->
+          <ellipse cx="420" cy="330" rx="55" ry="22" fill="rgba(59,139,212,0.08)" stroke="rgba(59,139,212,0.15)" stroke-width="1"/>
+          <text x="420" y="334" font-size="9" fill="rgba(59,139,212,0.5)" text-anchor="middle">Raritan Bay</text>
+
+          <!-- Zip code bubbles (position = approximate lat/lon within Middlesex County) -->
+          <!-- 07008 Carteret: FY25=30, largest -->
+          <circle cx="356" cy="43" r="22" fill="rgba(163,45,45,0.72)" stroke="rgba(163,45,45,0.9)" stroke-width="1.5"/>
+          <text x="356" y="47" font-size="10" font-weight="600" fill="white" text-anchor="middle">30</text>
+          <text x="356" y="72" font-size="9" fill="var(--text2)" text-anchor="middle">Carteret</text>
+          <text x="356" y="83" font-size="8" fill="var(--text3)" text-anchor="middle">07008</text>
+
+          <!-- 08817 Metuchen/Edison: FY25=25 -->
+          <circle cx="255" cy="100" r="18" fill="rgba(163,45,45,0.60)" stroke="rgba(163,45,45,0.8)" stroke-width="1.5"/>
+          <text x="255" y="104" font-size="10" font-weight="600" fill="white" text-anchor="middle">25</text>
+          <text x="255" y="127" font-size="9" fill="var(--text2)" text-anchor="middle">Edison/Metuchen</text>
+          <text x="255" y="138" font-size="8" fill="var(--text3)" text-anchor="middle">08817</text>
+
+          <!-- 08901 New Brunswick: FY25=14 -->
+          <circle cx="143" cy="196" r="13" fill="rgba(163,45,45,0.50)" stroke="rgba(163,45,45,0.7)" stroke-width="1.5"/>
+          <text x="143" y="200" font-size="9" font-weight="600" fill="white" text-anchor="middle">14</text>
+          <text x="143" y="219" font-size="9" fill="var(--text2)" text-anchor="middle">New Brunswick</text>
+          <text x="143" y="230" font-size="8" fill="var(--text3)" text-anchor="middle">08901</text>
+
+          <!-- 07001 Avenel: FY25=13 -->
+          <circle cx="358" cy="57" r="11" fill="rgba(186,117,23,0.72)" stroke="rgba(186,117,23,0.9)" stroke-width="1.5" transform="translate(15,0)"/>
+          <text x="373" y="61" font-size="9" font-weight="600" fill="white" text-anchor="middle">13</text>
+          <text x="393" y="75" font-size="9" fill="var(--text2)" text-anchor="middle">Avenel</text>
+          <text x="393" y="86" font-size="8" fill="var(--text3)" text-anchor="middle">07001</text>
+
+          <!-- 08861 Perth Amboy: FY25=12 -->
+          <circle cx="368" cy="148" r="11" fill="rgba(163,45,45,0.50)" stroke="rgba(163,45,45,0.7)" stroke-width="1.5"/>
+          <text x="368" y="152" font-size="9" font-weight="600" fill="white" text-anchor="middle">12</text>
+          <text x="368" y="170" font-size="9" fill="var(--text2)" text-anchor="middle">Perth Amboy</text>
+          <text x="368" y="181" font-size="8" fill="var(--text3)" text-anchor="middle">08861</text>
+
+          <!-- 07095 Woodbridge: FY25=6 -->
+          <circle cx="355" cy="80" r="7" fill="rgba(83,74,183,0.65)" stroke="rgba(83,74,183,0.85)" stroke-width="1.5"/>
+          <text x="355" y="83" font-size="8" fill="white" text-anchor="middle">6</text>
+          <text x="322" y="93" font-size="9" fill="var(--text2)" text-anchor="middle">Woodbridge 07095</text>
+
+          <!-- 08879 South Amboy: FY25=6 -->
+          <circle cx="355" cy="200" r="7" fill="rgba(83,74,183,0.60)" stroke="rgba(83,74,183,0.8)" stroke-width="1.5"/>
+          <text x="355" y="203" font-size="8" fill="white" text-anchor="middle">6</text>
+          <text x="355" y="218" font-size="9" fill="var(--text2)" text-anchor="middle">South Amboy 08879</text>
+
+          <!-- 08816 East Brunswick: FY25=6 -->
+          <circle cx="176" cy="282" r="7" fill="rgba(83,74,183,0.60)" stroke="rgba(83,74,183,0.8)" stroke-width="1.5"/>
+          <text x="176" y="285" font-size="8" fill="white" text-anchor="middle">6</text>
+          <text x="176" y="300" font-size="9" fill="var(--text2)" text-anchor="middle">E. Brunswick 08816</text>
+
+          <!-- 08859 Parlin/Sayreville: FY25=5 -->
+          <circle cx="292" cy="238" r="7" fill="rgba(0,131,143,0.65)" stroke="rgba(0,131,143,0.85)" stroke-width="1.5"/>
+          <text x="292" y="241" font-size="8" fill="white" text-anchor="middle">5</text>
+          <text x="292" y="258" font-size="9" fill="var(--text2)" text-anchor="middle">Sayreville 08859</text>
+
+          <!-- 08902 North Brunswick: FY25=0 (hollow) -->
+          <circle cx="93" cy="215" r="7" fill="none" stroke="var(--text3)" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="93" y="218" font-size="8" fill="var(--text3)" text-anchor="middle">0</text>
+          <text x="93" y="234" font-size="9" fill="var(--text3)" text-anchor="middle">N. Brunswick 08902</text>
+
+          <!-- Legend -->
+          <rect x="12" y="295" width="130" height="58" rx="5" fill="var(--surface)" stroke="var(--border)" stroke-width="0.5"/>
+          <text x="20" y="310" font-size="9" fill="var(--text3)" font-weight="600">LEGEND (FY25 cases)</text>
+          <circle cx="26" cy="324" r="8" fill="rgba(163,45,45,0.72)"/>
+          <text x="38" y="327" font-size="9" fill="var(--text2)">High volume (25–30)</text>
+          <circle cx="26" cy="340" r="6" fill="rgba(83,74,183,0.62)"/>
+          <text x="38" y="343" font-size="9" fill="var(--text2)">Lower volume (5–14)</text>
+          <circle cx="26" cy="344" r="6" fill="none" stroke="var(--text3)" stroke-dasharray="2,2" stroke-width="1.2" transform="translate(0,10)"/>
+          <text x="38" y="357" font-size="9" fill="var(--text3)">Zero in FY25</text>
+        </svg>
+      </div>
+      <p style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center;">Positions are approximate. For precise mapping, see the Removal Zip Codes tab.</p>
+    </div>
+
+    <footer>Experimental Views · CASA Middlesex County · FY25 · Data through Feb 2026 · For internal planning use</footer>
+  </main>
+</div>
+
 
 <script>
 /* ═══ COLLAPSIBLE SECTIONS ═══ */
@@ -1264,7 +1553,7 @@ function toggleSection(btn) {
 /* ═══ NAV ═══ */
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip'); });
+  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
   return false;
@@ -3172,6 +3461,160 @@ function init() {
 
 init();
 initExplorer();
+
+/* ═══════════════════════════════════════════
+   EXECUTIVE SUMMARY CHARTS
+═══════════════════════════════════════════ */
+(function(){
+  // ex_c1: Monthly census area line
+  new Chart(document.getElementById('ex_c1'),{type:'line',
+    data:{labels:dM,datasets:[{label:'Active Children',data:dT,
+      borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.12)',fill:true,
+      tension:0.35,pointRadius:4,pointBackgroundColor:'#3B8BD4',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},
+      scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false}},
+              y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,suggestedMin:110}}}});
+
+  // ex_c2: Fundraising stacked bar cash+inkind
+  new Chart(document.getElementById('ex_c2'),{type:'bar',
+    data:{labels:fY,datasets:[
+      {label:'Cash',data:fC,backgroundColor:'rgba(15,110,86,0.75)',borderRadius:3,stack:'s'},
+      {label:'In-Kind',data:fIK,backgroundColor:'rgba(83,74,183,0.60)',borderRadius:3,stack:'s'}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:TC,font:{size:10},boxWidth:10}},
+               tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': $'+Math.round(c.raw/1000)+'k';}}}},
+      scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false},stacked:true},
+              y:{ticks:{color:TC,callback:function(v){return '$'+Math.round(v/1000)+'k';}},grid:{color:GC},stacked:true,beginAtZero:true}}}});
+
+  // ex_c3: Volunteer headcount bar
+  var volPeak = Math.max.apply(null, vTotal);
+  new Chart(document.getElementById('ex_c3'),{type:'bar',
+    data:{labels:vYears,datasets:[{label:'Volunteers',data:vTotal,
+      backgroundColor:vTotal.map(function(v){return v===volPeak?'rgba(83,74,183,0.85)':'rgba(83,74,183,0.5)';}),
+      borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' volunteers';}}}},
+      scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false}},
+              y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,suggestedMin:100}}}});
+
+  // ex_c4: Case closures — reunification vs other
+  var exCcYrs=['FY21','FY22','FY23','FY24','FY25'];
+  var exReunif=[16,33,19,23,31];
+  var exTotals=[36,65,53,67,50];
+  var exOther=exTotals.map(function(t,i){return t-exReunif[i];});
+  new Chart(document.getElementById('ex_c4'),{type:'bar',
+    data:{labels:exCcYrs,datasets:[
+      {label:'Reunification',data:exReunif,backgroundColor:'rgba(34,139,100,0.82)',borderRadius:3,stack:'s'},
+      {label:'Other outcomes',data:exOther,backgroundColor:'rgba(148,163,184,0.65)',borderRadius:3,stack:'s'}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:TC,font:{size:10},boxWidth:10}},
+               tooltip:{callbacks:{label:function(c){var t=exTotals[c.dataIndex];return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}},
+      scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false},stacked:true},
+              y:{ticks:{color:TC},grid:{color:GC},stacked:true,beginAtZero:true}}}});
+})();
+
+/* ═══════════════════════════════════════════
+   EXPERIMENTAL TAB CHARTS
+═══════════════════════════════════════════ */
+(function(){
+  // xp_c1: Coverage ratio — children per volunteer FY21-FY25
+  var xpCdTotals=[168,200,203,191,167];
+  var xpCovRatio=xpCdTotals.map(function(c,i){return Math.round(c/vTotal[i]*100)/100;});
+  new Chart(document.getElementById('xp_c1'),{type:'line',
+    data:{labels:['FY21','FY22','FY23','FY24','FY25'],datasets:[
+      {label:'Children per volunteer',data:xpCovRatio,
+       borderColor:'#C62828',backgroundColor:'rgba(198,40,40,0.08)',fill:true,
+       tension:0.3,pointRadius:6,pointBackgroundColor:'#C62828',borderWidth:2.5},
+      {label:'Target threshold (1.5)',data:[1.5,1.5,1.5,1.5,1.5],
+       borderColor:'rgba(0,0,0,0.25)',borderDash:[5,5],borderWidth:1.5,pointRadius:0}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:TC,font:{size:10},boxWidth:12}},
+               tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw;}}}},
+      scales:{x:{ticks:{color:TC},grid:{display:false}},
+              y:{ticks:{color:TC},grid:{color:GC},min:1.1,max:1.8,
+                 title:{display:true,text:'Children / Volunteer',color:TC,font:{size:10}}}}}});
+
+  // xp_c2: Equity lens — race % children (Feb 2026) vs volunteers (FY25)
+  var xpEqLabels=['White','Black/Afr.Am.','Hispanic/Latino','Asian','Two+/Other/Unk'];
+  // Children Feb 2026: dT[7]=126, dRD = [As,Bk,Hi,2+,Unk,Wh] for month index 7
+  var xpChildFeb=[dRD[5][7],dRD[1][7],dRD[2][7],dRD[0][7],dRD[3][7]+dRD[4][7]]; // [Wh,Bk,Hi,As,2++Unk]
+  var xpChildPct=xpChildFeb.map(function(v){return Math.round(v/dT[7]*100);});
+  // Volunteers FY25: vRace[4]=[58,22,9,4,5,3] order [White,Asian,Black,Hisp,Two+,Other]
+  // Wait: vRaceLabels=['White','Asian','Black/Afr. Am.','Hispanic/Latino','Two or More','Other']
+  // vRace[4]=[58,23,23,10,4,3]
+  var xpVolFY25=vRace[4]; // [White=58, Asian=23, Black=23, Hisp=10, Two+=4, Other=3]
+  var xpVolPct=[
+    Math.round(xpVolFY25[0]/vTotal[4]*100), // White
+    Math.round(xpVolFY25[2]/vTotal[4]*100), // Black
+    Math.round(xpVolFY25[3]/vTotal[4]*100), // Hispanic
+    Math.round(xpVolFY25[1]/vTotal[4]*100), // Asian
+    Math.round((xpVolFY25[4]+xpVolFY25[5])/vTotal[4]*100) // Two+/Other
+  ];
+  new Chart(document.getElementById('xp_c2'),{type:'bar',
+    data:{labels:xpEqLabels,datasets:[
+      {label:'Children served (Feb 2026)',data:xpChildPct,backgroundColor:'rgba(59,139,212,0.72)',borderRadius:3},
+      {label:'Volunteers (FY25)',data:xpVolPct,backgroundColor:'rgba(83,74,183,0.65)',borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:TC,font:{size:10},boxWidth:10}},
+               tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+'%';}}}},
+      scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false}},
+              y:{ticks:{color:TC,callback:function(v){return v+'%';}},grid:{color:GC},beginAtZero:true,
+                 title:{display:true,text:'% of group',color:TC,font:{size:10}}}}}});
+
+  // xp_c3: Goal tracking — volunteers
+  var xpVolGoal=135;
+  var xpVolLabels=['FY21','FY22','FY23','FY24','FY25','FY26 Goal'];
+  var xpVolActual=vTotal.concat([null]);
+  var xpVolGoalArr=[null,null,null,null,null,xpVolGoal];
+  var xpVolChart=new Chart(document.getElementById('xp_c3'),{type:'bar',
+    data:{labels:xpVolLabels,datasets:[
+      {label:'Actual',data:xpVolActual,backgroundColor:'rgba(83,74,183,0.60)',borderRadius:4},
+      {label:'Goal',data:xpVolGoalArr,backgroundColor:'rgba(83,74,183,0.22)',
+       borderColor:'rgba(83,74,183,0.9)',borderWidth:2,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:TC,font:{size:10},boxWidth:10}},
+               tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+(c.raw===null?'—':c.raw);}}}},
+      scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false}},
+              y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,suggestedMin:100,
+                 title:{display:true,text:'Volunteers',color:TC,font:{size:10}}}}}});
+
+  function syncVolGoal(v) {
+    v = Math.min(175, Math.max(100, parseInt(v)||135));
+    document.getElementById('xp_vol_goal').value = v;
+    document.getElementById('xp_vol_goal_num').value = v;
+    xpVolChart.data.datasets[1].data[5] = v;
+    xpVolChart.update();
+  }
+  document.getElementById('xp_vol_goal').addEventListener('input', function(){ syncVolGoal(this.value); });
+  document.getElementById('xp_vol_goal_num').addEventListener('input', function(){ syncVolGoal(this.value); });
+
+  // xp_c4: Goal tracking — fundraising
+  var xpFundGoal=175000;
+  var xpFundActual=fY.map(function(_,i){return Math.round(fC[i]+fIK[i]);}).concat([null]);
+  var xpFundGoalArr=[null,null,null,null,null,xpFundGoal];
+  var xpFundChart=new Chart(document.getElementById('xp_c4'),{type:'bar',
+    data:{labels:['FY21','FY22','FY23','FY24','FY25','FY26 Goal'],datasets:[
+      {label:'Actual',data:xpFundActual,backgroundColor:'rgba(15,110,86,0.60)',borderRadius:4},
+      {label:'Goal',data:xpFundGoalArr,backgroundColor:'rgba(15,110,86,0.22)',
+       borderColor:'rgba(15,110,86,0.9)',borderWidth:2,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:TC,font:{size:10},boxWidth:10}},
+               tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+(c.raw===null?'—':'$'+Math.round(c.raw/1000)+'k');}}}},
+      scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false}},
+              y:{ticks:{color:TC,callback:function(v){return '$'+Math.round(v/1000)+'k';}},grid:{color:GC},beginAtZero:true,
+                 title:{display:true,text:'Total Raised',color:TC,font:{size:10}}}}}});
+
+  function syncFundGoal(v) {
+    v = Math.min(300000, Math.max(100000, parseInt(v)||175000));
+    document.getElementById('xp_fund_goal').value = v;
+    document.getElementById('xp_fund_goal_num').value = v;
+    xpFundChart.data.datasets[1].data[5] = v;
+    xpFundChart.update();
+  }
+  document.getElementById('xp_fund_goal').addEventListener('input', function(){ syncFundGoal(this.value); });
+  document.getElementById('xp_fund_goal_num').addEventListener('input', function(){ syncFundGoal(this.value); });
+})();
 </script>
 </body>
 </html>
