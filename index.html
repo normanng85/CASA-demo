@@ -67,6 +67,51 @@
       .nav-btn.active-xlab  { background:rgba(123,31,162,0.22); color:#CE93D8; border-color:#7B1FA2; }
     }
 
+    /* ── Password gate modal ── */
+    #pw-gate-overlay {
+      display:none; position:fixed; inset:0; z-index:9999;
+      background:rgba(0,0,0,0.55); backdrop-filter:blur(4px);
+      align-items:center; justify-content:center;
+    }
+    #pw-gate-overlay.open { display:flex; }
+    #pw-gate-box {
+      background:var(--surface,#fff); border-radius:16px;
+      box-shadow:0 8px 40px rgba(0,0,0,0.28); padding:36px 40px 32px;
+      min-width:320px; max-width:90vw; text-align:center;
+      animation:pwPop .18s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes pwPop { from{transform:scale(.85);opacity:0} to{transform:scale(1);opacity:1} }
+    #pw-gate-box .pw-icon { font-size:2.4rem; margin-bottom:8px; }
+    #pw-gate-box h3 { margin:0 0 4px; font-size:1.1rem; color:var(--text,#222); }
+    #pw-gate-box p  { margin:0 0 18px; font-size:.85rem; color:var(--muted,#888); }
+    #pw-gate-input {
+      width:100%; box-sizing:border-box; padding:10px 14px; font-size:1rem;
+      border:2px solid var(--border,#ddd); border-radius:8px;
+      background:var(--surface2,#f5f5f5); color:var(--text,#222);
+      outline:none; margin-bottom:12px; text-align:center; letter-spacing:.12em;
+    }
+    #pw-gate-input:focus { border-color:#C62828; }
+    #pw-gate-input.shake {
+      animation:pwShake .35s; border-color:#C62828;
+    }
+    @keyframes pwShake {
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-7px)} 40%{transform:translateX(7px)}
+      60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
+    }
+    #pw-gate-err { color:#C62828; font-size:.82rem; min-height:1.1em; margin-bottom:10px; }
+    #pw-gate-btns { display:flex; gap:10px; justify-content:center; }
+    .pw-btn-go {
+      background:#C62828; color:#fff; border:none; border-radius:8px;
+      padding:9px 24px; font-size:.95rem; font-weight:600; cursor:pointer;
+    }
+    .pw-btn-go:hover { background:#a51f1f; }
+    .pw-btn-cancel {
+      background:transparent; color:var(--muted,#888); border:1px solid var(--border,#ddd);
+      border-radius:8px; padding:9px 18px; font-size:.95rem; cursor:pointer;
+    }
+    .pw-btn-cancel:hover { background:var(--surface2,#f5f5f5); }
+
     /* LAYOUT */
     .page { display:none; } .page.on { display:block; }
     main { max-width:1200px; margin:0 auto; padding:1.5rem 1.5rem 3rem; }
@@ -383,7 +428,7 @@
   <a class="nav-btn" onclick="return showPage('explorer',this,'active-expl')" href="#">
     <span class="icon">📊</span> Explorer
   </a>
-  <a class="nav-btn" onclick="return showPage('executive',this,'active-exec')" href="#">
+  <a class="nav-btn" id="exec-nav-btn" onclick="return openExecGate(this)" href="#">
     <span class="icon">📋</span> Executive Summary
   </a>
   <a class="nav-btn" onclick="return showPage('experimental',this,'active-xlab')" href="#">
@@ -393,6 +438,22 @@
 
 </nav>
 
+
+<!-- ── Password gate modal ── -->
+<div id="pw-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="pw-gate-title">
+  <div id="pw-gate-box">
+    <div class="pw-icon">🔒</div>
+    <h3 id="pw-gate-title">Executive Summary</h3>
+    <p>This section is password protected.</p>
+    <input id="pw-gate-input" type="password" placeholder="Enter password" autocomplete="off"
+           onkeydown="if(event.key==='Enter')checkExecPw(); if(event.key==='Escape')closeExecGate();">
+    <div id="pw-gate-err"></div>
+    <div id="pw-gate-btns">
+      <button class="pw-btn-cancel" onclick="closeExecGate()">Cancel</button>
+      <button class="pw-btn-go" onclick="checkExecPw()">Unlock</button>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════
      PAGE 6 — EXECUTIVE SUMMARY
@@ -1551,6 +1612,49 @@ function toggleSection(btn) {
 }
 
 /* ═══ NAV ═══ */
+/* ── Executive Summary password gate ── */
+var _execNavEl = null;
+function openExecGate(el) {
+  _execNavEl = el;
+  var overlay = document.getElementById('pw-gate-overlay');
+  var input   = document.getElementById('pw-gate-input');
+  var err     = document.getElementById('pw-gate-err');
+  err.textContent = '';
+  input.value = '';
+  input.classList.remove('shake');
+  overlay.classList.add('open');
+  setTimeout(function(){ input.focus(); }, 80);
+  return false;
+}
+function closeExecGate() {
+  document.getElementById('pw-gate-overlay').classList.remove('open');
+  document.getElementById('pw-gate-input').value = '';
+  document.getElementById('pw-gate-err').textContent = '';
+  _execNavEl = null;
+}
+function checkExecPw() {
+  var val = document.getElementById('pw-gate-input').value;
+  var err = document.getElementById('pw-gate-err');
+  var inp = document.getElementById('pw-gate-input');
+  if (val.trim().toLowerCase() === 'casa') {
+    document.getElementById('pw-gate-overlay').classList.remove('open');
+    showPage('executive', _execNavEl, 'active-exec');
+    _execNavEl = null;
+  } else {
+    err.textContent = 'Incorrect password. Please try again.';
+    inp.classList.remove('shake');
+    void inp.offsetWidth; /* reflow to restart animation */
+    inp.classList.add('shake');
+    inp.value = '';
+    setTimeout(function(){ inp.focus(); }, 50);
+  }
+}
+/* Close overlay on outside click */
+document.addEventListener('click', function(e){
+  var overlay = document.getElementById('pw-gate-overlay');
+  if (overlay && overlay.classList.contains('open') && e.target === overlay) closeExecGate();
+});
+
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
   document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab'); });
