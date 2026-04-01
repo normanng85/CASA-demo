@@ -67,6 +67,47 @@
       .nav-btn.active-xlab  { background:rgba(123,31,162,0.22); color:#CE93D8; border-color:#7B1FA2; }
     }
 
+    /* ── Analysis button ── */
+    .analysis-btn {
+      display:inline-flex; align-items:center; gap:4px;
+      background:transparent; border:1px solid var(--border);
+      border-radius:6px; padding:3px 9px; font-size:11px;
+      color:var(--text2); cursor:pointer; margin-left:6px;
+      transition:background .15s, color .15s, border-color .15s;
+      white-space:nowrap; flex-shrink:0;
+    }
+    .analysis-btn:hover { background:var(--surface2); color:var(--text); border-color:var(--text3); }
+
+    /* ── Analysis modal ── */
+    #an-overlay {
+      display:none; position:fixed; inset:0; z-index:9998;
+      background:rgba(0,0,0,0.45); backdrop-filter:blur(3px);
+      align-items:center; justify-content:center;
+    }
+    #an-overlay.open { display:flex; }
+    #an-box {
+      background:var(--surface,#fff); border-radius:14px;
+      box-shadow:0 8px 40px rgba(0,0,0,0.22); padding:28px 32px 24px;
+      max-width:480px; width:90vw;
+      animation:anPop .16s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes anPop { from{transform:scale(.88);opacity:0} to{transform:scale(1);opacity:1} }
+    #an-box .an-icon { font-size:1.4rem; margin-bottom:6px; }
+    #an-box .an-title { font-size:.8rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.07em; color:var(--text3); margin-bottom:6px; }
+    #an-box .an-head  { font-size:1rem; font-weight:600; color:var(--text); margin-bottom:12px; line-height:1.35; }
+    #an-box .an-body  { font-size:.9rem; color:var(--text2); line-height:1.65; margin:0; }
+    #an-close {
+      margin-top:18px; display:block; width:100%;
+      background:var(--surface2); border:1px solid var(--border);
+      border-radius:8px; padding:8px; font-size:.88rem;
+      color:var(--text2); cursor:pointer;
+    }
+    #an-close:hover { background:var(--bg); }
+    @media (prefers-color-scheme: dark) {
+      #an-box { background:var(--surface); }
+    }
+
     /* ── Password gate modal ── */
     #pw-gate-overlay {
       display:none; position:fixed; inset:0; z-index:9999;
@@ -439,6 +480,17 @@
 </nav>
 
 
+<!-- ── Chart analysis modal ── -->
+<div id="an-overlay" role="dialog" aria-modal="true">
+  <div id="an-box">
+    <div class="an-icon">💡</div>
+    <div class="an-title">Chart Analysis</div>
+    <div class="an-head" id="an-head"></div>
+    <p class="an-body" id="an-body"></p>
+    <button id="an-close" onclick="closeAnalysis()">Close</button>
+  </div>
+</div>
+
 <!-- ── Password gate modal ── -->
 <div id="pw-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="pw-gate-title">
   <div id="pw-gate-box">
@@ -511,6 +563,30 @@
       </div>
     </div>
 
+    <!-- 2 additional KPIs: cost efficiency + throughput -->
+    <div class="drill-kpi-bar n4" style="margin-bottom:1.75rem;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">Cost per Child Served (FY25)</div>
+        <div class="dk-val">$894</div>
+        <div class="dk-up">↑ from $678 in FY24 — investment growing</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Cases Closed FY25</div>
+        <div class="dk-val">50</div>
+        <div class="dk-up">62% reunification — 5-yr high outcome rate</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Avg Child Age (Feb 2026)</div>
+        <div class="dk-val">8.8 yrs</div>
+        <div class="dk-sub">52% of children under age 10</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Geographic Concentration</div>
+        <div class="dk-val">41%</div>
+        <div class="dk-sub">of FY25 cases in top 3 zip codes</div>
+      </div>
+    </div>
+
     <!-- 4 mini trend charts -->
     <div class="two" style="margin-bottom:1.25rem;">
       <div class="card">
@@ -554,6 +630,8 @@
       <div class="insight watch"><div class="itag">Watch — Volunteer Headcount</div><p>Volunteers declined 5.5% from the FY24 peak of 128 to 121 in FY25. New cohort recruitment (23 in FY25) needs to accelerate to offset attrition and return toward the peak.</p></div>
       <div class="insight watch"><div class="itag">Watch — Donor Retention Risk</div><p>57% of FY25 donors (159 of 278) are giving for the first time. National first-year donor retention is ~19%, meaning ~130 could lapse without active stewardship — the most urgent FY26 fundraising risk.</p></div>
       <div class="insight alert"><div class="itag">Risk — Revenue Concentration</div><p>4 cash donors gave $5K+ in FY25, representing 20% of all cash revenue ($21K of $107K). Two in-kind donors gave $5K+. This concentration creates real vulnerability if major donors lapse.</p></div>
+      <div class="insight positive"><div class="itag">Strength — Investment per Child</div><p>Cost per child served grew from $293 (FY21) to $894 (FY25) — a 3× increase that reflects the program's fundraising growth outpacing caseload. Greater investment per child typically correlates with more volunteer hours, stronger court advocacy, and better permanency outcomes.</p></div>
+      <div class="insight watch"><div class="itag">Watch — Geographic Concentration</div><p>41% of FY25 cases are concentrated in just 3 zip codes: Carteret (07008, 30 children), Metuchen/Edison (08817, 25), and New Brunswick (08901, 14). Intentional volunteer recruitment in these communities — particularly Spanish-speaking advocates for Carteret and Perth Amboy — would improve geographic matching and cultural continuity for families.</p></div>
     </div>
 
     <footer>Executive Summary · CASA Middlesex County · FY25 · Data through Feb 2026</footer>
@@ -1655,12 +1733,195 @@
       <strong>Reading this chart:</strong> The 2-year tenure mark is the largest single cohort (25 volunteers), suggesting strong retention through the early critical period. The 7 ten-year-plus veterans represent irreplaceable institutional knowledge. The relatively small 0–1 year cohort (23) compared to the 2–4 year band means the corps is mature — experienced but will need renewed recruitment to sustain numbers as senior volunteers retire.
     </div>
 
+    <!-- ▸ 9. AVERAGE AGE OF CHILDREN SERVED -->
+    <div class="section-title">Average Age of Children Served</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Weighted average age computed from monthly age distributions (Jul 2025–Feb 2026). Shows whether the program is shifting toward younger or older children over time, and how the five age bands are composed each month.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:14px;">
+      <div class="drill-kpi"><div class="dk-lbl">Avg age — Feb 2026</div><div class="dk-val">8.8 yrs</div><div class="dk-sub">down from 8.9 in Jul 2025</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Under age 10</div><div class="dk-val">52%</div><div class="dk-sub">consistently 51–53% all 8 months</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Age 13 and over</div><div class="dk-val">35%</div><div class="dk-sub">stable across all 8 months</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Age trend</div><div class="dk-val">Stable</div><div class="dk-sub">±0.2 yrs variation — no drift</div></div>
+    </div>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="chart-toolbar"><div class="card-title">Age band composition by month — Jul 2025–Feb 2026 (% of active children)</div></div>
+      <div class="chart-hint">Stacked bars show % of children in each age band per month · Average age line overlaid on right axis</div>
+      <div class="cw" style="height:240px"><canvas id="xp_c6"></canvas></div>
+    </div>
+    <div class="drill-callout" style="margin-bottom:1.75rem;">
+      <strong>What this tells us:</strong> The average age of children in CASA care is remarkably stable at 8.7–8.9 years. The 0–3 age band (infants and toddlers) is consistently the program's largest group, representing roughly 27% of the caseload each month. The near-absence of variation across months means the program's age profile is structurally determined — driven by systemic referral patterns rather than seasonal intake fluctuations. This consistency simplifies resource planning but underscores the sustained need for volunteers comfortable working with very young children and their families.
+    </div>
+
     <footer>Experimental Views · CASA Middlesex County · FY25 · Data through Feb 2026 · For internal planning use</footer>
   </main>
 </div>
 
 
 <script>
+/* ══════════════════════════════════════════
+   CHART ANALYSIS — LOOKUP TABLE + AUTO-INJECT
+══════════════════════════════════════════ */
+var CHART_ANALYSIS = {
+  /* ── Executive Summary ── */
+  'Monthly child census — Jul 2025–Feb 2026':
+    'Active children peaked at 128 in August 2025 and dipped to 117 in January before rebounding to 126 in February — an 8-month average of 123. The January trough followed by the strongest single-month rebound (+9) suggests a typical seasonal intake pattern at the start of the calendar year. Overall the caseload is stable and well within the current volunteer corps\u2019 capacity.',
+  'Annual fundraising — FY21–FY25':
+    'Total revenue nearly tripled from $49K in FY21 to $149K in FY25, with the sharpest acceleration in FY24–FY25. Cash giving led the surge, rising 58% in FY25 to $107K, while in-kind normalized from FY24\u2019s exceptional $62K spike to a still-strong $42K. The five-year trajectory reflects a fundamentally expanded donor base, not just larger gifts from existing supporters.',
+  'Volunteer headcount — FY21–FY25':
+    'The volunteer corps grew steadily from 111 in FY21 to a peak of 128 in FY24 before a 5.5% decline to 121 in FY25. Despite the dip, 81% of FY25 volunteers have two or more years of service — the most experienced corps in the five-year dataset. Recruiting one modest cohort of 10–15 new volunteers in FY26 would restore the program to its peak headcount.',
+  'Case closures — reunification vs other — FY21–FY25':
+    'FY25\u2019s 62% reunification rate across 50 closures is the strongest outcome in the five-year dataset, nearly doubling FY24\u2019s 34%. The improvement is especially striking given that FY24 had the highest total closures (67), suggesting FY25\u2019s smaller closure volume reflects cases held open longer to achieve better outcomes. This single metric is the clearest indicator of CASA\u2019s program effectiveness.',
+
+  /* ── Child Demographics ── */
+  'Monthly active children — Jul 2025 to Feb 2026':
+    'The monthly caseload ranged from 117 to 128 children, averaging 123 per month across the period. The August peak likely reflects summer court calendars and school-year transition cases entering the system. The strong February rebound of +9 children is the largest single-month increase in the tracked period, signaling healthy new-case intake to start the calendar year.',
+  'Month-over-month census change':
+    'Month-over-month changes were modest throughout, ranging from \u22125 (Sep\u2192Oct) to +9 (Jan\u2192Feb). The small magnitude of fluctuations confirms the caseload is structurally stable — neither growing rapidly nor declining. The +9 February rebound is the standout movement, suggesting a batch of new referrals resolved from January court activity.',
+  'Race/ethnicity change — Jul 2025 to Feb 2026':
+    'Black/African American children showed the largest absolute change, increasing from 34 in July to 42 in February — an 8-child gain and a shift from 27% to 33% of the caseload. White children declined from 40 to 35 over the same period, while Hispanic/Latino remained relatively stable at 21\u201326. The growing Black/African American share strengthens the equity case for targeted volunteer recruitment in that community.',
+  'Age heatmap — all 20 individual ages \u00d7 8 months':
+    'The heatmap reveals that ages 0\u20133 and 13\u201317 consistently produce the warmest cells — the youngest and older adolescent children dominate CASA\u2019s caseload in almost equal measure. Middle childhood ages (5\u201311) show steady, moderate presence throughout. The pattern is highly stable across all eight months, confirming the age distribution is driven by systemic referral patterns rather than seasonal variation.',
+  'Foster care subtypes — FC/court id, FC/avail adopt, FC/18+':
+    'FC/court id is the dominant subtype by a wide margin, representing children placed via court identification — the most common foster care pathway. FC/18+ (aging-out youth) shows a slight upward trend and represents some of the highest-stakes advocacy, as these young people face emancipation without family permanency. FC/avail adopt cases are smaller in number but signal children in limbo awaiting permanency decisions, requiring particularly focused CASA support.',
+  'Closure reasons by year — stacked':
+    'Reunification has been the most common closure reason in every year of the dataset, ranging from 36% in FY23 to 62% in FY25. FY25\u2019s closure profile — 31 of 50 cases reunified — is the strongest on record, representing an 82% improvement over FY24\u2019s rate. The stacked view makes clear that FY22 (65 closures) and FY24 (67 closures) were high-volume years, while FY25 prioritized quality of outcome over quantity.',
+  'Top 3 closure reasons — trend lines':
+    'Reunification shows the most variable trend, swinging from a five-year low of 36% in FY23 to a high of 62% in FY25. Adoption surged in FY22\u2013FY23 before declining, while KLG (kinship legal guardianship) has trended downward. The year-to-year volatility in reunification rates likely reflects changing court dynamics and county-level family services capacity rather than CASA program performance alone.',
+  'Gender split — Feb 2026':
+    'The February 2026 caseload is 54% male and 46% female — a slight male skew compared to the national foster care average of approximately 51% male (AFCARS). The near-equal split means CASA\u2019s advocacy needs span both genders in roughly equal measure. Volunteer gender composition (83% female) does not closely mirror child gender, which is worth monitoring for cultural competency in casework.',
+  'Female vs male over time':
+    'Female children declined slightly from 65 in July to 58 in February while male count grew from 62 to 68, widening the gap over the period. The trend is modest but directional — the male majority is strengthening. Neither the individual counts nor the ratio suggests a concerning structural shift; monthly fluctuations within this range are expected.',
+  'Annual Census — Total Active Children':
+    'Annual caseload peaked in FY23 at 203 before declining to 167 in FY25 — the lowest in the five-year dataset. The three-year decline has coincided with strong improvements in volunteer coverage ratio and reunification outcomes, suggesting CASA is serving a smaller but better-supported caseload. The downward trend is worth monitoring to distinguish between reduced system referrals and unmet need.',
+  'Annual Race Distribution':
+    'White children were the plurality in FY21\u2013FY22 but Black/African American children overtook that position by FY25. Hispanic/Latino children have remained consistently around 22\u201326 per year — stable but under-represented in volunteer demographics relative to their share of the caseload. The five-year shift in racial composition reinforces the importance of ongoing diversity-focused volunteer recruitment.',
+  'Petition Types — Annual':
+    'FN (foster care/neglect) petitions have consistently dominated the petition mix, though their share has shifted slightly over five years. FG (guardianship) petitions have shown the clearest growth trend, consistent with national child welfare policy preferences for kinship placement. The multi-year pattern confirms that petition type distribution is structurally determined by court and DCF practices rather than year-to-year variation.',
+
+  'Race/ethnicity over time':
+    'Black/African American children showed the strongest growth trend over the eight-month period, rising from 34 to 42 — a 24% increase that expanded their share from 27% to 33% of the active caseload. White children declined from 40 to 35 while Two or More race children fell from 18 to 12, together representing the two groups with the largest absolute decreases. The shifting racial composition underscores the importance of intentional recruitment of Black and bilingual volunteers to maintain culturally reflective advocacy matches.',
+  'Race/ethnicity \u2014 Feb 2026':
+    'In February 2026, Black/African American children represent the largest racial group at 33% of the 126-child caseload \u2014 a near-parity with White children at 28% that marks a significant shift from prior years when White children were the plurality. Hispanic/Latino children are the third-largest group at 18%, concentrated in the Carteret and Perth Amboy corridors. Together, Black, Hispanic, and multiracial children account for 61% of the caseload, reinforcing the program\u2019s need for volunteers who reflect and understand these communities.',
+  'Age group trend over time \u2014 4-year bands':
+    'The youngest children (ages 0\u20133) consistently form the largest age band, hovering near 27\u201328% of the active caseload across all eight months \u2014 a stable pattern that reflects court-driven referral patterns for very young children removed for neglect or abuse. The middle and older adolescent bands (9\u201312 and 13\u201315) are nearly equal in size and show minimal month-to-month movement. The age composition\u2019s remarkable stability across the full period confirms this is a structurally determined distribution, not a seasonal artifact.',
+  'Petition types over time':
+    'Foster care/neglect (FN) petitions dominate the caseload but have declined from 89 in July to 77 in February \u2014 a 13% reduction that is the clearest indicator of movement toward permanency in the eight-month dataset. Guardianship (FG) petitions grew from 14 to 22 (+57%), reflecting a positive policy and casework trend toward kinship placement over institutional foster care. FC/18+ petitions grew slightly from 6 to 8, tracking the aging-out population that carries the highest advocacy stakes.',
+  'FN vs FG trend':
+    'The FN line reached a brief peak of 92 in September before declining steadily to 77 by February \u2014 its lowest point in the eight-month period. The FG line moved in the opposite direction, climbing from 14 to 22 (+57%) with no reversals across the entire period. The near-perfect inverse relationship between FN decline and FG growth is a strong signal that cases are progressing toward permanent kinship placements rather than cycling back into the foster care system.',
+
+  /* ── Case Closures ── */
+
+  /* ── Fundraising ── */
+  'Combined giving by fiscal year — cash + in-kind':
+    'Total giving nearly tripled from $49K in FY21 to $149K in FY25, with the most dramatic growth in FY24\u2013FY25. FY24 was defined by exceptional in-kind giving ($62K), while FY25 saw a strong rotation toward cash ($107K) — a healthier, more flexible revenue composition. The five-year growth trajectory reflects sustainable base-building rather than one-time windfalls.',
+  'Cash gifts by fiscal year':
+    'Cash giving declined from FY21 ($42K) to a trough in FY22 ($36K) before recovering strongly to a five-year high of $107K in FY25. The FY25 figure is 58% above FY24 and nearly three times FY22 — driven by a combination of a larger donor count and successful major gift cultivation. Cash giving is the most operationally flexible revenue type, making this trajectory particularly significant for program planning.',
+  'In-kind gifts by fiscal year':
+    'In-kind giving was flat at $7\u20138K from FY21\u2013FY23 before spiking to $62K in FY24 — an 8\u00d7 increase in one year. FY25 saw a partial normalization to $42K, which still represents a 5\u00d7 increase over the FY21\u2013FY23 baseline. The FY24 spike appears driven by large organizational in-kind contributions that partially recurred in FY25, suggesting a small number of institutional in-kind donors are driving significant variability.',
+  'Avg & median cash gift vs donor count by fiscal year':
+    'The average cash gift peaked at $871 in FY23 when donor count was low (75), then fell to $386 in FY25 as the donor base tripled. This reflects the classic dilution effect: adding many smaller first-time donors pulls the average down even as total revenue grows. The median gift is a more reliable health indicator — tracking it against the average reveals the degree of reliance on a small number of major donors.',
+  'FY25 donor channel overlap — cash vs in-kind':
+    'Only 9 FY25 donors gave in both the cash and in-kind channels — the vast majority participated in only one channel. This indicates two largely distinct donor communities with different motivations, networks, and cultivation needs. Cross-channel conversion — encouraging cash donors to participate in in-kind campaigns and vice versa — represents a low-cost revenue growth lever worth testing in FY26.',
+  'Retained donor movement — FY24 \u2192 FY25 (72 donors)':
+    'Of the 72 donors retained from FY24 into FY25, 25 upgraded to a higher gift tier and 23 moved down — a net positive movement in the retained cohort. The 25 upgrades represent the highest-value fundraising activity: retained donors who give more require no acquisition cost and signal deepening commitment. Understanding what motivated the upgraders (event, personal ask, communication) is the most actionable data point in this chart.',
+  'Donor tenure — consecutive years of giving':
+    'The donor base skews heavily toward short tenure, with first-year donors dominating the distribution and only 85 donors having given for three or more consecutive years. Building the multi-year cohort is the single most efficient path to sustainable fundraising — multi-year donors retain at 60\u201370% nationally compared to 19% for first-year donors. Even retaining an additional 30 of FY25\u2019s 159 new donors into FY26 would represent meaningful structural improvement.',
+  'Lifetime donor value (LTV) concentration — cumulative giving all years':
+    'The top 16 donors ($5K+ lifetime) hold 62% of all cumulative giving — a textbook Pareto concentration that is both a strength and a risk. These relationships are irreplaceable and warrant white-glove stewardship, personalized communication, and board-level engagement. The long tail of smaller donors is valuable for community breadth and resilience, but the program\u2019s financial health is disproportionately tied to a handful of major supporters.',
+  'Number of donors by gift size range — FY25 (cash + in-kind combined)':
+    'The $100\u2013$499 range holds the most donors (97), forming the broad middle of the donor pyramid. The $1\u201399 tier is large in count but small in total revenue contribution — it represents brand-new donors, younger supporters, and community engagement rather than financial capacity. Moving 15\u201320 donors from the $100\u2013$499 tier into the $500\u2013$999 range in FY26 through personal outreach would add meaningful unrestricted revenue with minimal lift.',
+  'Cash giving — individuals vs organizations':
+    'Individual donors drive the substantial majority of cash giving in every year, with organizational cash (foundations, businesses, civic groups) playing a secondary but growing role. FY25\u2019s individual cash surge to over $95K reflects the broad donor acquisition success that year. Building a formal corporate and foundation outreach program would diversify the revenue base and reduce concentration risk from individual donors.',
+  'In-kind giving — individuals vs organizations':
+    'Organizational in-kind donors (businesses donating goods or services) drove the FY24 spike and remain a larger share of in-kind giving than they are of cash giving. This suggests a distinct community of corporate and institutional partners who prefer non-cash engagement. A structured corporate in-kind program with defined ask amounts and recognition tiers could systematize this revenue stream into a predictable annual source.',
+  'Active donor count by fiscal year':
+    'Active donors grew from 69 in FY21 to 278 in FY25 — a 303% increase over five years with the most dramatic jump in FY24\u2013FY25 (+170 donors). The surge is unprecedented and likely reflects a targeted campaign, event, or peer-to-peer activation that acquired donors at scale. Sustaining even 30\u201335% of FY25\u2019s 159 new donors into FY26 would still represent a net gain over any prior year in the dataset.',
+  'Donor retention FY24 \u2192 FY25':
+    '57% of FY25\u2019s 278 donors are giving for the first time, while only 26% were retained from FY24 — a retention rate below the 30\u201335% sector benchmark. First-year donor retention nationally runs approximately 19\u201325%, meaning without active stewardship, roughly 120\u2013130 of the new donors will not give again in FY26. A 90-day stewardship sequence — thank-you call, impact report, personal story — for all 159 new donors is the highest-ROI FY26 fundraising investment.',
+
+  /* ── Volunteers ── */
+  'Active Volunteer Headcount — FY21 to FY25':
+    'The volunteer corps grew steadily from 111 in FY21 to a peak of 128 in FY24 before a modest decline to 121 in FY25. The five-year trend shows strong net growth (+9%) despite the recent dip, and 121 volunteers comfortably supports the current caseload at a 1.38 children-per-volunteer ratio. Returning to the FY24 peak requires a net gain of just 7 volunteers — achievable with one small recruiting cohort.',
+  'Age Distribution by Fiscal Year':
+    'The 40\u201359 age cohort dominates the volunteer corps in every year, reflecting the demographic reality that mid-career and pre-retirement adults have both the life experience and schedule flexibility CASA requires. The 21\u201329 cohort is small but stable, representing an important long-tenured pipeline — younger volunteers who stay will accumulate the most service years. Targeted recruitment of young professionals and graduate students in the Edison and New Brunswick corridors could grow this cohort.',
+  'Gender Breakdown by Fiscal Year':
+    'Female volunteers have maintained a consistent ~83% share across all five years, closely mirroring the national CASA average of ~84% female. The male share grew slightly from 14% in FY21 to 17% in FY25, a positive if modest trend. Intentional male-targeted recruitment — messaging through fathers\u2019 groups, sports coaching networks, and professional associations — could accelerate gender balance and broaden the advocacy perspectives available to children.',
+  'Race & Ethnicity by Fiscal Year':
+    'White volunteers declined from 77% in FY21 to 48% in FY25 — a dramatic 29-point diversification in four years that far exceeds the national CASA trend of ~70\u201375% white. Asian representation grew substantially, while Black and Hispanic volunteer shares increased but remain below their proportional share of the children served (19% vs 33%, and 8% vs 18% respectively). The trajectory is strongly positive but the equity gap with the caseload demographics warrants continued intentional recruitment.',
+  'Education Level Trend (FY21\u2013FY25)':
+    'The volunteer corps is highly educated, with approximately 76% holding a bachelor\u2019s degree or higher in FY25 — above the national CASA average of 65\u201370%. This pattern reflects the nature of CASA\u2019s advocacy work, which requires report writing, court appearances, and complex case navigation. Volunteer training requirements may naturally filter toward candidates with academic or professional backgrounds, though this also creates a socioeconomic barrier worth monitoring in recruitment outreach.',
+  'Non-English Languages Spoken (FY25)':
+    'Spanish is by far the most represented non-English language in the FY25 volunteer corps, which is particularly valuable given that 18% of children served are Hispanic/Latino — concentrated in Spanish-speaking communities like Carteret and Perth Amboy. The presence of Hindi and Urdu speakers reflects the Edison corridor\u2019s South Asian population and broadens the program\u2019s cultural reach. Actively publicizing language assets in volunteer recruitment materials signals to multilingual communities that CASA is a culturally accessible organization.',
+  'Years of Service Distribution (FY25)':
+    'The 2-year cohort is the single largest group at 25 volunteers, suggesting the program successfully retains advocates through the difficult first year — a historically high-attrition point in most volunteer organizations. Veterans with 5+ years total 37 (31% of the corps), providing an experienced anchor for complex cases and informal mentorship. The very small 0-year cohort (2 volunteers) signals that the FY25 recruiting class was unusually small and needs to be significantly expanded in FY26 to sustain corps size.',
+
+  /* ── Zip Codes ── */
+  'Top 10 Zip Codes by Total Removals — FY21 to FY25':
+    '07008 (Carteret) and 08817 (Metuchen/Edison) together account for 55 of the 167 FY25 cases — a third of the entire caseload in just two zip codes. Carteret\u2019s five-year total of 130 assignments makes it the single highest-volume geography by a wide margin, driven by its dense, predominantly Hispanic/Latino population. These same corridors should anchor volunteer recruitment geography, particularly for Spanish-speaking advocates.',
+  'Year-over-Year Trend — Top 5 Zip Codes':
+    '08817 (Metuchen/Edison) shows the sharpest growth trajectory of any zip code — from 8 cases in FY21 to 25 in FY25, a 3\u00d7 increase that makes it the second-highest volume zip after Carteret. Simultaneously, 08901 (New Brunswick) declined from 27 to 14 cases — a 48% drop suggesting changes in that community\u2019s child welfare dynamics or referral patterns. The divergence between Edison\u2019s rise and New Brunswick\u2019s decline is the most strategically significant geographic story in the dataset.',
+  'Annual Caseload Totals — FY21 to FY25':
+    'Total caseload peaked at 203 in FY23 and has declined to 167 in FY25 — the lowest in the dataset. The three-year decline corresponds with a period of growing volunteer corps capacity and rising fundraising, suggesting better-resourced programming may be enabling earlier, more effective interventions. A continued caseload decline warrants monitoring to distinguish improved outcomes from reduced system referrals or unmet need.',
+
+  /* ── Experimental ── */
+  'Jul 2025 \u2014 Monthly Snapshot':
+    'The July 2025 snapshot captures the baseline state of the active caseload at the start of the tracked period \u2014 127 children across six racial categories and five age bands. White children led with 40 (32%) and infants and toddlers (0\u20133) formed the largest age band at roughly 26% of all children. Use the slider to track how the caseload composition shifted through February 2026, or compare any two months to identify directional trends in race and age distribution.',
+  'Children per volunteer — FY21–FY25':
+    'The coverage ratio improved from 1.51 in FY21 to 1.38 in FY25, crossing below the published CASA National target threshold of 1.5 for the first time. The worst year was FY23 at 1.64, when caseload spiked to 203 while volunteer growth lagged. The current trajectory — improving ratio with a slightly declining caseload — is the most favorable conditions for quality advocacy the program has experienced in five years.',
+  'Race composition — children served (Feb 2026) vs. volunteers (FY25)':
+    'The most significant representation gap is Black/African American: 33% of children served but only 19% of volunteers — a 14-point deficit. Hispanic/Latino shows a similar 10-point gap. These gaps mean Black and Hispanic children are statistically less likely to be matched with a volunteer who shares their racial or cultural background, which research links to reduced advocacy effectiveness and shorter case duration. Both communities are geographic recruitment priorities.',
+  'Volunteer headcount — with FY26 goal':
+    'The slider lets you model FY26 ambitions against five years of actuals. Returning to the FY24 peak of 128 requires a net gain of just 7 volunteers — roughly one small recruiting cohort. More aggressive targets (135+) imply a structural expansion requiring both new cohort classes and improved early-tenure retention beyond the current ~19% one-year rate.',
+  'Total raised — with FY26 goal':
+    'Five years of fundraising growth provide context for FY26 goal-setting. Sustaining FY25\u2019s 15% year-over-year growth rate implies a target of approximately $171K. A stretch goal matching FY25 cash performance while rebuilding in-kind to FY24 levels ($62K) would push total giving past $200K — nearly doubling FY23\u2019s total in just two years.',
+  'Removal zip code map — Middlesex County, NJ · FY25 caseload':
+    'The northeast corridor — Carteret, Metuchen/Edison, and Avenel — dominates the FY25 caseload geographically, accounting for 41% of all cases in just three zip codes. The clustering is not coincidental: these are densely populated, lower-income urban communities with higher rates of family system involvement and housing instability. Targeted community presence and volunteer recruitment in these specific neighborhoods would yield the highest per-volunteer impact.',
+  'FY25 performance vs. CASA National benchmarks':
+    'Middlesex outperforms national benchmarks on five of eight scored metrics, with green flags on reunification rate, volunteer-to-child ratio, volunteer retention, fundraising growth, and new donor acquisition. The two watch-level flags — volunteer headcount decline and high new-donor concentration — are planning priorities for FY26, not program failures. The two diversity representation gaps are the most structurally persistent challenges and require sustained, community-specific recruitment investment.',
+  'FY25 volunteer corps — years of service distribution (n=121)':
+    'The experience pyramid shows a healthy middle bulge: 54 volunteers (45%) are in the 2\u20134 year developing range, suggesting strong early-tenure retention through the critical first few years. The 7 ten-year veterans are irreplaceable institutional assets — their case complexity capacity and mentorship value far exceeds their numerical share. With only 2 brand-new (0-year) volunteers in FY25, the incoming class was unusually thin and expanding recruitment is the most urgent workforce planning priority.',
+  'Age band composition by month — Jul 2025–Feb 2026 (% of active children)':
+    'The age composition is strikingly consistent across all eight months — the stacked bars maintain nearly identical proportions, with infants and toddlers (0\u20133) the largest band at roughly 27% each month. The red average age line hovering at 8.7\u20138.9 years with minimal variation confirms that the program\u2019s age profile is structurally determined by referral and court patterns, not by seasonal intake fluctuations. This consistency simplifies program planning but highlights the sustained need for volunteers skilled in advocating for very young children.',
+
+  /* ── Explorer ── */
+  'Custom Chart':
+    'This chart was built using the custom explorer. Select any combination of demographic, fundraising, or zip code variables from the left panel to compare trends across the full five-year dataset. Hover over data points for precise values, and use the export button to save the chart as a PNG.',
+};
+
+function showAnalysis(title, body) {
+  document.getElementById('an-head').textContent = title;
+  document.getElementById('an-body').textContent = body;
+  document.getElementById('an-overlay').classList.add('open');
+}
+function closeAnalysis() {
+  document.getElementById('an-overlay').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeAnalysis();
+});
+document.addEventListener('click', function(e){
+  var overlay = document.getElementById('an-overlay');
+  if (overlay && overlay.classList.contains('open') && e.target === overlay) closeAnalysis();
+});
+
+function initAnalysisButtons() {
+  document.querySelectorAll('.card-title').forEach(function(el) {
+    var rawTitle = el.textContent.trim();
+    // Normalise HTML entities in key lookup
+    var title = rawTitle.replace(/&amp;/g,'&').replace(/&gt;/g,'>').replace(/&lt;/g,'<');
+    var body = CHART_ANALYSIS[title] || CHART_ANALYSIS[rawTitle];
+    if (!body) return;
+    // Don't double-inject
+    if (el.querySelector('.analysis-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'analysis-btn';
+    btn.innerHTML = '💡 Analysis';
+    btn.title = 'View chart analysis';
+    btn.setAttribute('type','button');
+    (function(t,b){ btn.addEventListener('click', function(e){ e.stopPropagation(); showAnalysis(t,b); }); })(title, body);
+    el.appendChild(btn);
+  });
+}
+
 /* ═══ COLLAPSIBLE SECTIONS ═══ */
 function toggleSection(btn) {
   var body = btn.nextElementSibling;
@@ -3639,6 +3900,7 @@ function init() {
 
 init();
 initExplorer();
+initAnalysisButtons();
 
 /* ═══════════════════════════════════════════
    EXECUTIVE SUMMARY CHARTS
@@ -3953,6 +4215,65 @@ initExplorer();
       return                                          { emoji:'🔴', label:'Needs attention' };
     }
   }
+
+  // xp_c6: Average age trend — stacked % bars + avg age line
+  (function(){
+    var bandDefs   = [[0,3],[4,8],[9,12],[13,15],[16,19]];
+    var bandLabels = ['0–3 yrs','4–8 yrs','9–12 yrs','13–15 yrs','16–18+ yrs'];
+    var bandColors = [
+      'rgba(59,139,212,0.75)','rgba(15,110,86,0.72)','rgba(186,117,23,0.72)',
+      'rgba(163,45,45,0.72)','rgba(83,74,183,0.72)'
+    ];
+
+    // Compute % per band per month and weighted avg age
+    var bandPct = bandDefs.map(function(b){
+      return dRA.map(function(row,mi){
+        var s = 0; for(var i=b[0];i<=b[1];i++) s+=row[i];
+        return Math.round(s/dT[mi]*100);
+      });
+    });
+    var avgAges = dRA.map(function(row,mi){
+      var wsum=0; for(var i=0;i<20;i++) wsum+=i*row[i];
+      return Math.round(wsum/dT[mi]*10)/10;
+    });
+
+    var datasets = bandDefs.map(function(_,bi){
+      return { label:bandLabels[bi], data:bandPct[bi],
+               backgroundColor:bandColors[bi], borderRadius:2,
+               stack:'age', yAxisID:'y' };
+    });
+    // Avg age line on right axis
+    datasets.push({
+      label:'Avg age (yrs)', data:avgAges, type:'line',
+      borderColor:'#C62828', backgroundColor:'transparent',
+      borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#C62828',
+      tension:0.3, yAxisID:'y2', stack:undefined
+    });
+
+    new Chart(document.getElementById('xp_c6'),{
+      type:'bar',
+      data:{ labels:dM, datasets:datasets },
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{
+          legend:{ labels:{color:TC, font:{size:10}, boxWidth:12},
+                   position:'bottom' },
+          tooltip:{ callbacks:{ label:function(c){
+            if(c.dataset.yAxisID==='y2') return ' Avg age: '+c.raw+' yrs';
+            return ' '+c.dataset.label+': '+c.raw+'%';
+          }}}
+        },
+        scales:{
+          x:{ ticks:{color:TC,font:{size:10}}, grid:{display:false}, stacked:true },
+          y:{ ticks:{color:TC,font:{size:10},callback:function(v){return v+'%';}},
+              grid:{color:GC}, stacked:true, beginAtZero:true, max:100,
+              title:{display:true,text:'% of children',color:TC,font:{size:10}} },
+          y2:{ position:'right', ticks:{color:'#C62828',font:{size:10}},
+               grid:{display:false}, min:7, max:11,
+               title:{display:true,text:'Avg age (yrs)',color:'#C62828',font:{size:10}} }
+        }
+      }
+    });
+  })();
 
   var tbody = document.getElementById('scorecard_body');
   rows.forEach(function(r, i) {
