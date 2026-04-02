@@ -78,34 +78,46 @@
     }
     .analysis-btn:hover { background:var(--surface2); color:var(--text); border-color:var(--text3); }
 
-    /* ── Analysis modal ── */
+    /* ── Analysis side drawer ── */
     #an-overlay {
-      display:none; position:fixed; inset:0; z-index:9998;
-      background:rgba(0,0,0,0.45); backdrop-filter:blur(3px);
-      align-items:center; justify-content:center;
+      display:none; position:fixed; inset:0; z-index:9997;
+      /* transparent backdrop — chart stays fully visible; catches outside clicks */
     }
-    #an-overlay.open { display:flex; }
+    #an-overlay.open { display:block; }
     #an-box {
-      background:var(--surface,#fff); border-radius:14px;
-      box-shadow:0 8px 40px rgba(0,0,0,0.22); padding:28px 32px 24px;
-      max-width:480px; width:90vw;
-      animation:anPop .16s cubic-bezier(.34,1.56,.64,1);
+      position:fixed; top:0; right:0; bottom:0;
+      width:340px; max-width:92vw;
+      background:var(--surface,#fff);
+      border-left:2px solid var(--border);
+      box-shadow:-8px 0 36px rgba(0,0,0,.14);
+      overflow-y:auto; display:flex; flex-direction:column;
+      z-index:9998;
+      transform:translateX(110%);
+      transition:transform .28s cubic-bezier(.32,.72,0,1);
     }
-    @keyframes anPop { from{transform:scale(.88);opacity:0} to{transform:scale(1);opacity:1} }
-    #an-box .an-icon { font-size:1.4rem; margin-bottom:6px; }
-    #an-box .an-title { font-size:.8rem; font-weight:700; text-transform:uppercase;
-      letter-spacing:.07em; color:var(--text3); margin-bottom:6px; }
-    #an-box .an-head  { font-size:1rem; font-weight:600; color:var(--text); margin-bottom:12px; line-height:1.35; }
-    #an-box .an-body  { font-size:.9rem; color:var(--text2); line-height:1.65; margin:0; }
-    #an-close {
-      margin-top:18px; display:block; width:100%;
-      background:var(--surface2); border:1px solid var(--border);
-      border-radius:8px; padding:8px; font-size:.88rem;
-      color:var(--text2); cursor:pointer;
+    #an-box.open { transform:translateX(0); }
+    .an-drawer-hd {
+      display:flex; align-items:center; gap:8px;
+      padding:15px 16px 13px;
+      border-bottom:1px solid var(--border);
+      position:sticky; top:0; background:var(--surface,#fff); z-index:1;
     }
-    #an-close:hover { background:var(--bg); }
+    .an-drawer-bd { padding:20px 18px 36px; flex:1; }
+    #an-box .an-icon { font-size:1.15rem; flex-shrink:0; }
+    #an-box .an-title { font-size:.75rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.07em; color:var(--text3); flex:1; }
+    .an-x {
+      background:none; border:none; cursor:pointer; padding:4px 7px;
+      font-size:.95rem; color:var(--text3); border-radius:6px; line-height:1;
+      transition:background .15s, color .15s;
+    }
+    .an-x:hover { background:var(--surface2); color:var(--text); }
+    #an-box .an-head { font-size:.98rem; font-weight:600; color:var(--text);
+      margin:0 0 14px; line-height:1.4; }
+    #an-box .an-body { font-size:.9rem; color:var(--text2); line-height:1.72; margin:0; }
     @media (prefers-color-scheme: dark) {
       #an-box { background:var(--surface); }
+      .an-drawer-hd { background:var(--surface); }
     }
 
     /* ── Password gate modal ── */
@@ -374,6 +386,22 @@
     .drill-kpi .dk-sub { font-size:11px; color:var(--text3); margin-top:3px; }
     .drill-kpi .dk-up  { font-size:11px; color:#0F6E56; margin-top:3px; }
     .drill-kpi .dk-dn  { font-size:11px; color:#A32D2D; margin-top:3px; }
+    /* ── KPI trend badge & sparkline ── */
+    .dk-badge {
+      display:inline-flex; align-items:center; gap:3px;
+      padding:2px 8px 2px 6px; border-radius:20px;
+      font-size:11px; font-weight:600; margin-top:5px; line-height:1.5;
+    }
+    .dk-badge.up   { background:#dcfce7; color:#15803d; }
+    .dk-badge.dn   { background:#fee2e2; color:#b91c1c; }
+    .dk-badge.warn { background:#fef9c3; color:#854d0e; }
+    .dk-badge.neu  { background:var(--surface2); color:var(--text3); }
+    .dk-spark { display:block; width:100%; height:24px; margin-top:7px; overflow:visible; }
+    @media (prefers-color-scheme:dark) {
+      .dk-badge.up   { background:#052e16; color:#4ade80; }
+      .dk-badge.dn   { background:#450a0a; color:#fca5a5; }
+      .dk-badge.warn { background:#431407; color:#fcd34d; }
+    }
     @media (max-width:600px) { .drill-kpi-bar.n4{grid-template-columns:1fr 1fr;} .drill-kpi-bar.n3{grid-template-columns:1fr 1fr;} }
 
     /* ── DRILL CALLOUT ── */
@@ -480,14 +508,17 @@
 </nav>
 
 
-<!-- ── Chart analysis modal ── -->
-<div id="an-overlay" role="dialog" aria-modal="true">
-  <div id="an-box">
-    <div class="an-icon">💡</div>
-    <div class="an-title">Chart Analysis</div>
+<!-- ── Chart analysis side drawer ── -->
+<div id="an-overlay" onclick="closeAnalysis()"></div>
+<div id="an-box" role="dialog" aria-modal="true" aria-labelledby="an-head">
+  <div class="an-drawer-hd">
+    <span class="an-icon">💡</span>
+    <span class="an-title">Chart Analysis</span>
+    <button class="an-x" onclick="closeAnalysis()" aria-label="Close analysis panel">✕</button>
+  </div>
+  <div class="an-drawer-bd">
     <div class="an-head" id="an-head"></div>
     <p class="an-body" id="an-body"></p>
-    <button id="an-close" onclick="closeAnalysis()">Close</button>
   </div>
 </div>
 
@@ -517,73 +548,84 @@
       <p class="lead">Program snapshot through February 2026, covering monthly caseload (Jul 2025–Feb 2026), volunteer corps (FY25), fundraising (FY25), and case outcomes (FY21–FY25). Use the nav above to drill into any area.</p>
     </div>
 
-    <!-- 8 headline KPIs -->
+    <!-- Row 1: Caseload + Capacity -->
     <div class="drill-kpi-bar n4" style="margin-bottom:12px;">
       <div class="drill-kpi">
         <div class="dk-lbl">Active Children (Feb 2026)</div>
         <div class="dk-val">126</div>
-        <div class="dk-sub">avg 123/month · peaked 128 (Aug)</div>
+        <div class="dk-badge up">↑ +9 vs Jan 2026</div>
+        <svg class="dk-spark" id="sp1" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Active Volunteers (FY25)</div>
         <div class="dk-val">121</div>
-        <div class="dk-dn">↓ 5.5% vs FY24 peak (128)</div>
+        <div class="dk-badge warn">↓ 5.5% vs FY24 peak</div>
+        <svg class="dk-spark" id="sp2" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Children per Volunteer</div>
         <div class="dk-val">1.38</div>
-        <div class="dk-up">↓ from 1.64 in FY23 — improving</div>
+        <div class="dk-badge up">↓ from 1.64 in FY23</div>
+        <svg class="dk-spark" id="sp3" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Total Raised FY25</div>
         <div class="dk-val">$149K</div>
-        <div class="dk-up">↑ 15% vs FY24 ($130K)</div>
+        <div class="dk-badge up">↑ 15% vs FY24</div>
+        <svg class="dk-spark" id="sp4" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
     </div>
+
+    <!-- Row 2: Outcomes + Volunteers -->
     <div class="drill-kpi-bar n4" style="margin-bottom:1.75rem;">
       <div class="drill-kpi">
         <div class="dk-lbl">Active Donors FY25</div>
         <div class="dk-val">278</div>
-        <div class="dk-up">↑ 157% vs FY24 (108)</div>
+        <div class="dk-badge up">↑ 157% vs FY24</div>
+        <svg class="dk-spark" id="sp5" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">FY25 Reunification Rate</div>
         <div class="dk-val">62%</div>
-        <div class="dk-up">↑ from 34% in FY24 — 5-yr high</div>
+        <div class="dk-badge up">↑ from 34% in FY24 — 5-yr high</div>
+        <svg class="dk-spark" id="sp6" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Volunteer Retention (2+ yrs)</div>
         <div class="dk-val">81%</div>
-        <div class="dk-sub">98 of 121 with 2+ years service</div>
+        <div class="dk-badge neu">98 of 121 volunteers</div>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Volunteer Diversity</div>
         <div class="dk-val">52%</div>
-        <div class="dk-up">non-white ↑ from 39% in FY21</div>
+        <div class="dk-badge up">↑ non-white from 39% in FY21</div>
+        <svg class="dk-spark" id="sp8" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
     </div>
 
-    <!-- 2 additional KPIs: cost efficiency + throughput -->
+    <!-- Row 3: Efficiency + Context -->
     <div class="drill-kpi-bar n4" style="margin-bottom:1.75rem;">
       <div class="drill-kpi">
         <div class="dk-lbl">Cost per Child Served (FY25)</div>
         <div class="dk-val">$894</div>
-        <div class="dk-up">↑ from $678 in FY24 — investment growing</div>
+        <div class="dk-badge up">↑ 3× investment since FY21</div>
+        <svg class="dk-spark" id="sp9" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Cases Closed FY25</div>
         <div class="dk-val">50</div>
-        <div class="dk-up">62% reunification — 5-yr high outcome rate</div>
+        <div class="dk-badge neu">62% reunification rate</div>
+        <svg class="dk-spark" id="sp10" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Avg Child Age (Feb 2026)</div>
         <div class="dk-val">8.8 yrs</div>
-        <div class="dk-sub">52% of children under age 10</div>
+        <div class="dk-badge neu">stable across 8 months</div>
       </div>
       <div class="drill-kpi">
         <div class="dk-lbl">Geographic Concentration</div>
         <div class="dk-val">41%</div>
-        <div class="dk-sub">of FY25 cases in top 3 zip codes</div>
+        <div class="dk-badge warn">top 3 of 40+ zip codes</div>
       </div>
     </div>
 
@@ -1890,17 +1932,21 @@ var CHART_ANALYSIS = {
 function showAnalysis(title, body) {
   document.getElementById('an-head').textContent = title;
   document.getElementById('an-body').textContent = body;
+  // show backdrop then slide drawer in (rAF ensures display:block is painted first)
   document.getElementById('an-overlay').classList.add('open');
+  requestAnimationFrame(function(){
+    document.getElementById('an-box').classList.add('open');
+  });
 }
 function closeAnalysis() {
-  document.getElementById('an-overlay').classList.remove('open');
+  document.getElementById('an-box').classList.remove('open');
+  // wait for slide-out transition (280ms) before hiding backdrop
+  setTimeout(function(){
+    document.getElementById('an-overlay').classList.remove('open');
+  }, 300);
 }
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') closeAnalysis();
-});
-document.addEventListener('click', function(e){
-  var overlay = document.getElementById('an-overlay');
-  if (overlay && overlay.classList.contains('open') && e.target === overlay) closeAnalysis();
 });
 
 function initAnalysisButtons() {
@@ -3901,6 +3947,81 @@ function init() {
 init();
 initExplorer();
 initAnalysisButtons();
+
+/* ═══ EXECUTIVE KPI SPARKLINES ═══════════════════════════════════════
+   Each sparkline is drawn as an inline SVG polyline + area fill.
+   Data is sourced directly from the dashboard's existing data arrays.
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  var ns = 'http://www.w3.org/2000/svg';
+
+  function spark(id, data, clr) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var N = data.length, pad = 3, W = 100 - pad*2, H = 24 - pad*2;
+    var min = Math.min.apply(null, data);
+    var max = Math.max.apply(null, data);
+    var rng = max - min || 1;
+    var pts = data.map(function(v, i) {
+      var x = pad + (N === 1 ? W/2 : (i/(N-1))*W);
+      var y = pad + H - ((v - min)/rng)*H;
+      return x.toFixed(1)+','+y.toFixed(1);
+    });
+
+    // gradient fill under line
+    var gId = 'sg_'+id;
+    var defs = document.createElementNS(ns,'defs');
+    var grad = document.createElementNS(ns,'linearGradient');
+    grad.setAttribute('id',gId); grad.setAttribute('x1','0'); grad.setAttribute('y1','0');
+    grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
+    var s1=document.createElementNS(ns,'stop'); s1.setAttribute('offset','0%');
+    s1.setAttribute('stop-color',clr); s1.setAttribute('stop-opacity','0.22');
+    var s2=document.createElementNS(ns,'stop'); s2.setAttribute('offset','100%');
+    s2.setAttribute('stop-color',clr); s2.setAttribute('stop-opacity','0');
+    grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad); el.appendChild(defs);
+
+    // area fill
+    var aPts = pts.concat([(pad+W).toFixed(1)+','+(pad+H).toFixed(1), pad.toFixed(1)+','+(pad+H).toFixed(1)]);
+    var area = document.createElementNS(ns,'polygon');
+    area.setAttribute('points', aPts.join(' ')); area.setAttribute('fill','url(#'+gId+')');
+    el.appendChild(area);
+
+    // line
+    var line = document.createElementNS(ns,'polyline');
+    line.setAttribute('points', pts.join(' ')); line.setAttribute('fill','none');
+    line.setAttribute('stroke',clr); line.setAttribute('stroke-width','1.8');
+    line.setAttribute('stroke-linecap','round'); line.setAttribute('stroke-linejoin','round');
+    el.appendChild(line);
+
+    // terminal dot
+    var lp = pts[pts.length-1].split(',');
+    var dot = document.createElementNS(ns,'circle');
+    dot.setAttribute('cx',lp[0]); dot.setAttribute('cy',lp[1]);
+    dot.setAttribute('r','2.5'); dot.setAttribute('fill',clr);
+    el.appendChild(dot);
+  }
+
+  var G='#16a34a', A='#d97706', S='#64748b'; // green · amber · slate
+
+  // sp1 — Active children: 8-month census Jul25–Feb26
+  spark('sp1', [127,128,126,121,121,121,117,126], G);
+  // sp2 — Volunteers: FY21–FY25 headcount
+  spark('sp2', [111,124,124,128,121], A);
+  // sp3 — Children per volunteer: FY21–FY25 ratio
+  spark('sp3', [1.51,1.61,1.64,1.49,1.38], G);
+  // sp4 — Total raised ($K): FY21–FY25
+  spark('sp4', [49,44,73,130,149], G);
+  // sp5 — Active donors: FY21–FY25
+  spark('sp5', [76,66,75,108,278], G);
+  // sp6 — Reunification rate (%): FY21–FY25
+  spark('sp6', [44,51,36,34,62], G);
+  // sp8 — Volunteer diversity (% non-white): FY21–FY25
+  spark('sp8', [39,42,48,54,52], G);
+  // sp9 — Cost per child ($): FY21–FY25
+  spark('sp9', [293,223,360,678,894], G);
+  // sp10 — Cases closed: FY21–FY25
+  spark('sp10', [36,65,53,67,50], S);
+})();
 
 /* ═══════════════════════════════════════════
    EXECUTIVE SUMMARY CHARTS
