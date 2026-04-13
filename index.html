@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Program & Fundraising Dashboard</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script type="text/javascript" nonce="4e40f3d436f44e3b91e4e28bf84" src="//local.adguard.org?ts=1776118804943&amp;type=content-script&amp;dmn=mail-attachment.googleusercontent.com&amp;url=https%3A%2F%2Fmail-attachment.googleusercontent.com%2Fattachment%2Fu%2F0%2F%3Fui%3D2%26ik%3D635419c7c3%26attid%3D0.1%26permmsgid%3Dmsg-a%3Ar-3410478606049817372%26th%3D19d88f799a1b86d2%26view%3Datt%26disp%3Dsafe%26realattid%3Df_mnxrmlvi0%26zw%26saddbat%3DANGjdJ_LC2x7krQl6FxWwIv9Ri3DbvNrJiu7UHnTUkhzQJeeM_SVyJF56ErZjxNEr_wIsmopGlLEjv3cfZKbAX8zjGBLAN7tqNhIw__SgIgbseKJsCWMjwHH7mczbQKwWQvX6TlwgzPdGrm_tIMLprA41q3NvQziOviL7jSbKV1fYjKzxXzZazv2QrfSK9KP_IHQGdqKesC8BP4vSL_Fgc29yVa0OGOLgEivdwefRuQ04l1SYAJ8wogc6Pp-2iEOW3YmHOhOOn1HS4Remi0IOXB91gbaiXwLZ_KsD9ibJfd769a5fhg3xDmOuUjia9EuVPd_Q-zgf_wFqJU5mp66NOyuiMGD34GPYmCeIAQK3_CZMkl6WB3Ta67JgX_z5mvt1DQ6DkE9u8nn0LvceHi74r-R53Sy3UNG5JPfjBBNWiiu2bJ_vdIsdaXQp06ugPQeL7FAKrCWcmNUA27OXDBSTRGTTfRaAAJOTUvRLlCLumYPcjiaTxBy12cKvFyxhChGO0bJcLGayDq_JgDYxv1tCVhf-xmZ8Ld-CKM1okNmRG6k-Uogc1FG8_-Esn-RLROvEv6wRghG04XBvP3MV2E5Nln8YcXqdo0w9Hi1GjHnhMIVVVnc0dgRIoIwI8wVmgpNfLWETYZnMf3Aj64adfwGyAE9a861ohl9koELnFvUbblF1LhvnXwIW2Q_CQ8Sjzln6oC3gGGVtPTGYb9hnD1-dXLuK2iRSnLePp-aqmbs5y9eZxSA4ey7RfoTkdg-dMzjYO_ZkvCTgyIXYQYpA4WgfqJpdDnY__103qVHUNSenXb4jqlfkjQVmShaBGApMdxb2eDAO7a2cUHXXnucUE_JyeQfOYFAHSsJE7rjJNc6FiGNMVXAisPqYBOXie8HLYQ35eom5QxEctLvNi-RaKClWn9Br7w7JpPi5_coFo2g-zGWWtk-3myjcUpKMIGzuM3FbMOyO85-5yw8ULD0bhX_D8V2-Kn1RTIEigYgIV0IChwuTWfkQUCpDiMGFIg6frdplywuoQ1DQHlOkaJJmT01JjSk0Z69XqsAj2uZ2jy7kDeRIWpWX0UBQQq2PXAT75PwfXx67d_iFMa4PdCdeEsnmtOkn6ADCL0iZWmVpZipCwgj75j_a5GhycFxlvLo1cZOg4JAnOzQwn8pzLHVpb8fGCDzk79Bd2q1_cZaCu-2alW0mc6XxNFIXxDW0jlfNz4qEHMSS6q9CPOPX04-Y0T-&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="4e40f3d436f44e3b91e4e28bf84" src="//local.adguard.org?ts=1776118804943&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -475,6 +475,70 @@
       body { font-size:12px; }
       main { padding:0; }
     }
+
+    /* ── PILLAR NUMBER BADGE in nav ── */
+    .pillar-pip { display:inline-flex; align-items:center; justify-content:center;
+      width:18px; height:18px; border-radius:4px; font-size:10px; font-weight:700;
+      background:var(--border); color:var(--text2); margin-right:4px; flex-shrink:0;
+      letter-spacing:0; }
+    .nav-btn.active-demo .pillar-pip { background:#3B8BD4; color:#fff; }
+    .nav-btn.active-vol  .pillar-pip { background:#534AB7; color:#fff; }
+    .nav-btn.active-fund .pillar-pip { background:#0F6E56; color:#fff; }
+    .nav-btn.active-zip  .pillar-pip { background:#00838F; color:#fff; }
+
+    /* ── PILLAR STATUS BANNER (top of each pillar page) ── */
+    .pillar-banner {
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+      background:var(--surface); border:0.5px solid var(--border);
+      border-radius:var(--radius); padding:12px 18px; margin-bottom:1rem;
+    }
+    .pb-pillar { font-size:11px; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.07em; color:var(--text3); white-space:nowrap; }
+    .pb-name { font-size:14px; font-weight:600; color:var(--text); }
+    .pb-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600;
+      white-space:nowrap; flex-shrink:0;
+    }
+    .pb-badge.green  { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
+    .pb-badge.yellow { background:#fffde7; color:#6d4c00; border:1px solid #ffe082; }
+    .pb-badge.red    { background:#fdecea; color:#7b0c25; border:1px solid #ffcdd2; }
+    .pb-obj-row { display:flex; gap:10px; flex-wrap:wrap; margin-left:auto; }
+    .pb-obj { font-size:11.5px; color:var(--text2); display:flex; align-items:center; gap:4px; }
+    .pb-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .pb-dot.g { background:#43a047; }
+    .pb-dot.y { background:#ffa726; }
+    .pb-dot.r { background:#e53935; }
+
+    /* ── EXECUTIVE 4-PILLAR SCORECARD ── */
+    .pillar-scorecard { margin-bottom:1.75rem; }
+    .psc-row {
+      display:grid; grid-template-columns:80px 1fr auto auto;
+      align-items:center; gap:12px 16px;
+      padding:12px 16px; border-bottom:0.5px solid var(--border);
+      background:var(--surface);
+    }
+    .psc-row:first-child { border-radius:var(--radius) var(--radius) 0 0; border-top:0.5px solid var(--border); border-left:0.5px solid var(--border); border-right:0.5px solid var(--border); }
+    .psc-row:last-child  { border-radius:0 0 var(--radius) var(--radius); border-left:0.5px solid var(--border); border-right:0.5px solid var(--border); }
+    .psc-row:not(:first-child):not(:last-child) { border-left:0.5px solid var(--border); border-right:0.5px solid var(--border); }
+    .psc-head { display:flex; flex-direction:column; }
+    .psc-pillar { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--text3); }
+    .psc-name { font-size:13.5px; font-weight:600; color:var(--text); }
+    .psc-kpi { font-size:13px; color:var(--text2); }
+    .psc-kpi strong { color:var(--text); font-weight:600; }
+    .psc-detail { font-size:12px; color:var(--text3); text-align:right; }
+    .psc-link { font-size:12px; color:#3B8BD4; text-decoration:none; white-space:nowrap; }
+    .psc-link:hover { text-decoration:underline; }
+    @media (max-width:680px) {
+      .psc-row { grid-template-columns:1fr auto; }
+      .psc-detail { display:none; }
+    }
+    .action-line {
+      display:block; margin-top:7px; padding-top:7px;
+      border-top:0.5px solid var(--border);
+      font-size:12px; color:var(--text2); font-style:normal;
+    }
+    .action-line::before { content:'→ '; font-weight:600; color:var(--text3); }
   </style>
 </head>
 <body>
@@ -483,24 +547,22 @@
   <div class="brand">CASA Dashboard</div>
   <div class="brand-sep"></div>
   <a class="nav-btn active-demo" onclick="return showPage('demographics',this,'active-demo')" href="#">
-    <span class="icon">👶</span> Child Demographics
-  </a>
-  <a class="nav-btn" onclick="return showPage('fundraising',this,'active-fund')" href="#">
-    <span class="icon">💰</span> Fundraising
+    <span class="pillar-pip">P1</span><span class="icon">🎯</span> Program Quality &amp; Impact
   </a>
   <a class="nav-btn" onclick="return showPage('volunteers',this,'active-vol')" href="#">
-    <span class="icon">🤝</span> Volunteer Demographics
+    <span class="pillar-pip">P2</span><span class="icon">🤝</span> Volunteer &amp; Leadership Pipeline
   </a>
-  <a class="nav-btn" onclick="return showPage('zipcodes',this,'active-zip')" href="#">
-    <span class="icon">📍</span> Removal Zip Codes
+  <a class="nav-btn" onclick="return showPage('zipcodes',this,'active-expl')" href="#">
+    <span class="pillar-pip">P4</span><span class="icon">🏛️</span> Org Strength &amp; Governance
+  </a>
+  <a class="nav-btn" onclick="return showPage('fundraising',this,'active-fund')" href="#">
+    <span class="pillar-pip">P3</span><span class="icon">💰</span> Financial Sustainability & Community Partnerships
   </a>
   <a class="nav-btn" id="exec-nav-btn" onclick="return openExecGate(this)" href="#">
     <span class="icon">📋</span> Executive Summary
   </a>
-  <a class="nav-btn" onclick="return showPage('experimental',this,'active-xlab')" href="#">
-    <span class="icon">🔬</span> Experimental
-  </a>
-  <a class="nav-btn" onclick="return showPage('explorer',this,'active-expl')" href="#">
+
+  <a class="nav-btn" onclick="return showPage('explorer',this,'active-zip')" href="#">
     <span class="icon">📊</span> Build a Graph
   </a>
   <button class="print-btn" onclick="printCurrentPage()" style="margin-left:auto;">🖨 Print / PDF</button>
@@ -629,6 +691,65 @@
       </div>
     </div>
 
+    <!-- ── 4-PILLAR STRATEGIC SCORECARD ── -->
+    <div class="section-title" style="margin-bottom:10px;">FY26 Strategic Plan — Pillar Scorecard</div>
+    <p style="color:var(--text2);font-size:13px;margin:-4px 0 12px;line-height:1.6;">Current status across all four strategic pillars through February 2026. Click any pillar to drill in.</p>
+    <div class="pillar-scorecard">
+
+      <div class="psc-row">
+        <div class="psc-head">
+          <span class="psc-pillar">Pillar 1</span>
+          <span class="psc-name">Program Quality</span>
+        </div>
+        <div class="psc-kpi">
+          <span class="pb-badge yellow" style="margin-bottom:4px;">🟡 Watch</span><br>
+          <strong>160</strong> children served YTD vs. 200 goal &nbsp;·&nbsp; eligible served <strong>73–79%</strong> vs. 80% target
+        </div>
+        <div class="psc-detail">2 of 3 objectives on track<br>Eligible coverage gap is key risk</div>
+        <a class="psc-link" onclick="return showPage('demographics',document.querySelector('[onclick*=demographics]'),'active-demo')" href="#">Drill in →</a>
+      </div>
+
+      <div class="psc-row">
+        <div class="psc-head">
+          <span class="psc-pillar">Pillar 2</span>
+          <span class="psc-name">Volunteer Engagement</span>
+        </div>
+        <div class="psc-kpi">
+          <span class="pb-badge yellow" style="margin-bottom:4px;">🟡 Watch</span><br>
+          <strong>21%</strong> Black advocates (✓ goal) &nbsp;·&nbsp; <strong>10%</strong> Hispanic vs. 11% goal &nbsp;·&nbsp; new advocates below pace
+        </div>
+        <div class="psc-detail">1 of 3 objectives on track<br>Recruitment pipeline needs focus</div>
+        <a class="psc-link" onclick="return showPage('volunteers',document.querySelector('[onclick*=volunteers]'),'active-vol')" href="#">Drill in →</a>
+      </div>
+
+      <div class="psc-row">
+        <div class="psc-head">
+          <span class="psc-pillar">Pillar 3</span>
+          <span class="psc-name">Financial Sustainability</span>
+        </div>
+        <div class="psc-kpi">
+          <span class="pb-badge green" style="margin-bottom:4px;">🟢 On Track</span><br>
+          <strong>$125.2K</strong> raised of $128K goal (98%) &nbsp;·&nbsp; <strong>$260.5K</strong> grants awarded + $228.8K pending
+        </div>
+        <div class="psc-detail">2 of 2 objectives on track<br>Donor retention is the FY26 risk</div>
+        <a class="psc-link" onclick="return showPage('fundraising',document.querySelector('[onclick*=fundraising]'),'active-fund')" href="#">Drill in →</a>
+      </div>
+
+      <div class="psc-row">
+        <div class="psc-head">
+          <span class="psc-pillar">Pillar 4</span>
+          <span class="psc-name">Org &amp; Governance</span>
+        </div>
+        <div class="psc-kpi">
+          <span class="pb-badge green" style="margin-bottom:4px;">🟢 On Track</span><br>
+          <strong>0%</strong> staff attrition FY26 YTD &nbsp;·&nbsp; SOP compliance rollout in progress &nbsp;·&nbsp; board pipeline active
+        </div>
+        <div class="psc-detail">Governance KPIs being formalized<br>Strong operational stability</div>
+        <a class="psc-link" onclick="return showPage('zipcodes',document.querySelector('[onclick*=zipcodes]'),'active-expl')" href="#">Drill in →</a>
+      </div>
+
+    </div>
+
     <!-- 4 mini trend charts -->
     <div class="two" style="margin-bottom:1.25rem;">
       <div class="card">
@@ -669,11 +790,11 @@
       <div class="insight positive"><div class="itag">Strength — Program Outcomes</div><p>62% of FY25 case closures resulted in family reunification, up from 34% in FY24 and the best rate in five years. This is the single strongest program effectiveness signal in the dataset.</p></div>
       <div class="insight positive"><div class="itag">Strength — Fundraising Momentum</div><p>Active donors jumped 157% (108→278) in FY25, driving a 15% total revenue increase to $149K. Cash giving alone surged 58% to $107K. Understanding what drove this campaign is the top FY26 planning priority.</p></div>
       <div class="insight positive"><div class="itag">Strength — Volunteer Diversity</div><p>Non-white volunteers grew from 39% (FY21) to 52% (FY25), substantially exceeding the national CASA average of 25–30% and tracking toward demographic alignment with the children CASA serves.</p></div>
-      <div class="insight watch"><div class="itag">Watch — Volunteer Headcount</div><p>Volunteers declined 5.5% from the FY24 peak of 128 to 121 in FY25. New cohort recruitment (23 in FY25) needs to accelerate to offset attrition and return toward the peak.</p></div>
-      <div class="insight watch"><div class="itag">Watch — Donor Retention Risk</div><p>57% of FY25 donors (159 of 278) are giving for the first time. National first-year donor retention is ~19%, meaning ~130 could lapse without active stewardship — the most urgent FY26 fundraising risk.</p></div>
-      <div class="insight alert"><div class="itag">Risk — Revenue Concentration</div><p>4 cash donors gave $5K+ in FY25, representing 20% of all cash revenue ($21K of $107K). Two in-kind donors gave $5K+. This concentration creates real vulnerability if major donors lapse.</p></div>
+      <div class="insight watch"><div class="itag">Watch — Volunteer Headcount</div><p>Volunteers declined 5.5% from the FY24 peak of 128 to 121 in FY25. New cohort recruitment (23 in FY25) needs to accelerate to offset attrition and return toward the peak.<span class="action-line">Set a Q3 recruitment milestone of at least 10 new advocates in training by June and report the number at each board meeting — the trend line needs a concrete target, not just a direction.</span></p></div>
+      <div class="insight watch"><div class="itag">Watch — Donor Retention Risk</div><p>57% of FY25 donors (159 of 278) are giving for the first time. National first-year donor retention is ~19%, meaning ~130 could lapse without active stewardship — the most urgent FY26 fundraising risk.<span class="action-line">Assign each of the 71 multi-year donors a named board contact for a personal outreach call before May 30 — this cohort is the highest-return stewardship investment available right now.</span></p></div>
+      <div class="insight alert"><div class="itag">Risk — Revenue Concentration</div><p>4 cash donors gave $5K+ in FY25, representing 20% of all cash revenue ($21K of $107K). Two in-kind donors gave $5K+. This concentration creates real vulnerability if major donors lapse.<span class="action-line">Initiate individual cultivation plans for the top 4 cash donors this quarter; simultaneously identify 3–5 mid-level prospects ($1K–$5K capacity) so revenue is not dependent on any single relationship.</span></p></div>
       <div class="insight positive"><div class="itag">Strength — Investment per Child</div><p>Cost per child served grew from $293 (FY21) to $894 (FY25) — a 3× increase that reflects the program's fundraising growth outpacing caseload. Greater investment per child typically correlates with more volunteer hours, stronger court advocacy, and better permanency outcomes.</p></div>
-      <div class="insight watch"><div class="itag">Watch — Geographic Concentration</div><p>41% of FY25 cases are concentrated in just 3 zip codes: Carteret (07008, 30 children), Metuchen/Edison (08817, 25), and New Brunswick (08901, 14). Intentional volunteer recruitment in these communities — particularly Spanish-speaking advocates for Carteret and Perth Amboy — would improve geographic matching and cultural continuity for families.</p></div>
+      <div class="insight watch"><div class="itag">Watch — Geographic Concentration</div><p>41% of FY25 cases are concentrated in just 3 zip codes: Carteret (07008, 30 children), Metuchen/Edison (08817, 25), and New Brunswick (08901, 14). Intentional volunteer recruitment in these communities — particularly Spanish-speaking advocates for Carteret and Perth Amboy — would improve geographic matching and cultural continuity for families.<span class="action-line">Use the zip-code map to brief the next volunteer recruitment cohort on priority neighborhoods; consider a targeted community info session in Carteret (07008) by Q4 — 30 children with one of the highest Spanish-speaking populations in the county.</span></p></div>
     </div>
 
     <footer>Executive Summary · CASA Middlesex County · FY25 · Data through Feb 2026</footer>
@@ -685,25 +806,38 @@
 ══════════════════════════════════════════ -->
 <div id="demographics" class="page on">
   <main>
-    <div class="print-header"><span class="ph-org">CASA — Child Demographics Dashboard</span><span class="ph-date" id="ph_date_demo"></span></div>
+    <div class="print-header"><span class="ph-org">CASA — Program Quality &amp; Impact Dashboard</span><span class="ph-date" id="ph_date_demo"></span></div>
+    <div class="pillar-banner">
+      <span class="pb-pillar">Pillar 1</span>
+      <span class="pb-name">Program Quality &amp; Impact</span>
+      <span class="pb-badge yellow">🟡 Watch — 1 objective below target</span>
+      <div class="pb-obj-row">
+        <span class="pb-obj"><span class="pb-dot g"></span>Children served — on track (160 YTD)</span>
+        <span class="pb-obj"><span class="pb-dot y"></span>% eligible served — 73–79% vs. 80% goal</span>
+        <span class="pb-obj"><span class="pb-dot g"></span>Case outcomes — 89% positive (↑ FY25)</span>
+      </div>
+    </div>
+
     <div class="summary-block">
-      <h2>Child Demographics — Summary &amp; Insights</h2>
-      <p class="lead">The active caseload averaged <strong>123 children</strong> per month from July 2025 through February 2026, peaking at 128 in August and dipping to 117 in January before recovering. The population is racially diverse, nearly balanced by gender, and skewed toward younger children — with infants and toddlers (0–3) representing the single largest age band and growing steadily throughout the period. Foster care petitions (FN) dominate the case mix but are declining, while guardianship (FG) petitions are on a clear upward trajectory.</p>
+      <h2>Program Quality &amp; Impact — Summary &amp; Insights</h2>
+      <p class="lead">This pillar tracks CASA's core mission: delivering excellence in child advocacy and achieving measurable outcomes. The active caseload averaged <strong>123 children</strong> per month (Jul 2025–Feb 2026), with strong case closure outcomes including a 5-year-high 62% reunification rate in FY25. The data below covers caseload census, demographics, petition types, geographic reach, and case outcomes — all key indicators of program quality and impact.</p>
       <!-- ▸ KEY INSIGHTS -->
       <div class="collapse-section">
         <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
           <span class="collapse-label">Key Insights</span>
-          <span class="collapse-count">6 insights</span>
+          <span class="collapse-count">8 insights</span>
           <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="collapse-body">
           <div class="insight-grid">
-            <div class="insight watch"><div class="itag">Watch — rising disparity</div><p>Black/African American children increased from 34 to 42 over 8 months (+24%), now the second-largest racial group at 33% of the census. White representation declined from 31% to 28% over the same period. This growing disparity warrants review of referral and intake patterns.</p></div>
+            <div class="insight watch"><div class="itag">Watch — rising disparity</div><p>Black/African American children increased from 34 to 42 over 8 months (+24%), now the second-largest racial group at 33% of the census. White representation declined from 31% to 28% over the same period. This growing disparity warrants review of referral and intake patterns.<span class="action-line">Ask the court liaison to pull a referral-source breakdown by race at the next monthly meeting — the goal is to determine whether the shift reflects changes in court referral patterns or a broader placement policy change before it becomes a compliance question.</span></p></div>
             <div class="insight positive"><div class="itag">Trend — infant surge</div><p>Infants (0–11 months) rose from 8 to 14 — a 75% increase — the steepest growth of any age band. This signals a need to assess infant-specific placement capacity, foster parent training for young children, and early intervention service availability.</p></div>
             <div class="insight positive"><div class="itag">Trend — guardianship growth</div><p>FG (guardianship) petitions grew from 14 to 22 (+57%), suggesting more children are moving toward permanent family placements. This is a positive permanency indicator and may reflect successful casework or policy emphasis on kinship care.</p></div>
-            <div class="insight alert"><div class="itag">Flag — FN petition decline</div><p>FN (standard foster care) petitions fell from 89 to 77 (-13%) while total census stayed relatively stable. Monitor whether this reflects genuine permanency progress or a shift in petition classification practices.</p></div>
+            <div class="insight alert"><div class="itag">Flag — FN petition decline</div><p>FN (standard foster care) petitions fell from 89 to 77 (-13%) while total census stayed relatively stable. Monitor whether this reflects genuine permanency progress or a shift in petition classification practices.<span class="action-line">Ask intake staff to flag any petition reclassifications at the next team meeting; if the decline is genuine permanency progress, document it explicitly in the FY26 board report — it is a strong outcome narrative worth quantifying.</span></p></div>
             <div class="insight neutral"><div class="itag">Stable — gender balance</div><p>The caseload has maintained a near-equal gender split throughout (51% female, 49% male in July; shifting to 46% female, 54% male by February). The gradual male-skew trend is worth tracking across future months.</p></div>
             <div class="insight neutral"><div class="itag">Stable — Asian representation</div><p>Asian children have remained fixed at exactly 8 throughout all 8 months — an unusual pattern that may reflect a data ceiling, classification boundary, or genuine demographic stability worth confirming with intake staff.</p></div>
+            <div class="insight watch"><div class="itag">Watch — eligible coverage gap</div><p>CASA served 73–79% of eligible children (per bi-monthly census snapshots) against the FY26 goal of 80%. This is the single most strategically important metric in Pillar 1: the gap represents approximately 12–17 eligible children per month who have an active out-of-home placement but no assigned CASA advocate. Closing it requires both advocate recruitment and a stronger court referral pipeline.<span class="action-line">Track the raw number of unassigned eligible children monthly — not just the percentage — and present it in the board package so the urgency is concrete, not abstract.</span></p></div>
+            <div class="insight positive"><div class="itag">Trend — children served growing steadily</div><p>Rolling children served grew every month from 126 (Jul 2025) to 160 (Feb 2026) — a 27% increase over 8 months and 80% of the FY26 goal of 200 YTD. The monthly growth rate of roughly 5 additional children per month puts the 200-child annual target within reach if recruitment and referrals maintain current momentum through June.</p></div>
           </div>
         </div>
       </div>
@@ -747,6 +881,11 @@
                 <div class="nat-label">Racial disparity trajectory</div>
                 <div class="nat-compare"><span class="nat-yours">Black % rising</span><span class="nat-vs">vs</span><span class="nat-nat">Persistent nationally</span></div>
                 <div class="nat-note">Child Trends and AFCARS data confirm racial disparities persist in nearly every state. CASA's upward trend in Black representation (34→42) over just 8 months is a signal requiring active monitoring and equity-focused intake review.</div>
+              </div>
+              <div class="nat-card above">
+                <div class="nat-label">Children in OOH care — NJ context</div>
+                <div class="nat-compare"><span class="nat-yours">&minus;42% Middlesex (2019&rarr;2025)</span><span class="nat-vs">vs</span><span class="nat-nat">&minus;62% NJ statewide</span></div>
+                <div class="nat-note">Middlesex County's children in out-of-home care fell from 418 (2019) to 241 (2025) — a 42% decline. NJ statewide dropped from 9,595 to 4,869 (&minus;62%). This systemic reduction in the eligible pool — not program underperformance — is the primary driver of lower children-served counts in recent years. Source: CASA NJ Reimagining the Network, 2025.</div>
               </div>
             </div>
           </div>
@@ -807,71 +946,41 @@
       <div class="cw" style="height:220px"><canvas id="d_c1"></canvas></div>
     </div>
 
-    <div class="section-title">Caseload Momentum</div>
-    <div class="two">
+
+
+    <!-- ── FY26 CHILDREN-SERVED ROLLING TOTAL ── -->
+    <div class="section-title">FY26 Progress — Children Served vs. Goal</div>
+    <div class="two" style="margin-bottom:1.75rem;">
       <div class="card">
         <div class="chart-toolbar">
-          <div class="card-title">Month-over-month census change</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c12','census-mom')">⬇ PNG</button></div>
+          <div class="card-title">Children served — FY26 rolling YTD vs. 200 goal</div>
+          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_rolling','children-fy26-goal')">⬇ PNG</button></div>
         </div>
-        <div class="chart-hint">Net change from prior month — Jan→Feb recovery (+9) strongest single gain in the period</div>
-        <div class="cw" style="height:200px"><canvas id="d_c12"></canvas></div>
+        <div class="chart-hint">Cumulative unique children served Jul–Feb · dashed line = 200-child FY26 goal · Source: FY26 Strategic Plan Tracker</div>
+        <div class="cw" style="height:200px"><canvas id="d_rolling"></canvas></div>
       </div>
       <div class="card">
         <div class="chart-toolbar">
-          <div class="card-title">Race/ethnicity change — Jul 2025 to Feb 2026</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c13','race-delta')">⬇ PNG</button></div>
+          <div class="card-title">% eligible children served vs. 80% goal</div>
         </div>
-        <div class="chart-hint">Net headcount change from July 2025 baseline; positive = growth, negative = decline</div>
-        <div class="cw" style="height:200px"><canvas id="d_c13"></canvas></div>
+        <div class="chart-hint">Measured every other month (AOC data alternates) · <span style="color:#C62828;font-weight:600;">red</span> = FY26 goal (80%) · <span style="color:#E65100;font-weight:600;">orange</span> = NJ state expectation (85%) — 7 of 11 NJ counties already at this level · Source: FY26 Strategic Plan Tracker &amp; CASA NJ 2025</div>
+        <div class="cw" style="height:200px"><canvas id="d_eligible"></canvas></div>
       </div>
     </div>
 
     <div class="section-title">Race / Ethnicity</div>
-    <div class="two">
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Race/ethnicity over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c2','race-over-time')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Race/ethnicity — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c3','race-feb-2026')">⬇ PNG</button></div></div><div class="chart-hint">Snapshot of racial composition in the most recent month</div><div class="cw" style="height:240px"><canvas id="d_c3"></canvas></div></div>
-    </div>
+    <div class="card full"><div class="chart-toolbar"><div class="card-title">Race/ethnicity over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c2','race-over-time')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
 
-    <div class="section-title">Age Distribution</div>
-    <div class="card"><div class="chart-toolbar"><div class="card-title">Age group trend over time — 4-year bands</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c7','age-trend')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_agleg"></div><div class="cw" style="height:260px"><canvas id="d_c7"></canvas></div></div>
 
-    <div class="section-title">Age Detail — Individual Ages × Month</div>
-    <div class="card">
-      <div class="chart-toolbar">
-        <div class="card-title">Age heatmap — all 20 individual ages × 8 months</div>
-        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c15','age-heatmap')">⬇ PNG</button></div>
-      </div>
-      <div class="chart-hint">Each cell = child count. Darker blue = more children. Colored left bars mark 4-year bands (blue 0–3, green 4–7, amber 8–11, purple 12–15, red 16–18+).</div>
-      <div class="cw" style="height:480px"><canvas id="d_c15"></canvas></div>
-    </div>
 
     <div class="section-title">Petition Types</div>
-    <div class="two">
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Petition types over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c8','petition-types')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide · FN declining, FG rising</div><div class="tleg" id="d_pleg"></div><div class="cw" style="height:240px"><canvas id="d_c8"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">FN vs FG trend</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c9','fn-fg-trend')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide · guardianship (FG) on a clear upward trajectory</div><div class="tleg" id="d_fnfg_leg"></div><div class="cw" style="height:240px"><canvas id="d_c9"></canvas></div></div>
-    </div>
-    <div class="card">
-      <div class="chart-toolbar">
-        <div class="card-title">Foster care subtypes — FC/court id, FC/avail adopt, FC/18+</div>
-        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c14','fc-subtypes')">⬇ PNG</button></div>
-      </div>
-      <div class="chart-hint">Court-identified FC declining; avail-for-adoption and FC/18+ (aging out) rising — distinct trajectories within foster care</div>
-      <div class="tleg" id="d_fcleg"></div>
-      <div class="cw" style="height:220px"><canvas id="d_c14"></canvas></div>
-    </div>
+    <div class="card full"><div class="chart-toolbar"><div class="card-title">FN vs FG trend — Permanency trajectory</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c9','fn-fg-trend')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide · guardianship (FG) on a clear upward trajectory</div><div class="tleg" id="d_fnfg_leg"></div><div class="cw" style="height:240px"><canvas id="d_c9"></canvas></div></div>
 
-    <div class="section-title">Gender</div>
-    <div class="two">
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Gender split — Feb 2026</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c10','gender-feb-2026')">⬇ PNG</button></div></div><div class="chart-hint">Near-even split · 54% male in Feb 2026 vs ~51% nationally (AFCARS)</div><div class="cw" style="height:200px"><canvas id="d_c10"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Female vs male over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c11','gender-trend')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a data point to drill down</div><div class="chart-hint">Click legend pills to show/hide · slight male skew persists across the period</div><div class="tleg" id="d_gleg"></div><div class="cw" style="height:200px"><canvas id="d_c11"></canvas></div></div>
-    </div>
     <!-- ▸ ANNUAL TRENDS FY21–FY25 -->
     <div class="section-title">Historical Trends — FY21 to FY25</div>
-    <div class="three">
+    <div class="two">
       <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Census — Total Active Children</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c1','annual-census')">⬇ PNG</button></div></div><div class="chart-hint">FY21–FY25 annual active caseload</div><div class="cw" style="height:220px"><canvas id="cd_c1"></canvas></div></div>
       <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Race Distribution</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c2','annual-race')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c2"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Petition Types — Annual</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c3','annual-petitions')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c3"></canvas></div></div>
     </div>
 
     <!-- ▸ CASE CLOSURE OUTCOMES FY21–FY25 -->
@@ -924,7 +1033,118 @@
       </div>
     </div>
 
-    <footer>Child Demographics Summary – Active Cases &nbsp;·&nbsp; Jul 2025 – Feb 2026 &nbsp;·&nbsp; Historical FY21–FY25</footer>
+    
+    <!-- ── GEOGRAPHIC CASELOAD DISTRIBUTION ── -->
+
+    <!-- ▸ 1. COVERAGE RATIO -->
+    <div class="section-title">Volunteer-to-Child Coverage</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">How many active children does each volunteer carry? CASA programs nationally target a 1:1 to 1:2 ratio. A lower ratio means more capacity per volunteer.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:16px;">
+      <div class="drill-kpi"><div class="dk-lbl">FY25 ratio</div><div class="dk-val">1.38</div><div class="dk-up">↓ from 1.64 in FY23</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">FY25 children</div><div class="dk-val">167</div><div class="dk-sub">annual active caseload</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">FY25 volunteers</div><div class="dk-val">121</div><div class="dk-sub">active corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">vs. national target</div><div class="dk-val">✓ On track</div><div class="dk-sub">target ≤ 1.5 children/vol</div></div>
+    </div>
+    <div class="card" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar"><div class="card-title">Children per volunteer — FY21–FY25</div></div>
+      <div class="chart-hint">Lower = more volunteer capacity per child · dashed line = 1.5 target threshold</div>
+      <div class="cw" style="height:200px"><canvas id="xp_c1"></canvas></div>
+    </div>
+
+    
+
+    <!-- ▸ 5. GEOGRAPHIC MAP -->
+    <div class="section-title">Geographic Caseload Distribution — FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Approximate positions of top 10 removal zip codes within Middlesex County, NJ. Bubble size represents FY25 children assigned. North is up.</p>
+    <div class="card" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar"><div class="card-title">Removal zip code map — Middlesex County, NJ · FY25 caseload</div></div>
+      <div class="chart-hint">Bubble size = FY25 children assigned · darker fill = higher volume · approximate positions</div>
+      <div style="position:relative;width:100%;max-width:600px;margin:0 auto;">
+        <svg viewBox="0 0 500 360" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block;">
+          <!-- County background -->
+          <rect x="0" y="0" width="500" height="360" rx="8" fill="var(--surface2)"/>
+          <!-- Rough county border polygon (approximate Middlesex County NJ) -->
+          <polygon points="80,20 420,20 460,80 470,160 440,240 380,310 280,340 160,330 80,280 50,200 60,120" fill="none" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <!-- Compass rose -->
+          <text x="470" y="35" font-size="11" fill="var(--text3)" text-anchor="middle">N</text>
+          <text x="470" y="28" font-size="14" fill="var(--text3)" text-anchor="middle">↑</text>
+          <!-- Water body hint (Raritan Bay area, bottom right) -->
+          <ellipse cx="420" cy="330" rx="55" ry="22" fill="rgba(59,139,212,0.08)" stroke="rgba(59,139,212,0.15)" stroke-width="1"/>
+          <text x="420" y="334" font-size="9" fill="rgba(59,139,212,0.5)" text-anchor="middle">Raritan Bay</text>
+
+          <!-- Zip code bubbles (position = approximate lat/lon within Middlesex County) -->
+          <!-- 07008 Carteret: FY25=30, largest -->
+          <circle cx="356" cy="43" r="22" fill="rgba(163,45,45,0.72)" stroke="rgba(163,45,45,0.9)" stroke-width="1.5"/>
+          <text x="356" y="47" font-size="10" font-weight="600" fill="white" text-anchor="middle">30</text>
+          <text x="356" y="72" font-size="9" fill="var(--text2)" text-anchor="middle">Carteret</text>
+          <text x="356" y="83" font-size="8" fill="var(--text3)" text-anchor="middle">07008</text>
+
+          <!-- 08817 Metuchen/Edison: FY25=25 -->
+          <circle cx="255" cy="100" r="18" fill="rgba(163,45,45,0.60)" stroke="rgba(163,45,45,0.8)" stroke-width="1.5"/>
+          <text x="255" y="104" font-size="10" font-weight="600" fill="white" text-anchor="middle">25</text>
+          <text x="255" y="127" font-size="9" fill="var(--text2)" text-anchor="middle">Edison/Metuchen</text>
+          <text x="255" y="138" font-size="8" fill="var(--text3)" text-anchor="middle">08817</text>
+
+          <!-- 08901 New Brunswick: FY25=14 -->
+          <circle cx="143" cy="196" r="13" fill="rgba(163,45,45,0.50)" stroke="rgba(163,45,45,0.7)" stroke-width="1.5"/>
+          <text x="143" y="200" font-size="9" font-weight="600" fill="white" text-anchor="middle">14</text>
+          <text x="143" y="219" font-size="9" fill="var(--text2)" text-anchor="middle">New Brunswick</text>
+          <text x="143" y="230" font-size="8" fill="var(--text3)" text-anchor="middle">08901</text>
+
+          <!-- 07001 Avenel: FY25=13 -->
+          <circle cx="358" cy="57" r="11" fill="rgba(186,117,23,0.72)" stroke="rgba(186,117,23,0.9)" stroke-width="1.5" transform="translate(15,0)"/>
+          <text x="373" y="61" font-size="9" font-weight="600" fill="white" text-anchor="middle">13</text>
+          <text x="393" y="75" font-size="9" fill="var(--text2)" text-anchor="middle">Avenel</text>
+          <text x="393" y="86" font-size="8" fill="var(--text3)" text-anchor="middle">07001</text>
+
+          <!-- 08861 Perth Amboy: FY25=12 -->
+          <circle cx="368" cy="148" r="11" fill="rgba(163,45,45,0.50)" stroke="rgba(163,45,45,0.7)" stroke-width="1.5"/>
+          <text x="368" y="152" font-size="9" font-weight="600" fill="white" text-anchor="middle">12</text>
+          <text x="368" y="170" font-size="9" fill="var(--text2)" text-anchor="middle">Perth Amboy</text>
+          <text x="368" y="181" font-size="8" fill="var(--text3)" text-anchor="middle">08861</text>
+
+          <!-- 07095 Woodbridge: FY25=6 -->
+          <circle cx="355" cy="80" r="7" fill="rgba(83,74,183,0.65)" stroke="rgba(83,74,183,0.85)" stroke-width="1.5"/>
+          <text x="355" y="83" font-size="8" fill="white" text-anchor="middle">6</text>
+          <text x="322" y="93" font-size="9" fill="var(--text2)" text-anchor="middle">Woodbridge 07095</text>
+
+          <!-- 08879 South Amboy: FY25=6 -->
+          <circle cx="355" cy="200" r="7" fill="rgba(83,74,183,0.60)" stroke="rgba(83,74,183,0.8)" stroke-width="1.5"/>
+          <text x="355" y="203" font-size="8" fill="white" text-anchor="middle">6</text>
+          <text x="355" y="218" font-size="9" fill="var(--text2)" text-anchor="middle">South Amboy 08879</text>
+
+          <!-- 08816 East Brunswick: FY25=6 -->
+          <circle cx="176" cy="282" r="7" fill="rgba(83,74,183,0.60)" stroke="rgba(83,74,183,0.8)" stroke-width="1.5"/>
+          <text x="176" y="285" font-size="8" fill="white" text-anchor="middle">6</text>
+          <text x="176" y="300" font-size="9" fill="var(--text2)" text-anchor="middle">E. Brunswick 08816</text>
+
+          <!-- 08859 Parlin/Sayreville: FY25=5 -->
+          <circle cx="292" cy="238" r="7" fill="rgba(0,131,143,0.65)" stroke="rgba(0,131,143,0.85)" stroke-width="1.5"/>
+          <text x="292" y="241" font-size="8" fill="white" text-anchor="middle">5</text>
+          <text x="292" y="258" font-size="9" fill="var(--text2)" text-anchor="middle">Sayreville 08859</text>
+
+          <!-- 08902 North Brunswick: FY25=0 (hollow) -->
+          <circle cx="93" cy="215" r="7" fill="none" stroke="var(--text3)" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="93" y="218" font-size="8" fill="var(--text3)" text-anchor="middle">0</text>
+          <text x="93" y="234" font-size="9" fill="var(--text3)" text-anchor="middle">N. Brunswick 08902</text>
+
+          <!-- Legend -->
+          <rect x="12" y="295" width="130" height="58" rx="5" fill="var(--surface)" stroke="var(--border)" stroke-width="0.5"/>
+          <text x="20" y="310" font-size="9" fill="var(--text3)" font-weight="600">LEGEND (FY25 cases)</text>
+          <circle cx="26" cy="324" r="8" fill="rgba(163,45,45,0.72)"/>
+          <text x="38" y="327" font-size="9" fill="var(--text2)">High volume (25–30)</text>
+          <circle cx="26" cy="340" r="6" fill="rgba(83,74,183,0.62)"/>
+          <text x="38" y="343" font-size="9" fill="var(--text2)">Lower volume (5–14)</text>
+          <circle cx="26" cy="344" r="6" fill="none" stroke="var(--text3)" stroke-dasharray="2,2" stroke-width="1.2" transform="translate(0,10)"/>
+          <text x="38" y="357" font-size="9" fill="var(--text3)">Zero in FY25</text>
+        </svg>
+      </div>
+      <p style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center;">Positions are approximate. For precise mapping, see the Removal Zip Codes tab.</p>
+    </div>
+
+    
+
+    <footer>Program Quality &amp; Impact — Active Cases Jul 2025–Feb 2026 · Historical FY21–FY25 · CASA Middlesex County</footer>
   </main>
 </div>
 
@@ -934,25 +1154,38 @@
 ══════════════════════════════════════════ -->
 <div id="fundraising" class="page">
   <main>
-    <div class="print-header"><span class="ph-org">CASA — Fundraising Dashboard</span><span class="ph-date" id="ph_date_fund"></span></div>
+    <div class="print-header"><span class="ph-org">CASA — Financial Sustainability &amp; Community Partnerships</span><span class="ph-date" id="ph_date_fund"></span></div>
+    <div class="pillar-banner">
+      <span class="pb-pillar">Pillar 3</span>
+      <span class="pb-name">Financial Sustainability &amp; Community Partnerships</span>
+      <span class="pb-badge green">🟢 On Track — strong performance</span>
+      <div class="pb-obj-row">
+        <span class="pb-obj"><span class="pb-dot g"></span>Unrestricted — $125.2K / $128K (98%)</span>
+        <span class="pb-obj"><span class="pb-dot g"></span>Grants — $260.5K awarded + $228.8K pending</span>
+        <span class="pb-obj"><span class="pb-dot y"></span>Watch — first-year donor retention risk</span>
+      </div>
+    </div>
+
     <div class="summary-block">
-      <h2>Fundraising — Summary &amp; Insights</h2>
-      <p class="lead">Fiscal year FY25 (Jul 2024–Jun 2025) was the strongest fundraising year in the 5-year dataset, with <strong>$149,253</strong> raised across cash gifts and in-kind contributions — a 15% increase over FY24's $129,526. Cash giving surged 58% to $107K, driven by a dramatic expansion in the donor base from 108 to 278 active donors. However, in-kind giving fell 32% from $61.5K to $42K. The organization is increasingly reliant on individual donors, who contributed 75% of all cash gifts, while organizational in-kind giving remains the single largest in-kind category.</p>
+      <h2>Financial Sustainability &amp; Community Partnerships — Summary &amp; Insights</h2>
+      <p class="lead">This pillar tracks CASA's financial health, revenue diversification, and community partnerships. FY25 was the strongest fundraising year in the 5-year dataset: <strong>$149,253</strong> raised — a 15% increase over FY24 — with active donors surging 157% to 278. Building on this momentum requires converting new donors to recurring supporters, reducing revenue concentration risk, and expanding corporate and grant partnerships aligned with the FY27–28 strategic plan.</p>
       <!-- ▸ KEY INSIGHTS -->
       <div class="collapse-section">
         <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
           <span class="collapse-label">Key Insights</span>
-          <span class="collapse-count">6 insights</span>
+          <span class="collapse-count">8 insights</span>
           <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="collapse-body">
           <div class="insight-grid">
             <div class="insight positive"><div class="itag">Strength — donor growth</div><p>Active donors jumped from 108 in FY24 to 278 in FY25 — a 157% increase in one year. This is the most significant growth signal in the dataset and suggests either a successful campaign, expanded outreach, or a major new cultivation effort. Understanding what drove this is critical to repeating it.</p></div>
-            <div class="insight watch"><div class="itag">Watch — new vs retained</div><p>Of FY25's donors, 159 (57%) are brand new — they gave nothing in FY24. Only 71 (26%) were retained from the prior year. First-year donors typically have low retention rates, meaning next year's total could drop sharply without a strong stewardship strategy.</p></div>
-            <div class="insight alert"><div class="itag">Risk — in-kind volatility</div><p>In-kind gifts swung from $7.7K (FY23) to $61.5K (FY24) to $42K (FY25). The FY24 spike was almost entirely organizational in-kind ($55K from just 16 org donors). That has since fallen to $30K. Without understanding what drove FY24's spike, in-kind projections are unreliable.</p></div>
+            <div class="insight watch"><div class="itag">Watch — new vs retained</div><p>Of FY25's donors, 159 (57%) are brand new — they gave nothing in FY24. Only 71 (26%) were retained from the prior year. First-year donors typically have low retention rates, meaning next year's total could drop sharply without a strong stewardship strategy.<span class="action-line">Build a personal outreach list of the 71 retained donors now and assign each to a board member or staff relationship before April 30 — set a renewal ask deadline of May 31 so there is time to follow up before the fiscal year closes.</span></p></div>
+            <div class="insight alert"><div class="itag">Risk — in-kind volatility</div><p>In-kind gifts swung from $7.7K (FY23) to $61.5K (FY24) to $42K (FY25). The FY24 spike was almost entirely organizational in-kind ($55K from just 16 org donors). That has since fallen to $30K. Without understanding what drove FY24's spike, in-kind projections are unreliable.<span class="action-line">Identify the lead organizational in-kind donor from FY24 and schedule a Q4 meeting to explore whether the partnership can be renewed or converted to a direct cash gift — understanding that relationship is the first step to making in-kind revenue predictable.</span></p></div>
             <div class="insight positive"><div class="itag">Strength — cash momentum</div><p>Cash giving has grown in 3 of the last 4 fiscal years, from a low of $36K in FY22 to $107K in FY25 — nearly a 3× increase. Individual cash donors drove $80.8K (75%) of the total, showing strong grassroots giving momentum.</p></div>
             <div class="insight neutral"><div class="itag">Breadth — mid-range donors</div><p>The $100–$499 cash gift range has the most donors (97 in FY25), making it the backbone of the donor base. The $1–$99 range had 78 donors. Together these 175 donors make up 76% of cash donor count — significant upgrade potential exists in this group.</p></div>
-            <div class="insight watch"><div class="itag">Watch — major gift concentration</div><p>Just 4 cash donors gave $5,000+ in FY25, yet their gifts totaled $21K — 20% of all cash revenue. Two more in-kind donors gave $5K+ (totaling $16K). This concentration creates real vulnerability. A major gifts cultivation pipeline is worth building now.</p></div>
+            <div class="insight watch"><div class="itag">Watch — major gift concentration</div><p>Just 4 cash donors gave $5,000+ in FY25, yet their gifts totaled $21K — 20% of all cash revenue. Two more in-kind donors gave $5K+ (totaling $16K). This concentration creates real vulnerability. A major gifts cultivation pipeline is worth building now.<span class="action-line">Develop a prospect list of 5–10 individuals with $5K+ giving capacity for Q4 cultivation and bring it to the next development committee meeting — this is the single highest-leverage financial risk to address before FY27 planning begins.</span></p></div>
+            <div class="insight positive"><div class="itag">Strength — FY26 unrestricted goal nearly achieved</div><p>As of February 2026, CASA has raised $125,200 in unrestricted funds — 98% of the $128,000 FY26 goal, with four months of fiscal year remaining. This is the strongest current-year signal in the entire dataset: the program is on track to hit its unrestricted fundraising target for the first time against a plan-defined goal, and is well positioned to exceed it if year-end events perform as expected.</p></div>
+            <div class="insight positive"><div class="itag">Strength — grants pipeline is substantial</div><p>CASA submitted $489,311 in total grant applications in FY26, of which $260,500 has been awarded and $228,811 remains pending decision. Even at a conservative 50% success rate on pending grants, the pipeline would add over $114K in new restricted funding — materially strengthening the FY27 budget baseline and reducing reliance on individual donor growth to sustain program capacity.<span class="action-line">Identify which pending grants have the nearest decision dates and assign a staff lead to follow up with each funder before their deadline — maintaining relationships during review periods improves award rates.</span></p></div>
           </div>
         </div>
       </div>
@@ -1044,48 +1277,8 @@
       <div class="cw" style="height:260px"><canvas id="f_c1"></canvas></div>
     </div>
 
-    <div class="section-title">Cash vs In-Kind</div>
-    <div class="two">
-      <div class="card">
-        <div class="chart-toolbar"><div class="card-title">Cash gifts by fiscal year</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c2','cash-by-year')">⬇ PNG</button></div></div>
-        <div class="drill-badge"><span class="dot"></span>Click a bar to drill into gift breakdown</div>
-        <div class="chart-hint">5-year trend: $36K (FY22) → $107K (FY25) · click any bar to see individual vs org breakdown</div>
-        <div class="cw" style="height:220px"><canvas id="f_c2"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="chart-toolbar"><div class="card-title">In-kind gifts by fiscal year</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c3','inkind-by-year')">⬇ PNG</button></div></div>
-        <div class="drill-badge"><span class="dot"></span>Click a bar to drill into gift breakdown</div>
-        <div class="chart-hint">FY24 spike ($61.5K) driven by organizational in-kind; FY25 normalized to $42K</div>
-        <div class="cw" style="height:220px"><canvas id="f_c3"></canvas></div>
-      </div>
-    </div>
 
-    <div class="section-title">Gift Economics</div>
-    <div class="two">
-      <div class="card">
-        <div class="chart-toolbar">
-          <div class="card-title">Avg &amp; median cash gift vs donor count by fiscal year</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c9','avg-gift-trend')">⬇ PNG</button></div>
-        </div>
-        <div class="chart-hint">FY25 donor surge diluted avg gift from $871 peak (FY23) to $386 — more donors, smaller average</div>
-        <div class="tleg" id="f_avgleg"></div>
-        <div class="cw" style="height:240px"><canvas id="f_c9"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="chart-toolbar"><div class="card-title">FY25 donor channel overlap — cash vs in-kind</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c14','channel-overlap')">⬇ PNG</button></div></div>
-        <div class="chart-hint">Only 9 donors gave in both channels; nearly all FY25 donors are single-channel</div>
-        <div class="cw" style="height:240px; position:relative;">
-          <canvas id="f_c14"></canvas>
-          <div id="f_c14_center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);text-align:center;pointer-events:none;"></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="section-title">Constituent Type Breakdown</div>
-    <div class="two">
-      <div class="card"><div class="chart-toolbar"><div class="card-title">Cash giving — individuals vs organizations</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c4','cash-by-type')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="f_typleg"></div><div class="cw" style="height:240px"><canvas id="f_c4"></canvas></div></div>
-      <div class="card"><div class="chart-toolbar"><div class="card-title">In-kind giving — individuals vs organizations</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c5','inkind-by-type')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="f_iktyp"></div><div class="cw" style="height:240px"><canvas id="f_c5"></canvas></div></div>
-    </div>
 
     <div class="section-title">Donor Analysis</div>
     <div class="two">
@@ -1122,16 +1315,45 @@
       <div class="cw" style="height:240px"><canvas id="f_c13"></canvas></div>
     </div>
 
-    <div class="section-title">Gift Size Distribution — FY25</div>
-    <div class="card">
-      <div class="chart-toolbar">
-        <div class="card-title">Number of donors by gift size range — FY25 (cash + in-kind combined)</div>
-        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c8','gift-size-dist')">⬇ PNG</button></div>
+
+    <div class="section-title">FY26 Fundraising Goal Tracker</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 16px;line-height:1.6;">Enter an aspirational FY26 fundraising target to see how it compares to the five-year trend.</p>
+    <div class="card" style="margin-bottom:8px;">
+<div class="card">
+        <div class="chart-toolbar"><div class="card-title">Total raised — with FY26 goal</div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+          <label style="font-size:12px;color:var(--text2);">FY26 fundraising target:</label>
+          <input id="xp_fund_goal" type="range" min="100000" max="300000" step="5000" value="175000" style="flex:1;min-width:80px;accent-color:#0F6E56;">
+          <input id="xp_fund_goal_num" type="number" min="100000" max="300000" step="5000" value="175000" style="width:80px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
+          <span style="font-size:12px;color:var(--text3);">dollars</span>
+        </div>
+        <div class="cw" style="height:180px"><canvas id="xp_c4"></canvas></div>
       </div>
-      <div class="drill-badge"><span class="dot"></span>Click a bar to see cash vs in-kind breakdown</div>
-      <div class="chart-hint">$100–$499 range has most donors (97) · click a bar to see amount raised in that range</div>
-      <div class="cw" style="height:220px"><canvas id="f_c8"></canvas></div>
     </div>
+    <div class="drill-callout" style="margin-bottom:1.75rem;"><strong>How to use:</strong> Drag the sliders or type numbers to update the FY26 goal bar in real time. These are planning tools only — targets are not saved.</div>
+
+    
+
+
+    <!-- ── GRANT PIPELINE ── -->
+    <div class="section-title">FY26 Grant Pipeline &amp; Fundraising Progress</div>
+    <div class="two" style="margin-bottom:1.75rem;">
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Grant pipeline — applied vs. awarded (FY26 YTD)</div></div>
+        <div class="chart-hint">$489K submitted · $261K awarded (53% success rate) · Source: FY26 Strategic Plan Tracker</div>
+        <div class="cw" style="height:180px"><canvas id="f_grants"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">FY26 unrestricted fundraising — YTD vs. $128K goal</div></div>
+        <div class="chart-hint">$125.2K raised of $128K goal (98% to goal) through Feb 2026</div>
+        <div class="cw" style="height:180px"><canvas id="f_unrest"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight positive"><div class="itag">Strength — Grant success rate</div><p>$260,500 awarded from $489,311 submitted in FY26 — a 53% grant success rate that is substantially above the nonprofit sector average of 20–30%. Key awards include $34K from CASA NJ emergency funds, Middlesex County Commissioners, VOCA, and multiple corporate grants.</p></div>
+      <div class="insight watch"><div class="itag">Watch — Federal funding concentration</div><p>The multiyear budget strategy in progress should model scenarios for potential reductions in federal/state grants. Diversifying toward local foundations and corporate partnerships reduces dependency on any single funding stream.<span class="action-line">Build a 10% federal funding reduction scenario into the FY27 budget model and identify at least 2 local foundation targets to offset the gap — present both the scenario and the offset strategy to the board before the budget is finalized.</span></p></div>
+    </div>
+
     <footer>Gift data: Total Gifts By Year (cash + in-kind) &nbsp;·&nbsp; Fiscal years FY21 – FY25 (July–June)</footer>
   </main>
 </div>
@@ -1221,43 +1443,57 @@
     </div>
 
     <!-- Empty state -->
-    <div id="expl_empty" class="card" style="text-align:center; padding:3rem 1.5rem; color:var(--text3);">
-      <div style="font-size:32px; margin-bottom:1rem;">📊</div>
-      <div style="font-size:15px; font-weight:500; color:var(--text2); margin-bottom:0.5rem;">Select variables and click Build chart</div>
-      <div style="font-size:13px;">Mix any variables from demographics or fundraising to explore relationships in your data.</div>
+    <div id="expl_empty" class="card" style="text-align:center; padding:3rem 1rem; display:none;">
+      <div style="font-size:2rem;margin-bottom:8px;">📊</div>
+      <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:6px;">No data yet</div>
+      <div style="font-size:13px;color:var(--text2);">Configure your selections above and click Build Chart.</div>
     </div>
 
-    <footer>Chart Explorer — combine any variables from Child Demographics, Fundraising, Volunteer &amp; Removal Zip Code datasets</footer>
+    <footer>Custom Chart Builder · CASA Middlesex County</footer>
   </main>
 </div>
 
 
+
 <!-- ══════════════════════════════════════════
-     PAGE 4 — VOLUNTEER DEMOGRAPHICS
+     PAGE 4 — VOLUNTEER & LEADERSHIP PIPELINE
 ══════════════════════════════════════════ -->
 <div id="volunteers" class="page">
   <main>
-    <div class="print-header"><span class="ph-org">CASA — Volunteer Demographics Dashboard</span><span class="ph-date" id="ph_date_vol"></span></div>
+    <div class="print-header"><span class="ph-org">CASA — Volunteer &amp; Leadership Pipeline Dashboard</span><span class="ph-date" id="ph_date_vol"></span></div>
+    <div class="pillar-banner">
+      <span class="pb-pillar">Pillar 2</span>
+      <span class="pb-name">Volunteer Engagement &amp; Retention</span>
+      <span class="pb-badge yellow">🟡 Watch — recruitment below pace</span>
+      <div class="pb-obj-row">
+        <span class="pb-obj"><span class="pb-dot y"></span>New advocates — below 20/yr goal</span>
+        <span class="pb-obj"><span class="pb-dot g"></span>2-yr retention — 65% (✓ 62% benchmark)</span>
+        <span class="pb-obj"><span class="pb-dot g"></span>Black diversity — 21% (✓ 20% goal)</span>
+        <span class="pb-obj"><span class="pb-dot y"></span>Hispanic diversity — 10% vs. 11% goal</span>
+      </div>
+    </div>
+
 
     <div class="summary-block">
-      <h2>Volunteer Demographics — Summary &amp; Insights</h2>
-      <p class="lead">CASA's active volunteer corps has grown from <strong>111 volunteers in FY21</strong> to a peak of <strong>128 in FY24</strong>, with FY25 at 121 reflecting natural attrition and turnover. The corps is overwhelmingly female (~83%), highly educated (Bachelors or higher: ~76% in FY25), and meaningfully multilingual — with Hindi, Spanish, and Urdu speakers well-represented. Volunteer tenure has deepened year over year, with more advocates now in their 3–7-year range.</p>
+      <h2>Volunteer &amp; Leadership Pipeline — Summary &amp; Insights</h2>
+      <p class="lead">This pillar tracks CASA’s volunteer recruitment, retention, and diversity — the foundation of everything the program delivers. Without a sufficient, well-supported, and representative advocate corps, CASA cannot close the gap between eligible children and active cases, maintain cultural continuity with families, or sustain program quality at scale. The active corps has grown from <strong>111 volunteers in FY21</strong> to a peak of <strong>128 in FY24</strong>, with FY25 at 121 reflecting natural attrition. The data below covers headcount trends, demographics, tenure depth, diversity goal tracking, and the equity gap between volunteer composition and the children served.</p>
 
       <!-- ▸ KEY INSIGHTS -->
       <div class="collapse-section">
         <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
           <span class="collapse-label">Key Insights</span>
-          <span class="collapse-count">6 insights</span>
+          <span class="collapse-count">7 insights</span>
           <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="collapse-body">
           <div class="insight-grid">
-            <div class="insight positive"><div class="itag">Strength — diversity trajectory</div><p>Non-white volunteers grew from 39% in FY21 to 52% in FY25 — a 13-point shift in four years. White volunteers fell from 61% to 48%, while Asian representation grew from 20% to 19% and Black/African American volunteers grew from 8% to 19%. This trajectory represents meaningful progress toward demographic alignment with the children CASA serves.</p></div>
-            <div class="insight watch"><div class="itag">Watch — headcount plateau</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. New cohort recruitment (0–1 year volunteers: 23 in FY25) needs to offset annual attrition to avoid a sustained downward trend. The 3–7 year tenure band (58 volunteers) is the largest segment and represents the core experienced corps.</p></div>
+            <div class="insight positive"><div class="itag">Strength — diversity trajectory</div><p>Non-white volunteers grew from 39% in FY21 to 52% in FY25 — a 13-point shift in four years. White volunteers fell from 61% to 48%, while Asian representation declined slightly from 20% to 19% and Black/African American volunteers grew from 8% to 19%. This trajectory represents meaningful progress toward demographic alignment with the children CASA serves.</p></div>
+            <div class="insight watch"><div class="itag">Watch — headcount plateau</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. New cohort recruitment (0–1 year volunteers: 23 in FY25) needs to offset annual attrition to avoid a sustained downward trend. The 3–7 year tenure band (58 volunteers) is the largest segment and represents the core experienced corps.<span class="action-line">Schedule a recruitment pipeline review at the next staff meeting: set a specific Q3 cohort target (suggested: 8+ new advocates sworn in by June) and assign at least 2 board members to attend upcoming information sessions as ambassadors.</span></p></div>
             <div class="insight positive"><div class="itag">Strength — volunteer retention</div><p>81% of FY25 volunteers have 2+ years of service (98 of 121), and 7 volunteers have 10+ years. This deep bench of experienced advocates is a critical organizational asset — long-tenured volunteers typically carry the most complex cases and provide informal mentorship to newer recruits.</p></div>
-            <div class="insight neutral"><div class="itag">Stable — gender composition</div><p>The volunteer corps has maintained ~83% female since FY21, consistent with national CASA averages. While gender diversity is limited, this stability suggests reliable recruitment pipelines. The 21 male volunteers (17%) are slightly above the national CASA average of ~14% male.</p></div>
+            <div class="insight neutral"><div class="itag">Stable — gender composition</div><p>The volunteer corps has maintained ~83% female since FY21, consistent with national CASA averages. FY25 ended with 21 male volunteers (~16% of the corps), and FY26 YTD data shows male representation at 13–15% — below both the FY25 baseline and the 17% strategic goal. Male volunteer recruitment is an active gap to close alongside Hispanic representation.</p></div>
             <div class="insight positive"><div class="itag">Strength — language assets</div><p>18 Spanish speakers, 10 Hindi speakers, 4 Urdu speakers, and 4 ASL users provide direct language access for a significant share of the caseload. With 17–18% of active children identified as Hispanic/Latino, Spanish language capacity among volunteers is particularly valuable for family communication and court advocacy.</p></div>
-            <div class="insight neutral"><div class="itag">Context — vs. National CASA averages</div><p>Nationally, CASA programs average ~84% female volunteers and ~16% male — this program's 83%/17% split is closely aligned. Non-white volunteer representation nationally is approximately 25–30% and growing; at 52% non-white in FY25, this program substantially exceeds the national average, reflecting intentional diversity recruitment. Nationally, ~65–70% of CASA volunteers hold a bachelor's degree or higher; this program's ~76% with Bachelors or higher in FY25 is above average. The national volunteer-to-child ratio averages roughly 1:1 to 1:2; this program's ratio supports its full caseload. (Source: National CASA/GAL Association annual data.)</p></div>
+            <div class="insight positive"><div class="itag">Strength — bilingual goal achieved</div><p>As of February 2026, 13% of active advocates are bilingual Spanish speakers — meeting the FY26 13% strategic target. This is one of the few FY26 diversity goals fully achieved. Language-matched advocates improve communication with families, reduce interpreter dependency, and build trust in communities where Spanish is the primary language (notably Carteret and Perth Amboy, which together account for the largest share of the caseload).</p></div>
+            <div class="insight neutral"><div class="itag">Context — vs. National CASA averages</div><p>Nationally, CASA programs average ~84% female volunteers and ~16% male — this program’s 83%/17% split is closely aligned. Non-white volunteer representation nationally is approximately 25–30% and growing; at 52% non-white in FY25, this program substantially exceeds the national average, reflecting intentional diversity recruitment. Nationally, ~65–70% of CASA volunteers hold a bachelor’s degree or higher; this program’s ~76% with Bachelors or higher in FY25 is above average. The national volunteer-to-child ratio averages roughly 1:1 to 1:2; this program’s ratio supports its full caseload. (Source: National CASA/GAL Association annual data.)</p></div>
           </div>
         </div>
       </div>
@@ -1275,7 +1511,7 @@
               <div class="nat-card inline">
                 <div class="nat-label">Gender composition — Female</div>
                 <div class="nat-compare"><span class="nat-yours">83% female (FY25)</span><span class="nat-vs">vs</span><span class="nat-nat">~84% nationally</span></div>
-                <div class="nat-note">Nationally, CASA/GAL programs average approximately 84% female volunteers. This program's 83% is closely aligned with the national norm, suggesting recruitment patterns typical of CASA programs across the country.</div>
+                <div class="nat-note">Nationally, CASA/GAL programs average approximately 84% female volunteers. This program’s 83% is closely aligned with the national norm, suggesting recruitment patterns typical of CASA programs across the country.</div>
               </div>
               <div class="nat-card above">
                 <div class="nat-label">Volunteer diversity — Non-white share</div>
@@ -1283,7 +1519,7 @@
                 <div class="nat-note">Non-white volunteer representation nationally sits around 25–30% and is growing. At 52%, this program is approximately 20–25 points above the national average — a meaningful achievement in aligning volunteer demographics with the children served.</div>
               </div>
               <div class="nat-card above">
-                <div class="nat-label">Educational attainment — Bachelor's or higher</div>
+                <div class="nat-label">Educational attainment — Bachelor’s or higher</div>
                 <div class="nat-compare"><span class="nat-yours">76% bachelors+ (FY25)</span><span class="nat-vs">vs</span><span class="nat-nat">↑ ~65–70% nationally</span></div>
                 <div class="nat-note">CASA programs nationally report approximately 65–70% of volunteers hold a bachelor's degree or higher. This program's 76% is above the national average, reflecting a highly educated advocate corps — often associated with stronger documentation and court communication skills.</div>
               </div>
@@ -1311,7 +1547,7 @@
       <div class="collapse-section">
         <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
           <span class="collapse-label">Questions to Explore</span>
-          <span class="collapse-count">5 questions</span>
+          <span class="collapse-count">8 questions</span>
           <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="collapse-body">
@@ -1321,6 +1557,9 @@
             <span class="dive-pill">Case complexity by volunteer tenure band</span>
             <span class="dive-pill">Geographic distribution of volunteer home zip codes</span>
             <span class="dive-pill">Language match rate — Spanish-speaking volunteers vs. Spanish-speaking families</span>
+            <span class="dive-pill">Why is male advocate recruitment stalled at 13–15% vs. 17% goal?</span>
+            <span class="dive-pill">Which outreach channels produced Hispanic advocates — and can they be scaled?</span>
+            <span class="dive-pill">Training cohort conversion rate: info session → application → sworn in</span>
           </div>
         </div>
       </div>
@@ -1360,28 +1599,6 @@
       <div class="cw" style="height:220px"><canvas id="v_c1"></canvas></div>
     </div>
 
-    <!-- ── AGE + GENDER ── -->
-    <div class="two">
-      <div class="card">
-        <div class="chart-toolbar">
-          <div class="card-title">Age Distribution by Fiscal Year</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c2','vol-age-dist')">⬇ PNG</button></div>
-        </div>
-        <div class="drill-badge"><span class="dot"></span>Click a bar to drill into a year</div>
-        <div class="chart-hint">Click legend pills to show/hide</div>
-        <div class="tleg" id="v_aleg"></div>
-        <div class="cw" style="height:240px"><canvas id="v_c2"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="chart-toolbar">
-          <div class="card-title">Gender Breakdown by Fiscal Year</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c3','vol-gender')">⬇ PNG</button></div>
-        </div>
-        <div class="drill-badge"><span class="dot"></span>Click a year to drill down</div>
-        <div class="cw" style="height:240px"><canvas id="v_c3"></canvas></div>
-      </div>
-    </div>
-
     <!-- ── RACE / ETHNICITY ── -->
     <div class="card full">
       <div class="chart-toolbar">
@@ -1394,25 +1611,6 @@
       <div class="cw" style="height:260px"><canvas id="v_c4"></canvas></div>
     </div>
 
-    <!-- ── EDUCATION + LANGUAGES ── -->
-    <div class="two">
-      <div class="card">
-        <div class="chart-toolbar">
-          <div class="card-title">Education Level Trend (FY21–FY25)</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c5','vol-education')">⬇ PNG</button></div>
-        </div>
-        <div class="chart-hint">Click legend pills to show/hide</div>
-        <div class="tleg" id="v_eleg"></div>
-        <div class="cw" style="height:240px"><canvas id="v_c5"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="chart-toolbar">
-          <div class="card-title">Non-English Languages Spoken (FY25)</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c6','vol-languages')">⬇ PNG</button></div>
-        </div>
-        <div class="cw" style="height:240px"><canvas id="v_c6"></canvas></div>
-      </div>
-    </div>
 
     <!-- ── YEARS OF SERVICE ── -->
     <div class="card full">
@@ -1424,23 +1622,121 @@
       <div class="cw" style="height:220px"><canvas id="v_c7"></canvas></div>
     </div>
 
-    <footer>Volunteer Demographics — Active volunteers FY2021–FY2025 · Source: Volunteer Demographics Summary reports</footer>
-  </main>
+    
+
+    
+
+    <!-- ▸ 3. GOAL TRACKING -->
+    <div class="section-title">Goal Tracking — Set FY26 Targets</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 16px;line-height:1.6;">Enter aspirational FY26 targets below to see how they compare to the five-year trend. Adjust the sliders or type directly in the boxes.</p>
+        <div class="card" style="margin-bottom:8px;">
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Volunteer headcount — with FY26 goal</div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+          <label style="font-size:12px;color:var(--text2);">FY26 volunteer target:</label>
+          <input id="xp_vol_goal" type="range" min="100" max="175" value="135" style="flex:1;min-width:80px;accent-color:#534AB7;">
+          <input id="xp_vol_goal_num" type="number" min="100" max="175" value="135" style="width:60px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
+          <span style="font-size:12px;color:var(--text3);">volunteers</span>
+        </div>
+        <div class="cw" style="height:180px"><canvas id="xp_c3"></canvas></div>
+      </div>
+    </div>
+    <div class="drill-callout" style="margin-bottom:1.75rem;"><strong>How to use:</strong> Drag the sliders or type numbers to update the FY26 goal bar in real time. These are planning tools only — targets are not saved.</div>
+
+    
+
+    <!-- ▸ 8. VOLUNTEER EXPERIENCE PYRAMID -->
+    <div class="section-title">Volunteer Experience Pyramid</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">How many years of service does the current FY25 volunteer corps hold? Each bar represents the number of volunteers at that tenure level — from brand-new recruits to decade-long advocates.</p>
+    <div class="card" style="margin-bottom:8px;">
+      <div class="chart-toolbar"><div class="card-title">FY25 volunteer corps — years of service distribution (n=121)</div></div>
+      <div class="chart-hint">Bars show raw volunteer count at each tenure level · Shading deepens with experience</div>
+      <div class="cw" style="height:220px"><canvas id="xp_c5"></canvas></div>
+    </div>
+    <div class="drill-kpi-bar n4" style="margin-bottom:8px;">
+      <div class="drill-kpi"><div class="dk-lbl">New (0–1 yr)</div><div class="dk-val">23</div><div class="dk-sub">19% of corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Developing (2–4 yrs)</div><div class="dk-val">54</div><div class="dk-sub">45% of corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Experienced (5–9 yrs)</div><div class="dk-val">37</div><div class="dk-sub">31% of corps</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Veteran (10+ yrs)</div><div class="dk-val">7</div><div class="dk-sub">6% of corps</div></div>
+    </div>
+    <div class="drill-callout" style="margin-bottom:1.75rem;">
+      <strong>Reading this chart:</strong> The 2-year tenure mark is the largest single cohort (25 volunteers), suggesting strong retention through the early critical period. The 7 ten-year-plus veterans represent irreplaceable institutional knowledge. The relatively small 0–1 year cohort (23) compared to the 2–4 year band means the corps is mature — experienced but will need renewed recruitment to sustain numbers as senior volunteers retire.
+    </div>
+
+    
+
+        <!-- ── DEMOGRAPHIC EQUITY GAP ── -->
+    <div class="section-title">Demographic Representation Gap — Volunteers vs. Children Served</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Comparing the racial/ethnic composition of CASA's active volunteer corps (FY25) against the children currently in the caseload (FY26 YTD). Gaps highlight where volunteer recruitment can better reflect the communities CASA serves. Source: Internal data &amp; CASA NJ Reimagining the Network, 2025.</p>
+    <div class="card full" style="margin-bottom:1rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">Race/Ethnicity: Volunteers vs. Children in Caseload — % of total</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_equity','equity-gap')">&#11015; PNG</button></div>
+      </div>
+      <div class="chart-hint"><span style="color:#E65100;font-weight:600;">Orange bars</span> = NJ CASA statewide volunteer avg (Source: CASA NJ 2025) — Middlesex significantly outperforms NJ peers on diversity · Asian statewide data not itemised in report</div>
+      <div class="cw" style="height:260px"><canvas id="v_equity"></canvas></div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight positive"><div class="itag">Strength — Black/AA alignment improving</div><p>Black/African American volunteers (19%) are growing toward caseload representation (33%). In FY21 only 8% of volunteers were Black/AA — a 11-point gain in four years. The direction is right; a 14-point gap remains the highest priority for continued equity-focused recruitment.</p></div>
+      <div class="insight watch"><div class="itag">Watch — Hispanic/Latino gap</div><p>Hispanic/Latino children represent 18% of the caseload but only 8% of volunteers — a 10-point gap. With 18 Spanish-speaking volunteers (15% of corps), language capacity partially bridges this gap, but demographic representation lags behind.<span class="action-line">Identify 2–3 community organizations in Carteret or Perth Amboy — a parish, an ESL program, or an employer network — for partnership outreach this quarter; one or two new bilingual Hispanic advocates would close the representation gap entirely.</span></p></div>
+      <div class="insight neutral"><div class="itag">NJ Context — statewide benchmark</div><p>Across NJ's 11 CASA programs, 73% of volunteers identify as non-Hispanic white, while Black/African American children represent 48% of NJ children in out-of-home care — a structural equity challenge shared across the network. Middlesex's 48% non-white volunteer corps significantly outperforms the NJ average of ~27% non-white.</p></div>
+    </div>
+
+
+    <!-- ── FY26 DIVERSITY GOAL TRACKER ── -->
+    <div class="section-title">FY26 Volunteer Diversity Goal Tracker</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Monthly tracking of four FY26 diversity targets from the Strategic Plan Tracker. Dashed lines mark the FY26 goal for each metric. Data through February 2026.</p>
+    <div class="two" style="margin-bottom:1rem;">
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Hispanic/Latino advocates — goal: 11%</div></div>
+        <div class="chart-hint">Currently at 10% · 1 point below the 11% FY26 target</div>
+        <div class="cw" style="height:160px"><canvas id="v_div_hisp"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Black/African American advocates — goal: 20%</div></div>
+        <div class="chart-hint">Currently at 21% · on target and above the 20% FY26 goal</div>
+        <div class="cw" style="height:160px"><canvas id="v_div_black"></canvas></div>
+      </div>
+    </div>
+    <div class="two" style="margin-bottom:1.75rem;">
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Male advocates — goal: 17%</div></div>
+        <div class="chart-hint">Currently at 15% · trending up but 2 points below the 17% goal</div>
+        <div class="cw" style="height:160px"><canvas id="v_div_male"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Bilingual Spanish-speaking advocates — goal: 13%</div></div>
+        <div class="chart-hint">Hit 13% in February · goal reached</div>
+        <div class="cw" style="height:160px"><canvas id="v_div_bil"></canvas></div>
+      </div>
+    </div>
+
+    <footer>Volunteer &amp; Leadership Pipeline — FY2021–FY2025 · CASA Middlesex County</footer>
 </div>
 
 
 <!-- ══════════════════════════════════════════
-     PAGE 5 — REMOVAL ZIP CODES
+     PAGE 3 — ORGANIZATIONAL STRENGTH & GOVERNANCE
 ══════════════════════════════════════════ -->
 <div id="zipcodes" class="page">
   <main>
-    <div class="print-header"><span class="ph-org">CASA — Removal Zip Code Dashboard</span><span class="ph-date" id="ph_date_zip"></span></div>
+    <div class="print-header"><span class="ph-org">CASA — Organizational Strength &amp; Governance</span><span class="ph-date" id="ph_date_zip"></span></div>
+    <div class="pillar-banner">
+      <span class="pb-pillar">Pillar 4</span>
+      <span class="pb-name">Organizational Strength &amp; Governance</span>
+      <span class="pb-badge green">🟢 On Track — stable operations</span>
+      <div class="pb-obj-row">
+        <span class="pb-obj"><span class="pb-dot g"></span>Staff attrition — 0% FY26 YTD</span>
+        <span class="pb-obj"><span class="pb-dot y"></span>SOP compliance — rollout in progress</span>
+        <span class="pb-obj"><span class="pb-dot y"></span>Board pipeline — formalizing</span>
+      </div>
+    </div>
+
 
     <div class="summary-block">
-      <h2>Active Children — Removal Zip Codes</h2>
-      <p class="lead">Each row in the source data represents one child assigned to CASA, identified by removal zip code, case number, and original assigned-to-CASA date. <strong>Duplicate case numbers reflect multiple children on the same case</strong> — this is expected and correct. Removals are geographically concentrated in a Middlesex County corridor: Carteret (07008), New Brunswick (08901), and Perth Amboy (08861) are consistently the highest-volume zip codes, together representing roughly one-third of all cases each year. Total verified cases: FY21 = 168 · FY22 = 200 · FY23 = 203 · FY24 = 191 · FY25 = 167.</p>
+      <h2>Organizational Strength &amp; Governance — Summary &amp; Insights</h2>
+      <p class="lead">This pillar focuses on CASA's operational resilience, board effectiveness, and internal compliance. Key metrics include SOP compliance rates, board engagement, staff stability, and program performance benchmarked against CASA National standards. The scorecard below measures FY25 performance against published CASA National benchmarks and best practices.</p>
 
-      <!-- ▸ KEY INSIGHTS -->
       <div class="collapse-section">
         <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
           <span class="collapse-label">Key Insights</span>
@@ -1449,93 +1745,274 @@
         </button>
         <div class="collapse-body">
           <div class="insight-grid">
-            <div class="insight watch"><div class="itag">Watch — geographic concentration</div><p>The top 3 zip codes (07008 Carteret, 08901 New Brunswick, 08861 Perth Amboy) consistently account for 30–37% of all removals each year. Over five years, 07008 generated 130 child assignments and 08901 generated 115 — the two highest-volume zips by a wide margin. These are dense urban communities with elevated rates of family system involvement.</p></div>
-            <div class="insight watch"><div class="itag">Watch — 08817 rising trend</div><p>Metuchen/Edison (08817) shows the sharpest growth trajectory in the dataset: 8 cases in FY21, steady through FY23 (11), then accelerating to 18 in FY24 and 25 in FY25 — a 3× increase over five years. By FY25 it is the second-highest zip code. This emerging concentration warrants attention for volunteer placement and recruitment in the Edison area.</p></div>
-            <div class="insight positive"><div class="itag">Opportunity — targeted recruitment</div><p>Volunteer recruitment in the 07008 (Carteret), 08901 (New Brunswick), 08817 (Metuchen/Edison), and 08861 (Perth Amboy) corridors could improve geographic match between advocates and families. Spanish-speaking volunteers are especially valuable in Carteret and Perth Amboy, both of which have large Hispanic/Latino populations.</p></div>
-            <div class="insight neutral"><div class="itag">Context — 40+ zip codes served</div><p>Over the five-year period, more than 40 distinct zip codes appear across all years, spanning 07xxx (northern Middlesex/Union County) and 08xxx (central/southern Middlesex) ranges. The caseload peaked at 203 children in FY23 and has since declined to 167 in FY25 — a 18% reduction likely reflecting both systemic trends and natural case closure patterns.</p></div>
+            <div class="insight positive"><div class="itag">Strength — zero staff attrition in FY26</div><p>No Program Coordinator turnover year-to-date is the single most important Pillar 4 signal. Each PC departure historically creates a 60–90 day gap in case coverage and increased volunteer burden. Maintaining a stable team preserves institutional knowledge, volunteer relationships, and case continuity — all critical given the 241-child eligible pool and the 200-child YTD serving goal.</p></div>
+            <div class="insight watch"><div class="itag">Watch — PC-to-case ratio approaching ceiling</div><p>At roughly 1 PC per 48 active cases, the team operates near CASA National's recommended 1:50 maximum. With rolling children served growing from 126 (Jul) to 160 (Feb), the ratio will tighten further as CASA approaches its 200-child annual target. Additional staffing or intern support should be modeled before caseload reaches 150+ active cases.<span class="action-line">Add PC-to-case ratio to the monthly report; if active cases exceed 145 before June, bring staffing options to the board before it becomes a crisis.</span></p></div>
+            <div class="insight neutral"><div class="itag">Context — NJ network financial position</div><p>Across NJ's 11 CASA programs, 5 are operating with deficits and 10 maintain 4+ months of cash reserves. Middlesex's FY26 fundraising trajectory ($125.2K of $128K goal) and grants pipeline ($260.5K awarded of $489K submitted) position it among the financially stronger NJ programs — a meaningful stabilizing factor for board and funder confidence.</p></div>
+            <div class="insight neutral"><div class="itag">Action — formalize quarterly governance KPIs</div><p>The FY27–28 Strategic Framework identifies board meeting attendance, SOP checklist completion, and board pipeline count as Pillar 4 KPIs — but none currently have a tracking mechanism. Establishing a simple monthly log for these three metrics this quarter would provide a baseline for FY27 reporting and demonstrate to funders that governance is actively managed rather than assumed.<span class="action-line">Assign one staff member to collect board attendance and SOP completion data at each meeting, starting next month — the infrastructure is a one-page spreadsheet, not a system implementation.</span></p></div>
           </div>
         </div>
       </div>
 
-      <!-- ▸ QUESTIONS TO EXPLORE -->
       <div class="collapse-section">
         <button class="collapse-btn" onclick="toggleSection(this)" aria-expanded="false">
-          <span class="collapse-label">Questions to Explore</span>
-          <span class="collapse-count">4 questions</span>
+          <span class="collapse-label">Strategic Objectives</span>
+          <span class="collapse-count">2 objectives</span>
           <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="collapse-body">
-          <div class="dive-list" style="padding-top:0.5rem;">
-            <span class="dive-pill">Do volunteers' home zip codes match removal zip codes?</span>
-            <span class="dive-pill">Which zip codes have the longest average case durations?</span>
-            <span class="dive-pill">What is driving the sustained 08817 (Edison) increase since FY23?</span>
-            <span class="dive-pill">Is the FY25 caseload decline (167) a systemic reduction or case closure timing?</span>
+          <div class="insight-grid">
+            <div class="insight neutral"><div class="itag">Objective 3.1 — Operational Compliance</div><p>Ensure 100% staff/board compliance with new SOPs and Internal Controls through bi-annual audits. Monthly KPI: % of staff/board who have completed required monthly "SOP Checklists."</p></div>
+            <div class="insight neutral"><div class="itag">Objective 3.2 — Governance &amp; Capacity</div><p>Conduct a skill-gap analysis to shape board recruiting and balance staff workload vs. capacity. Monthly KPI: Board attendance/participation rate &amp; # of prospective board members in the pipeline.</p></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── HEADLINE STATS ── -->
-    <div class="drill-kpi-bar n4" style="margin:0 0 18px 0;">
+
+    <!-- ── PILLAR 4 GOVERNANCE METRICS ── -->
+    <div class="section-title">Organizational Health — Governance &amp; Operations (FY26 YTD)</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Core operational and governance metrics for Pillar 4. Staff stability and compliance data reflect FY26 year-to-date (through Feb 2026). Board metrics are tracked quarterly.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:18px;">
       <div class="drill-kpi">
-        <div class="dk-lbl">Peak Caseload — FY23</div>
-        <div class="dk-val">203</div>
-        <div class="dk-up">↑ from 168 in FY21</div>
+        <div class="dk-lbl">Staff attrition (FY26 YTD)</div>
+        <div class="dk-val">0%</div>
+        <div class="dk-sub">Goal: &lt;20% · All PCs retained</div>
       </div>
       <div class="drill-kpi">
-        <div class="dk-lbl">FY25 Total Cases</div>
-        <div class="dk-val">167</div>
-        <div class="dk-dn">↓ 18% from FY23 peak</div>
+        <div class="dk-lbl">Program Coordinator capacity</div>
+        <div class="dk-val">1 : 48</div>
+        <div class="dk-sub">Avg active cases per PC (FY26 avg)</div>
       </div>
       <div class="drill-kpi">
-        <div class="dk-lbl">Top 3 Zips Share (FY25)</div>
-        <div class="dk-val">41%</div>
-        <div class="dk-sub">07008 · 08817 · 08901</div>
+        <div class="dk-lbl">SOP compliance rollout</div>
+        <div class="dk-val">In Progress</div>
+        <div class="dk-dn">FY26 initiative · target: 100% by Q4</div>
       </div>
       <div class="drill-kpi">
-        <div class="dk-lbl">Zip Codes Served (all years)</div>
-        <div class="dk-val">40+</div>
-        <div class="dk-sub">Middlesex County region</div>
+        <div class="dk-lbl">Prospective board members</div>
+        <div class="dk-val">Pipeline Active</div>
+        <div class="dk-sub">Skill-gap analysis in FY26 scope</div>
       </div>
     </div>
-
-    <!-- ── TOP ZIP CODES BAR CHART ── -->
-    <div class="card full">
-      <div class="chart-toolbar">
-        <div class="card-title">Top 10 Zip Codes by Total Removals — FY21 to FY25</div>
-        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('z_c1','zip-top10')">⬇ PNG</button></div>
-      </div>
-      <div class="chart-hint">Sorted by cumulative total across all 5 years · Duplicate case numbers = multiple children on the same case</div>
-      <div class="cw" style="height:300px"><canvas id="z_c1"></canvas></div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight positive"><div class="itag">Strength — Zero staff attrition</div><p>No Program Coordinator turnover in FY26 year-to-date is the most important Pillar 4 signal. Each PC departure historically creates a 60–90 day gap in case coverage and increased volunteer burden. Maintaining a stable team preserves institutional knowledge and volunteer relationships — both critical for program continuity given the 241-child eligible pool.</p></div>
+      <div class="insight watch"><div class="itag">Watch — PC-to-case ratio at capacity ceiling</div><p>At roughly 1 PC per 48 active cases, the team is operating near the practical ceiling for effective individual case oversight. CASA National recommends a 1:50 maximum; Middlesex's current 126 active children leaves limited buffer for caseload growth without additional staffing. Reaching the 200-child YTD goal will require monitoring this ratio monthly.<span class="action-line">Add PC-to-case ratio to the monthly executive report; if active cases exceed 145 before June, bring staffing options — including a part-time Program Coordinator or licensed intern — to the board for a decision before the caseload reaches the ceiling.</span></p></div>
+      <div class="insight neutral"><div class="itag">Action — Formalize quarterly governance KPIs</div><p>Board meeting attendance rate, SOP checklist completion percentage, and prospective board member pipeline count are the three Pillar 4 KPIs called out in the FY27–28 Strategic Framework. Establishing a simple monthly tracking mechanism for these metrics this quarter would allow the FY27 plan to open with a baseline — and demonstrate to funders that governance is actively managed.</p></div>
     </div>
 
-    <!-- ── TREND + DISTRIBUTION ── -->
-    <div class="two">
-      <div class="card">
-        <div class="chart-toolbar">
-          <div class="card-title">Year-over-Year Trend — Top 5 Zip Codes</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('z_c2','zip-trend')">⬇ PNG</button></div>
-        </div>
-        <div class="chart-hint">All years sourced from verified case records · 08817 (Edison) shows the steepest growth</div>
-        <div class="cw" style="height:260px"><canvas id="z_c2"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="chart-toolbar">
-          <div class="card-title">Annual Caseload Totals — FY21 to FY25</div>
-          <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('z_c3','zip-totals')">⬇ PNG</button></div>
-        </div>
-        <div class="chart-hint">Each bar = total children assigned that fiscal year · peaked FY23 at 203</div>
-        <div class="cw" style="height:260px"><canvas id="z_c3"></canvas></div>
-      </div>
+    <!-- ── FY27-28 STRATEGIC KPI TABLE ── -->
+    <div class="section-title">FY26–FY28 Strategic Plan — KPI Reference Table</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Formal targets across CASA's four strategic pillars sourced from the FY2027–2028 Strategic Framework. FY26 actuals reflect current YTD performance (through Feb 2026).</p>
+    <div class="card" style="margin-bottom:1.75rem;overflow-x:auto;">
+      <div class="chart-toolbar"><div class="card-title">Strategic KPI targets — all four pillars</div></div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border);">
+            <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;min-width:180px;">KPI</th>
+            <th style="text-align:center;padding:8px 10px;color:var(--text2);font-weight:600;">FY26 Target</th>
+            <th style="text-align:center;padding:8px 10px;color:var(--text2);font-weight:600;">FY27–28 Target</th>
+            <th style="text-align:center;padding:8px 10px;color:var(--text2);font-weight:600;">FY26 YTD Actual</th>
+            <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;">Tracking</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- PILLAR 1: Program Quality -->
+          <tr style="background:var(--bg2);">
+            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 1 — Program Quality &amp; Impact</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">Children served (rolling YTD)</td>
+            <td style="text-align:center;padding:8px 10px;">200</td>
+            <td style="text-align:center;padding:8px 10px;">200+</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">160 (Feb)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">On track — cumulative, seasonal ramp</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">% eligible children served</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;80%</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;85%</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#f57f17;">73–79%</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Below FY26 goal; advocacy referral pipeline key</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">Positive case closure outcomes</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;75%</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;75%</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">89% (FY25)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Exceeding benchmark</td>
+          </tr>
+          <!-- PILLAR 2: Volunteer Engagement -->
+          <tr style="background:var(--bg2);">
+            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 2 — Volunteer Engagement &amp; Retention</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">New advocates sworn in / year</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;20</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;20</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#f57f17;">~12 (est.)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Recruitment pipeline a priority</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">2-year volunteer retention rate</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;62%</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;62%</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">65% (FY25)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Meeting benchmark</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">Hispanic/Latino volunteer representation</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;11%</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;11%</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#f57f17;">10% (Feb)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Near goal; trending up</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">Black/African American volunteer representation</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;20%</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;20%</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">21% (Feb)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Meeting goal</td>
+          </tr>
+          <!-- PILLAR 3: Financial & Community -->
+          <tr style="background:var(--bg2);">
+            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 3 — Financial Sustainability &amp; Community Partnerships</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">Unrestricted fundraising raised</td>
+            <td style="text-align:center;padding:8px 10px;">$128K</td>
+            <td style="text-align:center;padding:8px 10px;">$250K</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">$125.2K</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">98% of FY26 goal through Feb</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">New grants secured / year</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;2</td>
+            <td style="text-align:center;padding:8px 10px;">&ge;2</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">$260.5K awarded</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Strong pipeline; $228.8K pending</td>
+          </tr>
+          <!-- PILLAR 4: Org Strength -->
+          <tr style="background:var(--bg2);">
+            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 4 — Organizational Strength &amp; Governance</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">Program Coordinator attrition</td>
+            <td style="text-align:center;padding:8px 10px;">&lt;20%</td>
+            <td style="text-align:center;padding:8px 10px;">&lt;20%</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">0% (FY26 YTD)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Stable staff — no attrition this year</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:var(--text3);margin-top:10px;">Source: CASA Middlesex FY2027–2028 Strategic Framework, KPI Reference sheet. FY26 YTD actuals through February 2026.</p>
     </div>
 
-    <footer>Removal Zip Codes — Active children FY2021–FY2025 · Source: Active Children Removal Zip Code reports · Duplicate case numbers indicate multiple children on the same case</footer>
+    <!-- ▸ 7. RISK FLAG SCORECARD -->
+    <div class="section-title">Program Health Scorecard</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Key program metrics scored against published CASA National benchmarks and best practices. All figures come directly from source data.</p>
+    <div class="card" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar"><div class="card-title">FY25 performance vs. CASA National benchmarks</div></div>
+      <div class="chart-hint">Green = meeting or exceeding benchmark · Yellow = within 10% of threshold · Red = below benchmark</div>
+      <table id="scorecard_tbl" style="width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border);">
+            <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;">Metric</th>
+            <th style="text-align:center;padding:8px 10px;color:var(--text2);font-weight:600;">Middlesex FY25</th>
+            <th style="text-align:center;padding:8px 10px;color:var(--text2);font-weight:600;">Benchmark</th>
+            <th style="text-align:center;padding:8px 6px;color:var(--text2);font-weight:600;">Status</th>
+            <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;">Context</th>
+          </tr>
+        </thead>
+        <tbody id="scorecard_body"></tbody>
+      </table>
+      <p style="font-size:11px;color:var(--text3);margin-top:10px;">Benchmarks sourced from CASA National Program Standards and published sector research. Volunteer diversity benchmark reflects aspirational best practice, not a published minimum.</p>
+    </div>
+
+    
+
+    <!-- ── NJ NETWORK CONTEXT ── -->
+    <div class="section-title">NJ Network Context — Middlesex in the Statewide Picture</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Data from CASA NJ's 11-program network provides a regional peer benchmark alongside CASA National standards. Source: CASA NJ Reimagining the Network Presentation, 2025.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:18px;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">Middlesex children in OOH care (2025)</div>
+        <div class="dk-val">241</div>
+        <div class="dk-dn">&#8595; from 418 in 2019 (&minus;42%)</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">NJ statewide OOH decline (2019&rarr;2025)</div>
+        <div class="dk-val">&minus;62%</div>
+        <div class="dk-sub">9,595 &rarr; 4,869 children</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">NJ counties at &ge;85% CASA coverage</div>
+        <div class="dk-val">7 of 11</div>
+        <div class="dk-sub">Middlesex FY26 goal: 80% eligible served</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Middlesex % eligible served (FY26 YTD)</div>
+        <div class="dk-val">73&ndash;79%</div>
+        <div class="dk-dn">Goal: 80% &middot; NJ top tier: &ge;85%</div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight positive"><div class="itag">Context — declining caseload is systemic</div><p>The 42% drop in Middlesex OOH placements since 2019 mirrors NJ's statewide 62% decline and a national six-year trend of falling foster care numbers. CASA's reduced children-served count reflects a shrinking eligible pool, not reduced program effectiveness.</p></div>
+      <div class="insight watch"><div class="itag">Opportunity — closing the coverage gap</div><p>7 of NJ's 11 CASA programs serve &ge;85% of eligible children. Middlesex's current 73&ndash;79% range sits below this top tier. Reaching 80% (the FY26 goal) and then 85% would mean serving approximately 10&ndash;20 more children per month — achievable through stronger referral pipelines and advocate recruitment.<span class="action-line">Track the raw number of eligible children without an assigned advocate each month — not just the percentage — and include it in the board package to make the gap concrete and drive urgency around both court referrals and advocate recruitment.</span></p></div>
+      <div class="insight neutral"><div class="itag">NJ Financial health context</div><p>Across 11 NJ CASA programs, 5 are operating with deficits and 10 have &ge;4 months of cash reserves. Middlesex's FY26 fundraising trajectory ($125.2K of $128K goal) and grants pipeline ($260.5K awarded of $489K submitted) position it favorably relative to NJ peers.</p></div>
+    </div>
+
+
+    <!-- ── NJ VOLUNTEER DIVERSITY BENCHMARK ── -->
+    <div class="section-title">NJ Volunteer Diversity — Middlesex vs. Statewide</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">CASA NJ network demographic comparison (FY25 network survey). Middlesex serves a majority non-white community — volunteer diversity is both a community trust and program effectiveness goal.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:18px;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">NJ avg. non-white volunteers</div>
+        <div class="dk-val">27%</div>
+        <div class="dk-sub">Statewide network average</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Middlesex non-white volunteers</div>
+        <div class="dk-val">52%</div>
+        <div class="dk-sub">Significantly above NJ average</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Middlesex Hispanic/Latino advocates</div>
+        <div class="dk-val">10%</div>
+        <div class="dk-dn">FY26 goal: 11% · Gap: ~1–2 advocates</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Middlesex Black/African American advocates</div>
+        <div class="dk-val">21%</div>
+        <div class="dk-sub">Meeting the 20% FY26 goal</div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight positive"><div class="itag">Strength — Diversity leader in NJ network</div><p>At 52% non-white volunteer representation, Middlesex far exceeds the NJ statewide average of 27%. This is a meaningful strategic differentiator — the program's advocate pool more closely reflects the demographics of the 241 children it serves, which research links to stronger child-advocate relationships and better case outcomes.</p></div>
+      <div class="insight watch"><div class="itag">Opportunity — Hispanic representation just below goal</div><p>Hispanic/Latino volunteers represent 10% of Middlesex's active advocate pool vs. the 11% FY26 target. Given that Hispanic children are among the most represented in the caseload, recruiting 1–2 additional bilingual Hispanic advocates would close the gap and strengthen community trust in Spanish-speaking families.<span class="action-line">Identify 2 specific outreach contacts in the Hispanic community and make first contact by end of Q3 — one new bilingual advocate closes this goal entirely, and the outreach itself builds community visibility in the families CASA serves.</span></p></div>
+    </div>
+
+    <!-- ▸ 4. DONOR RETENTION PROJECTION -->
+    <div class="section-title">Donor Retention Projection — FY26 Outlook</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Applying national benchmark retention rates to FY25's donor composition to project FY26 active donor count under different stewardship scenarios.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:12px;">
+      <div class="drill-kpi"><div class="dk-lbl">FY25 total donors</div><div class="dk-val">278</div><div class="dk-sub">71 retained · 159 new · 48 lapsed</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Conservative FY26 est.</div><div class="dk-val">~76</div><div class="dk-dn">if 19% first-year + 65% multi-year retention</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">Strong stewardship est.</div><div class="dk-val">~106</div><div class="dk-sub">if 35% first-year + 70% multi-year retention</div></div>
+      <div class="drill-kpi"><div class="dk-lbl">New donors needed to hit 278</div><div class="dk-val">~172+</div><div class="dk-dn">requires major new acquisition effort</div></div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight alert"><div class="itag">Risk — First-Year Cohort</div><p>159 of 278 FY25 donors are giving for the first time. At the national 19% first-year retention rate, only ~30 are likely to give again in FY26 without intervention. This single group poses the greatest attrition risk.<span class="action-line">Launch a first-year donor stewardship sequence now: an impact story by email in March, a personal board call in April, and a renewal ask by May 15 — divide the 159 names among board members (roughly 20 names each) so no one is overwhelmed.</span></p></div>
+      <div class="insight watch"><div class="itag">Opportunity — Multi-Year Core</div><p>The 71 retained donors (those who gave in both FY24 and FY25) are the most valuable segment. Multi-year donors nationally retain at 60–70%. Prioritizing personal stewardship for this group protects the stable revenue base.<span class="action-line">Assign each of the 71 retained donors a named board contact this month; a brief personal call before May is the single highest-return stewardship action available before the fiscal year ends — the math is 5–6 calls per board member.</span></p></div>
+      <div class="insight positive"><div class="itag">Strategy — Upgrade Mid-Range</div><p>175 of 278 FY25 donors gave under $500 (the $1–$99 and $100–$499 tiers). These donors represent significant upgrade potential — moving just 20 of them up one gift tier would add ~$10K to FY26 revenue.</p></div>
+    </div>
+
+    
+
+    <footer>Organizational Strength &amp; Governance · CASA Middlesex County · FY25 · Source: CASA National Benchmarks &amp; Internal Data</footer>
   </main>
 </div>
 
-<!-- ══════════════════════════════════════════
-     PAGE 7 — EXPERIMENTAL
-══════════════════════════════════════════ -->
 <div id="experimental" class="page">
   <main>
     <div class="summary-block">
@@ -1555,7 +2032,7 @@
     <div class="card" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar"><div class="card-title">Children per volunteer — FY21–FY25</div></div>
       <div class="chart-hint">Lower = more volunteer capacity per child · dashed line = 1.5 target threshold</div>
-      <div class="cw" style="height:200px"><canvas id="xp_c1"></canvas></div>
+      <div class="cw" style="height:200px"><canvas id="xp_c1_ex"></canvas></div>
     </div>
 
     <!-- ▸ 2. EQUITY LENS -->
@@ -1563,7 +2040,7 @@
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Comparing the racial composition of children served against the volunteer corps. Alignment between these groups is a best-practice indicator for child advocacy programs.</p>
     <div class="card" style="margin-bottom:8px;">
       <div class="chart-toolbar"><div class="card-title">Race composition — children served (Feb 2026) vs. volunteers (FY25)</div></div>
-      <div class="chart-hint">Grouped bars show % of each group · Asian volunteers (19%) far exceed Asian children served (6%)</div>
+      <div class="chart-hint">Grouped bars show % of each group · <span style="color:#E65100;font-weight:600;">Orange bars</span> = NJ CASA statewide volunteer avg (Source: CASA NJ 2025) · Asian/Two+/Other NJ data not itemised in report</div>
       <div class="cw" style="height:220px"><canvas id="xp_c2"></canvas></div>
     </div>
     <div class="drill-callout" style="margin-bottom:1.75rem;">
@@ -1582,7 +2059,7 @@
           <input id="xp_vol_goal_num" type="number" min="100" max="175" value="135" style="width:60px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
           <span style="font-size:12px;color:var(--text3);">volunteers</span>
         </div>
-        <div class="cw" style="height:180px"><canvas id="xp_c3"></canvas></div>
+        <div class="cw" style="height:180px"><canvas id="xp_c3_ex"></canvas></div>
       </div>
       <div class="card">
         <div class="chart-toolbar"><div class="card-title">Total raised — with FY26 goal</div></div>
@@ -1592,7 +2069,7 @@
           <input id="xp_fund_goal_num" type="number" min="100000" max="300000" step="5000" value="175000" style="width:80px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
           <span style="font-size:12px;color:var(--text3);">dollars</span>
         </div>
-        <div class="cw" style="height:180px"><canvas id="xp_c4"></canvas></div>
+        <div class="cw" style="height:180px"><canvas id="xp_c4_ex"></canvas></div>
       </div>
     </div>
     <div class="drill-callout" style="margin-bottom:1.75rem;"><strong>How to use:</strong> Drag the sliders or type numbers to update the FY26 goal bar in real time. These are planning tools only — targets are not saved.</div>
@@ -1607,8 +2084,8 @@
       <div class="drill-kpi"><div class="dk-lbl">New donors needed to hit 278</div><div class="dk-val">~172+</div><div class="dk-dn">requires major new acquisition effort</div></div>
     </div>
     <div class="insight-grid" style="margin-bottom:1.75rem;">
-      <div class="insight alert"><div class="itag">Risk — First-Year Cohort</div><p>159 of 278 FY25 donors are giving for the first time. At the national 19% first-year retention rate, only ~30 are likely to give again in FY26 without intervention. This single group poses the greatest attrition risk.</p></div>
-      <div class="insight watch"><div class="itag">Opportunity — Multi-Year Core</div><p>The 71 retained donors (those who gave in both FY24 and FY25) are the most valuable segment. Multi-year donors nationally retain at 60–70%. Prioritizing personal stewardship for this group protects the stable revenue base.</p></div>
+      <div class="insight alert"><div class="itag">Risk — First-Year Cohort</div><p>159 of 278 FY25 donors are giving for the first time. At the national 19% first-year retention rate, only ~30 are likely to give again in FY26 without intervention. This single group poses the greatest attrition risk.<span class="action-line">Launch a first-year donor stewardship sequence now: an impact story by email in March, a personal board call in April, and a renewal ask by May 15 — divide the 159 names among board members (roughly 20 names each) so no one is overwhelmed.</span></p></div>
+      <div class="insight watch"><div class="itag">Opportunity — Multi-Year Core</div><p>The 71 retained donors (those who gave in both FY24 and FY25) are the most valuable segment. Multi-year donors nationally retain at 60–70%. Prioritizing personal stewardship for this group protects the stable revenue base.<span class="action-line">Assign each of the 71 retained donors a named board contact this month; a brief personal call before May is the single highest-return stewardship action available before the fiscal year ends — the math is 5–6 calls per board member.</span></p></div>
       <div class="insight positive"><div class="itag">Strategy — Upgrade Mid-Range</div><p>175 of 278 FY25 donors gave under $500 (the $1–$99 and $100–$499 tiers). These donors represent significant upgrade potential — moving just 20 of them up one gift tier would add ~$10K to FY26 revenue.</p></div>
     </div>
 
@@ -1763,7 +2240,7 @@
     <div class="card" style="margin-bottom:8px;">
       <div class="chart-toolbar"><div class="card-title">FY25 volunteer corps — years of service distribution (n=121)</div></div>
       <div class="chart-hint">Bars show raw volunteer count at each tenure level · Shading deepens with experience</div>
-      <div class="cw" style="height:220px"><canvas id="xp_c5"></canvas></div>
+      <div class="cw" style="height:220px"><canvas id="xp_c5_ex"></canvas></div>
     </div>
     <div class="drill-kpi-bar n4" style="margin-bottom:8px;">
       <div class="drill-kpi"><div class="dk-lbl">New (0–1 yr)</div><div class="dk-val">23</div><div class="dk-sub">19% of corps</div></div>
@@ -1923,6 +2400,36 @@ var CHART_ANALYSIS = {
     'The experience pyramid shows a healthy middle bulge: 54 volunteers (45%) are in the 2\u20134 year developing range, suggesting strong early-tenure retention through the critical first few years. The 7 ten-year veterans are irreplaceable institutional assets — their case complexity capacity and mentorship value far exceeds their numerical share. With only 2 brand-new (0-year) volunteers in FY25, the incoming class was unusually thin and expanding recruitment is the most urgent workforce planning priority.',
   'Age band composition by month — Jul 2025–Feb 2026 (% of active children)':
     'The age composition is strikingly consistent across all eight months — the stacked bars maintain nearly identical proportions, with infants and toddlers (0\u20133) the largest band at roughly 27% each month. The red average age line hovering at 8.7\u20138.9 years with minimal variation confirms that the program\u2019s age profile is structurally determined by referral and court patterns, not by seasonal intake fluctuations. This consistency simplifies program planning but highlights the sustained need for volunteers skilled in advocating for very young children.',
+
+  /* ── FY26 Program Progress (Demographics tab) ── */
+  'Children served \u2014 FY26 rolling YTD vs. 200 goal':
+    'At 160 children served through February \u2014 80% of the 200-child FY26 goal \u2014 the program is tracking ahead of pace with four months remaining. The rolling total grew steadily from 126 in July to 160 in February, averaging 4\u20135 new unique children per month. Reaching 200 by June requires 40 additional children across four months \u2014 a rate of 10 per month that is achievable given typical spring court calendars and case intake patterns.',
+  '% eligible children served vs. 80% goal':
+    'The percentage of eligible children served ranged from 73% to 79% across the four measured months \u2014 consistently 1\u20137 points below the 80% FY26 target. August 2025 came closest at 79%, while October and February both registered 73%. The gap is modest but persistent, suggesting volunteer capacity rather than referral volume is the limiting factor \u2014 each additional active advocate directly expands coverage and moves this metric toward the goal.',
+  'FN vs FG trend \u2014 Permanency trajectory':
+    'The FN (foster care/neglect) line peaked at 92 in September before declining to 77 by February \u2014 its lowest point in the period \u2014 while FG (guardianship) petitions climbed from 14 to 22, a 57% increase with no reversals. The sustained inverse movement is a meaningful permanency signal: fewer children remain in standard foster care while more are transitioning toward guardianship placements. This trajectory directly supports the strategic plan goal of 75%+ positive case closure outcomes across FY26\u2013FY28.',
+
+  /* ── FY26 Fundraising (Fundraising tab) ── */
+  'Grant pipeline \u2014 applied vs. awarded (FY26 YTD)':
+    'CASA submitted $489,311 in grant applications in FY26 YTD and has received $260,500 \u2014 a 53% success rate that is more than double the nonprofit sector benchmark of 20\u201330%. Key awards span CASA NJ emergency funds, Middlesex County Commissioners, VOCA, and corporate grants. The $228,811 still pending represents meaningful upside; even partial conversion at the current success rate would push total grant revenue well above FY25 levels.',
+  'FY26 unrestricted fundraising \u2014 YTD vs. $128K goal':
+    'With $125,200 raised through February \u2014 98% of the $128K FY26 unrestricted goal \u2014 the program is positioned to exceed this target with four months remaining. This is the strongest goal-tracking signal across all four strategic pillars and reflects both the donor count expansion of FY25 and successful early-year stewardship. Every dollar raised beyond $128K builds the discretionary reserve that allows CASA to respond to unexpected caseload or staffing needs without impacting program delivery.',
+
+  /* ── Volunteer Equity & Diversity Goals (Volunteers tab) ── */
+  'Race/Ethnicity: Volunteers vs. Children in Caseload \u2014 % of total':
+    'The chart surfaces two actionable representation gaps: Black/African American children are 33% of the caseload but only 19% of volunteers, and Hispanic/Latino children are 18% of the caseload but only 8% of volunteers. White volunteers at 48% are nearly double their share of the child population (28%) \u2014 a pattern common nationally, but an active equity recruitment priority here. At 52% non-white overall, Middlesex\u2019s volunteer corps significantly outperforms the NJ CASA average of ~27% non-white, while the group-level gaps remain the most specific and actionable diversity targets.',
+  'Hispanic/Latino advocates \u2014 goal: 11%':
+    'Hispanic/Latino representation grew from 8% in July to 10% by October and held steady through February \u2014 one percentage point below the 11% FY26 target. The jump from 8% to 10% between September and October represents real progress; recruiting one additional bilingual Hispanic advocate from the current corps of 121 would meet or exceed the goal. Given that Hispanic/Latino children represent 18% of the caseload, sustained growth in this metric is both a strategic equity priority and a direct service quality lever for families in Carteret and Perth Amboy.',
+  'Black/African American advocates \u2014 goal: 20%':
+    'Black/African American advocates have exceeded the 20% FY26 goal in every month of the tracked period, ranging from 20% to 23% \u2014 one of only two diversity metrics fully on track in FY26. The current 21% is above target, though it still trails the caseload share of 33%, making continued growth the longer-term equity priority. The FY26 goal reflects a realistic milestone on the path to fuller demographic alignment; the FY27\u201328 strategic plan should escalate the target incrementally as recruitment scales.',
+  'Male advocates \u2014 goal: 17%':
+    'Male advocate representation grew from 13% in July to 15% in February \u2014 a consistent upward trend that closes half the gap to the 17% FY26 goal. Reaching 17% requires approximately 2\u20133 additional male volunteers from the current corps of 121, a modest target achievable with focused outreach through fathers\u2019 groups, professional associations, and coaching networks. Male advocates bring perspectives that research links to improved advocacy outcomes for male children, who represent 54% of the active caseload.',
+  'Bilingual Spanish-speaking advocates \u2014 goal: 13%':
+    'Bilingual Spanish-speaking advocates hit the 13% FY26 target in February after hovering between 10\u201311% for the first six months \u2014 making this the only diversity metric to reach its FY26 goal by mid-year. Maintaining this level is operationally critical: Spanish-speaking children and families represent the second-largest linguistic group in the caseload, and any attrition among bilingual advocates would directly reduce cultural match capacity. Sustaining 13%+ through June should be treated as a retention priority, not just a recruitment milestone.',
+
+  /* ── Strategic Planning (Organizational Strength tab) ── */
+  'Strategic KPI targets \u2014 all four pillars':
+    'The table shows CASA tracking above target on program outcomes (89% positive closures vs. 75% goal) and fundraising (98% to unrestricted goal), while new advocate recruitment (~12 vs. 20+ goal) and % eligible children served (73\u201379% vs. 80% goal) are the two active watch items for FY26. The four-pillar balanced scorecard structure \u2014 Program Quality, Volunteer Engagement, Fundraising, and Organizational Strength \u2014 catches cross-functional risks before they compound. FY27\u201328 targets escalate across all pillars, making current-year gaps the highest-priority items for board planning and resource allocation.',
 
   /* ── Explorer ── */
   'Custom Chart':
@@ -2087,6 +2594,40 @@ function goalLine(val, label, color) {
     borderDashOffset: 0
   };
 }
+
+/* ── refLineLabels plugin ──────────────────────────────────────────────
+   For any dataset with a `refLabel` string, draws a small colour-matched
+   label flush against the right edge of the chart area, just above the
+   reference line.  Works on line datasets that span the full x-axis.
+   Colour coding convention used throughout this dashboard:
+     #C62828  red    → internal FY26 Strategic Plan goal
+     #E65100  orange → NJ CASA network / state expectation benchmark
+────────────────────────────────────────────────────────────────────── */
+Chart.register({
+  id: 'refLineLabels',
+  afterDraw: function(chart) {
+    var ctx = chart.ctx;
+    chart.data.datasets.forEach(function(ds, di) {
+      if (!ds.refLabel) return;
+      var meta = chart.getDatasetMeta(di);
+      if (meta.hidden) return;
+      var pts = meta.data;
+      if (!pts || !pts.length) return;
+      // Use the last visible point to get the y-position of the reference line
+      var last = pts[pts.length - 1];
+      if (!last || typeof last.x !== 'number' || typeof last.y !== 'number') return;
+      var ca = chart.chartArea;
+      if (!ca) return;
+      ctx.save();
+      ctx.font = '600 9px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
+      ctx.fillStyle = ds.borderColor || '#666';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(ds.refLabel, ca.right - 3, last.y - 4);
+      ctx.restore();
+    });
+  }
+});
 
 /* ═══ DEMOGRAPHICS DATA ═══ */
 var dM  = ['Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26'];
@@ -2945,225 +3486,10 @@ function init() {
     );
   });
 
-  /* ── d_c3: Race doughnut Feb 2026 ── */
-  new Chart(document.getElementById('d_c3'),{type:'doughnut',data:{labels:dRK,datasets:[{data:dRD.map(function(d){return d[7];}),backgroundColor:dRC,borderWidth:2,borderColor:BC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:10,color:TC}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
-
-
-  /* ── d_c7: Age trend — click point → full 20-age breakdown ── */
-  // Full age labels for drill
-  var dAgeAllLabels=['0–11mo','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','18+'];
-  var ageTrend=new Chart(document.getElementById('d_c7'),{type:'line',
-    data:{labels:dM,datasets:dABL.map(function(k,i){return{label:k,data:dBS[i],borderColor:dABC[i],backgroundColor:'transparent',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:dABC[i],borderWidth:2.5};})},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}},
-      scales:{y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},x:{ticks:{color:TC},grid:{display:false}}},
-      interaction:{mode:'index',intersect:false}}});
-  mkToggleLeg('d_agleg',ageTrend,dABL,dABC);
-  document.getElementById('d_c7').style.cursor='pointer';
-  document.getElementById('d_c7').addEventListener('click',function(e){
-    var mi=getClickIndex(ageTrend,e);
-    if(mi<0)return;
-    var monthLabel=dM[mi];
-    var total=dT[mi];
-    var rawAges=dRA[mi];
-    var colors=['#3B8BD4','#3B8BD4','#3B8BD4','#3B8BD4','#0F6E56','#0F6E56','#0F6E56','#0F6E56','#BA7517','#BA7517','#BA7517','#BA7517','#534AB7','#534AB7','#534AB7','#534AB7','#A32D2D','#A32D2D','#A32D2D','#A32D2D'];
-    var anchor=e.target.closest('.card')||e.target.parentElement;
-    var curBands=band(rawAges),julBands=band(dRA[0]);
-    var infants=rawAges[0],infantPct=Math.round(infants/total*100);
-    var maxBandVal=Math.max.apply(null,curBands),maxBandIdx=curBands.indexOf(maxBandVal);
-    var chg03=curBands[0]-julBands[0];
-    openDemoDrill(
-      anchor,
-      monthLabel+' — Full age breakdown (all ages)',
-      'Total census: '+total+' children  ·  4-year bands color-coded',
-      function(body){
-        var calloutText = infants>=12
-          ? 'Infants (0–11 months) are at <strong>'+infants+'</strong> in '+monthLabel+' — up from 8 in July 2025 (+75%). At '+infantPct+'% of the caseload, this exceeds the national rate of ~7% (AFCARS FY2024). Infant-specific placement capacity and specialized foster parent training may need review.'
-          : 'The <strong>0–3 age band</strong> ('+curBands[0]+' children, '+Math.round(curBands[0]/total*100)+'% of census) remains the single largest age grouping in '+monthLabel+'. The '+dABL[maxBandIdx]+' band leads at '+maxBandVal+' children.';
-        body.innerHTML=
-          '<div class="drill-kpi-bar n4">'
-          +kpi('Total census',total,monthLabel,null,null)
-          +kpi('Infants (0–11mo)',infants,infantPct+'% of census',infants>8?'▲ Up from 8 in Jul 25':null,infants>8?'up':null)
-          +kpi('Largest band',dABL[maxBandIdx],maxBandVal+' children ('+Math.round(maxBandVal/total*100)+'%)',null,null)
-          +kpi('Ages 0–3',curBands[0],Math.round(curBands[0]/total*100)+'% of census',(chg03>=0?'+':'')+chg03+' since Jul 25',chg03>0?'up':chg03<0?'dn':null)
-          +'</div>'
-          +'<div class="drill-callout">'+calloutText+'</div>'
-          +'<div class="cw" style="height:260px"><canvas id="d_drill_age"></canvas></div>';
-        return new Chart(document.getElementById('d_drill_age'),{type:'bar',
-          data:{labels:dAgeAllLabels,datasets:[{label:'Children',data:rawAges,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},
-          options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children ('+Math.round(c.raw/total*100)+'%)';}}}},
-            scales:{x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},y:{ticks:{color:TC,stepSize:2},grid:{color:GC},beginAtZero:true}}}});
-      }
-    );
-  });
-
-  /* ── d_c8: Petition stacked bar — click month → ranked bar ── */
-  var petChart=new Chart(document.getElementById('d_c8'),{type:'bar',
-    data:{labels:dM,datasets:dPK.map(function(k,i){return{label:k,data:dPD[i],backgroundColor:dPC[i],stack:'s'};})},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
-      var total=dPK.reduce(function(sum,_,i){return sum+dPD[i][c.dataIndex];},0);
-      return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';
-    }}}},scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC},grid:{color:GC}}}}});
-  mkToggleLeg('d_pleg',petChart,dPK,dPC);
-  document.getElementById('d_c8').style.cursor='pointer';
-  document.getElementById('d_c8').addEventListener('click',function(e){
-    var mi=getClickIndex(petChart,e);
-    if(mi<0)return;
-    var monthLabel=dM[mi];
-    var vals=dPK.map(function(_,i){return dPD[i][mi];});
-    var total=vals.reduce(function(a,b){return a+b;},0);
-    // Sort by value descending for ranked view
-    var sorted=dPK.map(function(k,i){return{k:k,v:vals[i],c:dPC[i]};}).sort(function(a,b){return b.v-a.v;});
-    var anchor=e.target.closest('.card')||e.target.parentElement;
-    var fnCount=vals[5],fgCount=vals[4],fnJul=dPD[5][0],fgJul=dPD[4][0];
-    var fnChg=fnCount-fnJul,fgChg=fgCount-fgJul;
-    var ratio=(fnCount/Math.max(fgCount,1)).toFixed(1);
-    openDemoDrill(
-      anchor,
-      monthLabel+' — Petition types breakdown',
-      'Total petitions: '+total,
-      function(body){
-        var calloutText='In '+monthLabel+', FN (foster care) petitions stand at <strong>'+fnCount+'</strong>'+(fnChg<=0?' — down '+Math.abs(fnChg)+' from July 2025':'+ '+fnChg+' from July 2025')+'. FG (guardianship) petitions '+(fgChg>0?'have grown to <strong>'+fgCount+'</strong> (+'+fgChg+' from Jul) — a positive permanency indicator suggesting more children moving toward permanent placements.':'are at '+fgCount+'.')+(fnChg<0&&fgChg>0?' The FN decline paired with FG growth may reflect genuine permanency progress.':'');
-        body.innerHTML=
-          '<div class="drill-kpi-bar n4">'
-          +kpi('Total petitions',total,monthLabel,null,null)
-          +kpi('FN (foster care)',fnCount,Math.round(fnCount/total*100)+'% of total',(fnChg>=0?'+':'')+fnChg+' since Jul 25',fnChg>0?'up':'dn')
-          +kpi('FG (guardianship)',fgCount,Math.round(fgCount/total*100)+'% of total',(fgChg>=0?'+':'')+fgChg+' since Jul 25',fgChg>0?'up':'dn')
-          +kpi('FN / FG ratio',ratio+'×','FN petitions per FG',null,null)
-          +'</div>'
-          +'<div class="drill-callout">'+calloutText+'</div>'
-          +'<div class="two"><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Ranked by count</div><div class="cw" style="height:200px"><canvas id="d_drill_pet1"></canvas></div></div><div><div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Share of total</div><div class="cw" style="height:200px"><canvas id="d_drill_pet2"></canvas></div></div></div>';
-        new Chart(document.getElementById('d_drill_pet1'),{type:'bar',
-          data:{labels:sorted.map(function(d){return d.k;}),datasets:[{data:sorted.map(function(d){return d.v;}),backgroundColor:sorted.map(function(d){return d.c;}),borderRadius:4,borderSkipped:false}]},
-          options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}},
-            scales:{x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},y:{ticks:{color:TC,font:{size:11}},grid:{display:false}}}}});
-        return new Chart(document.getElementById('d_drill_pet2'),{type:'doughnut',
-          data:{labels:dPK,datasets:[{data:vals,backgroundColor:dPC,borderWidth:2,borderColor:BC}]},
-          options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8,color:TC}},
-            tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
-      }
-    );
-  });
-
   /* ── d_c9: FN vs FG line ── */
   var fnfgChart=new Chart(document.getElementById('d_c9'),{type:'line',data:{labels:dM,datasets:[{label:'FN',data:dPD[5],borderColor:'#A32D2D',tension:0.3,pointRadius:4,pointBackgroundColor:'#A32D2D',borderWidth:2.5},{label:'FG',data:dPD[4],borderColor:'#BA7517',tension:0.3,pointRadius:4,pointBackgroundColor:'#BA7517',borderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' petitions';}}}},scales:{y:{ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
   mkToggleLeg('d_fnfg_leg',fnfgChart,['FN','FG'],['#A32D2D','#BA7517']);
 
-  /* ── d_c10: Gender doughnut ── */
-  new Chart(document.getElementById('d_c10'),{type:'doughnut',data:{labels:['Female','Male'],datasets:[{data:[dF[7],dMa[7]],backgroundColor:['#534AB7','#3B8BD4'],borderWidth:2,borderColor:BC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:13},color:TC,padding:14}},tooltip:{callbacks:{label:function(c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/t*100)+'%)';}}}}}});
-
-  /* ── d_c11: Gender line — click month → census split panel ── */
-  var gLineChart=new Chart(document.getElementById('d_c11'),{type:'line',
-    data:{labels:dM,datasets:[
-      {label:'Female',data:dF,borderColor:'#534AB7',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#534AB7',borderWidth:2.5},
-      {label:'Male',  data:dMa,borderColor:'#3B8BD4',tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#3B8BD4',borderWidth:2.5}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
-      var total=dT[c.dataIndex];
-      return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';
-    }}}},scales:{y:{min:50,max:75,ticks:{color:TC},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}},interaction:{mode:'index',intersect:false}}});
-  mkToggleLeg('d_gleg',gLineChart,['Female','Male'],['#534AB7','#3B8BD4']);
-  document.getElementById('d_c11').style.cursor='pointer';
-  document.getElementById('d_c11').addEventListener('click',function(e){
-    var mi=getClickIndex(gLineChart,e);
-    if(mi<0)return;
-    var monthLabel=dM[mi];
-    var female=dF[mi], male=dMa[mi], total=dT[mi];
-    var femPct=Math.round(female/total*100), malePct=Math.round(male/total*100);
-    var anchor=e.target.closest('.card')||e.target.parentElement;
-    var femAvg=Math.round(dF.reduce(function(a,b){return a+b;},0)/dF.length);
-    var maleAvg=Math.round(dMa.reduce(function(a,b){return a+b;},0)/dMa.length);
-    var femAvgPct=Math.round(femAvg/(femAvg+maleAvg)*100);
-    openDemoDrill(
-      anchor,
-      monthLabel+' — Census gender split',
-      'Total active: '+total+' children',
-      function(body){
-        var callout = 'The 8-month average is <strong>'+femAvgPct+'% female / '+(100-femAvgPct)+'% male</strong>. '
-          +(malePct>femPct
-            ? 'In '+monthLabel+', male ('+male+') has pulled ahead of female ('+female+'), a gradual shift from the 51% female baseline in July 2025. AFCARS FY2024 shows ~51% male nationally.'
-            : 'The split in '+monthLabel+' ('+femPct+'% female, '+malePct+'% male) aligns closely with the AFCARS FY2024 national average of ~49% female.');
-        body.innerHTML=
-          '<div class="two"><div><div class="cw" style="height:180px"><canvas id="d_drill_gend1"></canvas></div></div>'
-          +'<div style="display:flex;flex-direction:column;justify-content:center;gap:16px;padding:1rem 0;">'
-          +'<div style="background:rgba(83,74,183,0.1);border-left:3px solid #534AB7;border-radius:var(--radius-md);padding:.85rem 1rem;">'
-          +'<div style="font-size:12px;color:#534AB7;font-weight:500;margin-bottom:4px;">Female</div>'
-          +'<div style="font-size:24px;font-weight:500;color:var(--text);">'+female+'</div>'
-          +'<div style="font-size:12px;color:var(--text3);">'+femPct+'% of census · 8-mo avg '+femAvg+'</div></div>'
-          +'<div style="background:rgba(59,139,212,0.1);border-left:3px solid #3B8BD4;border-radius:var(--radius-md);padding:.85rem 1rem;">'
-          +'<div style="font-size:12px;color:#3B8BD4;font-weight:500;margin-bottom:4px;">Male</div>'
-          +'<div style="font-size:24px;font-weight:500;color:var(--text);">'+male+'</div>'
-          +'<div style="font-size:12px;color:var(--text3);">'+malePct+'% of census · 8-mo avg '+maleAvg+'</div></div></div></div>'
-          +'<div style="margin-top:1rem;">'
-          +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">8-month gender trend</div>'
-          +'<div class="cw" style="height:140px"><canvas id="d_drill_gend2"></canvas></div></div>'
-          +'<div class="drill-callout" style="margin-top:1rem;">'+callout+'</div>';
-        var gd1=new Chart(document.getElementById('d_drill_gend1'),{type:'doughnut',
-          data:{labels:['Female','Male'],datasets:[{data:[female,male],backgroundColor:['#534AB7','#3B8BD4'],borderWidth:2,borderColor:BC}]},
-          options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{font:{size:12},color:TC,padding:12}},
-            tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/total*100)+'%)';}}}}}});
-        new Chart(document.getElementById('d_drill_gend2'),{type:'line',
-          data:{labels:dM,datasets:[
-            {label:'Female',data:dF,borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,0.08)',fill:true,tension:0.3,pointRadius:3,pointBackgroundColor:'#534AB7',borderWidth:2},
-            {label:'Male',  data:dMa,borderColor:'#3B8BD4',backgroundColor:'transparent',fill:false,tension:0.3,pointRadius:3,pointBackgroundColor:'#3B8BD4',borderWidth:2}
-          ]},
-          options:{responsive:true,maintainAspectRatio:false,
-            plugins:{legend:{position:'top',labels:{font:{size:11},color:TC,padding:10}},
-              tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' ('+Math.round(c.raw/dT[c.dataIndex]*100)+'%)';}}}},
-            scales:{y:{min:50,max:75,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC,font:{size:11}},grid:{display:false}}},
-            interaction:{mode:'index',intersect:false}}});
-        return gd1;
-      }
-    );
-  });
-
-  /* ── d_c12: Month-over-month census change ── */
-  new Chart(document.getElementById('d_c12'),{type:'bar',
-    data:{labels:dMoMLabels,datasets:[{label:'MoM change',data:dMoM,
-      backgroundColor:dMoM.map(function(v){return v>=0?'rgba(15,110,86,0.75)':'rgba(163,45,45,0.75)';}),
-      borderColor:dMoM.map(function(v){return v>=0?'#0F6E56':'#A32D2D';}),
-      borderWidth:1.5,borderRadius:4,borderSkipped:false}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.raw>=0?'+':'')+c.raw+' children vs prior month';}}}},
-      scales:{
-        x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},
-        y:{ticks:{color:TC,callback:function(v){return (v>=0?'+':'')+v;}},grid:{color:GC},
-          title:{display:true,text:'Net change',color:TC,font:{size:11}}}
-      }}
-  });
-
-  /* ── d_c13: Race delta diverging bar ── */
-  new Chart(document.getElementById('d_c13'),{type:'bar',
-    data:{labels:dRDeltaK,datasets:[{label:'Change from Jul 2025',data:dRDeltaV,
-      backgroundColor:dRDeltaV.map(function(v){return v>0?'rgba(163,45,45,0.75)':v<0?'rgba(15,110,86,0.75)':'rgba(136,135,128,0.45)';}),
-      borderColor:dRDeltaV.map(function(v){return v>0?'#A32D2D':v<0?'#0F6E56':'#888780';}),
-      borderWidth:1.5,borderRadius:3,borderSkipped:false}]},
-    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.raw>=0?'+':'')+c.raw+' children vs Jul 2025';}}}},
-      scales:{
-        x:{ticks:{color:TC,callback:function(v){return (v>=0?'+':'')+v;}},grid:{color:GC}},
-        y:{ticks:{color:TC,font:{size:12}},grid:{display:false}}
-      }}
-  });
-
-  /* ── d_c14: FC subtypes line ── */
-  var dFCSubData=[dPD[2],dPD[1],dPD[3]]; // court id, avail adopt, FC/18+
-  var fcSubChart=new Chart(document.getElementById('d_c14'),{type:'line',
-    data:{labels:dM,datasets:storeFullData(dFCSubK.map(function(k,i){
-      return {label:k,data:dFCSubData[i].slice(),
-        borderColor:dFCSubC[i],backgroundColor:'transparent',
-        tension:0.3,pointRadius:4,pointHoverRadius:7,
-        pointBackgroundColor:dFCSubC[i],borderWidth:2.5};
-    }))},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}},
-      scales:{y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},x:{ticks:{color:TC},grid:{display:false}}},
-      interaction:{mode:'index',intersect:false}}
-  });
-  mkToggleLeg('d_fcleg',fcSubChart,dFCSubK,dFCSubC);
-  allDemoCharts['c14']=fcSubChart;
-
-  /* ── d_c15: Age heatmap ── */
-  setTimeout(function(){ drawHeatmap('d_c15'); }, 80);
 
   /* ─── FUNDRAISING ─── */
   // Helper: chart click → openDrill with anchor (bars + x-axis labels)
@@ -3178,37 +3504,20 @@ function init() {
   }
 
   var totChart = new Chart(document.getElementById('f_c1'),{type:'bar',
-    data:{labels:fY,datasets:[{label:'Cash gifts',data:fC,backgroundColor:'#3B8BD4',stack:'s',borderRadius:4},{label:'In-kind',data:fIK,backgroundColor:'#0F6E56',stack:'s',borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
+    data:{labels:fY,datasets:[
+      {label:'Cash gifts',data:fC,backgroundColor:'#3B8BD4',stack:'s',borderRadius:4},
+      {label:'In-kind',data:fIK,backgroundColor:'#0F6E56',stack:'s',borderRadius:4},
+      {type:'line',label:'FY26 unrestricted goal ($128K)',data:fY.map(function(){return 128000;}),
+        borderColor:'#C62828',borderDash:[8,4],borderWidth:2,
+        pointRadius:0,tension:0,fill:false,order:0,yAxisID:'y',refLabel:'FY26 Goal: $128K'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
+      if(c.datasetIndex===2) return ' FY26 unrestricted goal: $128K';
+      return ' '+c.dataset.label+': '+dollarFmt(c.raw);
+    }}}},
       scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC,callback:dollarTick},grid:{color:GC}}}}});
   mkToggleLeg('f_totleg',totChart,['Cash gifts','In-kind'],['#3B8BD4','#0F6E56']);
   addDrillClick(totChart,'combined');
-
-  var cashChart = new Chart(document.getElementById('f_c2'),{type:'bar',
-    data:{labels:fY,datasets:[{label:'Cash gifts',data:fC,backgroundColor:fY.map(function(_,i){return i===4?'#3B8BD4':'rgba(59,139,212,0.55)';}),borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw);}}}},
-      scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
-  addDrillClick(cashChart,'cash');
-
-  var ikChart = new Chart(document.getElementById('f_c3'),{type:'bar',
-    data:{labels:fY,datasets:[{label:'In-kind',data:fIK,backgroundColor:fY.map(function(_,i){return i===4?'#0F6E56':'rgba(15,110,86,0.55)';}),borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw);}}}},
-      scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
-  addDrillClick(ikChart,'inkind');
-
-  var cashTypChart=new Chart(document.getElementById('f_c4'),{type:'bar',
-    data:{labels:fY,datasets:[{label:'Individual',data:fCI,backgroundColor:'#3B8BD4',stack:'s',borderRadius:4},{label:'Organization',data:fCO,backgroundColor:'#BA7517',stack:'s',borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
-      scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC,callback:dollarTick},grid:{color:GC}}}}});
-  mkToggleLeg('f_typleg',cashTypChart,['Individual','Organization'],['#3B8BD4','#BA7517']);
-  addDrillClick(cashTypChart,'cash');
-
-  var ikTypChart=new Chart(document.getElementById('f_c5'),{type:'bar',
-    data:{labels:fY,datasets:[{label:'Individual',data:fII,backgroundColor:'#3B8BD4',stack:'s',borderRadius:4},{label:'Organization',data:fIO,backgroundColor:'#BA7517',stack:'s',borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+dollarFmt(c.raw);}}}},
-      scales:{x:{stacked:true,ticks:{color:TC},grid:{display:false}},y:{stacked:true,ticks:{color:TC,callback:dollarTick},grid:{color:GC}}}}});
-  mkToggleLeg('f_iktyp',ikTypChart,['Individual','Organization'],['#3B8BD4','#BA7517']);
-  addDrillClick(ikTypChart,'inkind');
 
   var donorChart = new Chart(document.getElementById('f_c6'),{type:'bar',
     data:{labels:fY,datasets:[{label:'Active donors',data:fD,backgroundColor:fY.map(function(_,i){return i===4?'rgba(83,74,183,0.9)':'rgba(83,74,183,0.5)';}),borderRadius:4}]},
@@ -3228,100 +3537,6 @@ function init() {
     data:{labels:['Retained (both FYs)','New donors','Lapsed donors'],datasets:[{data:[71,159,19],backgroundColor:['#0F6E56','#3B8BD4','#A32D2D'],borderWidth:2,borderColor:BC}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{font:{size:12},color:TC,padding:12}},
       tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/retTotal*100)+'%)';}}}}}});
-
-  // FY25 combined bucket counts for overview bar
-  var fBD24=[98,113,36,33,6];
-  var fBDAmounts24=[2788.40+959.98, 17252.23+2474, 14966.82+6311, 51179.86+16113, 21088.50+16119.28];
-  var giftSizeChart=new Chart(document.getElementById('f_c8'),{type:'bar',
-    data:{labels:fBL,datasets:[{label:'Donors',data:fBD24,backgroundColor:fBC,borderRadius:4,borderSkipped:false}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){
-      var t=fBD24.reduce(function(a,b){return a+b;},0);
-      return [' '+c.raw+' donors ('+Math.round(c.raw/t*100)+'% of total)',' Amount raised: '+dollarFmt(fBDAmounts24[c.dataIndex])];
-    }}}},scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:20},grid:{color:GC},beginAtZero:true}}},
-  });
-  document.getElementById('f_c8').style.cursor='pointer';
-  document.getElementById('f_c8').addEventListener('click',function(e){
-    var bi=getClickIndex(giftSizeChart,e);
-    if(bi<0)return;
-    var bucket=fBL[bi];
-    var cashN=fDrillCash[4][bi].n, cashAmt=fDrillCash[4][bi].sum;
-    var ikN=fDrillInkind[4][bi].n, ikAmt=fDrillInkind[4][bi].sum;
-    var totalN=cashN+ikN, totalAmt=cashAmt+ikAmt;
-    closeDrill(); closeDemoDrill();
-    var anchor=e.target.closest('.card')||e.target.parentElement;
-    var panel=createDrillPanel(anchor,'FY25 '+bucket+' — Cash vs in-kind breakdown',totalN+' donors · '+dollarFmt(totalAmt)+' total raised in this range','#3B8BD4',closeDrill);
-    var body=panel.querySelector('#drill_body');
-    body.innerHTML=
-      '<div class="two"><div>'
-      +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Amount raised</div>'
-      +'<div class="cw" style="height:200px"><canvas id="f_drill_amount"></canvas></div></div><div>'
-      +'<div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Number of donors</div>'
-      +'<div class="cw" style="height:200px"><canvas id="f_drill_count"></canvas></div></div></div>'
-      +'<div style="margin-top:1rem;"><div class="two">'
-      +'<div class="cw" style="height:160px"><canvas id="f_drill_type_amt"></canvas></div>'
-      +'<div class="cw" style="height:160px"><canvas id="f_drill_type_cnt"></canvas></div></div></div>';
-    drillCharts.amount=new Chart(document.getElementById('f_drill_amount'),{type:'bar',
-      data:{labels:['Cash gifts','In-kind gifts'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+dollarFmt(c.raw)+' ('+Math.round(c.raw/totalAmt*100)+'% of range total)';}}}},
-        scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,callback:dollarTick},grid:{color:GC},beginAtZero:true}}}});
-    drillCharts.count=new Chart(document.getElementById('f_drill_count'),{type:'bar',
-      data:{labels:['Cash donors','In-kind donors'],datasets:[{data:[cashN,ikN],backgroundColor:['#3B8BD4','#0F6E56'],borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' donors';}}}},
-        scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC,stepSize:5},grid:{color:GC},beginAtZero:true}}}});
-    drillCharts.typeAmt=new Chart(document.getElementById('f_drill_type_amt'),{type:'doughnut',
-      data:{labels:['Cash','In-kind'],datasets:[{data:[cashAmt,ikAmt],backgroundColor:['#3B8BD4','#0F6E56'],borderWidth:2,borderColor:BC}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Amount: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
-        legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
-        tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+dollarFmt(c.raw);}}}}}});
-    drillCharts.typeCnt=new Chart(document.getElementById('f_drill_type_cnt'),{type:'doughnut',
-      data:{labels:['Cash donors','In-kind donors'],datasets:[{data:[cashN,ikN],backgroundColor:['#3B8BD4','#0F6E56'],borderWidth:2,borderColor:BC}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Donors: cash vs in-kind',color:TC,font:{size:12,weight:'400'},padding:{bottom:8}},
-        legend:{position:'bottom',labels:{font:{size:11},color:TC,padding:10}},
-        tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' donors';}}}}}});
-  });
-
-  /* ── f_c9: Avg gift + median gift trend (dual-axis with donor count) ── */
-  var avgGiftChart=new Chart(document.getElementById('f_c9'),{type:'line',
-    data:{labels:fY,datasets:[
-      {label:'Avg cash gift',data:fAvgCash,
-        borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,
-        tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#3B8BD4',
-        borderWidth:2.5,yAxisID:'y'},
-      {label:'Median cash gift',data:fMedCash,
-        borderColor:'#534AB7',backgroundColor:'transparent',fill:false,
-        tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#534AB7',
-        borderWidth:2,borderDash:[5,3],yAxisID:'y'},
-      {label:'Active donors',data:fD,
-        borderColor:'#BA7517',backgroundColor:'transparent',fill:false,
-        tension:0.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#BA7517',
-        borderWidth:2.5,yAxisID:'y2'}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
-        if(c.datasetIndex===2) return ' Active donors: '+c.raw;
-        return ' '+c.dataset.label+': $'+c.raw.toLocaleString();
-      }}}},
-      scales:{
-        x:{ticks:{color:TC},grid:{display:false}},
-        y:{ticks:{color:TC,callback:function(v){return '$'+v;}},grid:{color:GC},beginAtZero:true,
-          title:{display:true,text:'$ per donor',color:TC,font:{size:11}}},
-        y2:{position:'right',ticks:{color:'#BA7517'},grid:{display:false},beginAtZero:true,
-          title:{display:true,text:'donors',color:'#BA7517',font:{size:11}}}
-      },
-      interaction:{mode:'index',intersect:false}}
-  });
-  mkToggleLeg('f_avgleg',avgGiftChart,['Avg cash gift','Median cash gift','Active donors'],['#3B8BD4','#534AB7','#BA7517']);
-
-  /* ── f_c14: FY25 cash vs in-kind overlap doughnut ── */
-  var overlapTotal=fOverlapD.reduce(function(a,b){return a+b;},0);
-  document.getElementById('f_c14_center').innerHTML='<div style="font-size:20px;font-weight:500;color:var(--text);">'+overlapTotal+'</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">unique donors</div>';
-  new Chart(document.getElementById('f_c14'),{type:'doughnut',
-    data:{labels:fOverlapL,datasets:[{data:fOverlapD,
-      backgroundColor:['#3B8BD4','#0F6E56','#534AB7'],borderWidth:2,borderColor:BC}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
-      plugins:{legend:{position:'bottom',labels:{font:{size:12},color:TC,padding:12}},
-        tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/overlapTotal*100)+'%)';}}}}}
-  });
 
   /* ── f_c11: Retained donor movement (upgrade / same / downgrade) ── */
   new Chart(document.getElementById('f_c11'),{type:'bar',
@@ -3388,14 +3603,8 @@ function init() {
   setupTableToggle('d_c2', ['Race/Ethnicity'].concat(dM),
     dRK.map(function(k,i){return {label:k,values:dRD[i]};})
   );
-  setupTableToggle('d_c7', ['Age band'].concat(dM),
-    dABL.map(function(k,i){return {label:k,values:dBS[i]};})
-  );
   setupTableToggle('d_c9', ['Petition'].concat(dM),
     [{label:'FN',values:dPD[5]},{label:'FG',values:dPD[4]}]
-  );
-  setupTableToggle('d_c11', ['Gender'].concat(dM),
-    [{label:'Female',values:dF},{label:'Male',values:dMa},{label:'Total',values:dT}]
   );
   setupTableToggle('f_c1', [''].concat(fY),
     [{label:'Cash gifts',values:fC.map(function(v){return '$'+Math.round(v).toLocaleString();})},
@@ -3406,21 +3615,6 @@ function init() {
     [{label:'Active donors',values:fD}]
   );
   // New chart table toggles
-  setupTableToggle('d_c12', ['Month'].concat(dMoMLabels),
-    [{label:'Net change',values:dMoM}]
-  );
-  setupTableToggle('d_c13', ['Race/Ethnicity','Jul→Feb change'],
-    dRDeltaK.map(function(k,i){return {label:k,values:[(dRDeltaV[i]>=0?'+':'')+dRDeltaV[i]]};})
-  );
-  setupTableToggle('d_c14', ['Petition type'].concat(dM),
-    [{label:'FC/court id',values:dPD[2]},{label:'FC/avail adopt',values:dPD[1]},{label:'FC/18+',values:dPD[3]}]
-  );
-  setupTableToggle('f_c9', [''].concat(fY),
-    [{label:'Avg cash gift ($)',values:fAvgCash},{label:'Median cash gift ($)',values:fMedCash},{label:'Active donors',values:fD}]
-  );
-  setupTableToggle('f_c12', ['Tenure','Donors'],
-    fTenureL.map(function(k,i){return {label:k,values:[fTenureD[i]]};})
-  );
   setupTableToggle('f_c13', ['LTV bucket','Donors','Lifetime giving ($)','Cumulative %'],
     fLtvL.map(function(k,i){var c=ltvCumPct[i];return {label:k,values:[fLtvN[i],'$'+fLtvV[i].toLocaleString(),c+'%']};})
   );
@@ -3468,29 +3662,6 @@ function init() {
     });
     setupTableToggle('cd_c2',['Race/Ethnicity'].concat(cdYears),
       dRK.map(function(k,ri){return {label:k,values:cdRace.map(function(yr){return yr[ri]===null?'n/a':yr[ri];})};})
-    );
-  })();
-
-  /* ── cd_c3: Annual Petition types ── */
-  (function(){
-    var petKeys=['Adoption','FC/Avail','FC/Court','FC/18+','FG','FN'];
-    var petColors=['#3B8BD4','#185FA5','#639922','#3B6D11','#BA7517','#A32D2D'];
-    var petData=petKeys.map(function(k,pi){
-      return {
-        label:k,
-        data:cdPets.map(function(yr){return yr[pi]===null?0:yr[pi];}),
-        backgroundColor:petColors[pi],borderWidth:0.5,borderColor:'rgba(0,0,0,0.1)'
-      };
-    });
-    new Chart(document.getElementById('cd_c3'),{type:'bar',
-      data:{labels:cdYears,datasets:petData},
-      options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},color:TC,padding:8}},
-          tooltip:{mode:'index',intersect:false}},
-        scales:{x:{stacked:true,ticks:{color:TC}},y:{stacked:true,ticks:{color:TC}}}}
-    });
-    setupTableToggle('cd_c3',['Petition'].concat(cdYears),
-      petKeys.map(function(k,pi){return {label:k,values:cdPets.map(function(yr){return yr[pi]===null?'n/a':yr[pi];})};})
     );
   })();
 
@@ -3580,16 +3751,20 @@ function init() {
         backgroundColor:'rgba(59,139,212,0.55)',borderColor:'#3B8BD4',borderWidth:1.5,borderRadius:5},
       {type:'line',label:'Trend',data:vTotal,
         borderColor:'#0F6E56',backgroundColor:'transparent',fill:false,
-        tension:0.35,pointRadius:5,pointBackgroundColor:'#0F6E56',borderWidth:2.5,borderDash:[]}
+        tension:0.35,pointRadius:5,pointBackgroundColor:'#0F6E56',borderWidth:2.5,borderDash:[]},
+      {type:'line',label:'FY26 Goal (135)',data:vYears.map(function(){return 135;}),
+        borderColor:'#C62828',borderDash:[8,4],borderWidth:2,pointRadius:0,
+        tension:0,fill:false,order:0,refLabel:'FY26 Goal: 135'}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){
         if(c.datasetIndex===0) return ' '+c.raw+' volunteers';
+        if(c.datasetIndex===2) return ' FY26 goal: 135';
         return null;
       }}}},
       scales:{
         x:{ticks:{color:TC},grid:{display:false}},
-        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,min:100,suggestedMax:140}
+        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,min:100,suggestedMax:145}
       }}
   });
   document.getElementById('v_c1').style.cursor='pointer';
@@ -3622,84 +3797,6 @@ function init() {
         data:{labels:vAgeLabels,datasets:[{data:vAge[yi],backgroundColor:vAgeC,borderRadius:4}]},
         options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' volunteers ('+Math.round(c.raw/tot*100)+'%)';}}}},
           scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true}}}});
-    });
-  });
-
-  /* ── v_c2: Age distribution grouped bar ── */
-  var vAgeChart=new Chart(document.getElementById('v_c2'),{type:'bar',
-    data:{labels:vYears,datasets:vAgeLabels.map(function(lbl,i){return {
-      label:lbl,data:vAge.map(function(yr){return yr[i];}),
-      backgroundColor:vAgeC[i],borderRadius:3
-    };})},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{stacked:false,ticks:{color:TC},grid:{display:false}},
-        y:{stacked:false,ticks:{color:TC},grid:{color:GC},beginAtZero:true}
-      }}
-  });
-  mkToggleLeg('v_aleg',vAgeChart,vAgeLabels,vAgeC);
-  document.getElementById('v_c2').style.cursor='pointer';
-  document.getElementById('v_c2').addEventListener('click',function(e){
-    var yi=getClickIndex(vAgeChart,e);
-    if(yi<0)return;
-    var yr=vYears[yi],tot=vTotal[yi],ages=vAge[yi];
-    var dominant=vAgeLabels[ages.indexOf(Math.max.apply(null,ages))];
-    var anchor=e.target.closest('.card')||e.target.parentElement;
-    openDemoDrill(anchor,yr+' — Age distribution','Total volunteers: '+tot,function(body){
-      body.innerHTML=
-        '<div class="drill-callout">In <strong>'+yr+'</strong>, the largest age group was <strong>'+dominant+'</strong> with '+Math.max.apply(null,ages)+' volunteers ('+Math.round(Math.max.apply(null,ages)/tot*100)+'%). The 50+ cohort combined is '+( ages[3]+ages[4])+' volunteers — '+(Math.round((ages[3]+ages[4])/tot*100))+'% of the corps.</div>'
-        +'<div class="cw" style="height:220px"><canvas id="v_drill_agebar"></canvas></div>';
-      return new Chart(document.getElementById('v_drill_agebar'),{type:'bar',
-        data:{labels:vAgeLabels,datasets:[{data:ages,backgroundColor:vAgeC,borderRadius:5}]},
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' volunteers ('+Math.round(c.raw/tot*100)+'%)';}}}},
-          scales:{x:{ticks:{color:TC},grid:{display:false}},y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true}}}});
-    });
-  });
-
-  /* ── v_c3: Gender stacked bar ── */
-  var vGenderChart=new Chart(document.getElementById('v_c3'),{type:'bar',
-    data:{labels:vYears,datasets:[
-      {label:'Female',data:vFemale,backgroundColor:'#D4697A',borderRadius:3,stack:'g'},
-      {label:'Male',data:vMale,backgroundColor:'#3B8BD4',borderRadius:3,stack:'g'}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:TC,boxWidth:14}},
-        tooltip:{mode:'index',intersect:false,callbacks:{
-          afterBody:function(items){
-            var total=items.reduce(function(s,it){return s+it.raw;},0);
-            var pct=Math.round(items[0].raw/total*100);
-            return 'Female: '+pct+'%  |  Male: '+(100-pct)+'%';
-          }
-        }}
-      },
-      scales:{
-        x:{stacked:true,ticks:{color:TC},grid:{display:false}},
-        y:{stacked:true,ticks:{color:TC},grid:{color:GC},beginAtZero:true}
-      }}
-  });
-  document.getElementById('v_c3').style.cursor='pointer';
-  document.getElementById('v_c3').addEventListener('click',function(e){
-    var yi=getClickIndex(vGenderChart,e);
-    if(yi<0)return;
-    var yr=vYears[yi],fem=vFemale[yi],mal=vMale[yi],tot=vTotal[yi];
-    var femPct=Math.round(fem/tot*100);
-    var natAvg=84; // ~84% female nationally for CASA
-    var anchor=e.target.closest('.card')||e.target.parentElement;
-    openDemoDrill(anchor,yr+' — Gender breakdown','Active volunteers: '+tot,function(body){
-      body.innerHTML=
-        '<div class="drill-kpi-bar n4">'
-        +kpi('Female',fem,femPct+'% of corps',null,null)
-        +kpi('Male',mal,(100-femPct)+'% of corps',null,null)
-        +kpi('vs. National Avg',natAvg+'% female','Typical CASA program',null,null)
-        +kpi('Year',yr,'FY snapshot',null,null)
-        +'</div>'
-        +'<div class="drill-callout">CASA\'s <strong>'+femPct+'% female</strong> composition in '+yr+' is '+(femPct<natAvg?'slightly below':'near')+ ' the national average for CASA programs (~'+natAvg+'% female). The '+mal+' male volunteers ('+(100-femPct)+'%) are '+(100-femPct>14?'above':'near')+ ' the national average of ~14% male.</div>'
-        +'<div class="cw" style="height:180px;max-width:300px;margin:0 auto;"><canvas id="v_drill_gendnut"></canvas></div>';
-      return new Chart(document.getElementById('v_drill_gendnut'),{type:'doughnut',
-        data:{labels:['Female','Male'],datasets:[{data:[fem,mal],backgroundColor:['#D4697A','#3B8BD4'],borderWidth:2,borderColor:BC}]},
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:13},color:TC,padding:14}},
-          tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+' ('+Math.round(c.raw/tot*100)+'%)';}}}}}});
     });
   });
 
@@ -3749,36 +3846,6 @@ function init() {
     });
   });
 
-  /* ── v_c5: Education grouped bar ── */
-  var vEduChart=new Chart(document.getElementById('v_c5'),{type:'bar',
-    data:{labels:vYears,datasets:vEduLabels.map(function(lbl,i){return {
-      label:lbl,data:vEdu.map(function(yr){return yr[i];}),
-      backgroundColor:vEduC[i],borderRadius:3
-    };})},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{stacked:false,ticks:{color:TC},grid:{display:false}},
-        y:{stacked:false,ticks:{color:TC},grid:{color:GC},beginAtZero:true}
-      }}
-  });
-  mkToggleLeg('v_eleg',vEduChart,vEduLabels,vEduC);
-
-  /* ── v_c6: Non-English languages horizontal bar ── */
-  new Chart(document.getElementById('v_c6'),{type:'bar',
-    data:{labels:vLangLabels,datasets:[{
-      label:'Speakers',data:vLangVals,indexAxis:'y',
-      backgroundColor:['#0F6E56','#3B8BD4','#BA7517','#534AB7','#A32D2D','#BA7517','#3B8BD4','#888780','#888780'],
-      borderRadius:4
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' speakers';}}}},
-      scales:{
-        x:{ticks:{color:TC},grid:{color:GC},beginAtZero:true},
-        y:{ticks:{color:TC,font:{size:11}},grid:{display:false}}
-      }}
-  });
-
   /* ── v_c7: Years of Service bar ── */
   new Chart(document.getElementById('v_c7'),{type:'bar',
     data:{labels:vYosLabels,datasets:[{
@@ -3822,6 +3889,50 @@ function init() {
     vYosLabels.map(function(lbl,i){return {label:lbl,values:[vYosVals[i]]};})
   );
 
+
+  /* ── v_equity: Demographic equity gap chart (Volunteers vs. Children) ── */
+  (function(){
+    var eqLabels = ['Black/Afr. Am.','Hispanic/Latino','White','Asian'];
+    var volPct   = [19.0, 8.3, 47.9, 19.0];   // FY25 volunteers (% of 121)
+    var kidPct   = [33.3, 18.3, 27.8, 6.3];   // FY26 YTD caseload (% of 126, Feb 2026)
+    // NJ CASA statewide volunteer averages (Source: CASA NJ Reimagining the Network, 2025)
+    // Documented: Black/AA=12%, Hispanic=7%, White=73%; Asian not itemised — shown as null
+    var njVolPct = [12.0, 7.0, 73.0, null];
+    var eqCanvas = document.getElementById('v_equity');
+    if(!eqCanvas) return;
+    new Chart(eqCanvas, {
+      type: 'bar',
+      data: {
+        labels: eqLabels,
+        datasets: [
+          { label: 'Volunteers — Middlesex (FY25)', data: volPct,
+            backgroundColor: 'rgba(83,74,183,0.82)', borderRadius: 4, borderSkipped: false },
+          { label: 'Children in Caseload (FY26 YTD)', data: kidPct,
+            backgroundColor: 'rgba(163,45,45,0.75)', borderRadius: 4, borderSkipped: false },
+          { label: 'Volunteers — NJ CASA avg (2025)', data: njVolPct,
+            backgroundColor: 'rgba(230,81,0,0.52)', borderColor: '#E65100', borderWidth: 1.5,
+            borderRadius: 4, borderSkipped: false }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', labels: { color: TC, font: { size: 12 }, padding: 14 } },
+          tooltip: { callbacks: { label: function(c){
+            if (c.raw === null) return ' ' + c.dataset.label + ': not itemised in NJ report';
+            return ' ' + c.dataset.label + ': ' + c.raw.toFixed(1) + '%';
+          } } }
+        },
+        scales: {
+          x: { ticks: { color: TC }, grid: { display: false } },
+          y: { ticks: { color: TC, callback: function(v){ return v + '%'; } },
+               grid: { color: GC }, beginAtZero: true, max: 60 }
+        }
+      }
+    });
+  })();
+
   /* ── PRINT DATE LABELS ── */
   var today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   ['ph_date_demo','ph_date_fund','ph_date_vol','ph_date_zip'].forEach(function(id){
@@ -3833,120 +3944,186 @@ function init() {
   initAnnotations();
 }
 
-/* ═══════════════════════════════════════════════
-   ZIP CODE CHARTS
-═══════════════════════════════════════════════ */
-(function initZipCharts(){
-  var TC = getComputedStyle(document.documentElement).getPropertyValue('--text') || '#1a1a2e';
-  var GC = 'rgba(128,128,128,0.12)';
-
-  /* Use global zip data */
-  var zYears   = zipYears;
-  var zLabels  = zipCodes;
-  var zAllYrs  = zipCounts;
-  var zTotYrs  = zipYears;
-  var zTotVals = zipTotals;
-
-  /* ── Trend chart — top 5 zips (all lines solid, all data verified) ── */
-  var zTrendZips   = ['07008','08901','08817','08861','07001'];
-  var zTrendVals   = {'07008':[21,22,29,28,30],'08901':[27,27,27,20,14],'08817':[8,8,11,18,25],'08861':[16,16,14,14,12],'07001':[5,11,12,12,13]};
-  var zTrendColors = ['#3B8BD4','#0F6E56','#00838F','#BA7517','#534AB7'];
-
-  /* ── Colour palette for 5 years ── */
-  var zYrColors = [
-    'rgba(59,139,212,0.65)',
-    'rgba(15,110,86,0.70)',
-    'rgba(0,131,143,0.70)',
-    'rgba(186,117,23,0.70)',
-    'rgba(83,74,183,0.75)'
-  ];
-
-  /* ── z_c1: Top 10 zips grouped bar (all 5 years) ── */
-  new Chart(document.getElementById('z_c1'),{type:'bar',
-    data:{labels:zLabels,datasets:zYears.map(function(yr,yi){
-      return {
-        label:yr,
-        data:zAllYrs.map(function(row){return row[yi];}),
-        backgroundColor:zYrColors[yi],
-        borderRadius:2
-      };
-    })},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{labels:{color:TC,font:{size:11},boxWidth:12}},
-        tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}
-      },
-      scales:{
-        x:{ticks:{color:TC,font:{size:11}},grid:{display:false}},
-        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true,
-          title:{display:true,text:'Children Assigned',color:TC,font:{size:11}}}
-      }}
-  });
-
-  /* ── z_c2: YOY trend top 5 (all solid lines) ── */
-  var z2Datasets = zTrendZips.map(function(zip,i){
-    return {
-      label: zip,
-      data: zTrendVals[zip],
-      borderColor: zTrendColors[i],
-      backgroundColor: 'transparent',
-      borderWidth: 2,
-      pointRadius: 4,
-      pointBackgroundColor: zTrendColors[i],
-      tension: 0.3
-    };
-  });
-  new Chart(document.getElementById('z_c2'),{type:'line',
-    data:{labels:zTotYrs,datasets:z2Datasets},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{labels:{color:TC,font:{size:11},boxWidth:14}},
-        tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+' children';}}}
-      },
-      scales:{
-        x:{ticks:{color:TC},grid:{display:false}},
-        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:true,
-          title:{display:true,text:'Children Assigned',color:TC,font:{size:11}}}
-      }}
-  });
-
-  /* ── z_c3: Annual totals bar ── */
-  var zTotPeak = Math.max.apply(null, zTotVals);
-  new Chart(document.getElementById('z_c3'),{type:'bar',
-    data:{labels:zTotYrs,datasets:[{
-      label:'Total Children',
-      data:zTotVals,
-      backgroundColor:zTotVals.map(function(v){return v===zTotPeak?'rgba(0,131,143,0.9)':'rgba(0,131,143,0.55)';}),
-      borderRadius:5
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children assigned';}}}
-      },
-      scales:{
-        x:{ticks:{color:TC},grid:{display:false}},
-        y:{ticks:{color:TC},grid:{color:GC},beginAtZero:false,
-          suggestedMin:140,
-          title:{display:true,text:'Children Assigned',color:TC,font:{size:11}}}
-      }}
-  });
-
-  /* ── table toggles for zip charts ── */
-  setupTableToggle('z_c1', ['Zip Code'].concat(zYears),
-    zLabels.map(function(z,i){return {label:z,values:zAllYrs[i]};})
-  );
-  setupTableToggle('z_c2', ['Zip Code'].concat(zTotYrs),
-    zTrendZips.map(function(zip){return {label:zip,values:zTrendVals[zip]};})
-  );
-  setupTableToggle('z_c3', ['Year','Children Assigned'],
-    zTotYrs.map(function(yr,i){return {label:yr,values:[zTotVals[i]]};})
-  );
-})();
-
 init();
 initExplorer();
 initAnalysisButtons();
+
+
+/* ═══════════════════════════════════════════
+   FY26 STRATEGIC TRACKER CHARTS
+   Sources: FY26 Strategic Plan Tracker (share with Norman.xlsx)
+═══════════════════════════════════════════ */
+(function(){
+  var trMonths = ['Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26'];
+
+  // ── d_rolling: FY26 children served rolling YTD vs 200-child goal ──
+  var rollingData = [126,130,134,135,137,143,148,160];
+  var rollingGoal = rollingData.map(function(){ return 200; });
+  (function(){
+    var canvas = document.getElementById('d_rolling');
+    if (!canvas) return;
+    new Chart(canvas, {
+      type: 'line',
+      data: { labels: trMonths, datasets: [
+        { label: 'Children served (YTD)', data: rollingData,
+          borderColor: '#3B8BD4', backgroundColor: 'rgba(59,139,212,0.10)',
+          fill: true, tension: 0.3, pointRadius: 5,
+          pointBackgroundColor: '#3B8BD4', borderWidth: 2.5 },
+        { label: 'FY26 goal (200)', data: rollingGoal,
+          borderColor: '#C62828', borderDash: [8,4],
+          borderWidth: 2, pointRadius: 0, tension: 0, fill: false, order: 0,
+          refLabel: 'FY26 Goal: 200' }
+      ]},
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: TC, font: { size: 10 }, boxWidth: 10 } },
+          tooltip: { callbacks: { label: function(c) {
+            if (c.datasetIndex === 1) return ' FY26 goal: 200 children';
+            return ' ' + c.raw + ' children served YTD';
+          }}}},
+        scales: {
+          x: { ticks: { color: TC, font: { size: 10 } }, grid: { display: false } },
+          y: { ticks: { color: TC }, grid: { color: GC }, min: 100, max: 220,
+               title: { display: true, text: 'Children (YTD)', color: TC, font: { size: 10 } } }
+        }}
+    });
+  })();
+
+  // ── d_eligible: % eligible children served vs 80% goal ──
+  // Data available every other month from AOC; labels show 4 measured months
+  (function(){
+    var canvas = document.getElementById('d_eligible');
+    if (!canvas) return;
+    var eligMonths = ['Aug 25','Oct 25','Dec 25','Feb 26'];
+    var eligData   = [79, 73, 75, 73];
+    var eligGoal   = eligMonths.map(function(){ return 80; });
+    new Chart(canvas, {
+      type: 'bar',
+      data: { labels: eligMonths, datasets: [
+        { label: '% eligible served', data: eligData,
+          backgroundColor: eligData.map(function(v){ return v >= 80 ? 'rgba(15,110,86,0.65)' : 'rgba(59,139,212,0.60)'; }),
+          borderRadius: 4 },
+        { type: 'line', label: 'FY26 goal (80%)', data: eligGoal,
+          borderColor: '#C62828', borderDash: [8,4],
+          borderWidth: 2, pointRadius: 0, tension: 0, fill: false, order: 0,
+          refLabel: 'FY26 Goal: 80%' },
+        { type: 'line', label: 'NJ state expectation (85%)', data: eligMonths.map(function(){ return 85; }),
+          borderColor: '#E65100', borderDash: [4,3],
+          borderWidth: 1.5, pointRadius: 0, tension: 0, fill: false, order: 0,
+          refLabel: 'NJ Leader: 85%' }
+      ]},
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: TC, font: { size: 10 }, boxWidth: 10 } },
+          tooltip: { callbacks: { label: function(c) {
+            if (c.datasetIndex === 1) return ' FY26 goal: 80% (Strategic Plan)';
+            if (c.datasetIndex === 2) return ' NJ state expectation: 85% \u2014 7 of 11 NJ counties already achieve this';
+            return ' ' + c.raw + '% eligible children served';
+          }}}},
+        scales: {
+          x: { ticks: { color: TC, font: { size: 10 } }, grid: { display: false } },
+          y: { ticks: { color: TC, callback: function(v){ return v + '%'; } },
+               grid: { color: GC }, min: 60, max: 95,
+               title: { display: true, text: '% eligible served', color: TC, font: { size: 10 } } }
+        }}
+    });
+  })();
+
+  // ── Volunteer Diversity Goal Tracker — 4 mini line charts ──
+  var divMonths = trMonths;
+  function mkDivChart(id, data, goal, color, label) {
+    var canvas = document.getElementById(id);
+    if (!canvas) return;
+    var goalLine = divMonths.map(function(){ return goal * 100; });
+    var pctData  = data.map(function(v){ return Math.round(v * 1000) / 10; });
+    new Chart(canvas, {
+      type: 'line',
+      data: { labels: divMonths, datasets: [
+        { label: label, data: pctData,
+          borderColor: color, backgroundColor: color.replace('rgb(', 'rgba(').replace(')', ', 0.10)'),
+          fill: true, tension: 0.3, pointRadius: 4,
+          pointBackgroundColor: color, borderWidth: 2.5 },
+        { label: 'FY26 goal (' + Math.round(goal * 100) + '%)', data: goalLine,
+          borderColor: '#C62828', borderDash: [8,4],
+          borderWidth: 2, pointRadius: 0, tension: 0, fill: false, order: 0,
+          refLabel: 'FY26 Goal: ' + Math.round(goal * 100) + '%' }
+      ]},
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false },
+          tooltip: { callbacks: { label: function(c) {
+            if (c.datasetIndex === 1) return ' Goal: ' + Math.round(goal * 100) + '%';
+            return ' ' + c.raw.toFixed(1) + '%';
+          }}}},
+        scales: {
+          x: { ticks: { color: TC, font: { size: 9 } }, grid: { display: false } },
+          y: { ticks: { color: TC, callback: function(v){ return v + '%'; }, font: { size: 9 } },
+               grid: { color: GC }, beginAtZero: false }
+        }}
+    });
+  }
+
+  mkDivChart('v_div_hisp',  [0.08,0.08,0.08,0.08,0.10,0.10,0.10,0.10], 0.11, 'rgb(186,117,23)',  'Hispanic/Latino %');
+  mkDivChart('v_div_black', [0.22,0.23,0.23,0.22,0.22,0.20,0.21,0.21], 0.20, 'rgb(163,45,45)',   'Black/AA %');
+  mkDivChart('v_div_male',  [0.13,0.13,0.13,0.13,0.13,0.14,0.14,0.15], 0.17, 'rgb(59,139,212)',  'Male advocates %');
+  mkDivChart('v_div_bil',   [0.10,0.11,0.11,0.11,0.11,0.10,0.10,0.13], 0.13, 'rgb(83,74,183)',   'Bilingual Spanish %');
+
+  // ── Grant Pipeline charts ──
+  (function(){
+    var canvas = document.getElementById('f_grants');
+    if (!canvas) return;
+    new Chart(canvas, {
+      type: 'bar',
+      data: { labels: ['Grant applications'], datasets: [
+        { label: 'Awarded / received', data: [260500],
+          backgroundColor: 'rgba(15,110,86,0.75)', borderRadius: [4,0,0,4], borderSkipped: false },
+        { label: 'Pending / not yet awarded', data: [228811],
+          backgroundColor: 'rgba(59,139,212,0.45)', borderRadius: [0,4,4,0], borderSkipped: false }
+      ]},
+      options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        plugins: { legend: { labels: { color: TC, font: { size: 10 }, boxWidth: 10 } },
+          tooltip: { callbacks: { label: function(c) {
+            var labels = ['Awarded: $260,500','Pending: $228,811 (total submitted: $489,311)'];
+            return ' ' + labels[c.datasetIndex];
+          }}}},
+        scales: {
+          x: { stacked: true, ticks: { color: TC, callback: function(v){ return '$'+Math.round(v/1000)+'K'; } },
+               grid: { color: GC }, beginAtZero: true, max: 520000 },
+          y: { stacked: true, ticks: { color: TC }, grid: { display: false } }
+        }}
+    });
+  })();
+
+  (function(){
+    var canvas = document.getElementById('f_unrest');
+    if (!canvas) return;
+    var raised = 125200;
+    var goal   = 128000;
+    var remaining = goal - raised;
+    new Chart(canvas, {
+      type: 'bar',
+      data: { labels: ['Unrestricted fundraising'], datasets: [
+        { label: 'Raised YTD', data: [raised],
+          backgroundColor: 'rgba(15,110,86,0.75)', borderRadius: [4,0,0,4], borderSkipped: false },
+        { label: 'Remaining to goal', data: [remaining],
+          backgroundColor: 'rgba(148,163,184,0.40)', borderRadius: [0,4,4,0], borderSkipped: false },
+        { type: 'line', label: '$128K goal', data: [goal],
+          borderColor: '#C62828', borderDash: [8,4],
+          borderWidth: 2, pointRadius: 0, tension: 0, fill: false, order: 0 }
+      ]},
+      options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        plugins: { legend: { labels: { color: TC, font: { size: 10 }, boxWidth: 10 } },
+          tooltip: { callbacks: { label: function(c) {
+            if (c.datasetIndex === 0) return ' Raised: $125,200 (98% of goal)';
+            if (c.datasetIndex === 1) return ' Remaining: $2,800';
+            return ' FY26 goal: $128,000';
+          }}}},
+        scales: {
+          x: { stacked: true, ticks: { color: TC, callback: function(v){ return '$'+Math.round(v/1000)+'K'; } },
+               grid: { color: GC }, beginAtZero: true, max: 145000 },
+          y: { stacked: true, ticks: { color: TC }, grid: { display: false } }
+        }}
+    });
+  })();
+
+})();
 
 /* ═══ EXECUTIVE KPI SPARKLINES ═══════════════════════════════════════
    Each sparkline is drawn as an inline SVG polyline + area fill.
@@ -4112,13 +4289,21 @@ initAnalysisButtons();
     Math.round(xpVolFY25[1]/vTotal[4]*100), // Asian
     Math.round((xpVolFY25[4]+xpVolFY25[5])/vTotal[4]*100) // Two+/Other
   ];
+  // NJ CASA network volunteer averages (FY25, source: CASA NJ Reimagining the Network 2025)
+  // Documented: White=73%, Black/AA=12%, Hispanic/Latino=7%; Asian/Two+/Other=~8% (balance, not itemised)
+  var xpNJVolPct=[73,12,7,null,8];
   new Chart(document.getElementById('xp_c2'),{type:'bar',
     data:{labels:xpEqLabels,datasets:[
       {label:'Children served (Feb 2026)',data:xpChildPct,backgroundColor:'rgba(59,139,212,0.72)',borderRadius:3},
-      {label:'Volunteers (FY25)',data:xpVolPct,backgroundColor:'rgba(83,74,183,0.65)',borderRadius:3}]},
+      {label:'Volunteers — Middlesex (FY25)',data:xpVolPct,backgroundColor:'rgba(83,74,183,0.65)',borderRadius:3},
+      {label:'Volunteers — NJ CASA avg (2025)',data:xpNJVolPct,backgroundColor:'rgba(230,81,0,0.50)',
+        borderColor:'#E65100',borderWidth:1.5,borderRadius:3}]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{labels:{color:TC,font:{size:10},boxWidth:10}},
-               tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+'%';}}}},
+               tooltip:{callbacks:{label:function(c){
+                 var v=c.raw; if(v===null) return ' '+c.dataset.label+': not itemised in NJ report';
+                 return ' '+c.dataset.label+': '+v+'%';
+               }}}},
       scales:{x:{ticks:{color:TC,font:{size:10}},grid:{display:false}},
               y:{ticks:{color:TC,callback:function(v){return v+'%';}},grid:{color:GC},beginAtZero:true,
                  title:{display:true,text:'% of group',color:TC,font:{size:10}}}}}});
