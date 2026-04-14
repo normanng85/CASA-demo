@@ -790,7 +790,8 @@
       <div class="insight positive"><div class="itag">Strength — Program Outcomes</div><p>62% of FY25 case closures resulted in family reunification, up from 34% in FY24 and the best rate in five years. This is the single strongest program effectiveness signal in the dataset.</p></div>
       <div class="insight positive"><div class="itag">Strength — Fundraising Momentum</div><p>Active donors jumped 157% (108→278) in FY25, driving a 15% total revenue increase to $149K. Cash giving alone surged 58% to $107K. Understanding what drove this campaign is the top FY26 planning priority.</p></div>
       <div class="insight positive"><div class="itag">Strength — Volunteer Diversity</div><p>Non-white volunteers grew from 39% (FY21) to 52% (FY25), substantially exceeding the national CASA average of 25–30% and tracking toward demographic alignment with the children CASA serves.</p></div>
-      <div class="insight watch"><div class="itag">Watch — Volunteer Headcount</div><p>Volunteers declined 5.5% from the FY24 peak of 128 to 121 in FY25. New cohort recruitment (23 in FY25) needs to accelerate to offset attrition and return toward the peak.<span class="action-line">Set a Q3 recruitment milestone of at least 10 new advocates in training by June and report the number at each board meeting — the trend line needs a concrete target, not just a direction.</span></p></div>
+      <div class="insight positive"><div class="itag">Strength — Black/AA Goal Exceeded ✓</div><p>Black/African American advocates now represent 21% of the volunteer corps — exceeding the FY26 strategic goal of 20%. This is the only diversity metric to cross its target line, representing a 13-point gain from 8% in FY21. The recruitment strategy behind this gain should be documented and applied to the Hispanic/Latino and male advocate pipelines.</p></div>
+      <div class="insight watch"><div class="itag">Watch — ~23% Annual Attrition Rate</div><p>Volunteers declined 5.5% from the FY24 peak of 128 to 121 in FY25. With 23 new recruits and a net loss of 7, approximately 30 volunteers departed — a ~23% annual attrition rate. At the current pace, the corps will continue to contract. The program needs to recruit ~30 per year to hold steady, not 20.<span class="action-line">Set a FY26 recruitment target of at least 30 new advocates (not 20) to break even on attrition. Track the monthly sworn-in count at every board meeting as the leading indicator of program capacity.</span></p></div>
       <div class="insight watch"><div class="itag">Watch — Donor Retention Risk</div><p>57% of FY25 donors (159 of 278) are giving for the first time. National first-year donor retention is ~19%, meaning ~130 could lapse without active stewardship — the most urgent FY26 fundraising risk.<span class="action-line">Assign each of the 71 multi-year donors a named board contact for a personal outreach call before May 30 — this cohort is the highest-return stewardship investment available right now.</span></p></div>
       <div class="insight alert"><div class="itag">Risk — Revenue Concentration</div><p>4 cash donors gave $5K+ in FY25, representing 20% of all cash revenue ($21K of $107K). Two in-kind donors gave $5K+. This concentration creates real vulnerability if major donors lapse.<span class="action-line">Initiate individual cultivation plans for the top 4 cash donors this quarter; simultaneously identify 3–5 mid-level prospects ($1K–$5K capacity) so revenue is not dependent on any single relationship.</span></p></div>
       <div class="insight positive"><div class="itag">Strength — Investment per Child</div><p>Cost per child served grew from $293 (FY21) to $894 (FY25) — a 3× increase that reflects the program's fundraising growth outpacing caseload. Greater investment per child typically correlates with more volunteer hours, stronger court advocacy, and better permanency outcomes.</p></div>
@@ -814,7 +815,7 @@
       <div class="pb-obj-row">
         <span class="pb-obj"><span class="pb-dot g"></span>Children served — on track (160 YTD)</span>
         <span class="pb-obj"><span class="pb-dot y"></span>% eligible served — 73–79% vs. 80% goal</span>
-        <span class="pb-obj"><span class="pb-dot g"></span>Case outcomes — 89% positive (↑ FY25)</span>
+        <span class="pb-obj"><span class="pb-dot g"></span>Case outcomes — 88% positive (↑ FY25)</span>
       </div>
     </div>
 
@@ -983,6 +984,17 @@
       <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Race Distribution</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c2','annual-race')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c2"></canvas></div></div>
     </div>
 
+    <div class="section-title">Age Distribution Over Time — FY21 to FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">How the age composition of CASA's active caseload has shifted across five fiscal years. School-age children (6–10) are the growing share; infants and toddlers (0–2) have declined from 17% to 15% of the caseload.</p>
+    <div class="card full" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">Caseload age composition — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_age','age-composition')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">100% stacked bars — each segment = proportion of total annual caseload · hover for counts</div>
+      <div class="cw" style="height:240px"><canvas id="cd_age"></canvas></div>
+    </div>
+
     <!-- ▸ CASE CLOSURE OUTCOMES FY21–FY25 -->
     <div class="section-title">Case Closure Outcomes — FY21 to FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">
@@ -1028,7 +1040,8 @@
           <li><strong>Adoption trended upward through FY24</strong>, reaching a five-year high of 22 cases (33% of closures), then declined to 8 in FY25. This may reflect a cohort of long-term cases that reached finalization.</li>
           <li><strong>KLG / Guardian placements are declining</strong> — peaked at 14 cases (22%) in FY22 and have dropped to just 3 (6%) in FY25. This shift may reflect broader policy emphasis on family reunification.</li>
           <li><strong>Total case closures fluctuate</strong> — from a low of 36 in FY21 to a high of 67 in FY24, then back to 50 in FY25. This reflects natural variation in caseload turnover, not a simple trend.</li>
-          <li><strong>"Judge Released CASA" cases are growing</strong> — 1 case in FY21 to 7 in FY24, suggesting judges are proactively releasing CASA oversight as families stabilize while cases remain legally open.</li>
+          <li><strong>"Aged Out at 21" spiked to a five-year high in FY25 — 12% of all closures</strong> — 6 children aged out without family permanency, representing 12% of FY25 closures. This is a dramatic acceleration: the rate was 0% in FY23, 1.5% in FY24 (1 of 67), and has now jumped to 12% in a single year. Each of these 6 children transitioned out of foster care without a permanent family. <strong>Immediate action warranted:</strong> CASA should conduct a proactive case review of all children currently aged 17–18 on the active caseload to identify permanency barriers and pursue family reunification, kinship, or guardianship options before they reach 21. This metric should be added to the monthly program report and board dashboard.</li>
+          <li><strong>"Judge Released CASA" spiked in FY24 then recovered</strong> — 7 cases in FY24 (the highest in the dataset) dropped back to 2 in FY25. When a judge proactively releases CASA, it signals the family has stabilized — which is generally positive, though high volumes can also indicate CASA is being dismissed before completing its advocacy role.</li>
         </ul>
       </div>
     </div>
@@ -1142,7 +1155,17 @@
       <p style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center;">Positions are approximate. For precise mapping, see the Removal Zip Codes tab.</p>
     </div>
 
-    
+    <div class="section-title">Geographic Concentration Shift — FY21 to FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Tracking the five FY25 highest-volume zip codes across five years reveals a geographic shift: Carteret (07008) has been the #1 concentration point every year and is growing. Edison/Metuchen (08817) surged from 8th in FY21 to 2nd in FY25. New Brunswick (08901) — formerly tied for #1 — has declined sharply.</p>
+    <div class="card full" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">Top zip code concentration shift — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_zip_trend','geo-shift')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Lines track FY25's top 5 zip codes over time · null = zip was outside top 8 that year · Source: AOC removal zip code data</div>
+      <div class="tleg" id="cd_zip_leg"></div>
+      <div class="cw" style="height:240px"><canvas id="cd_zip_trend"></canvas></div>
+    </div>
 
     <footer>Program Quality &amp; Impact — Active Cases Jul 2025–Feb 2026 · Historical FY21–FY25 · CASA Middlesex County</footer>
   </main>
@@ -1180,7 +1203,8 @@
           <div class="insight-grid">
             <div class="insight positive"><div class="itag">Strength — donor growth</div><p>Active donors jumped from 108 in FY24 to 278 in FY25 — a 157% increase in one year. This is the most significant growth signal in the dataset and suggests either a successful campaign, expanded outreach, or a major new cultivation effort. Understanding what drove this is critical to repeating it.</p></div>
             <div class="insight watch"><div class="itag">Watch — new vs retained</div><p>Of FY25's donors, 159 (57%) are brand new — they gave nothing in FY24. Only 71 (26%) were retained from the prior year. First-year donors typically have low retention rates, meaning next year's total could drop sharply without a strong stewardship strategy.<span class="action-line">Build a personal outreach list of the 71 retained donors now and assign each to a board member or staff relationship before April 30 — set a renewal ask deadline of May 31 so there is time to follow up before the fiscal year closes.</span></p></div>
-            <div class="insight alert"><div class="itag">Risk — in-kind volatility</div><p>In-kind gifts swung from $7.7K (FY23) to $61.5K (FY24) to $42K (FY25). The FY24 spike was almost entirely organizational in-kind ($55K from just 16 org donors). That has since fallen to $30K. Without understanding what drove FY24's spike, in-kind projections are unreliable.<span class="action-line">Identify the lead organizational in-kind donor from FY24 and schedule a Q4 meeting to explore whether the partnership can be renewed or converted to a direct cash gift — understanding that relationship is the first step to making in-kind revenue predictable.</span></p></div>
+            <div class="insight alert"><div class="itag">Risk — in-kind concentration and volatility</div><p>In-kind giving is structurally concentrated: the top 5 in-kind donors account for approximately 59% of all in-kind revenue in FY25. The FY24 spike to $61.5K was driven by organizational in-kind ($55K from just 16 org donors), which fell to $30K in FY25. A single anchor in-kind donor reducing or ending their gift could materially impact total giving. This is a board-level risk that warrants a diversification strategy.<span class="action-line">Identify the top 3 in-kind donor relationships and schedule cultivation meetings before Q4; simultaneously, develop a list of 5 prospective in-kind partners to reduce concentration dependency in FY27.</span></p></div>
+            <div class="insight positive"><div class="itag">Strength — individual donor surge signals grassroots momentum</div><p>Individual donors grew from 77 in FY24 to 199 in FY25 — a 158% increase — contributing $80.9K in cash (75% of total cash giving). This grassroots surge is the most important fundraising signal in the dataset. It suggests either a successful campaign, expanded community presence, or both. Understanding what drove it is critical to repeating it in FY26.<span class="action-line">Segment the 199 FY25 individual donors by acquisition source (event, referral, digital, direct mail) and identify the top-performing channel — that channel deserves disproportionate investment in FY26.</span></p></div>
             <div class="insight positive"><div class="itag">Strength — cash momentum</div><p>Cash giving has grown in 3 of the last 4 fiscal years, from a low of $36K in FY22 to $107K in FY25 — nearly a 3× increase. Individual cash donors drove $80.8K (75%) of the total, showing strong grassroots giving momentum.</p></div>
             <div class="insight neutral"><div class="itag">Breadth — mid-range donors</div><p>The $100–$499 cash gift range has the most donors (97 in FY25), making it the backbone of the donor base. The $1–$99 range had 78 donors. Together these 175 donors make up 76% of cash donor count — significant upgrade potential exists in this group.</p></div>
             <div class="insight watch"><div class="itag">Watch — major gift concentration</div><p>Just 4 cash donors gave $5,000+ in FY25, yet their gifts totaled $21K — 20% of all cash revenue. Two more in-kind donors gave $5K+ (totaling $16K). This concentration creates real vulnerability. A major gifts cultivation pipeline is worth building now.<span class="action-line">Develop a prospect list of 5–10 individuals with $5K+ giving capacity for Q4 cultivation and bring it to the next development committee meeting — this is the single highest-leverage financial risk to address before FY27 planning begins.</span></p></div>
@@ -1286,6 +1310,17 @@
       <div class="card"><div class="chart-toolbar"><div class="card-title">Donor retention FY24 → FY25</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c7','donor-retention')">⬇ PNG</button></div></div><div class="chart-hint">26% retained · 57% new · 17% lapsed — new donor stewardship is the top priority</div><div class="cw" style="height:220px; position:relative;"><canvas id="f_c7"></canvas><div id="f_c7_center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;"></div></div></div>
     </div>
 
+    <div class="section-title">Giving by Constituent Type — FY21 to FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Individual donors now represent the primary and fastest-growing revenue stream. In FY25, 199 individual donors gave $80.9K — 2.6× more than the 77 individual donors in FY24. Organizational donors gave $26.4K across 31 funders. Understanding these two segments separately informs cultivation strategy and concentration risk.</p>
+    <div class="card full" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">Cash giving — individuals vs. organizations — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_constit','constituent-giving')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Grouped bars · hover for exact dollar amounts · individual donor surge in FY25 reflects 199 donors vs. 77 in FY24</div>
+      <div class="cw" style="height:240px"><canvas id="f_constit"></canvas></div>
+    </div>
+
     <div class="section-title">Donor Health</div>
     <div class="two">
       <div class="card">
@@ -1352,6 +1387,67 @@
     <div class="insight-grid" style="margin-bottom:1.75rem;">
       <div class="insight positive"><div class="itag">Strength — Grant success rate</div><p>$260,500 awarded from $489,311 submitted in FY26 — a 53% grant success rate that is substantially above the nonprofit sector average of 20–30%. Key awards include $34K from CASA NJ emergency funds, Middlesex County Commissioners, VOCA, and multiple corporate grants.</p></div>
       <div class="insight watch"><div class="itag">Watch — Federal funding concentration</div><p>The multiyear budget strategy in progress should model scenarios for potential reductions in federal/state grants. Diversifying toward local foundations and corporate partnerships reduces dependency on any single funding stream.<span class="action-line">Build a 10% federal funding reduction scenario into the FY27 budget model and identify at least 2 local foundation targets to offset the gap — present both the scenario and the offset strategy to the board before the budget is finalized.</span></p></div>
+    </div>
+
+    <div class="section-title">Community Outreach &amp; Awareness — FY26 YTD</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Community presence directly supports fundraising pipeline by building awareness, trust, and volunteer/donor referrals. Both outreach metrics are tracking above FY26 goals through February 2026.</p>
+    <div class="drill-kpi-bar n4" style="margin-bottom:1.75rem;">
+      <div class="drill-kpi">
+        <div class="dk-lbl">Community events (FY26 YTD)</div>
+        <div class="dk-val">22</div>
+        <div class="dk-badge up">↑ vs. 10+ goal — 120% above target</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Social media posts/month</div>
+        <div class="dk-val">11</div>
+        <div class="dk-badge up">↑ vs. 8/month goal</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">20th Anniversary Gala</div>
+        <div class="dk-val">In Progress</div>
+        <div class="dk-sub">Signature event — FY26 milestone</div>
+      </div>
+      <div class="drill-kpi">
+        <div class="dk-lbl">Grant award rate</div>
+        <div class="dk-val">53%</div>
+        <div class="dk-badge up">↑ vs. 20–30% sector norm</div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight positive"><div class="itag">Strength — community presence far exceeds goal</div><p>22 community events through February against a 10+ full-year goal means CASA has already doubled its outreach target with four months remaining. Community events are the most direct pipeline for volunteer referrals and donor awareness — this level of presence is a meaningful competitive advantage for a program of this size.</p></div>
+      <div class="insight positive"><div class="itag">Strength — consistent digital presence</div><p>Averaging 11 social media posts per month against an 8/month goal demonstrates consistent brand presence. Social media engagement compounds over time — donors and volunteers who follow CASA for 6+ months before giving or joining have higher lifetime value than those acquired through cold outreach.</p></div>
+    </div>
+
+    <!-- ── AVERAGE GIFT SIZE TREND ── -->
+    <div class="section-title">Fundraising Efficiency — Average Gift Size vs. Donor Count</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">As donor count has grown, average cash gift per donor has fallen — a classic "breadth vs. depth" tradeoff. FY23's peak average ($871/donor) was achieved with only 75 donors; FY25's $386 average reflects 278 donors but a shallower individual investment. Understanding this dynamic is key to FY26 stewardship strategy.</p>
+    <div class="card full" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">Average cash gift per donor vs. total donors — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_avg_gift','avg-gift-trend')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Bars = donor count (right axis) · Line = avg cash gift per donor (left axis) · FY23 peak avg gift driven by small high-value cohort</div>
+      <div class="cw" style="height:240px"><canvas id="f_avg_gift"></canvas></div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight watch"><div class="itag">Watch — Avg gift dilution as donor base grows</div><p>Average cash gift peaked at $871 in FY23 (75 donors) and has fallen to $386 in FY25 (278 donors). This is expected when a donor base expands rapidly — new donors give smaller first-time gifts. The risk is that total revenue growth becomes dependent on continuing to add new donors rather than deepening existing relationships. A mid-range upgrade strategy (moving $100–$499 donors to the $500+ tier) is the most direct way to reverse this trend without requiring more new acquisition.<span class="action-line">Set a specific FY26 upgrade target: identify 20 donors who gave $100–$499 in FY25 and make personal cultivation calls before May — moving each up by $200–$300 would add $4–6K to total cash without any new donor acquisition.</span></p></div>
+      <div class="insight positive"><div class="itag">Strength — Total cash still grew 58% despite avg decline</div><p>Even with average gift falling, total cash giving grew from $68K (FY24) to $107K (FY25) — because donor count grew 4× faster. This means the FY25 campaign was highly effective at broadening the base. The task for FY26 is to retain and deepen those relationships, not just add more names.</p></div>
+    </div>
+
+    <!-- ── IN-KIND REVENUE TREND ── -->
+    <div class="section-title">In-Kind Revenue — Five-Year Trend &amp; Concentration Risk</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">In-kind giving has been highly volatile — stable at $7–8K for three years, spiking to $62K in FY24 driven by a small number of large organizational donors, then declining to $42K in FY25. This volatility makes in-kind an unreliable revenue assumption for budgeting without active concentration risk management.</p>
+    <div class="card full" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">In-kind revenue by year — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_ik_vol','ik-trend')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Orange dashed line = 5-year average ($24.9K) · FY24 spike driven by organizational in-kind ($55K from 16 org donors)</div>
+      <div class="cw" style="height:220px"><canvas id="f_ik_vol"></canvas></div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight alert"><div class="itag">Risk — In-kind volatility is a board-level budget risk</div><p>In-kind swung from $7.8K (FY22) to $61.6K (FY24) — an 8× spike — then fell to $42K in FY25. The FY24 spike was organizational in-kind concentrated among 16 donors. If one or two anchor in-kind donors reduce or exit, a $15–20K gap in total giving could appear in a single year. In-kind should not be treated as a stable budget line without a named donor management plan for the top 3–5 in-kind contributors.<span class="action-line">Map the top 5 in-kind donors by gift value and assign a board relationship owner to each before Q4 — then build a list of 3 prospective in-kind partners so the program is not dependent on any single contributor.</span></p></div>
+      <div class="insight neutral"><div class="itag">Context — In-kind as % of total giving</div><p>In-kind grew from 14% of total giving in FY21–FY23 to 47% in FY24, then settled to 28% in FY25 as cash surged. A healthy fundraising portfolio typically targets in-kind at 20–30% of total — FY25's 28% is structurally sound, but maintaining it requires active stewardship of existing in-kind relationships and deliberate growth of cash giving to keep the ratio balanced.</p></div>
     </div>
 
     <footer>Gift data: Total Gifts By Year (cash + in-kind) &nbsp;·&nbsp; Fiscal years FY21 – FY25 (July–June)</footer>
@@ -1476,7 +1572,7 @@
 
     <div class="summary-block">
       <h2>Volunteer &amp; Leadership Pipeline — Summary &amp; Insights</h2>
-      <p class="lead">This pillar tracks CASA’s volunteer recruitment, retention, and diversity — the foundation of everything the program delivers. Without a sufficient, well-supported, and representative advocate corps, CASA cannot close the gap between eligible children and active cases, maintain cultural continuity with families, or sustain program quality at scale. The active corps has grown from <strong>111 volunteers in FY21</strong> to a peak of <strong>128 in FY24</strong>, with FY25 at 121 reflecting natural attrition. The data below covers headcount trends, demographics, tenure depth, diversity goal tracking, and the equity gap between volunteer composition and the children served.</p>
+      <p class="lead">This pillar tracks CASA’s volunteer recruitment, retention, and diversity — the foundation of everything the program delivers. Without a sufficient, well-supported, and representative advocate corps, CASA cannot close the gap between eligible children and active cases, maintain cultural continuity with families, or sustain program quality at scale. The active corps has grown from <strong>111 volunteers in FY21</strong> to a peak of <strong>128 in FY24</strong>, with FY25 at 121 after approximately <strong>30 departures in FY25 (~23% annual attrition rate)</strong>. With only 23 new recruits in FY25, the corps netted a loss of 7. Reaching and sustaining the 128 peak requires recruiting roughly 30 advocates per year — a target the program has not yet hit. On the positive side, Black/African American advocates now represent 21%, exceeding the FY26 goal of 20% — the only diversity metric to cross its target. The data below covers headcount trends, demographics, tenure depth, diversity goal tracking, and the equity gap between volunteer composition and the children served.</p>
 
       <!-- ▸ KEY INSIGHTS -->
       <div class="collapse-section">
@@ -1488,10 +1584,12 @@
         <div class="collapse-body">
           <div class="insight-grid">
             <div class="insight positive"><div class="itag">Strength — diversity trajectory</div><p>Non-white volunteers grew from 39% in FY21 to 52% in FY25 — a 13-point shift in four years. White volunteers fell from 61% to 48%, while Asian representation declined slightly from 20% to 19% and Black/African American volunteers grew from 8% to 19%. This trajectory represents meaningful progress toward demographic alignment with the children CASA serves.</p></div>
-            <div class="insight watch"><div class="itag">Watch — headcount plateau</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. New cohort recruitment (0–1 year volunteers: 23 in FY25) needs to offset annual attrition to avoid a sustained downward trend. The 3–7 year tenure band (58 volunteers) is the largest segment and represents the core experienced corps.<span class="action-line">Schedule a recruitment pipeline review at the next staff meeting: set a specific Q3 cohort target (suggested: 8+ new advocates sworn in by June) and assign at least 2 board members to attend upcoming information sessions as ambassadors.</span></p></div>
+            <div class="insight watch"><div class="itag">Watch — ~23% annual attrition rate</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. With 23 new advocates recruited in FY25 and a net loss of 7, approximately <strong>30 volunteers departed in FY25 — a ~23% annual attrition rate</strong>. This means the program must recruit and onboard roughly 30 advocates per year just to hold steady. At the current pace of 23 new recruits, the corps will continue to contract. The 3–7 year tenure band (58 volunteers) is the largest and most experienced segment — protecting this cohort through recognition and role variety is as important as new recruitment.<span class="action-line">Set a FY26 recruitment target of at least 30 new advocates to offset attrition and return to the FY24 peak, not just 20. Assign at least 2 board members as recruitment ambassadors for information sessions. Track the monthly sworn-in count at every board meeting as a leading indicator.</span></p></div>
             <div class="insight positive"><div class="itag">Strength — volunteer retention</div><p>81% of FY25 volunteers have 2+ years of service (98 of 121), and 7 volunteers have 10+ years. This deep bench of experienced advocates is a critical organizational asset — long-tenured volunteers typically carry the most complex cases and provide informal mentorship to newer recruits.</p></div>
-            <div class="insight neutral"><div class="itag">Stable — gender composition</div><p>The volunteer corps has maintained ~83% female since FY21, consistent with national CASA averages. FY25 ended with 21 male volunteers (~16% of the corps), and FY26 YTD data shows male representation at 13–15% — below both the FY25 baseline and the 17% strategic goal. Male volunteer recruitment is an active gap to close alongside Hispanic representation.</p></div>
-            <div class="insight positive"><div class="itag">Strength — language assets</div><p>18 Spanish speakers, 10 Hindi speakers, 4 Urdu speakers, and 4 ASL users provide direct language access for a significant share of the caseload. With 17–18% of active children identified as Hispanic/Latino, Spanish language capacity among volunteers is particularly valuable for family communication and court advocacy.</p></div>
+            <div class="insight watch"><div class="itag">Watch — male representation slipping</div><p>The volunteer corps has maintained ~83% female since FY21, consistent with national CASA averages. However, FY26 YTD data shows male representation at 13–15% — a regression from FY25's 17% baseline and below the 17% strategic goal. Without deliberate outreach through fathers' groups, sports coaching networks, and professional associations, this gap will widen.<span class="action-line">Set a Q3 target of at least 3 new male advocates sworn in before June; brief 2 board members to attend the next information session as male role model ambassadors.</span></p></div>
+            <div class="insight positive"><div class="itag">Strength — growing younger cohort</div><p>The 21–29 age group grew from 19 volunteers in FY21 to 26 in FY25 — a 37% increase. Younger advocates typically remain active across multiple career transitions, build longer-term relationships with children, and provide the succession pipeline for experienced roles. This trend is one of the most encouraging long-term signals in the volunteer data.</p></div>
+            <div class="insight watch"><div class="itag">Watch — employment shift affects scheduling</div><p>The corps has shifted from a retiree-heavy composition toward full-time working professionals (54 of 121 in FY25, vs. 44 of 111 in FY21). This is good for diversity of professional perspective but means daytime availability for court hearings and training sessions is more constrained. Scheduling flexibility — evening cohort training, virtual onboarding options — should be evaluated against this trend.<span class="action-line">Survey the current cohort on preferred training times before scheduling the next class — the answer may differ meaningfully from assumptions made when the corps skewed toward retirees.</span></p></div>
+            <div class="insight watch"><div class="itag">Watch — Spanish capacity dipped from peak</div><p>Spanish language capacity peaked at 20 volunteers in FY24 (14 fluent + 6 conversational), then declined to 18 in FY25 (15 fluent + 3 conversational). Conversational speakers dropped by half — from 6 to 3 — in a single year. With 07008 Carteret now the #1 zip code (30 children, one of the highest Hispanic/Latino concentrations in the county), this trend is moving in the wrong direction. Hindi (10), Urdu (4), and ASL (4) speakers remain stable and provide strong multilingual depth. Spanish recruitment specifically — in Carteret and Perth Amboy — should be a named FY26 priority.<span class="action-line">Target at least 2 new Spanish-speaking advocate recruits in FY26 through community partnerships in Carteret (07008) and Perth Amboy (08861), where the caseload concentration and language need are highest.</span></p></div>
             <div class="insight positive"><div class="itag">Strength — bilingual goal achieved</div><p>As of February 2026, 13% of active advocates are bilingual Spanish speakers — meeting the FY26 13% strategic target. This is one of the few FY26 diversity goals fully achieved. Language-matched advocates improve communication with families, reduce interpreter dependency, and build trust in communities where Spanish is the primary language (notably Carteret and Perth Amboy, which together account for the largest share of the caseload).</p></div>
             <div class="insight neutral"><div class="itag">Context — vs. National CASA averages</div><p>Nationally, CASA programs average ~84% female volunteers and ~16% male — this program’s 83%/17% split is closely aligned. Non-white volunteer representation nationally is approximately 25–30% and growing; at 52% non-white in FY25, this program substantially exceeds the national average, reflecting intentional diversity recruitment. Nationally, ~65–70% of CASA volunteers hold a bachelor’s degree or higher; this program’s ~76% with Bachelors or higher in FY25 is above average. The national volunteer-to-child ratio averages roughly 1:1 to 1:2; this program’s ratio supports its full caseload. (Source: National CASA/GAL Association annual data.)</p></div>
           </div>
@@ -1643,7 +1741,17 @@
     </div>
     <div class="drill-callout" style="margin-bottom:1.75rem;"><strong>How to use:</strong> Drag the sliders or type numbers to update the FY26 goal bar in real time. These are planning tools only — targets are not saved.</div>
 
-    
+    <div class="section-title">Volunteer Employment Status — FY21 to FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">The corps has shifted from a retiree-heavy base toward working professionals. Full-time workers are now the largest single employment group. This has implications for training scheduling, court hearing availability, and long-term succession planning.</p>
+    <div class="card full" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">Employment status composition — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_employ','employment-status')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Stacked bars — hover for counts · "Not specified" includes Decline to State + Not Entered responses</div>
+      <div class="tleg" id="v_employ_leg"></div>
+      <div class="cw" style="height:240px"><canvas id="v_employ"></canvas></div>
+    </div>
 
     <!-- ▸ 8. VOLUNTEER EXPERIENCE PYRAMID -->
     <div class="section-title">Volunteer Experience Pyramid</div>
@@ -1663,7 +1771,17 @@
       <strong>Reading this chart:</strong> The 2-year tenure mark is the largest single cohort (25 volunteers), suggesting strong retention through the early critical period. The 7 ten-year-plus veterans represent irreplaceable institutional knowledge. The relatively small 0–1 year cohort (23) compared to the 2–4 year band means the corps is mature — experienced but will need renewed recruitment to sustain numbers as senior volunteers retire.
     </div>
 
-    
+    <div class="section-title">Volunteer Language Capabilities — FY21 to FY25</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Spanish language capacity peaked at 20 volunteers in FY24 (14 fluent + 6 conversational) and declined to 18 in FY25 (15 fluent + 3 conversational) — a net loss of 2, driven by conversational speakers dropping by half. The Hispanic/Latino caseload has grown to 20–23% of children served (~25–29 children/month), meaning the volunteer-to-family language match ratio is under pressure. Hindi remains the second most common non-English language.</p>
+    <div class="card full" style="margin-bottom:1.75rem;">
+      <div class="chart-toolbar">
+        <div class="card-title">Non-English language capabilities — FY21 to FY25</div>
+        <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_lang_trend','language-trend')">⬇ PNG</button></div>
+      </div>
+      <div class="chart-hint">Counts of volunteers fluent or conversational in each non-English language · Spanish = fluent + conversational combined</div>
+      <div class="tleg" id="v_lang_leg"></div>
+      <div class="cw" style="height:240px"><canvas id="v_lang_trend"></canvas></div>
+    </div>
 
         <!-- ── DEMOGRAPHIC EQUITY GAP ── -->
     <div class="section-title">Demographic Representation Gap — Volunteers vs. Children Served</div>
@@ -1677,7 +1795,7 @@
       <div class="cw" style="height:260px"><canvas id="v_equity"></canvas></div>
     </div>
     <div class="insight-grid" style="margin-bottom:1.75rem;">
-      <div class="insight positive"><div class="itag">Strength — Black/AA alignment improving</div><p>Black/African American volunteers (19%) are growing toward caseload representation (33%). In FY21 only 8% of volunteers were Black/AA — a 11-point gain in four years. The direction is right; a 14-point gap remains the highest priority for continued equity-focused recruitment.</p></div>
+      <div class="insight positive"><div class="itag">Strength — Black/AA goal exceeded ✓</div><p>Black/African American volunteers now represent 21% of the active corps — <strong>exceeding the FY26 strategic goal of 20%</strong>. This is the only diversity metric that has crossed its target, and it represents a 13-point gain from just 8% in FY21 over four years of intentional recruitment. The direction is sustained and the goal is met. A meaningful gap to caseload representation (33%) remains, but the milestone itself deserves recognition and the recruitment strategy that produced it should be documented as a model for other pipeline goals.</p></div>
       <div class="insight watch"><div class="itag">Watch — Hispanic/Latino gap</div><p>Hispanic/Latino children represent 18% of the caseload but only 8% of volunteers — a 10-point gap. With 18 Spanish-speaking volunteers (15% of corps), language capacity partially bridges this gap, but demographic representation lags behind.<span class="action-line">Identify 2–3 community organizations in Carteret or Perth Amboy — a parish, an ESL program, or an employer network — for partnership outreach this quarter; one or two new bilingual Hispanic advocates would close the representation gap entirely.</span></p></div>
       <div class="insight neutral"><div class="itag">NJ Context — statewide benchmark</div><p>Across NJ's 11 CASA programs, 73% of volunteers identify as non-Hispanic white, while Black/African American children represent 48% of NJ children in out-of-home care — a structural equity challenge shared across the network. Middlesex's 48% non-white volunteer corps significantly outperforms the NJ average of ~27% non-white.</p></div>
     </div>
@@ -1797,7 +1915,41 @@
     <div class="insight-grid" style="margin-bottom:1.75rem;">
       <div class="insight positive"><div class="itag">Strength — Zero staff attrition</div><p>No Program Coordinator turnover in FY26 year-to-date is the most important Pillar 4 signal. Each PC departure historically creates a 60–90 day gap in case coverage and increased volunteer burden. Maintaining a stable team preserves institutional knowledge and volunteer relationships — both critical for program continuity given the 241-child eligible pool.</p></div>
       <div class="insight watch"><div class="itag">Watch — PC-to-case ratio at capacity ceiling</div><p>At roughly 1 PC per 48 active cases, the team is operating near the practical ceiling for effective individual case oversight. CASA National recommends a 1:50 maximum; Middlesex's current 126 active children leaves limited buffer for caseload growth without additional staffing. Reaching the 200-child YTD goal will require monitoring this ratio monthly.<span class="action-line">Add PC-to-case ratio to the monthly executive report; if active cases exceed 145 before June, bring staffing options — including a part-time Program Coordinator or licensed intern — to the board for a decision before the caseload reaches the ceiling.</span></p></div>
-      <div class="insight neutral"><div class="itag">Action — Formalize quarterly governance KPIs</div><p>Board meeting attendance rate, SOP checklist completion percentage, and prospective board member pipeline count are the three Pillar 4 KPIs called out in the FY27–28 Strategic Framework. Establishing a simple monthly tracking mechanism for these metrics this quarter would allow the FY27 plan to open with a baseline — and demonstrate to funders that governance is actively managed.</p></div>
+      <div class="insight positive"><div class="itag">Strength — coordinator pipeline on schedule</div><p>Monthly coordinator meetings have been completed on time in 8 of 9 months (89%), and 1-year coordinator attrition is 0% against a maximum 20% target. Three new peer coordinators are targeted for training in spring 2026 — a leadership pipeline investment that directly expands supervisory capacity for a growing caseload. This organizational stability rarely shows up in program metrics but is the infrastructure that makes all other outcomes possible.</p></div>
+      <div class="insight positive"><div class="itag">Strength — community outreach doubles goal</div><p>22 community events completed through February against a 10+ full-year target — more than double the annual goal with four months remaining. Combined with consistent social media output (11 posts/month vs. 8 goal), CASA Middlesex's community presence is significantly above plan and building the long-term awareness pipeline for volunteers and donors.<span class="action-line">Document which event types generated the most volunteer inquiries or donor leads — a one-page event ROI summary would help the board allocate outreach resources for FY27.</span></p></div>
+      <div class="insight watch"><div class="itag">Action — Board pipeline — formalize tracking</div><p>Board recruitment is actively in scope for FY26: a skill-gap analysis is underway and candidates are being explored, with 2 members currently on leave. Formalizing a board pipeline tracker — with candidate names, skill areas, and cultivation stage — would allow the Executive Director and board chair to monitor progress monthly rather than only at quarterly board meetings. Three or more active candidates in the pipeline is the target threshold.<span class="action-line">Ask the board chair to identify one specific board candidate per current member as a referral target before the next quarterly meeting — personal referrals are the highest-conversion board recruitment channel for nonprofits of this size.</span></p></div>
+    </div>
+
+    <!-- ── FOUR PILLAR PULSE ── -->
+    <div class="section-title">Four Pillar Pulse — Five-Year Performance (FY21–FY25)</div>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">A combined view of the headline metric for each strategic pillar across five fiscal years. Use this as a quick-read "all four pillars at once" to see whether CASA is improving, plateauing, or reversing on each front simultaneously.</p>
+    <div class="two" style="margin-bottom:1rem;">
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Pillar 1 — Positive closure rate (%) FY21–FY25</div></div>
+        <div class="chart-hint">Reun + Adopt + KLG + Judge Released CASA ÷ total closures · FY26 goal: ≥75%</div>
+        <div class="cw" style="height:180px"><canvas id="p4_sp_p1"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Pillar 2 — Active volunteer headcount FY21–FY25</div></div>
+        <div class="chart-hint">Annual active advocates · FY26 goal: ≥130</div>
+        <div class="cw" style="height:180px"><canvas id="p4_sp_p2"></canvas></div>
+      </div>
+    </div>
+    <div class="two" style="margin-bottom:1.75rem;">
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Pillar 3 — Total giving (cash + in-kind, $K) FY21–FY25</div></div>
+        <div class="chart-hint">Cash + in-kind · FY25: $149K total · 15% increase over FY24</div>
+        <div class="cw" style="height:180px"><canvas id="p4_sp_p3"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-toolbar"><div class="card-title">Pillar 4 — Children served (annual active) FY21–FY25</div></div>
+        <div class="chart-hint">Annual active caseload · FY26 goal: 200 rolling YTD</div>
+        <div class="cw" style="height:180px"><canvas id="p4_sp_p4"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-bottom:1.75rem;">
+      <div class="insight positive"><div class="itag">Pattern — Three pillars are trending up</div><p>Program outcomes (closure rate), financial sustainability (total giving), and caseload (children served) have all improved over five years. Volunteer headcount is the one pillar moving in the wrong direction: after peaking at 128 in FY24, it declined to 121. Since volunteer capacity directly constrains caseload growth, the Pillar 2 plateau is the single most important trend to reverse if CASA intends to serve the full 241-child eligible pool.</p></div>
+      <div class="insight watch"><div class="itag">Pillar 2 is the binding constraint on Pillar 1 and 4</div><p>The positive closure rate (Pillar 1) and children served (Pillar 4) are both limited by how many active volunteers exist (Pillar 2). The current 1:1.38 volunteer-to-child ratio is healthy, but reaching 200 children served while volunteer count is declining means the ratio will tighten. Every advocate recruited directly expands the program's ability to serve children — making the recruitment target the single highest-leverage input across all four pillars.<span class="action-line">Present this four-pillar view at the next board meeting to make the volunteer constraint visible — it connects the dots between a "volunteer recruitment" problem and the program's ability to hit its service goals.</span></p></div>
     </div>
 
     <!-- ── FY27-28 STRATEGIC KPI TABLE ── -->
@@ -1838,7 +1990,7 @@
             <td style="padding:8px 10px;font-size:13px;">Positive case closure outcomes</td>
             <td style="text-align:center;padding:8px 10px;">&ge;75%</td>
             <td style="text-align:center;padding:8px 10px;">&ge;75%</td>
-            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">89% (FY25)</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">88% (FY25)</td>
             <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Exceeding benchmark</td>
           </tr>
           <!-- PILLAR 2: Volunteer Engagement -->
@@ -2384,6 +2536,16 @@ var CHART_ANALYSIS = {
   /* ── Experimental ── */
   'Jul 2025 \u2014 Monthly Snapshot':
     'The July 2025 snapshot captures the baseline state of the active caseload at the start of the tracked period \u2014 127 children across six racial categories and five age bands. White children led with 40 (32%) and infants and toddlers (0\u20133) formed the largest age band at roughly 26% of all children. Use the slider to track how the caseload composition shifted through February 2026, or compare any two months to identify directional trends in race and age distribution.',
+  'Caseload age composition \u2014 FY21 to FY25':
+    'School-age children (6\u201310) grew from 21% of the FY21 caseload to 25% in FY25, becoming the largest single age band. Infants and toddlers (0\u20132) declined from 17% to 15% while teens (13\u201315) peaked in FY23\u201324 and have since stabilized. The FY22\u201323 peak in 0\u20132 year olds (41\u201343 children) likely reflects pandemic-era removal patterns. School-age concentration has implications for educational advocacy needs and the volunteer skill set required for effective court representation.',
+  'Top zip code concentration shift \u2014 FY21 to FY25':
+    'Carteret (07008) has been the #1 or #2 concentration zip every year and reached 30 children in FY25 \u2014 its highest point. Edison/Metuchen (08817) showed the most dramatic shift, rising from 8 children in FY21 to 25 in FY25, now the #2 concentration point. New Brunswick (08901) declined from 27 children (tied #1 in FY21\u201323) to just 14 in FY25 \u2014 the sharpest decline of any top zip. This geographic redistribution suggests that volunteer recruitment and community partnerships should prioritize the 07008 and 08817 corridors, where Spanish-speaking and Edison township community networks are the most relevant entry points.',
+  'Employment status composition \u2014 FY21 to FY25':
+    'Full-time employed volunteers have been the single largest group since FY22 (54 in FY25), while Retired volunteers stabilized at 24 after declining from 32 in FY21\u201322. Not Employed volunteers dropped sharply from 12 in FY21 to 4 in FY25, reflecting broader economic trends. The \u201cNot Specified\u201d category (Decline to State + Not Entered) grew from 7 to 23, which is a data quality concern. The shift toward working professionals has direct implications: evening and weekend training cohorts, virtual onboarding options, and flexible court hearing scheduling become more important as the corps skews away from retirees with full daytime availability.',
+  'Non-English language capabilities \u2014 FY21 to FY25':
+    'Spanish fluency (fluent + conversational) has been the most stable non-English capability, holding at 14\u201318 volunteers across all five years. Hindi peaked at 15 in FY23\u201324 and declined to 10 in FY25. Arabic dropped from 5\u20136 in FY21\u201323 to 4 in FY25. American Sign Language has been consistent at 4\u20135 volunteers. The critical gap: Spanish-fluent volunteers (15 in FY25) are serving a Hispanic/Latino caseload that represents 20\u201323% of children \u2014 approximately 25\u201329 children per month. If each Spanish-fluent volunteer carries one or more Hispanic children, language capacity is at or near saturation and further Hispanic/Latino caseload growth without additional Spanish-fluent recruitment creates cultural continuity risk.',
+  'Cash giving \u2014 individuals vs. organizations \u2014 FY21 to FY25':
+    'Individual cash donors grew from 67 in FY21 to 199 in FY25 \u2014 a 197% increase \u2014 while individual giving grew from $34.6K to $80.9K (134% increase). Organizational cash donors grew from 6 to 31 (417% increase) and organizational giving from $7.6K to $26.4K (248% increase). The asymmetry is notable: organizations represent 15% of donors but 25% of cash giving, while individuals represent 85% of donors but 75% of cash. Both segments are growing, but the individual donor surge in FY25 (77\u2192199) is the dominant story and represents the highest-risk concentration \u2014 if first-year retention is low, FY26 individual cash could drop substantially without strong stewardship.',
   'Children per volunteer — FY21–FY25':
     'The coverage ratio improved from 1.51 in FY21 to 1.38 in FY25, crossing below the published CASA National target threshold of 1.5 for the first time. The worst year was FY23 at 1.64, when caseload spiked to 203 while volunteer growth lagged. The current trajectory — improving ratio with a slightly declining caseload — is the most favorable conditions for quality advocacy the program has experienced in five years.',
   'Race composition — children served (Feb 2026) vs. volunteers (FY25)':
@@ -2429,7 +2591,23 @@ var CHART_ANALYSIS = {
 
   /* ── Strategic Planning (Organizational Strength tab) ── */
   'Strategic KPI targets \u2014 all four pillars':
-    'The table shows CASA tracking above target on program outcomes (89% positive closures vs. 75% goal) and fundraising (98% to unrestricted goal), while new advocate recruitment (~12 vs. 20+ goal) and % eligible children served (73\u201379% vs. 80% goal) are the two active watch items for FY26. The four-pillar balanced scorecard structure \u2014 Program Quality, Volunteer Engagement, Fundraising, and Organizational Strength \u2014 catches cross-functional risks before they compound. FY27\u201328 targets escalate across all pillars, making current-year gaps the highest-priority items for board planning and resource allocation.',
+    'The table shows CASA tracking above target on program outcomes (88% positive closures vs. 75% goal) and fundraising (98% to unrestricted goal), while new advocate recruitment (~12 vs. 20+ goal) and % eligible children served (73\u201379% vs. 80% goal) are the two active watch items for FY26. The four-pillar balanced scorecard structure \u2014 Program Quality, Volunteer Engagement, Fundraising, and Organizational Strength \u2014 catches cross-functional risks before they compound. FY27\u201328 targets escalate across all pillars, making current-year gaps the highest-priority items for board planning and resource allocation.',
+
+  /* ── Pillar 3 new charts ── */
+  'Average cash gift per donor vs. total donors \u2014 FY21 to FY25':
+    'Average cash gift per donor peaked at $871 in FY23 when only 75 donors were active, and has declined to $386 in FY25 as the donor base expanded to 278. This is not a crisis \u2014 it is the expected math of rapid base growth, where many first-time donors give smaller amounts. The risk is structural: if total revenue growth depends on adding new donors each year rather than deepening existing relationships, the program is perpetually on an acquisition treadmill. The strategic lever for FY26 is mid-range upgrades \u2014 identifying the 97 donors in the $100\u2013$499 tier and making personal cultivation calls to move 20 of them into the $500+ range. That single action would add approximately $5\u20138K in cash without any new donor acquisition.',
+  'In-kind revenue by year \u2014 FY21 to FY25':
+    'In-kind giving was stable at $7\u20138K for three years (FY21\u2013FY23), then spiked to $61.6K in FY24 driven by a concentration of organizational in-kind donors (16 organizations gave $55K combined), before declining to $42K in FY25. The 8\u00d7 swing between FY22 and FY24 makes in-kind structurally unreliable as a budget line without active concentration risk management. At 28% of FY25 total giving, in-kind is in a healthy range \u2014 but the FY24 spike should not be treated as a new baseline. The top 3\u20135 in-kind donors almost certainly represent the majority of this revenue and each relationship warrants named board stewardship and a defined ask level. A diversified in-kind pipeline of 10+ smaller organizational contributors would reduce single-donor concentration risk significantly.',
+
+  /* ── Pillar 4 Four Pillar Pulse charts ── */
+  'Pillar 1 \u2014 Positive closure rate (%) FY21\u2013FY25':
+    'Positive closure rate (reunification + adoption + KLG + judge released CASA \u00f7 total closures) has held above 78% in every year of the dataset and exceeded 88% in four of five years. FY23 reached 91% \u2014 the highest recorded. The consistent performance well above the \u226575% benchmark is the strongest program quality signal in the dashboard and reflects sustained advocacy effectiveness. The main risk to watch in FY25 and beyond is the aged-out rate: 6 children (12% of FY25 closures) aged out without family permanency \u2014 a spike from 0\u20131.5% in prior years. A proactive case review for children currently aged 17\u201318 is the highest-priority action to protect this metric in FY26.',
+  'Pillar 2 \u2014 Active volunteer headcount FY21\u2013FY25':
+    'Active volunteers grew from 111 in FY21 to a peak of 128 in FY24 \u2014 then declined to 121 in FY25. This is the only pillar trending in the wrong direction. With approximately 30 departures estimated in FY25 (23 new recruits minus a net loss of 7 = ~23% annual attrition), the program must recruit roughly 30 advocates per year just to hold steady. At the FY25 pace of 23 new advocates, the corps will continue to contract unless attrition is reduced or recruitment is accelerated. Since volunteer capacity directly constrains both children served (Pillar 4) and case quality (Pillar 1), this is the binding constraint across all four pillars.',
+  'Pillar 3 \u2014 Total giving (cash + in-kind, $K) FY21\u2013FY25':
+    'Total giving has grown from $49K (FY21) to $149K (FY25) \u2014 a 204% increase over five years. The growth is not linear: FY22 was the lowest year ($45K), FY23 marked the first strong year ($73K), and FY24\u2013FY25 represent a step-change acceleration. The FY24 spike to $130K was partially driven by organizational in-kind ($62K vs. $8K the prior year), which normalized to $42K in FY25. Cash giving has grown more sustainably: $42K \u2192 $36K \u2192 $65K \u2192 $68K \u2192 $107K. The FY26 goal of $128K unrestricted is 98% achieved through February, positioning FY26 for the program\u2019s strongest back-to-back fundraising years.',
+  'Pillar 4 \u2014 Children served (annual active) FY21\u2013FY25':
+    'Annual active caseload has grown steadily from 143 children (FY21) to 167 (FY25) \u2014 a 17% increase over five years. The FY26 goal of 200 rolling YTD children is tracking well at 160 through February. Growth has been consistent and orderly, with no single-year spikes that would strain capacity. The key constraint on serving more children is not referrals \u2014 241 children are currently eligible and not receiving CASA advocacy \u2014 but volunteer capacity. Each advocate added directly translates to an additional child served, making the Pillar 2 headcount trajectory the most important single lever for closing the 241-child gap.',
 
   /* ── Explorer ── */
   'Custom Chart':
@@ -2622,8 +2800,16 @@ Chart.register({
       ctx.font = '600 9px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
       ctx.fillStyle = ds.borderColor || '#666';
       ctx.textAlign = 'right';
-      ctx.textBaseline = 'bottom';
-      ctx.fillText(ds.refLabel, ca.right - 3, last.y - 4);
+      // If the reference line is within ~16px of the top of the chart area, draw
+      // the label BELOW the line instead of above to prevent canvas clipping.
+      var roomAbove = last.y - ca.top;
+      if (roomAbove < 16) {
+        ctx.textBaseline = 'top';
+        ctx.fillText(ds.refLabel, ca.right - 3, last.y + 4);
+      } else {
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(ds.refLabel, ca.right - 3, last.y - 4);
+      }
       ctx.restore();
     });
   }
@@ -3888,7 +4074,71 @@ function init() {
   setupTableToggle('v_c7', ['Years of Service','FY25 Count'],
     vYosLabels.map(function(lbl,i){return {label:lbl,values:[vYosVals[i]]};})
   );
+  /* ── v_employ: Employment status composition FY21–FY25 ── */
+  (function(){
+    var canvas = document.getElementById('v_employ');
+    if (!canvas) return;
+    var empYears = ['FY21','FY22','FY23','FY24','FY25'];
+    var empCats = [
+      { label:'Full-time',    data:[44,54,55,54,54], color:'rgba(59,139,212,0.82)' },
+      { label:'Retired',      data:[32,32,27,24,24], color:'rgba(83,74,183,0.72)' },
+      { label:'Part-time',    data:[15,17,17,19,16], color:'rgba(15,110,86,0.72)' },
+      { label:'Not Employed', data:[12,9,10,9,4],    color:'rgba(186,117,23,0.72)' },
+      { label:'Student',      data:[1,2,2,1,0],      color:'rgba(0,131,143,0.65)' },
+      { label:'Not Specified',data:[7,10,13,21,23],  color:'rgba(136,135,128,0.55)' }
+    ];
+    var empChart = new Chart(canvas, {
+      type:'bar',
+      data:{ labels:empYears, datasets:empCats.map(function(e){
+        return { label:e.label, data:e.data, backgroundColor:e.color, stack:'emp', borderRadius:0 };
+      })},
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{ mode:'index', intersect:false, callbacks:{ label:function(c){ return ' '+c.dataset.label+': '+c.raw; }}}
+        },
+        scales:{
+          x:{ ticks:{color:TC}, grid:{display:false}, stacked:true },
+          y:{ ticks:{color:TC}, grid:{color:GC}, stacked:true, beginAtZero:true,
+              title:{display:true,text:'Volunteers',color:TC,font:{size:10}} }
+        }}
+    });
+    mkToggleLeg('v_employ_leg', empChart, empCats.map(function(e){return e.label;}), empCats.map(function(e){return e.color.replace(/[\d.]+\)$/,'1)');}));
+  })();
 
+  /* ── v_lang_trend: Non-English language capabilities FY21–FY25 ── */
+  (function(){
+    var canvas = document.getElementById('v_lang_trend');
+    if (!canvas) return;
+    var langYears = ['FY21','FY22','FY23','FY24','FY25'];
+    // Spanish fluent + conversational combined
+    var langSeries = [
+      { label:'Spanish (fluent+conv.)', data:[14,13,18,20,18], color:'#C62828' },
+      { label:'Hindi',                  data:[14,14,15,15,10], color:'#E65100' },
+      { label:'Urdu',                   data:[7,7,5,null,4],   color:'#534AB7' },
+      { label:'Arabic',                 data:[5,6,6,4,4],      color:'#3B8BD4' },
+      { label:'American Sign Language', data:[4,5,4,4,4],      color:'#0F6E56' }
+    ];
+    var langChart = new Chart(canvas, {
+      type:'line',
+      data:{ labels:langYears, datasets:langSeries.map(function(s){
+        return { label:s.label, data:s.data, borderColor:s.color, backgroundColor:'transparent',
+          borderWidth:2.5, pointRadius:5, pointBackgroundColor:s.color,
+          tension:0.3, fill:false, spanGaps:false };
+      })},
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{ callbacks:{ label:function(c){ return ' '+c.dataset.label+': '+(c.raw===null?'not recorded':c.raw+' volunteers'); }}}
+        },
+        scales:{
+          x:{ ticks:{color:TC}, grid:{display:false} },
+          y:{ ticks:{color:TC}, grid:{color:GC}, beginAtZero:true,
+              title:{display:true,text:'Volunteers (count)',color:TC,font:{size:10}}, max:25 }
+        }}
+    });
+    mkToggleLeg('v_lang_leg', langChart, langSeries.map(function(s){return s.label;}), langSeries.map(function(s){return s.color;}));
+  })();
 
   /* ── v_equity: Demographic equity gap chart (Volunteers vs. Children) ── */
   (function(){
@@ -3931,6 +4181,84 @@ function init() {
         }
       }
     });
+  })();
+  /* ── cd_age: Caseload age composition FY21–FY25 (100% stacked bar) ── */
+  (function(){
+    var canvas = document.getElementById('cd_age');
+    if (!canvas) return;
+    var ageYears = ['FY21','FY22','FY23','FY24','FY25'];
+    var ageTotals = [168, 200, 203, 191, 167];
+    // Data: [FY21, FY22, FY23, FY24, FY25] raw counts
+    var ageBands = [
+      { label:'0–2 (Infants)',   data:[29,41,43,31,25], color:'rgba(198,40,40,0.78)' },
+      { label:'3–5 (Toddlers)',  data:[32,37,34,34,29], color:'rgba(186,117,23,0.78)' },
+      { label:'6–10 (School)',   data:[36,39,46,47,42], color:'rgba(15,110,86,0.78)' },
+      { label:'11–12 (PreTeen)', data:[17,25,22,15,15], color:'rgba(59,139,212,0.78)' },
+      { label:'13–15 (Teen)',    data:[19,19,24,34,29], color:'rgba(83,74,183,0.78)' },
+      { label:'16–17 (Older teen)', data:[20,16,12,10,13], color:'rgba(0,131,143,0.78)' },
+      { label:'18+ (Young adult)',  data:[15,23,22,20,14], color:'rgba(136,135,128,0.78)' }
+    ];
+    // Convert to percentages
+    var pctDatasets = ageBands.map(function(band) {
+      return {
+        label: band.label,
+        data: band.data.map(function(v,i){ return Math.round(v/ageTotals[i]*1000)/10; }),
+        backgroundColor: band.color,
+        stack: 'age',
+        borderRadius: 0
+      };
+    });
+    new Chart(canvas, {
+      type: 'bar',
+      data: { labels: ageYears, datasets: pctDatasets },
+      options: { responsive:true, maintainAspectRatio:false,
+        plugins: {
+          legend: { position:'right', labels:{ color:TC, font:{size:10}, boxWidth:12, padding:10 } },
+          tooltip: { callbacks: { label: function(c){
+            var raw = ageBands[c.datasetIndex].data[c.dataIndex];
+            return ' '+c.dataset.label+': '+raw+' ('+c.raw.toFixed(1)+'%)';
+          }}}
+        },
+        scales: {
+          x: { ticks:{color:TC,font:{size:11}}, grid:{display:false}, stacked:true },
+          y: { ticks:{color:TC, callback:function(v){return v+'%';}}, grid:{color:GC}, stacked:true,
+               min:0, max:100, title:{display:true,text:'% of annual caseload',color:TC,font:{size:10}} }
+        }}
+    });
+  })();
+
+  /* ── cd_zip_trend: Geographic concentration shift FY21–FY25 ── */
+  (function(){
+    var canvas = document.getElementById('cd_zip_trend');
+    if (!canvas) return;
+    var zipYears = ['FY21','FY22','FY23','FY24','FY25'];
+    var zipSeries = [
+      { label:'07008 — Carteret',          data:[21,22,29,28,30], color:'#C62828' },
+      { label:'08817 — Edison/Metuchen',   data:[8,null,11,18,25], color:'#E65100' },
+      { label:'08901 — New Brunswick',     data:[27,27,27,20,14], color:'#3B8BD4' },
+      { label:'07001 — Avenel/Woodbridge', data:[null,11,12,12,13], color:'#0F6E56' },
+      { label:'08861 — Perth Amboy',       data:[16,16,14,14,12], color:'#534AB7' }
+    ];
+    var zipChart = new Chart(canvas, {
+      type: 'line',
+      data: { labels: zipYears, datasets: zipSeries.map(function(s){
+        return { label:s.label, data:s.data, borderColor:s.color,
+          backgroundColor:'transparent', borderWidth:2.5,
+          pointRadius:5, pointBackgroundColor:s.color,
+          tension:0.25, fill:false, spanGaps:false };
+      })},
+      options: { responsive:true, maintainAspectRatio:false,
+        plugins: {
+          legend:{display:false},
+          tooltip:{ callbacks:{ label:function(c){ return ' '+c.dataset.label+': '+(c.raw===null?'outside top 8':c.raw+' children'); }}}
+        },
+        scales: {
+          x:{ ticks:{color:TC}, grid:{display:false} },
+          y:{ ticks:{color:TC}, grid:{color:GC}, beginAtZero:true,
+              title:{display:true,text:'Children assigned',color:TC,font:{size:10}} }
+        }}
+    });
+    mkToggleLeg('cd_zip_leg', zipChart, zipSeries.map(function(s){return s.label;}), zipSeries.map(function(s){return s.color;}));
   })();
 
   /* ── PRINT DATE LABELS ── */
@@ -4090,6 +4418,36 @@ initAnalysisButtons();
         }}
     });
   })();
+  /* ── f_constit: Cash giving by constituent type FY21–FY25 ── */
+  (function(){
+    var canvas = document.getElementById('f_constit');
+    if (!canvas) return;
+    var fConstitYears = ['FY21','FY22','FY23','FY24','FY25'];
+    var indCash  = [34592, 30799, 50975, 56054, 80855];
+    var orgCash  = [7585,  5567,  14331, 11920, 26420];
+    var indCount = [67, 54, 61, 77, 199];
+    var orgCount = [6,  6,  10, 13, 31];
+    new Chart(canvas, {
+      type:'bar',
+      data:{ labels:fConstitYears, datasets:[
+        { label:'Individuals', data:indCash, backgroundColor:'rgba(59,139,212,0.75)', borderRadius:4 },
+        { label:'Organizations', data:orgCash, backgroundColor:'rgba(15,110,86,0.72)', borderRadius:4 }
+      ]},
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{
+          legend:{ labels:{color:TC,font:{size:10},boxWidth:10} },
+          tooltip:{ callbacks:{ label:function(c){
+            var cnt = c.datasetIndex===0 ? indCount[c.dataIndex] : orgCount[c.dataIndex];
+            return ' '+c.dataset.label+': '+dollarFmt(c.raw)+' ('+cnt+' donors)';
+          }}}
+        },
+        scales:{
+          x:{ ticks:{color:TC}, grid:{display:false} },
+          y:{ ticks:{color:TC, callback:function(v){return '$'+Math.round(v/1000)+'k';}}, grid:{color:GC}, beginAtZero:true,
+              title:{display:true,text:'Cash giving ($)',color:TC,font:{size:10}} }
+        }}
+    });
+  })();
 
   (function(){
     var canvas = document.getElementById('f_unrest');
@@ -4121,6 +4479,167 @@ initAnalysisButtons();
           y: { stacked: true, ticks: { color: TC }, grid: { display: false } }
         }}
     });
+  })();
+
+  /* ── f_avg_gift: Average cash gift per donor vs. donor count FY21–FY25 ── */
+  (function(){
+    var canvas = document.getElementById('f_avg_gift');
+    if (!canvas) return;
+    var yrs   = ['FY21','FY22','FY23','FY24','FY25'];
+    var csh   = [42176.84, 36365.5, 65306.05, 67974.0, 107275.81];
+    var dnrs  = [76, 66, 75, 108, 278];
+    var avgGift = csh.map(function(c,i){ return Math.round(c / dnrs[i]); });
+    // avgGift = [555, 551, 871, 629, 386]
+    new Chart(canvas, {
+      type: 'bar',
+      data: { labels: yrs, datasets: [
+        { type: 'line', label: 'Avg cash gift / donor ($)',
+          data: avgGift, yAxisID: 'yLeft',
+          borderColor: '#C62828', backgroundColor: 'rgba(198,40,40,0.08)',
+          borderWidth: 2.5, pointRadius: 5, pointBackgroundColor: '#C62828',
+          tension: 0.3, fill: true, order: 1 },
+        { label: 'Total donors',
+          data: dnrs, yAxisID: 'yRight',
+          backgroundColor: 'rgba(59,139,212,0.55)', borderRadius: 4, order: 2 }
+      ]},
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: TC, font: { size: 10 }, boxWidth: 10 } },
+          tooltip: { callbacks: { label: function(c) {
+            if (c.dataset.label.indexOf('Avg') > -1)
+              return ' Avg gift: $' + c.raw + '/donor';
+            return ' Total donors: ' + c.raw;
+          }}}
+        },
+        scales: {
+          x: { ticks: { color: TC }, grid: { display: false } },
+          yLeft: { position: 'left', beginAtZero: true,
+            ticks: { color: '#C62828', callback: function(v){ return '$'+v; } },
+            grid: { color: GC },
+            title: { display: true, text: 'Avg gift per donor ($)', color: '#C62828', font: { size: 10 } } },
+          yRight: { position: 'right', beginAtZero: true,
+            ticks: { color: '#3B8BD4' },
+            grid: { display: false },
+            title: { display: true, text: 'Total donors', color: '#3B8BD4', font: { size: 10 } } }
+        }
+      }
+    });
+  })();
+
+  /* ── f_ik_vol: In-kind revenue volatility FY21–FY25 ── */
+  (function(){
+    var canvas = document.getElementById('f_ik_vol');
+    if (!canvas) return;
+    var yrs = ['FY21','FY22','FY23','FY24','FY25'];
+    var ik  = [7008, 8144.95, 7750, 61552.02, 41977.26];
+    var avg = ik.reduce(function(a,b){ return a+b; }, 0) / ik.length; // ~24886
+    var avgLine = yrs.map(function(){ return Math.round(avg); });
+    new Chart(canvas, {
+      type: 'bar',
+      data: { labels: yrs, datasets: [
+        { label: 'In-kind giving ($)',
+          data: ik.map(function(v){ return Math.round(v); }),
+          backgroundColor: ['rgba(186,117,23,0.65)','rgba(186,117,23,0.65)','rgba(186,117,23,0.65)','rgba(198,40,40,0.75)','rgba(186,117,23,0.65)'],
+          borderRadius: 4, order: 2 },
+        { type: 'line', label: '5-yr avg ($24.9K)',
+          data: avgLine, yAxisID: 'y',
+          borderColor: '#E65100', borderDash: [6,4],
+          borderWidth: 2, pointRadius: 0, tension: 0, fill: false, order: 1,
+          refLabel: 'Avg $24.9K' }
+      ]},
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: TC, font: { size: 10 }, boxWidth: 10 } },
+          tooltip: { callbacks: { label: function(c) {
+            if (c.datasetIndex === 0) return ' In-kind: $' + Math.round(c.raw).toLocaleString();
+            return ' 5-yr avg: $24,886';
+          }}}
+        },
+        scales: {
+          x: { ticks: { color: TC }, grid: { display: false } },
+          y: { beginAtZero: true, ticks: { color: TC, callback: function(v){ return '$'+Math.round(v/1000)+'K'; } },
+               grid: { color: GC } }
+        }
+      }
+    });
+  })();
+
+  /* ── p4_sp_p1–p4: Four Pillar Pulse sparklines ── */
+  (function(){
+    var spYrs = ['FY21','FY22','FY23','FY24','FY25'];
+
+    function makeSparkline(id, data, label, color, yCallback, goalVal, goalLabel, goalColor) {
+      var canvas = document.getElementById(id);
+      if (!canvas) return;
+      var datasets = [
+        { label: label, data: data,
+          borderColor: color, backgroundColor: color.replace(')',',0.12)').replace('rgb','rgba'),
+          borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: color,
+          tension: 0.3, fill: true }
+      ];
+      if (goalVal !== undefined) {
+        datasets.push({
+          type: 'line', label: goalLabel,
+          data: spYrs.map(function(){ return goalVal; }),
+          borderColor: goalColor || '#C62828', borderDash: [6,4],
+          borderWidth: 1.5, pointRadius: 0, tension: 0, fill: false,
+          refLabel: goalLabel
+        });
+      }
+      new Chart(canvas, {
+        type: 'line',
+        data: { labels: spYrs, datasets: datasets },
+        options: { responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: TC, font: { size: 10 }, boxWidth: 10 } },
+            tooltip: { callbacks: { label: function(c) {
+              return ' ' + c.dataset.label + ': ' + yCallback(c.raw);
+            }}}
+          },
+          scales: {
+            x: { ticks: { color: TC, font: { size: 10 } }, grid: { display: false } },
+            y: { beginAtZero: false, ticks: { color: TC, font: { size: 10 }, callback: yCallback }, grid: { color: GC } }
+          }
+        }
+      });
+    }
+
+    // P1: Positive closure rate % — Reun+Adopt+KLG+JudgeReleased / total closures
+    // Data: FY21:28/36=78, FY22:57/65=88, FY23:48/53=91, FY24:59/67=88, FY25:44/50=88
+    makeSparkline('p4_sp_p1',
+      [78, 88, 91, 88, 88],
+      'Positive closure rate (%)',
+      '#0F6E56',
+      function(v){ return v + '%'; },
+      75, 'Goal ≥75%', '#C62828');
+
+    // P2: Active volunteer headcount
+    makeSparkline('p4_sp_p2',
+      vTotal,
+      'Active volunteers',
+      '#534AB7',
+      function(v){ return v; },
+      130, 'Goal ≥130', '#C62828');
+
+    // P3: Total giving cash + in-kind ($K)
+    var totalGiving = fY.map(function(_,i){ return Math.round((fC[i] + fIK[i]) / 1000); });
+    // [49, 45, 73, 130, 149]
+    makeSparkline('p4_sp_p3',
+      totalGiving,
+      'Total giving ($K)',
+      '#BA7517',
+      function(v){ return '$'+v+'K'; },
+      undefined, undefined);
+
+    // P4: Children served (annual active caseload)
+    var cdTotalAnn = [143, 148, 149, 155, 167];
+    makeSparkline('p4_sp_p4',
+      cdTotalAnn,
+      'Children served (annual)',
+      '#3B8BD4',
+      function(v){ return v; },
+      200, 'Goal 200', '#C62828');
+
   })();
 
 })();
