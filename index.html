@@ -327,14 +327,12 @@
     .print-btn:hover { background:var(--surface2); }
 
     /* ── DATE FILTER ── */
-    .date-filter { display:flex; align-items:center; gap:8px; margin-bottom:1rem; flex-wrap:wrap; }
-    .date-filter label { font-size:12px; color:var(--text3); white-space:nowrap; }
     .month-chip {
       font-size:11px; font-weight:500; padding:3px 10px; border-radius:20px; cursor:pointer;
       border:1px solid var(--border); background:var(--surface2); color:var(--text2);
       transition:background .12s, color .12s, border-color .12s;
     }
-    .month-chip.on { background:#3B8BD4; color:#fff; border-color:#3B8BD4; }
+    .month-chip.on { background:#3B8BD4; color:#fff; border-color:#3B8BD4; } /* kept for legacy references */
 
     /* ── EXPLORER PAGE ── */
     .expl-controls {
@@ -571,6 +569,111 @@
       font-size:12px; color:var(--text2); font-style:normal;
     }
     .action-line::before { content:'→ '; font-weight:600; color:var(--text3); }
+
+    /* ── Jump-to-section navigation ── */
+    .jump-nav {
+      display:flex; flex-wrap:wrap; align-items:center; gap:5px;
+      margin:0 0 1.5rem; padding:9px 13px;
+      background:var(--surface2); border:0.5px solid var(--border);
+      border-radius:var(--radius-md);
+    }
+    .jump-nav-lbl {
+      font-size:10.5px; font-weight:600; color:var(--text3);
+      text-transform:uppercase; letter-spacing:0.08em;
+      white-space:nowrap; margin-right:4px; flex-shrink:0;
+    }
+    .jump-pill {
+      display:inline-flex; align-items:center; gap:3px;
+      font-size:12px; font-weight:500; color:var(--text2);
+      background:var(--surface); border:0.5px solid var(--border);
+      border-radius:20px; padding:4px 10px;
+      cursor:pointer; text-decoration:none;
+      transition:background .13s, color .13s, border-color .13s, transform .1s;
+      white-space:nowrap; line-height:1.4;
+    }
+    .jump-pill:hover {
+      background:var(--text); color:var(--surface);
+      border-color:transparent; transform:translateY(-1px);
+    }
+    .jump-pill-arrow { font-size:9px; opacity:0.55; }
+
+    /* Offset scroll targets so sticky nav doesn't obscure section headings */
+    .section-title[id],
+    .card[id],
+    .drill-kpi-bar[id] {
+      scroll-margin-top: 72px;
+    }
+
+    /* ── Pillar progress bar (sits at bottom edge of sticky nav) ── */
+    #pillar-progress {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; background: var(--border); overflow: hidden; pointer-events: none;
+    }
+    #pillar-progress-fill {
+      height: 100%; width: 0%;
+      background: #3B8BD4;
+      transition: width 80ms linear, background 0.3s ease;
+    }
+
+    /* ── Scroll-to-top button ── */
+    #scroll-top-btn {
+      position: fixed; bottom: 28px; right: 28px; z-index: 600;
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--text); color: var(--surface);
+      border: none; border-radius: 20px; padding: 8px 14px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.03em;
+      cursor: pointer; opacity: 0; transform: translateY(10px);
+      transition: opacity .22s, transform .22s; pointer-events: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    }
+    #scroll-top-btn.vis { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #scroll-top-btn:hover { opacity: 0.85; }
+
+    /* ── Insight filter bar ── */
+    .insight-filter {
+      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+      margin-bottom: 12px; padding-bottom: 10px;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .insight-filter-lbl {
+      font-size: 10.5px; font-weight: 600; color: var(--text3);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      white-space: nowrap; margin-right: 4px;
+    }
+    .if-btn {
+      font-size: 11.5px; font-weight: 600; padding: 4px 11px;
+      border-radius: 20px; border: 1.5px solid var(--border);
+      background: var(--surface); color: var(--text2);
+      cursor: pointer; transition: background .13s, color .13s, border-color .13s;
+      white-space: nowrap;
+    }
+    .if-btn:hover { border-color: var(--text3); color: var(--text); }
+    .if-btn.if-active { border-color: transparent; }
+    .if-btn.if-active[data-f="all"]      { background: var(--text);    color: var(--surface); }
+    .if-btn.if-active[data-f="positive"] { background: #1b5e20; color: #fff; }
+    .if-btn.if-active[data-f="watch"]    { background: #bf360c; color: #fff; }
+    .if-btn.if-active[data-f="alert"]    { background: #7f0000; color: #fff; }
+    .if-btn.if-active[data-f="neutral"]  { background: #37474f; color: #fff; }
+    .insight.if-hidden { display: none !important; }
+
+    /* ── KPI / Jump-pill tooltip ── */
+    #ui-tip {
+      position: fixed; z-index: 3000; pointer-events: none;
+      background: var(--text); color: var(--surface);
+      border-radius: 8px; padding: 10px 13px;
+      font-size: 12.5px; line-height: 1.55; max-width: 240px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      opacity: 0; transition: opacity .15s;
+    }
+    #ui-tip.tip-vis { opacity: 1; }
+    #ui-tip strong { font-size: 11px; font-weight: 600; opacity: 0.7;
+                     display: block; margin-bottom: 3px; letter-spacing: 0.03em; }
+    #ui-tip .tip-val { font-size: 20px; font-weight: 700; line-height: 1.2; display: block; }
+    #ui-tip .tip-sub { display: block; margin-top: 4px; opacity: 0.75; font-size: 11.5px; }
+    #ui-tip .tip-list { margin: 4px 0 0; padding: 0; list-style: none; }
+    #ui-tip .tip-list li { padding: 2px 0; border-top: 0.5px solid rgba(255,255,255,0.12);
+                           font-size: 11.5px; opacity: 0.85; }
+    #ui-tip .tip-list li:first-child { border-top: none; }
   </style>
 </head>
 <body>
@@ -599,7 +702,15 @@
   </a>
   <button class="print-btn" onclick="printCurrentPage()" style="margin-left:auto;">🖨 Print / PDF</button>
 
+  <!-- Pillar scroll-progress bar sits at bottom edge of sticky nav -->
+  <div id="pillar-progress"><div id="pillar-progress-fill"></div></div>
 </nav>
+
+<!-- Shared tooltip for KPI cards + jump pills -->
+<div id="ui-tip" role="tooltip"></div>
+
+<!-- Floating scroll-to-top button -->
+<button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑ Top</button>
 
 
 <!-- ── Chart analysis side drawer ── -->
@@ -955,21 +1066,20 @@
       <div class="metric"><div class="label">Avg gender split</div><div class="val">51/49</div><div class="sub">F / M</div></div>
     </div>
 
-    <div class="section-title">Census</div>
-
-    <!-- Month filter -->
-    <div class="date-filter">
-      <label>Filter months:</label>
-      <span id="df_all" class="month-chip on" onclick="toggleMonth(-1)">All</span>
-      <span class="month-chip on" data-mi="0" onclick="toggleMonth(0)">Jul</span>
-      <span class="month-chip on" data-mi="1" onclick="toggleMonth(1)">Aug</span>
-      <span class="month-chip on" data-mi="2" onclick="toggleMonth(2)">Sep</span>
-      <span class="month-chip on" data-mi="3" onclick="toggleMonth(3)">Oct</span>
-      <span class="month-chip on" data-mi="4" onclick="toggleMonth(4)">Nov</span>
-      <span class="month-chip on" data-mi="5" onclick="toggleMonth(5)">Dec</span>
-      <span class="month-chip on" data-mi="6" onclick="toggleMonth(6)">Jan</span>
-      <span class="month-chip on" data-mi="7" onclick="toggleMonth(7)">Feb</span>
+    <!-- ── Jump-to-section nav ── -->
+    <div class="jump-nav">
+      <span class="jump-nav-lbl">Jump to</span>
+      <a class="jump-pill" href="#p1-census" onclick="document.getElementById('p1-census').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Census</a>
+      <a class="jump-pill" href="#p1-fy26" onclick="document.getElementById('p1-fy26').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> FY26 Progress</a>
+      <a class="jump-pill" href="#p1-race" onclick="document.getElementById('p1-race').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Race / Ethnicity</a>
+      <a class="jump-pill" href="#p1-trends" onclick="document.getElementById('p1-trends').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Historical Trends</a>
+      <a class="jump-pill" href="#p1-age" onclick="document.getElementById('p1-age').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Age Distribution</a>
+      <a class="jump-pill" href="#p1-closures" onclick="document.getElementById('p1-closures').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Case Closures</a>
+      <a class="jump-pill" href="#p1-coverage" onclick="document.getElementById('p1-coverage').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Coverage</a>
+      <a class="jump-pill" href="#p1-geo" onclick="document.getElementById('p1-geo').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Geographic Distribution</a>
     </div>
+
+    <div id="p1-census" class="section-title">Census</div>
 
     <div class="card">
       <div class="chart-toolbar">
@@ -983,7 +1093,7 @@
 
 
     <!-- ── FY26 CHILDREN-SERVED ROLLING TOTAL ── -->
-    <div class="section-title">FY26 Progress — Children Served vs. Goal</div>
+    <div id="p1-fy26" class="section-title">FY26 Progress — Children Served vs. Goal</div>
     <div class="two" style="margin-bottom:1.75rem;">
       <div class="card">
         <div class="chart-toolbar">
@@ -1002,7 +1112,7 @@
       </div>
     </div>
 
-    <div class="section-title">Race / Ethnicity</div>
+    <div id="p1-race" class="section-title">Race / Ethnicity</div>
     <div class="card full"><div class="chart-toolbar"><div class="card-title">Race/ethnicity over time</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('d_c2','race-over-time')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill down</div><div class="chart-hint">Click legend pills to show/hide</div><div class="tleg" id="d_rleg"></div><div class="cw" style="height:240px"><canvas id="d_c2"></canvas></div></div>
 
 
@@ -1021,13 +1131,13 @@
     </div>
 
     <!-- ▸ ANNUAL TRENDS FY21–FY25 -->
-    <div class="section-title">Historical Trends — FY21 to FY25</div>
+    <div id="p1-trends" class="section-title">Historical Trends — FY21 to FY25</div>
     <div class="two">
       <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Census — Total Active Children</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c1','annual-census')">⬇ PNG</button></div></div><div class="chart-hint">FY21–FY25 annual active caseload</div><div class="cw" style="height:220px"><canvas id="cd_c1"></canvas></div></div>
       <div class="card"><div class="chart-toolbar"><div class="card-title">Annual Race Distribution</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('cd_c2','annual-race')">⬇ PNG</button></div></div><div class="chart-hint">Click legend pills to show/hide</div><div class="cw" style="height:220px"><canvas id="cd_c2"></canvas></div></div>
     </div>
 
-    <div class="section-title">Age Distribution Over Time — FY21 to FY25</div>
+    <div id="p1-age" class="section-title">Age Distribution Over Time — FY21 to FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">How the age composition of CASA's active caseload has shifted across five fiscal years. School-age children (6–10) are the growing share; infants and toddlers (0–2) have declined from 17% to 15% of the caseload.</p>
     <div class="card full" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar">
@@ -1039,7 +1149,7 @@
     </div>
 
     <!-- ▸ CASE CLOSURE OUTCOMES FY21–FY25 -->
-    <div class="section-title">Case Closure Outcomes — FY21 to FY25</div>
+    <div id="p1-closures" class="section-title">Case Closure Outcomes — FY21 to FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">
       Tracks how cases were resolved each fiscal year. A single "closed case" may cover multiple children. The totals below reflect cases closed, not individual children.
     </p>
@@ -1093,7 +1203,7 @@
     <!-- ── GEOGRAPHIC CASELOAD DISTRIBUTION ── -->
 
     <!-- ▸ 1. COVERAGE RATIO -->
-    <div class="section-title">Volunteer-to-Child Coverage</div>
+    <div id="p1-coverage" class="section-title">Volunteer-to-Child Coverage</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">How many active children does each volunteer carry? CASA programs nationally target a 1:1 to 1:2 ratio. A lower ratio means more capacity per volunteer.</p>
     <div class="drill-kpi-bar n4" style="margin-bottom:16px;">
       <div class="drill-kpi"><div class="dk-lbl">FY25 ratio</div><div class="dk-val">1.38</div><div class="dk-up">↓ from 1.64 in FY23</div></div>
@@ -1107,10 +1217,10 @@
       <div class="cw" style="height:200px"><canvas id="xp_c1"></canvas></div>
     </div>
 
-    
+
 
     <!-- ▸ 5. GEOGRAPHIC MAP -->
-    <div class="section-title">Geographic Caseload Distribution — FY25</div>
+    <div id="p1-geo" class="section-title">Geographic Caseload Distribution — FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Approximate positions of top 10 removal zip codes within Middlesex County, NJ. Bubble size represents FY25 children assigned. North is up.</p>
     <div class="card" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar"><div class="card-title">Removal zip code map — Middlesex County, NJ · FY25 caseload</div></div>
@@ -1339,8 +1449,21 @@
       <div class="metric"><div class="label">Total program revenue FY25</div><div class="val">$638K</div><div class="up">▲ since FY22: +64%</div></div>
     </div>
 
+    <!-- ── Jump-to-section nav ── -->
+    <div class="jump-nav">
+      <span class="jump-nav-lbl">Jump to</span>
+      <a class="jump-pill" href="#p3-revenue" onclick="document.getElementById('p3-revenue').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Full Revenue Picture</a>
+      <a class="jump-pill" href="#p3-grants" onclick="document.getElementById('p3-grants').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Grant Streams</a>
+      <a class="jump-pill" href="#p3-unrestricted" onclick="document.getElementById('p3-unrestricted').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Unrestricted Fundraising</a>
+      <a class="jump-pill" href="#p3-donor-giving" onclick="document.getElementById('p3-donor-giving').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Donor Giving</a>
+      <a class="jump-pill" href="#p3-donor-analysis" onclick="document.getElementById('p3-donor-analysis').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Donor Analysis</a>
+      <a class="jump-pill" href="#p3-pipeline" onclick="document.getElementById('p3-pipeline').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Grant Pipeline</a>
+      <a class="jump-pill" href="#p3-outreach" onclick="document.getElementById('p3-outreach').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Community Outreach</a>
+      <a class="jump-pill" href="#p3-efficiency" onclick="document.getElementById('p3-efficiency').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Fundraising Efficiency</a>
+    </div>
+
     <!-- ── FULL REVENUE PICTURE ── -->
-    <div class="section-title">Full Revenue Picture — FY22 to FY25</div>
+    <div id="p3-revenue" class="section-title">Full Revenue Picture — FY22 to FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Donor giving (cash + in-kind gifts tracked in the donor database) represents one slice of CASA's total budget. The charts below show the complete revenue picture, including government grants and the imputed value of donated volunteer time. Total program revenue reached <strong>$638K in FY25</strong> — with government grants ($499K) representing the largest single funding category.</p>
     <div class="card full" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar">
@@ -1356,7 +1479,7 @@
     </div>
 
     <!-- ── GOVERNMENT GRANT STREAMS ── -->
-    <div class="section-title">Government Grant Streams — FY22 to FY25</div>
+    <div id="p3-grants" class="section-title">Government Grant Streams — FY22 to FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Government grants are CASA's largest revenue category by far. Breaking them out by stream reveals which are stable, which are volatile, and where dependency concentration lies. VOCA and NJ State Pass-Thru together account for more than 75% of all grant revenue in every year.</p>
     <div class="card full" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar">
@@ -1374,7 +1497,7 @@
     </div>
 
     <!-- ── UNRESTRICTED EVENT BREAKDOWN ── -->
-    <div class="section-title">Unrestricted Fundraising — Event &amp; Source Breakdown FY22–FY25</div>
+    <div id="p3-unrestricted" class="section-title">Unrestricted Fundraising — Event &amp; Source Breakdown FY22–FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Unrestricted fundraising is CASA's most flexible revenue — it can be deployed without donor restrictions. Breaking it out by event and source shows which channels are stable, which are growing, and where FY26 investment should focus. The Toast Gala has been remarkably consistent at $51–55K for three consecutive years.</p>
     <div class="card full" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar">
@@ -1391,7 +1514,7 @@
       <div class="insight neutral"><div class="itag">Context — Interest income is non-recurring</div><p>Interest income grew from $6.9K (FY23) to $29.3K (FY24) and declined to $17.4K (FY25), tracking the interest rate cycle on CASA's cash reserves. This revenue line reflects healthy reserve-building — but it is rate-dependent and should not be treated as a growing budget line for FY27 planning as rates normalize.</p></div>
     </div>
 
-    <div class="section-title">Donor Giving Detail — Cash &amp; In-Kind (FY21–FY25)</div>
+    <div id="p3-donor-giving" class="section-title">Donor Giving Detail — Cash &amp; In-Kind (FY21–FY25)</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">The charts below focus on CASA's donor giving — cash gifts and in-kind contributions tracked through the donor database. This represents the unrestricted and in-kind portion of the revenue picture above, and is the primary lever the development team controls year-to-year.</p>
 
     <div class="section-title">Total Giving Overview</div>
@@ -1409,7 +1532,7 @@
 
 
 
-    <div class="section-title">Donor Analysis</div>
+    <div id="p3-donor-analysis" class="section-title">Donor Analysis</div>
     <div class="two">
       <div class="card"><div class="chart-toolbar"><div class="card-title">Active donor count by fiscal year</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c6','donor-count')">⬇ PNG</button></div></div><div class="drill-badge"><span class="dot"></span>Click a bar to drill into that year's giving breakdown</div><div class="chart-hint">FY25 donor surge (+157%): 108 → 278 active donors — far exceeding sector trends</div><div class="cw" style="height:220px"><canvas id="f_c6"></canvas></div></div>
       <div class="card"><div class="chart-toolbar"><div class="card-title">Donor retention FY24 → FY25</div><div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('f_c7','donor-retention')">⬇ PNG</button></div></div><div class="chart-hint">26% retained · 57% new · 17% lapsed — new donor stewardship is the top priority</div><div class="cw" style="height:220px; position:relative;"><canvas id="f_c7"></canvas><div id="f_c7_center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;"></div></div></div>
@@ -1496,7 +1619,7 @@
 
 
     <!-- ── GRANT PIPELINE ── -->
-    <div class="section-title">FY26 Grant Pipeline &amp; Fundraising Progress</div>
+    <div id="p3-pipeline" class="section-title">FY26 Grant Pipeline &amp; Fundraising Progress</div>
     <div class="two" style="margin-bottom:1.75rem;">
       <div class="card">
         <div class="chart-toolbar"><div class="card-title">Grant pipeline — applied vs. awarded (FY26 YTD)</div></div>
@@ -1514,7 +1637,7 @@
       <div class="insight alert"><div class="itag">Risk — Federal &amp; state grants = 78% of total budget</div><p>Historical revenue data shows government grants represent $499K of CASA's $638K total revenue (78%) in FY25. VOCA alone ($147K) and NJ State Pass-Thru ($230K) together total $377K — nearly 60% of the entire program budget. A 20% VOCA reduction would eliminate ~$29K; a 10% NJ State cut would eliminate ~$23K. Either scenario dwarfs the impact of losing CASA's top individual donors. The FY27 budget must model at least a 15% and 30% federal funding reduction scenario before it is finalized.<span class="action-line">Build a 15% and 30% federal funding reduction scenario into the FY27 budget model, identify at least 3 local foundation targets to partially offset either gap, and present both the scenario and the diversification roadmap to the board before the budget is finalized — not after a cut is announced.</span></p></div>
     </div>
 
-    <div class="section-title">Community Outreach &amp; Awareness — FY26 YTD</div>
+    <div id="p3-outreach" class="section-title">Community Outreach &amp; Awareness — FY26 YTD</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Community presence directly supports fundraising pipeline by building awareness, trust, and volunteer/donor referrals. Both outreach metrics are tracking above FY26 goals through February 2026.</p>
     <div class="drill-kpi-bar n4" style="margin-bottom:1.75rem;">
       <div class="drill-kpi">
@@ -1544,7 +1667,7 @@
     </div>
 
     <!-- ── AVERAGE GIFT SIZE TREND ── -->
-    <div class="section-title">Fundraising Efficiency — Average Gift Size vs. Donor Count</div>
+    <div id="p3-efficiency" class="section-title">Fundraising Efficiency — Average Gift Size vs. Donor Count</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">As donor count has grown, average cash gift per donor has fallen — a classic "breadth vs. depth" tradeoff. FY23's peak average ($871/donor) was achieved with only 75 donors; FY25's $386 average reflects 278 donors but a shallower individual investment. Understanding this dynamic is key to FY26 stewardship strategy.</p>
     <div class="card full" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar">
@@ -1798,8 +1921,19 @@
       </div>
     </div>
 
+    <!-- ── Jump-to-section nav ── -->
+    <div class="jump-nav">
+      <span class="jump-nav-lbl">Jump to</span>
+      <a class="jump-pill" href="#p2-headcount" onclick="document.getElementById('p2-headcount').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Headcount Trend</a>
+      <a class="jump-pill" href="#p2-race" onclick="document.getElementById('p2-race').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Race / Ethnicity</a>
+      <a class="jump-pill" href="#p2-employment" onclick="document.getElementById('p2-employment').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Employment Status</a>
+      <a class="jump-pill" href="#p2-experience" onclick="document.getElementById('p2-experience').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Experience Pyramid</a>
+      <a class="jump-pill" href="#p2-language" onclick="document.getElementById('p2-language').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Language Capabilities</a>
+      <a class="jump-pill" href="#p2-diversity" onclick="document.getElementById('p2-diversity').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Diversity Equity</a>
+    </div>
+
     <!-- ── HEADCOUNT TREND ── -->
-    <div class="card full">
+    <div id="p2-headcount" class="card full">
       <div class="chart-toolbar">
         <div class="card-title">Active Volunteer Headcount — FY21 to FY25</div>
         <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c1','vol-headcount')">⬇ PNG</button></div>
@@ -1809,7 +1943,7 @@
     </div>
 
     <!-- ── RACE / ETHNICITY ── -->
-    <div class="card full">
+    <div id="p2-race" class="card full">
       <div class="chart-toolbar">
         <div class="card-title">Race &amp; Ethnicity by Fiscal Year</div>
         <div class="toolbar-btns"><button class="icon-btn" onclick="exportChart('v_c4','vol-race')">⬇ PNG</button></div>
@@ -1829,7 +1963,7 @@
 
     <!-- Goal tracker slider removed from P2 — available in Build a Graph / Experimental tab -->
 
-    <div class="section-title">Volunteer Employment Status — FY21 to FY25</div>
+    <div id="p2-employment" class="section-title">Volunteer Employment Status — FY21 to FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">The corps has shifted from a retiree-heavy base toward working professionals. Full-time workers are now the largest single employment group. This has implications for training scheduling, court hearing availability, and long-term succession planning.</p>
     <div class="card full" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar">
@@ -1842,7 +1976,7 @@
     </div>
 
     <!-- ▸ 8. VOLUNTEER EXPERIENCE PYRAMID -->
-    <div class="section-title">Volunteer Experience Pyramid</div>
+    <div id="p2-experience" class="section-title">Volunteer Experience Pyramid</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">How many years of service does the current FY25 volunteer corps hold? Each bar represents the number of volunteers at that tenure level — from brand-new recruits to decade-long advocates.</p>
     <div class="card" style="margin-bottom:8px;">
       <div class="chart-toolbar"><div class="card-title">FY25 volunteer corps — years of service distribution (n=121)</div></div>
@@ -1859,7 +1993,7 @@
       <strong>Reading this chart:</strong> The 2-year tenure mark is the largest single cohort (25 volunteers), suggesting strong retention through the early critical period. The 7 ten-year-plus veterans represent irreplaceable institutional knowledge. The relatively small 0–1 year cohort (23) compared to the 2–4 year band means the corps is mature — experienced but will need renewed recruitment to sustain numbers as senior volunteers retire.
     </div>
 
-    <div class="section-title">Volunteer Language Capabilities — FY21 to FY25</div>
+    <div id="p2-language" class="section-title">Volunteer Language Capabilities — FY21 to FY25</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 12px;line-height:1.6;">Spanish language capacity peaked at 20 volunteers in FY24 (14 fluent + 6 conversational) and declined to 18 in FY25 (15 fluent + 3 conversational) — a net loss of 2, driven by conversational speakers dropping by half. The Hispanic/Latino caseload has grown to 20–23% of children served (~25–29 children/month), meaning the volunteer-to-family language match ratio is under pressure. Hindi remains the second most common non-English language.</p>
     <div class="card full" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar">
@@ -1872,7 +2006,7 @@
     </div>
 
         <!-- ── DEMOGRAPHIC EQUITY GAP ── -->
-    <div class="section-title">Demographic Representation Gap — Volunteers vs. Children Served</div>
+    <div id="p2-diversity" class="section-title">Demographic Representation Gap — Volunteers vs. Children Served</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Comparing the racial/ethnic composition of CASA's active volunteer corps (FY25) against the children currently in the caseload (FY26 YTD). Gaps highlight where volunteer recruitment can better reflect the communities CASA serves. Source: Internal data &amp; CASA NJ Reimagining the Network, 2025.</p>
     <div class="card full" style="margin-bottom:1rem;">
       <div class="chart-toolbar">
@@ -1983,8 +2117,17 @@
     </div>
 
 
+    <!-- ── Jump-to-section nav ── -->
+    <div class="jump-nav">
+      <span class="jump-nav-lbl">Jump to</span>
+      <a class="jump-pill" href="#p4-governance" onclick="document.getElementById('p4-governance').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Governance Metrics</a>
+      <a class="jump-pill" href="#p4-pulse" onclick="document.getElementById('p4-pulse').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Four Pillar Pulse</a>
+      <a class="jump-pill" href="#p4-kpi-table" onclick="document.getElementById('p4-kpi-table').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Strategic KPI Table</a>
+      <a class="jump-pill" href="#p4-scorecard" onclick="document.getElementById('p4-scorecard').scrollIntoView({behavior:'smooth'});return false;"><span class="jump-pill-arrow">↓</span> Program Health Scorecard</a>
+    </div>
+
     <!-- ── PILLAR 4 GOVERNANCE METRICS ── -->
-    <div class="section-title">Organizational Health — Governance &amp; Operations (FY26 YTD)</div>
+    <div id="p4-governance" class="section-title">Organizational Health — Governance &amp; Operations (FY26 YTD)</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Core operational and governance metrics for Pillar 4. Staff stability and compliance data reflect FY26 year-to-date (through Feb 2026). Board metrics are tracked quarterly.</p>
     <div class="drill-kpi-bar n4" style="margin-bottom:18px;">
       <div class="drill-kpi">
@@ -2017,7 +2160,7 @@
     </div>
 
     <!-- ── FOUR PILLAR PULSE ── -->
-    <div class="section-title">Four Pillar Pulse — Five-Year Performance (FY21–FY25)</div>
+    <div id="p4-pulse" class="section-title">Four Pillar Pulse — Five-Year Performance (FY21–FY25)</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">A combined view of the headline metric for each strategic pillar across five fiscal years. Use this as a quick-read "all four pillars at once" to see whether CASA is improving, plateauing, or reversing on each front simultaneously.</p>
     <div class="two" style="margin-bottom:1rem;">
       <div class="card">
@@ -2049,7 +2192,7 @@
     </div>
 
     <!-- ── FY27-28 STRATEGIC KPI TABLE ── -->
-    <div class="section-title">FY26–FY28 Strategic Plan — KPI Reference Table</div>
+    <div id="p4-kpi-table" class="section-title">FY26–FY28 Strategic Plan — KPI Reference Table</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Formal targets across CASA's four strategic pillars sourced from the FY2027–2028 Strategic Framework. FY26 actuals reflect current YTD performance (through Feb 2026).</p>
     <div class="card" style="margin-bottom:1.75rem;overflow-x:auto;">
       <div class="chart-toolbar"><div class="card-title">Strategic KPI targets — all four pillars</div></div>
@@ -2156,7 +2299,7 @@
     </div>
 
     <!-- ▸ 7. RISK FLAG SCORECARD -->
-    <div class="section-title">Program Health Scorecard</div>
+    <div id="p4-scorecard" class="section-title">Program Health Scorecard</div>
     <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Key program metrics scored against published CASA National benchmarks and best practices. All figures come directly from source data.</p>
     <div class="card" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar"><div class="card-title">FY25 performance vs. CASA National benchmarks</div></div>
@@ -2843,6 +2986,7 @@ function showPage(id, el, cls) {
   document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
+  window.scrollTo({ top: 0, behavior: 'instant' });
 
   /* ── Re-animate charts on the newly-shown page ──
      Delay slightly so the page fade runs first, then charts build in. */
@@ -3262,50 +3406,6 @@ function exportChart(canvasId, filename) {
   link.download = (filename || 'chart') + '.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
-}
-
-/* ═══ DATE FILTER ═══ */
-var activeMonths = [0,1,2,3,4,5,6,7]; // all 8 months active
-var allDemoCharts = {}; // store refs for filter updates
-
-function toggleMonth(mi) {
-  if (mi === -1) {
-    // "All" button — reset
-    activeMonths = [0,1,2,3,4,5,6,7];
-    document.querySelectorAll('.month-chip').forEach(function(c){ c.classList.add('on'); });
-  } else {
-    var idx = activeMonths.indexOf(mi);
-    if (idx >= 0 && activeMonths.length > 1) {
-      activeMonths.splice(idx, 1);
-      document.querySelector('[data-mi="'+mi+'"]').classList.remove('on');
-    } else if (idx < 0) {
-      activeMonths.push(mi);
-      activeMonths.sort(function(a,b){return a-b;});
-      document.querySelector('[data-mi="'+mi+'"]').classList.add('on');
-    }
-    // Update "All" chip state
-    var allOn = activeMonths.length === 8;
-    document.getElementById('df_all').classList.toggle('on', allOn);
-  }
-  applyMonthFilter();
-}
-
-function applyMonthFilter() {
-  var labels = activeMonths.map(function(i){ return dM[i]; });
-  Object.keys(allDemoCharts).forEach(function(key) {
-    var chart = allDemoCharts[key];
-    if (!chart || !chart.data) return;
-    chart.data.labels = labels;
-    chart.data.datasets.forEach(function(ds, di) {
-      if (ds._fullData) ds.data = activeMonths.map(function(i){ return ds._fullData[i]; });
-    });
-    chart.update();
-  });
-}
-
-function storeFullData(datasets) {
-  datasets.forEach(function(ds) { ds._fullData = ds.data.slice(); });
-  return datasets;
 }
 
 /* ═══ ANNOTATIONS ═══ */
@@ -3753,7 +3853,7 @@ function init() {
   /* ─── DEMOGRAPHICS ─── */
 
   /* ── d_c1: Census line ── */
-  allDemoCharts['c1'] = new Chart(document.getElementById('d_c1'),{type:'line',data:{labels:dM,datasets:storeFullData([{label:'Children',data:dT.slice(),borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,tension:0.35,pointRadius:5,pointBackgroundColor:'#3B8BD4',pointBorderColor:'#fff',pointBorderWidth:1.5}])},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},scales:{y:{min:110,max:135,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}}});
+  new Chart(document.getElementById('d_c1'),{type:'line',data:{labels:dM,datasets:[{label:'Children',data:dT.slice(),borderColor:'#3B8BD4',backgroundColor:'rgba(59,139,212,0.1)',fill:true,tension:0.35,pointRadius:5,pointBackgroundColor:'#3B8BD4',pointBorderColor:'#fff',pointBorderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+' children';}}}},scales:{y:{min:110,max:135,ticks:{color:TC,stepSize:5},grid:{color:GC}},x:{ticks:{color:TC},grid:{display:false}}}}});
 
   /* ── d_c2: Race stacked bar — click month → doughnut snapshot ── */
   var rc2=new Chart(document.getElementById('d_c2'),{type:'bar',
@@ -5491,17 +5591,18 @@ initAnalysisButtons();
   });
 })();
 
-/* ═══ SOLARI / SPLIT-FLAP KPI ANIMATION ══════════════════════════════
+/* ═══ KPI COUNT-UP ANIMATION ════════════════════════════════════════
    All KPIs on a page share ONE requestAnimationFrame loop with ONE
    shared start timestamp → they begin together and end together.
 
-   Each digit counts sequentially (0 → 1 → 2 … → final) within its
-   own time-slot. All slots are proportioned so the last digit of every
-   element lands at the same absolute moment. The green flash fires
-   for ALL elements in the same animation frame.
+   all values count up smoothly from 0 to their target in sync.
+   Values can never exceed the target, giving a clean "increasing to
+   the final number" feel. The green flash fires for ALL elements
+   together when the count reaches 100%.
 
-   • tabular-nums keeps digit widths stable while counting
-   • Placeholder dashes shown before counting begins
+   • Counts the whole number, not individual digits — no digit drift
+   • Handles $123K, 88%, plain integers; skips text & ratio values
+   • tabular-nums keeps widths stable while counting
    • Click any KPI card to replay the whole page in sync
    • Respects prefers-reduced-motion
 ═══════════════════════════════════════════════════════════════════════ */
@@ -5510,59 +5611,56 @@ initAnalysisButtons();
   var reducedMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var TOTAL_MS  = 1400;  /* every element finishes at exactly this time  */
-  var SPIN_REVS = 1.2;   /* full rotations before homing in on target    */
-  var FLASH_MS  = 280;   /* green flash duration (ms)                    */
+  var TOTAL_MS = 1300;  /* all elements finish at exactly this time */
+  var FLASH_MS = 600;   /* green flash duration (ms)                */
 
-  /* ── Easing: cubic ease-in-out within a digit's slot (p = 0→1) ── */
+  /* Cubic ease-in-out: slow start, fast middle, slow finish */
   function ease(p) {
     return p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;
   }
 
-  /* ── What digit to show at overall progress t (0→1), for one numeric
-     position seq out of n total, whose target is targetDigit ── */
-  function digitAt(t, seq, n, targetDigit) {
-    var slotStart = seq / n;
-    var slotEnd   = (seq + 1) / n;
-
-    if (t <= slotStart) return '–';           /* not started yet     */
-    if (t >= 1)         return String(targetDigit); /* done           */
-
-    var p       = Math.min((t - slotStart) / (slotEnd - slotStart), 1);
-    var eased   = ease(p);
-    /* Total "distance" this wheel travels: full revolutions + steps to target */
-    var total   = SPIN_REVS * 10 + targetDigit;
-    return String(Math.floor(eased * total) % 10);
-  }
-
-  /* ── Prepare one element: cache final value, show dashes, return item ── */
+  /* ── Prepare one element for count-up animation ──
+     Finds the first numeric run in the label (e.g. "638" in "$638K"),
+     stores prefix/suffix, and resets the display to "0".
+     Returns null for text-only values or complex ratio strings. */
   function prepEl(el) {
     var final = el.getAttribute('data-sf');
     if (!final) { final = el.textContent.trim(); el.setAttribute('data-sf', final); }
 
-    var chars  = final.split('');
-    var numPos = [];
-    chars.forEach(function(c, i){ if (/[0-9]/.test(c)) numPos.push(i); });
-    if (!numPos.length) return null;
+    /* Skip pure-text values ("In Progress", "Pipeline Active", etc.) */
+    if (!/[0-9]/.test(final)) return null;
+    /* Skip ratio / slash values ("51/49", "1 : 48") — too complex to count cleanly */
+    if (/[\/:]/.test(final))  return null;
 
-    var display = chars.slice();
-    numPos.forEach(function(p){ display[p] = '–'; });
-    el.textContent    = display.join('');
+    /* Match the first numeric run, allowing an optional decimal part */
+    var m = final.match(/([0-9]+(?:\.[0-9]+)?)/);
+    if (!m) return null;
+
+    var numStr   = m[1];
+    var target   = parseFloat(numStr);
+    if (isNaN(target) || target < 1) return null;   /* nothing to count */
+
+    var decimals = numStr.indexOf('.') >= 0 ? numStr.split('.')[1].length : 0;
+    var pre      = final.slice(0, m.index);          /* e.g. "$"         */
+    var post     = final.slice(m.index + numStr.length); /* e.g. "K" or "%" */
+
+    /* Show zero at the start of the animation */
+    var zeroStr = decimals > 0 ? (0).toFixed(decimals) : '0';
+    el.textContent = pre + zeroStr + post;
     el.style.fontVariantNumeric = 'tabular-nums';
-    /* Clear any leftover inline colour from a previous run */
     el.style.color      = '';
     el.style.transition = '';
 
-    return { el: el, final: final, chars: chars, numPos: numPos, display: display.slice() };
+    return { el: el, final: final, pre: pre, post: post,
+             target: target, decimals: decimals };
   }
 
-  /* ── Run one animation pass for all items on the current page ── */
+  /* ── Run one animation pass for all KPI items on the current page ── */
   function animatePage() {
     if (reducedMotion) return;
     var page = document.querySelector('.page.on');
     if (!page) return;
 
-    /* Collect and prepare all animatable elements */
     var items = [];
     page.querySelectorAll('.dk-val, .metric .val').forEach(function(el){
       var item = prepEl(el);
@@ -5575,35 +5673,32 @@ initAnalysisButtons();
 
     function frame(ts) {
       if (!startTs) startTs = ts;
-      var t = Math.min((ts - startTs) / TOTAL_MS, 1);
+      var t     = Math.min((ts - startTs) / TOTAL_MS, 1);
+      var eased = ease(t);
 
       items.forEach(function(item) {
-        var n    = item.numPos.length;
-        var disp = item.chars.slice(); /* start from clean chars copy */
-
-        item.numPos.forEach(function(pos, seq){
-          var target = parseInt(item.chars[pos], 10);
-          disp[pos] = (t >= 1) ? item.chars[pos] : digitAt(t, seq, n, target);
-        });
-
-        item.el.textContent = disp.join('');
+        var val = eased * item.target;
+        var s   = item.decimals > 0
+                    ? val.toFixed(item.decimals)
+                    : String(Math.floor(val));
+        item.el.textContent = item.pre + s + item.post;
       });
 
-      /* ── When all done: lock final text + fire green flash on all ── */
+      /* ── All done: lock final text, fire green flash on every element ── */
       if (t >= 1 && !flashDone) {
         flashDone = true;
         items.forEach(function(item){
-          item.el.textContent  = item.final;
+          item.el.textContent      = item.final;
           item.el.style.transition = 'none';
           item.el.style.color      = '#2e7d32';
-          void item.el.offsetWidth; /* force reflow */
+          void item.el.offsetWidth;  /* force reflow so transition fires */
           item.el.style.transition = 'color ' + FLASH_MS + 'ms ease';
           setTimeout(function(){
             item.el.style.color = '';
             setTimeout(function(){ item.el.style.transition = ''; }, FLASH_MS + 40);
           }, FLASH_MS);
         });
-        return; /* stop loop */
+        return;  /* stop the loop */
       }
 
       if (t < 1) requestAnimationFrame(frame);
@@ -5641,6 +5736,181 @@ initAnalysisButtons();
       return r;
     };
   }
+
+})();
+
+/* ═══ INSIGHT FILTER BAR ═════════════════════════════════════════════
+   Injects All / Strengths / Watch / Alerts / Context pill toggles
+   above every Key Insights grid on all four pillars.
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  document.querySelectorAll('.collapse-btn').forEach(function(btn){
+    var lbl = btn.querySelector('.collapse-label');
+    if (!lbl || lbl.textContent.trim() !== 'Key Insights') return;
+
+    var body = btn.nextElementSibling;
+    if (!body) return;
+    var grid = body.querySelector('.insight-grid');
+    if (!grid) return;
+
+    var bar = document.createElement('div');
+    bar.className = 'insight-filter';
+    bar.innerHTML =
+      '<span class="insight-filter-lbl">Filter</span>' +
+      '<button class="if-btn if-active" data-f="all">All</button>' +
+      '<button class="if-btn" data-f="positive">✦ Strengths</button>' +
+      '<button class="if-btn" data-f="watch">◉ Watch</button>' +
+      '<button class="if-btn" data-f="alert">⚑ Alerts</button>' +
+      '<button class="if-btn" data-f="neutral">◦ Context</button>';
+
+    body.insertBefore(bar, grid);
+
+    bar.querySelectorAll('.if-btn').forEach(function(b){
+      b.addEventListener('click', function(e){
+        e.stopPropagation();
+        bar.querySelectorAll('.if-btn').forEach(function(x){ x.classList.remove('if-active'); });
+        b.classList.add('if-active');
+        var f = b.getAttribute('data-f');
+        grid.querySelectorAll('.insight').forEach(function(card){
+          if (f === 'all') {
+            card.classList.remove('if-hidden');
+          } else {
+            card.classList.toggle('if-hidden', !card.classList.contains(f));
+          }
+        });
+      });
+    });
+  });
+})();
+
+/* ═══ SCROLL PROGRESS BAR + SCROLL-TO-TOP BUTTON ════════════════════
+   Progress bar fills as user scrolls the current pillar page.
+   Color tracks the active pillar. Scroll-to-top button fades in
+   after 300px of scroll.
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  var fill   = document.getElementById('pillar-progress-fill');
+  var topBtn = document.getElementById('scroll-top-btn');
+  if (!fill || !topBtn) return;
+
+  var pillarColors = {
+    demographics: '#3B8BD4',
+    volunteers:   '#534AB7',
+    fundraising:  '#0F6E56',
+    zipcodes:     '#BA7517',
+    executive:    '#C62828',
+    explorer:     '#00838F'
+  };
+
+  function onScroll(){
+    var scrolled = window.scrollY;
+    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = maxScroll > 0 ? Math.min(scrolled / maxScroll * 100, 100) : 0;
+    fill.style.width = pct + '%';
+
+    /* Color follows active pillar */
+    var active = document.querySelector('.page.on');
+    if (active) fill.style.background = pillarColors[active.id] || '#888';
+
+    /* Show scroll-to-top after 300px */
+    topBtn.classList.toggle('vis', scrolled > 300);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); /* initialise on load */
+})();
+
+/* ═══ SHARED TOOLTIP (KPI CARDS + JUMP PILLS) ══════════════════════
+   • Hovering a .drill-kpi or .metric shows a polished tooltip with the
+     full label, value, and all badge/sub lines — useful when text is
+     small or partially hidden.
+   • Hovering a .jump-pill dynamically reads every .card-title between
+     that section anchor and the next, and lists them so the user knows
+     exactly which charts are in the target section.
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  var tip = document.getElementById('ui-tip');
+  if (!tip) return;
+
+  /* ── Positioning helper: keeps tooltip inside viewport ── */
+  function posTip(e){
+    var tw = 250, th = tip.offsetHeight || 120;
+    var x  = e.clientX + 14;
+    var y  = e.clientY - 14;
+    if (x + tw > window.innerWidth  - 8) x = e.clientX - tw - 14;
+    if (y + th > window.innerHeight - 8) y = window.innerHeight - th - 12;
+    if (y < 8) y = 8;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  }
+
+  function showTip(html, e){ tip.innerHTML = html; tip.classList.add('tip-vis'); posTip(e); }
+  function hideTip(){ tip.classList.remove('tip-vis'); }
+
+  /* ── KPI card tooltips ── */
+  document.querySelectorAll('.drill-kpi, .metric').forEach(function(card){
+    card.addEventListener('mouseenter', function(e){
+      var lbl  = card.querySelector('.dk-lbl, .label');
+      var val  = card.querySelector('.dk-val, .val');
+      if (!lbl || !val) return;
+
+      /* Gather all secondary lines */
+      var subs = [];
+      card.querySelectorAll('.dk-badge,.dk-up,.dk-dn,.dk-sub,.sub,.up,.dn').forEach(function(el){
+        var t = el.textContent.trim();
+        if (t) subs.push(t);
+      });
+
+      var html = '<strong>' + lbl.textContent.trim() + '</strong>' +
+                 '<span class="tip-val">' + val.textContent.trim() + '</span>';
+      if (subs.length){
+        html += '<span class="tip-sub">' + subs.join(' · ') + '</span>';
+      }
+      showTip(html, e);
+    });
+    card.addEventListener('mousemove', posTip);
+    card.addEventListener('mouseleave', hideTip);
+  });
+
+  /* ── Jump-pill tooltips: list charts in target section ── */
+  function chartsInSection(targetId){
+    var anchor = document.getElementById(targetId);
+    if (!anchor) return [];
+
+    var titles = [];
+    /* Walk forward through siblings until we hit another anchored section */
+    var sibling = anchor.nextElementSibling;
+    while (sibling) {
+      if (sibling.id && /^p[1-4]-/.test(sibling.id)) break;  /* next section */
+      sibling.querySelectorAll('.card-title').forEach(function(ct){
+        var t = ct.textContent.trim();
+        /* Deduplicate and skip toolbar-button noise */
+        if (t && t.length < 120 && titles.indexOf(t) === -1) titles.push(t);
+      });
+      sibling = sibling.nextElementSibling;
+    }
+    return titles;
+  }
+
+  document.querySelectorAll('.jump-pill').forEach(function(pill){
+    pill.addEventListener('mouseenter', function(e){
+      var href = pill.getAttribute('href') || '';
+      var id   = href.replace('#', '');
+      if (!id) return;
+
+      var charts = chartsInSection(id);
+      if (!charts.length) return;
+
+      var label = pill.textContent.replace('↓', '').trim();
+      var html  = '<strong>' + label + '</strong>' +
+                  '<ul class="tip-list">' +
+                  charts.map(function(c){ return '<li>' + c + '</li>'; }).join('') +
+                  '</ul>';
+      showTip(html, e);
+    });
+    pill.addEventListener('mousemove', posTip);
+    pill.addEventListener('mouseleave', hideTip);
+  });
 
 })();
 </script>
