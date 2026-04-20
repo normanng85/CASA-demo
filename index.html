@@ -59,6 +59,8 @@
     .nav-btn.active-exec .icon { background:#C62828; color:#fff; }
     .nav-btn.active-xlab { background:#f0e8f8; color:#3a0a5a; border-color:#7B1FA2; border-width:2px; box-shadow:0 2px 8px rgba(123,31,162,0.22),0 0 0 3px rgba(123,31,162,0.12); font-weight:700; }
     .nav-btn.active-xlab .icon { background:#7B1FA2; color:#fff; }
+    .nav-btn.active-act { background:#fff8e1; color:#5f3800; border-color:#F57C00; border-width:2px; box-shadow:0 2px 8px rgba(245,124,0,0.22),0 0 0 3px rgba(245,124,0,0.12); font-weight:700; }
+    @media (prefers-color-scheme:dark) { .nav-btn.active-act { background:rgba(245,124,0,0.18); color:#ffcc80; border-color:#F57C00; } }
 
     @media (prefers-color-scheme: dark) {
       .nav-btn.active-demo  { background:rgba(59,139,212,0.22); color:#85B7EB; border-color:#3B8BD4; }
@@ -675,33 +677,35 @@
                            font-size: 11.5px; opacity: 0.85; }
     #ui-tip .tip-list li:first-child { border-top: none; }
 
+  /* ── Actions page filter pills (pillar colors) ── */
+  .if-btn.if-active[data-act-pid="all"]          { background:var(--text);  color:var(--surface); border-color:transparent; }
+  .if-btn.if-active[data-act-pid="executive"]    { background:#C62828; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-pid="demographics"] { background:#3B8BD4; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-pid="volunteers"]   { background:#534AB7; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-pid="fundraising"]  { background:#0F6E56; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-pid="zipcodes"]     { background:#00838F; color:#fff; border-color:transparent; }
+
+  /* ── Actions page type filter pills ── */
+  .if-btn.if-active[data-act-type="all"]      { background:var(--text);  color:var(--surface); border-color:transparent; }
+  .if-btn.if-active[data-act-type="positive"] { background:#1b5e20; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-type="watch"]    { background:#bf360c; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-type="alert"]    { background:#7f0000; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-type="neutral"]  { background:#37474f; color:#fff; border-color:transparent; }
+
+  /* ── Action item cards ── */
+  .act-card { border-left:3px solid var(--act-clr, var(--border)); }
+  .act-card .itag { letter-spacing:0.04em; }
+  .act-source { font-size:11px; font-weight:600; color:var(--text3); margin:5px 0 6px; line-height:1.4; }
+  .act-body { font-size:13px; line-height:1.57; color:var(--text); margin:0; }
+  #act-count-bar { font-size:12px; color:var(--text3); margin:0 0 12px; }
+
   /* ── Nav alert badges (Feature 2) ── */
   .nav-alert-badge { display:inline-flex; align-items:center; justify-content:center; min-width:17px; height:16px; border-radius:8px; font-size:9.5px; font-weight:700; padding:0 5px; margin-left:5px; line-height:1; vertical-align:middle; }
   .nab-alert { background:rgba(198,40,40,0.15); color:#c62828; }
   .nab-watch { background:rgba(186,117,23,0.15); color:#885800; }
   @media (prefers-color-scheme:dark) { .nab-alert{background:rgba(198,40,40,0.28);color:#ef9a9a;} .nab-watch{background:rgba(186,117,23,0.28);color:#ffcc80;} }
 
-  /* ── Action Items panel (Feature 1) ── */
-  #actions-overlay { position:fixed; inset:0; z-index:800; background:rgba(0,0,0,0); pointer-events:none; transition:background .25s; }
-  #actions-overlay.open { background:rgba(0,0,0,0.38); pointer-events:auto; }
-  #actions-panel { position:fixed; top:0; right:0; bottom:0; width:min(480px,96vw); z-index:801; background:var(--surface); border-left:1px solid var(--border); box-shadow:-10px 0 40px rgba(0,0,0,0.18); transform:translateX(102%); transition:transform .28s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column; overflow:hidden; }
-  #actions-panel.open { transform:translateX(0); }
-  #ap-header { display:flex; align-items:center; gap:10px; padding:15px 18px 13px; border-bottom:1px solid var(--border); flex-shrink:0; }
-  #ap-header-text { flex:1; }
-  #ap-title { font-size:15px; font-weight:700; color:var(--text); }
-  #ap-subtitle { font-size:11px; color:var(--text3); margin-top:2px; }
-  #ap-close { background:none; border:none; font-size:20px; cursor:pointer; color:var(--text3); padding:2px 7px; border-radius:6px; line-height:1; }
-  #ap-close:hover { background:var(--surface2); color:var(--text); }
-  #ap-filters { display:flex; flex-wrap:wrap; gap:5px; padding:10px 18px; border-bottom:1px solid var(--border); flex-shrink:0; }
-  .ap-filter { font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px; border:1.5px solid var(--border); background:var(--surface2); color:var(--text2); cursor:pointer; transition:background .13s, color .13s, border-color .13s; white-space:nowrap; }
-  .ap-filter.ap-active { background:var(--text); color:var(--surface); border-color:transparent; }
-  #ap-count { font-size:11px; color:var(--text3); padding:8px 18px 2px; flex-shrink:0; }
-  #ap-list { flex:1; overflow-y:auto; padding:6px 0 24px; }
-  .ap-group-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--text3); padding:14px 18px 5px; }
-  .ap-item { padding:10px 18px; border-bottom:0.5px solid var(--border); }
-  .ap-item:last-child { border-bottom:none; }
-  .ap-source { font-size:10.5px; font-weight:600; color:var(--text3); margin-bottom:4px; line-height:1.3; }
-  .ap-text { font-size:13px; line-height:1.57; color:var(--text); }
+  /* ── Action Items page ── */
 
   /* ── Chart → table toggle (Feature 5) ── */
   .chart-tbl-btn { font-size:11px; }
@@ -739,7 +743,7 @@
   <a class="nav-btn" onclick="return showPage('explorer',this,'active-zip')" href="#">
     <span class="icon">📊</span> Build a Graph
   </a>
-  <button id="nav-actions-btn" class="nav-btn" style="margin-left:auto;" aria-label="Open action items panel">⚡ Actions</button>
+  <a id="nav-actions-btn" class="nav-btn" onclick="return showPage('actions',this,'active-act')" href="#" style="margin-left:auto;">⚡ Action Items</a>
   <button class="print-btn" onclick="printCurrentPage()">🖨 Print / PDF</button>
 
   <!-- Pillar scroll-progress bar sits at bottom edge of sticky nav -->
@@ -752,27 +756,6 @@
 <!-- Floating scroll-to-top button -->
 <button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑ Top</button>
 
-<!-- ── Action Items Panel (Feature 1) ── -->
-<div id="actions-overlay"></div>
-<div id="actions-panel" role="dialog" aria-modal="true" aria-label="Action Items">
-  <div id="ap-header">
-    <div id="ap-header-text">
-      <div id="ap-title">⚡ Action Items</div>
-      <div id="ap-subtitle">All recommended next steps across every pillar</div>
-    </div>
-    <button id="ap-close" aria-label="Close panel">✕</button>
-  </div>
-  <div id="ap-filters">
-    <button class="ap-filter ap-active" data-pid="all">All pillars</button>
-    <button class="ap-filter" data-pid="executive">Executive</button>
-    <button class="ap-filter" data-pid="demographics">P1 — Program</button>
-    <button class="ap-filter" data-pid="volunteers">P2 — Volunteers</button>
-    <button class="ap-filter" data-pid="fundraising">P3 — Financial</button>
-    <button class="ap-filter" data-pid="zipcodes">P4 — Governance</button>
-  </div>
-  <div id="ap-count"></div>
-  <div id="ap-list"></div>
-</div>
 
 
 <!-- ── Chart analysis side drawer ── -->
@@ -2786,6 +2769,56 @@
 </div>
 
 
+<!-- ══════════════════════════════════════════
+     ACTION ITEMS — Full page
+══════════════════════════════════════════ -->
+<div id="actions" class="page">
+  <main>
+    <div class="print-header"><span class="ph-org">CASA — Action Items</span><span class="ph-date" id="ph_date_act"></span></div>
+    <div class="pillar-banner" style="border-left-color:#F57C00;">
+      <span class="pb-pillar" style="background:#F57C00;">⚡</span>
+      <span class="pb-name">Action Items — All Pillars</span>
+      <span class="pb-badge yellow">Board &amp; Staff Planning Reference</span>
+      <div class="pb-obj-row">
+        <span class="pb-obj"><span class="pb-dot g"></span>All recommended next steps in one place</span>
+        <span class="pb-obj"><span class="pb-dot g"></span>Filter by pillar to focus your review</span>
+        <span class="pb-obj"><span class="pb-dot y"></span>Each item links back to its source insight</span>
+      </div>
+    </div>
+
+    <div class="summary-block">
+      <h2>Consolidated Action Items</h2>
+      <p class="lead">Every recommended next step from across all four pillars and the executive summary, collected in one place. Use the pillar filters below to focus on a single area, or review all items for board meeting preparation. Each card shows the insight it came from and the specific action recommended.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="insight-filter" id="act-filter-bar" style="margin-bottom:6px;">
+      <span class="insight-filter-lbl">Pillar</span>
+      <button class="if-btn if-active" data-act-pid="all">All pillars</button>
+      <button class="if-btn" data-act-pid="executive" style="border-color:rgba(198,40,40,0.35);">📋 Executive</button>
+      <button class="if-btn" data-act-pid="demographics" style="border-color:rgba(59,139,212,0.35);">🎯 P1 — Program Quality</button>
+      <button class="if-btn" data-act-pid="volunteers" style="border-color:rgba(83,74,183,0.35);">🤝 P2 — Volunteer Engagement</button>
+      <button class="if-btn" data-act-pid="fundraising" style="border-color:rgba(15,110,86,0.35);">💰 P3 — Financial Sustainability</button>
+      <button class="if-btn" data-act-pid="zipcodes" style="border-color:rgba(0,131,143,0.35);">🏛️ P4 — Governance</button>
+    </div>
+    <div class="insight-filter" id="act-type-filter-bar" style="margin-bottom:8px;">
+      <span class="insight-filter-lbl">Type</span>
+      <button class="if-btn if-active" data-act-type="all">All types</button>
+      <button class="if-btn" data-act-type="positive">✦ Strengths</button>
+      <button class="if-btn" data-act-type="watch">◉ Watch</button>
+      <button class="if-btn" data-act-type="alert">⚑ Alerts</button>
+      <button class="if-btn" data-act-type="neutral">◦ Context</button>
+    </div>
+    <div id="act-count-bar"></div>
+
+    <!-- Action cards grid — populated by JS -->
+    <div id="act-grid" class="insight-grid"></div>
+
+    <footer>Action Items · CASA Middlesex County · Generated from dashboard insights · FY25 data</footer>
+  </main>
+</div>
+
+
 <script>
 /* ══════════════════════════════════════════
    CHART ANALYSIS — LOOKUP TABLE + AUTO-INJECT
@@ -3103,7 +3136,7 @@ document.addEventListener('click', function(e){
 
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab'); });
+  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab','active-act'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -6149,105 +6182,124 @@ initAnalysisButtons();
   })();
 
   /* ══════════════════════════════════════════════════════
-     FEATURE 1 — Consolidated Action Items panel
+     FEATURE 1 — Action Items full page
   ══════════════════════════════════════════════════════ */
   (function(){
-    var pillarNames = {
-      'executive':    'Executive Summary',
-      'demographics': 'P1 — Program Quality & Impact',
-      'volunteers':   'P2 — Volunteer Engagement',
-      'fundraising':  'P3 — Financial Sustainability',
-      'zipcodes':     'P4 — Organizational Strength'
+    var PILLAR_META = {
+      'executive':    { label:'Executive Summary',              color:'#C62828', icon:'📋' },
+      'demographics': { label:'P1 — Program Quality & Impact', color:'#3B8BD4', icon:'🎯' },
+      'volunteers':   { label:'P2 — Volunteer Engagement',     color:'#534AB7', icon:'🤝' },
+      'fundraising':  { label:'P3 — Financial Sustainability', color:'#0F6E56', icon:'💰' },
+      'zipcodes':     { label:'P4 — Organizational Strength',  color:'#00838F', icon:'🏛️' }
     };
     var PILLAR_ORDER = ['executive','demographics','volunteers','fundraising','zipcodes'];
 
-    var overlay      = document.getElementById('actions-overlay');
-    var panel        = document.getElementById('actions-panel');
-    var listEl       = document.getElementById('ap-list');
-    var countEl      = document.getElementById('ap-count');
-    var activeFilter = 'all';
-    var groups       = null;
+    var grid         = document.getElementById('act-grid');
+    var countBar     = document.getElementById('act-count-bar');
+    var built        = false;
+    var activePid    = 'all';
+    var activeType   = 'all';
+    var INSIGHT_TYPES = ['positive','watch','alert','neutral'];
 
-    function buildGroups(){
-      var g = {};
-      PILLAR_ORDER.forEach(function(id){ g[id] = []; });
-      document.querySelectorAll('.action-line').forEach(function(al){
-        var page = al.closest('.page');
-        var pid  = page ? page.id : null;
-        if (!pid || !g[pid]) return;
-        var insight = al.closest('.insight');
-        var itag    = insight ? insight.querySelector('.itag') : null;
-        g[pid].push({
-          source: itag ? itag.textContent.trim() : '',
-          text:   al.textContent.trim()
-        });
-      });
-      return g;
-    }
-
-    function renderList(filter){
-      listEl.innerHTML = '';
-      var total = 0;
+    function buildGrid(){
+      if (!grid) return;
+      grid.innerHTML = '';
       PILLAR_ORDER.forEach(function(pid){
-        if (filter !== 'all' && filter !== pid) return;
-        var items = groups[pid];
-        if (!items || !items.length) return;
-        total += items.length;
-        var lbl = document.createElement('div');
-        lbl.className   = 'ap-group-label';
-        lbl.textContent = pillarNames[pid] || pid;
-        listEl.appendChild(lbl);
-        items.forEach(function(item){
-          var div = document.createElement('div');
-          div.className = 'ap-item';
-          if (item.source){
+        var meta = PILLAR_META[pid];
+        var page = document.getElementById(pid);
+        if (!page) return;
+        page.querySelectorAll('.action-line').forEach(function(al){
+          var insight     = al.closest('.insight');
+          var itag        = insight ? insight.querySelector('.itag') : null;
+          var insightType = 'neutral';
+          if (insight) INSIGHT_TYPES.forEach(function(t){ if (insight.classList.contains(t)) insightType = t; });
+
+          var card = document.createElement('div');
+          card.className = 'insight act-card';
+          card.setAttribute('data-act-pid',  pid);
+          card.setAttribute('data-act-type', insightType);
+          card.style.setProperty('--act-clr', meta.color);
+
+          // Pillar badge
+          var badge = document.createElement('div');
+          badge.className = 'itag';
+          badge.textContent = meta.icon + ' ' + meta.label;
+          badge.style.cssText = 'background:' + meta.color + '1a;color:' + meta.color + ';margin-bottom:6px;';
+          card.appendChild(badge);
+
+          // Source insight label
+          if (itag){
             var src = document.createElement('div');
-            src.className   = 'ap-source';
-            src.textContent = item.source;
-            div.appendChild(src);
+            src.className   = 'act-source';
+            src.textContent = itag.textContent.trim();
+            card.appendChild(src);
           }
-          var txt = document.createElement('div');
-          txt.className   = 'ap-text';
-          txt.textContent = item.text;
-          div.appendChild(txt);
-          listEl.appendChild(div);
+
+          // Action text
+          var body = document.createElement('p');
+          body.className   = 'act-body';
+          body.textContent = al.textContent.trim();
+          card.appendChild(body);
+
+          grid.appendChild(card);
         });
       });
-      countEl.textContent = total + ' action item' + (total !== 1 ? 's' : '');
+      built = true;
     }
 
-    function openPanel(){
-      if (!groups) groups = buildGroups();
-      renderList(activeFilter);
-      overlay.classList.add('open');
-      panel.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePanel(){
-      overlay.classList.remove('open');
-      panel.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('nav-actions-btn').addEventListener('click', function(e){
-      e.preventDefault(); openPanel();
-    });
-    document.getElementById('ap-close').addEventListener('click', closePanel);
-    overlay.addEventListener('click', closePanel);
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && panel.classList.contains('open')) closePanel();
-    });
-
-    document.querySelectorAll('.ap-filter').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        document.querySelectorAll('.ap-filter').forEach(function(b){ b.classList.remove('ap-active'); });
-        btn.classList.add('ap-active');
-        activeFilter = btn.getAttribute('data-pid') || 'all';
-        if (!groups) groups = buildGroups();
-        renderList(activeFilter);
+    function applyFilters(){
+      if (!built) buildGrid();
+      var cards = grid.querySelectorAll('.act-card');
+      var shown = 0;
+      cards.forEach(function(c){
+        var pidMatch  = activePid  === 'all' || c.getAttribute('data-act-pid')  === activePid;
+        var typeMatch = activeType === 'all' || c.getAttribute('data-act-type') === activeType;
+        var visible   = pidMatch && typeMatch;
+        c.style.display = visible ? '' : 'none';
+        if (visible) shown++;
       });
-    });
+      if (countBar){
+        var parts = [];
+        if (activePid  !== 'all') parts.push(PILLAR_META[activePid] ? PILLAR_META[activePid].label : activePid);
+        if (activeType !== 'all'){
+          var typeLabels = { positive:'Strengths', watch:'Watch', alert:'Alerts', neutral:'Context' };
+          parts.push(typeLabels[activeType] || activeType);
+        }
+        countBar.textContent = shown + ' action item' + (shown !== 1 ? 's' : '') +
+          (parts.length ? ' — ' + parts.join(' · ') : ' across all pillars & types');
+      }
+    }
+
+    // Build grid on first load
+    setTimeout(function(){ buildGrid(); applyFilters(); }, 100);
+
+    // Wire pillar filter buttons
+    var filterBar = document.getElementById('act-filter-bar');
+    if (filterBar){
+      filterBar.querySelectorAll('.if-btn').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          filterBar.querySelectorAll('.if-btn').forEach(function(b){ b.classList.remove('if-active'); });
+          btn.classList.add('if-active');
+          activePid = btn.getAttribute('data-act-pid') || 'all';
+          applyFilters();
+        });
+      });
+    }
+
+    // Wire type filter buttons
+    var typeBar = document.getElementById('act-type-filter-bar');
+    if (typeBar){
+      typeBar.querySelectorAll('.if-btn').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          typeBar.querySelectorAll('.if-btn').forEach(function(b){ b.classList.remove('if-active'); });
+          btn.classList.add('if-active');
+          activeType = btn.getAttribute('data-act-type') || 'all';
+          applyFilters();
+        });
+      });
+    }
   })();
 
   /* ══════════════════════════════════════════════════════
