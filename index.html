@@ -2806,7 +2806,7 @@
       <button class="if-btn if-active" data-act-type="all">All types</button>
       <button class="if-btn" data-act-type="positive">✦ Strengths</button>
       <button class="if-btn" data-act-type="watch">◉ Watch</button>
-      <button class="if-btn" data-act-type="alert">⚑ Alerts</button>
+      <button class="if-btn" data-act-type="alert">⚑ Risks</button>
       <button class="if-btn" data-act-type="neutral">◦ Context</button>
     </div>
     <div id="act-count-bar"></div>
@@ -6262,7 +6262,7 @@ initAnalysisButtons();
         var parts = [];
         if (activePid  !== 'all') parts.push(PILLAR_META[activePid] ? PILLAR_META[activePid].label : activePid);
         if (activeType !== 'all'){
-          var typeLabels = { positive:'Strengths', watch:'Watch', alert:'Alerts', neutral:'Context' };
+          var typeLabels = { positive:'Strengths', watch:'Watch', alert:'Risks', neutral:'Context' };
           parts.push(typeLabels[activeType] || activeType);
         }
         countBar.textContent = shown + ' action item' + (shown !== 1 ? 's' : '') +
