@@ -674,6 +674,45 @@
     #ui-tip .tip-list li { padding: 2px 0; border-top: 0.5px solid rgba(255,255,255,0.12);
                            font-size: 11.5px; opacity: 0.85; }
     #ui-tip .tip-list li:first-child { border-top: none; }
+
+  /* ── Nav alert badges (Feature 2) ── */
+  .nav-alert-badge { display:inline-flex; align-items:center; justify-content:center; min-width:17px; height:16px; border-radius:8px; font-size:9.5px; font-weight:700; padding:0 5px; margin-left:5px; line-height:1; vertical-align:middle; }
+  .nab-alert { background:rgba(198,40,40,0.15); color:#c62828; }
+  .nab-watch { background:rgba(186,117,23,0.15); color:#885800; }
+  @media (prefers-color-scheme:dark) { .nab-alert{background:rgba(198,40,40,0.28);color:#ef9a9a;} .nab-watch{background:rgba(186,117,23,0.28);color:#ffcc80;} }
+
+  /* ── Action Items panel (Feature 1) ── */
+  #actions-overlay { position:fixed; inset:0; z-index:800; background:rgba(0,0,0,0); pointer-events:none; transition:background .25s; }
+  #actions-overlay.open { background:rgba(0,0,0,0.38); pointer-events:auto; }
+  #actions-panel { position:fixed; top:0; right:0; bottom:0; width:min(480px,96vw); z-index:801; background:var(--surface); border-left:1px solid var(--border); box-shadow:-10px 0 40px rgba(0,0,0,0.18); transform:translateX(102%); transition:transform .28s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column; overflow:hidden; }
+  #actions-panel.open { transform:translateX(0); }
+  #ap-header { display:flex; align-items:center; gap:10px; padding:15px 18px 13px; border-bottom:1px solid var(--border); flex-shrink:0; }
+  #ap-header-text { flex:1; }
+  #ap-title { font-size:15px; font-weight:700; color:var(--text); }
+  #ap-subtitle { font-size:11px; color:var(--text3); margin-top:2px; }
+  #ap-close { background:none; border:none; font-size:20px; cursor:pointer; color:var(--text3); padding:2px 7px; border-radius:6px; line-height:1; }
+  #ap-close:hover { background:var(--surface2); color:var(--text); }
+  #ap-filters { display:flex; flex-wrap:wrap; gap:5px; padding:10px 18px; border-bottom:1px solid var(--border); flex-shrink:0; }
+  .ap-filter { font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px; border:1.5px solid var(--border); background:var(--surface2); color:var(--text2); cursor:pointer; transition:background .13s, color .13s, border-color .13s; white-space:nowrap; }
+  .ap-filter.ap-active { background:var(--text); color:var(--surface); border-color:transparent; }
+  #ap-count { font-size:11px; color:var(--text3); padding:8px 18px 2px; flex-shrink:0; }
+  #ap-list { flex:1; overflow-y:auto; padding:6px 0 24px; }
+  .ap-group-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--text3); padding:14px 18px 5px; }
+  .ap-item { padding:10px 18px; border-bottom:0.5px solid var(--border); }
+  .ap-item:last-child { border-bottom:none; }
+  .ap-source { font-size:10.5px; font-weight:600; color:var(--text3); margin-bottom:4px; line-height:1.3; }
+  .ap-text { font-size:13px; line-height:1.57; color:var(--text); }
+
+  /* ── Chart → table toggle (Feature 5) ── */
+  .chart-tbl-btn { font-size:11px; }
+  .chart-tbl-wrap { overflow-x:auto; padding:4px 4px 8px; }
+  .chart-tbl { width:100%; border-collapse:collapse; font-size:12.5px; }
+  .chart-tbl th { background:var(--surface2); color:var(--text2); font-weight:600; padding:7px 10px; text-align:left; border-bottom:1.5px solid var(--border); font-size:11px; white-space:nowrap; }
+  .chart-tbl th:not(:first-child) { text-align:right; }
+  .chart-tbl td { padding:7px 10px; border-bottom:0.5px solid var(--border); color:var(--text); }
+  .chart-tbl td:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; }
+  .chart-tbl tr:last-child td { border-bottom:none; }
+  .chart-tbl tr:hover td { background:var(--surface2); }
   </style>
 </head>
 <body>
@@ -700,7 +739,8 @@
   <a class="nav-btn" onclick="return showPage('explorer',this,'active-zip')" href="#">
     <span class="icon">📊</span> Build a Graph
   </a>
-  <button class="print-btn" onclick="printCurrentPage()" style="margin-left:auto;">🖨 Print / PDF</button>
+  <button id="nav-actions-btn" class="nav-btn" style="margin-left:auto;" aria-label="Open action items panel">⚡ Actions</button>
+  <button class="print-btn" onclick="printCurrentPage()">🖨 Print / PDF</button>
 
   <!-- Pillar scroll-progress bar sits at bottom edge of sticky nav -->
   <div id="pillar-progress"><div id="pillar-progress-fill"></div></div>
@@ -711,6 +751,28 @@
 
 <!-- Floating scroll-to-top button -->
 <button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑ Top</button>
+
+<!-- ── Action Items Panel (Feature 1) ── -->
+<div id="actions-overlay"></div>
+<div id="actions-panel" role="dialog" aria-modal="true" aria-label="Action Items">
+  <div id="ap-header">
+    <div id="ap-header-text">
+      <div id="ap-title">⚡ Action Items</div>
+      <div id="ap-subtitle">All recommended next steps across every pillar</div>
+    </div>
+    <button id="ap-close" aria-label="Close panel">✕</button>
+  </div>
+  <div id="ap-filters">
+    <button class="ap-filter ap-active" data-pid="all">All pillars</button>
+    <button class="ap-filter" data-pid="executive">Executive</button>
+    <button class="ap-filter" data-pid="demographics">P1 — Program</button>
+    <button class="ap-filter" data-pid="volunteers">P2 — Volunteers</button>
+    <button class="ap-filter" data-pid="fundraising">P3 — Financial</button>
+    <button class="ap-filter" data-pid="zipcodes">P4 — Governance</button>
+  </div>
+  <div id="ap-count"></div>
+  <div id="ap-list"></div>
+</div>
 
 
 <!-- ── Chart analysis side drawer ── -->
@@ -6054,6 +6116,237 @@ initAnalysisButtons();
   });
 
 })();
+
+  /* ══════════════════════════════════════════════════════
+     FEATURE 2 — Alert badges on nav tabs
+  ══════════════════════════════════════════════════════ */
+  (function(){
+    var pageMap = {
+      'demographics': document.querySelector('[onclick*="demographics"]'),
+      'volunteers':   document.querySelector('[onclick*="volunteers"]'),
+      'fundraising':  document.querySelector('[onclick*="fundraising"]'),
+      'zipcodes':     document.querySelector('[onclick*="zipcodes"]'),
+      'executive':    document.getElementById('exec-nav-btn')
+    };
+    document.querySelectorAll('.page').forEach(function(page){
+      var btn = pageMap[page.id];
+      if (!btn) return;
+      var alerts  = page.querySelectorAll('.insight.alert').length;
+      var watches = page.querySelectorAll('.insight.watch').length;
+      if (alerts > 0) {
+        var ba = document.createElement('span');
+        ba.className = 'nav-alert-badge nab-alert';
+        ba.textContent = alerts + (alerts === 1 ? ' risk' : ' risks');
+        btn.appendChild(ba);
+      }
+      if (watches > 0) {
+        var bw = document.createElement('span');
+        bw.className = 'nav-alert-badge nab-watch';
+        bw.textContent = watches + ' watch';
+        btn.appendChild(bw);
+      }
+    });
+  })();
+
+  /* ══════════════════════════════════════════════════════
+     FEATURE 1 — Consolidated Action Items panel
+  ══════════════════════════════════════════════════════ */
+  (function(){
+    var pillarNames = {
+      'executive':    'Executive Summary',
+      'demographics': 'P1 — Program Quality & Impact',
+      'volunteers':   'P2 — Volunteer Engagement',
+      'fundraising':  'P3 — Financial Sustainability',
+      'zipcodes':     'P4 — Organizational Strength'
+    };
+    var PILLAR_ORDER = ['executive','demographics','volunteers','fundraising','zipcodes'];
+
+    var overlay      = document.getElementById('actions-overlay');
+    var panel        = document.getElementById('actions-panel');
+    var listEl       = document.getElementById('ap-list');
+    var countEl      = document.getElementById('ap-count');
+    var activeFilter = 'all';
+    var groups       = null;
+
+    function buildGroups(){
+      var g = {};
+      PILLAR_ORDER.forEach(function(id){ g[id] = []; });
+      document.querySelectorAll('.action-line').forEach(function(al){
+        var page = al.closest('.page');
+        var pid  = page ? page.id : null;
+        if (!pid || !g[pid]) return;
+        var insight = al.closest('.insight');
+        var itag    = insight ? insight.querySelector('.itag') : null;
+        g[pid].push({
+          source: itag ? itag.textContent.trim() : '',
+          text:   al.textContent.trim()
+        });
+      });
+      return g;
+    }
+
+    function renderList(filter){
+      listEl.innerHTML = '';
+      var total = 0;
+      PILLAR_ORDER.forEach(function(pid){
+        if (filter !== 'all' && filter !== pid) return;
+        var items = groups[pid];
+        if (!items || !items.length) return;
+        total += items.length;
+        var lbl = document.createElement('div');
+        lbl.className   = 'ap-group-label';
+        lbl.textContent = pillarNames[pid] || pid;
+        listEl.appendChild(lbl);
+        items.forEach(function(item){
+          var div = document.createElement('div');
+          div.className = 'ap-item';
+          if (item.source){
+            var src = document.createElement('div');
+            src.className   = 'ap-source';
+            src.textContent = item.source;
+            div.appendChild(src);
+          }
+          var txt = document.createElement('div');
+          txt.className   = 'ap-text';
+          txt.textContent = item.text;
+          div.appendChild(txt);
+          listEl.appendChild(div);
+        });
+      });
+      countEl.textContent = total + ' action item' + (total !== 1 ? 's' : '');
+    }
+
+    function openPanel(){
+      if (!groups) groups = buildGroups();
+      renderList(activeFilter);
+      overlay.classList.add('open');
+      panel.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel(){
+      overlay.classList.remove('open');
+      panel.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('nav-actions-btn').addEventListener('click', function(e){
+      e.preventDefault(); openPanel();
+    });
+    document.getElementById('ap-close').addEventListener('click', closePanel);
+    overlay.addEventListener('click', closePanel);
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && panel.classList.contains('open')) closePanel();
+    });
+
+    document.querySelectorAll('.ap-filter').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.ap-filter').forEach(function(b){ b.classList.remove('ap-active'); });
+        btn.classList.add('ap-active');
+        activeFilter = btn.getAttribute('data-pid') || 'all';
+        if (!groups) groups = buildGroups();
+        renderList(activeFilter);
+      });
+    });
+  })();
+
+  /* ══════════════════════════════════════════════════════
+     FEATURE 5 — Chart → data table toggle
+  ══════════════════════════════════════════════════════ */
+  (function(){
+    function fmt(v){
+      if (v === null || v === undefined || v === '') return '—';
+      if (typeof v !== 'number') return String(v);
+      if (Math.abs(v) >= 1000) return v.toLocaleString();
+      return v % 1 !== 0 ? v.toFixed(1) : String(v);
+    }
+
+    function buildTable(chart){
+      var labels   = chart.data.labels || [];
+      var datasets = chart.data.datasets.filter(function(ds){ return ds.data && ds.data.length; });
+      var isDoughnut = (chart.config.type === 'doughnut' || chart.config.type === 'pie');
+
+      var wrap = document.createElement('div');
+      wrap.className = 'chart-tbl-wrap';
+      var tbl = document.createElement('table');
+      tbl.className = 'chart-tbl';
+
+      if (isDoughnut){
+        var ds    = datasets[0];
+        var total = ds.data.reduce(function(a,b){ return a + (b||0); }, 0);
+        var hdr   = document.createElement('thead');
+        hdr.innerHTML = '<tr><th>Category</th><th>Value</th><th>Share</th></tr>';
+        tbl.appendChild(hdr);
+        var tbody = document.createElement('tbody');
+        labels.forEach(function(lbl, i){
+          var v   = ds.data[i] || 0;
+          var pct = total > 0 ? Math.round(v / total * 100) + '%' : '—';
+          var tr  = document.createElement('tr');
+          tr.innerHTML = '<td>' + lbl + '</td><td>' + fmt(v) + '</td><td>' + pct + '</td>';
+          tbody.appendChild(tr);
+        });
+        tbl.appendChild(tbody);
+      } else {
+        var hdr = document.createElement('thead');
+        hdr.innerHTML = '<tr><th></th>' + datasets.map(function(ds){
+          return '<th>' + (ds.label || '') + '</th>';
+        }).join('') + '</tr>';
+        tbl.appendChild(hdr);
+        var tbody = document.createElement('tbody');
+        labels.forEach(function(lbl, i){
+          var tr = document.createElement('tr');
+          var cells = '<td>' + lbl + '</td>' + datasets.map(function(ds){
+            var v = Array.isArray(ds.data[i]) ? ds.data[i][1] : ds.data[i];
+            return '<td>' + fmt(v) + '</td>';
+          }).join('');
+          tr.innerHTML = cells;
+          tbody.appendChild(tr);
+        });
+        tbl.appendChild(tbody);
+      }
+      wrap.appendChild(tbl);
+      return wrap;
+    }
+
+    function injectBtn(canvas){
+      var card   = canvas.closest('.card');
+      if (!card) return;
+      var tbBtns = card.querySelector('.toolbar-btns');
+      if (!tbBtns || tbBtns.querySelector('.chart-tbl-btn')) return;
+
+      var btn = document.createElement('button');
+      btn.className   = 'icon-btn chart-tbl-btn';
+      btn.textContent = '⊞ Table';
+      btn.title       = 'View as data table';
+
+      var tableWrap  = null;
+      var showingTbl = false;
+      var cw         = canvas.parentElement;
+
+      btn.addEventListener('click', function(){
+        var chart = Chart.getChart(canvas);
+        if (!chart) return;
+        if (!showingTbl){
+          tableWrap = buildTable(chart);
+          canvas.style.display = 'none';
+          cw.appendChild(tableWrap);
+          btn.textContent = '◧ Chart';
+          showingTbl = true;
+        } else {
+          if (tableWrap){ tableWrap.remove(); tableWrap = null; }
+          canvas.style.display = '';
+          btn.textContent = '⊞ Table';
+          showingTbl = false;
+        }
+      });
+      tbBtns.appendChild(btn);
+    }
+
+    setTimeout(function(){
+      document.querySelectorAll('.cw canvas').forEach(injectBtn);
+    }, 500);
+  })();
+
 </script>
 </body>
 </html>
