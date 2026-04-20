@@ -204,6 +204,38 @@
     }
     .insight.alert { animation: alertPulse 2.2s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) { .insight.alert { animation:none; } }
+
+    /* ── Action card type pulses ── */
+    @keyframes actPulseAlert {
+      0%   { box-shadow: 0 0 0 2px  rgba(163,45,45,0.55); }
+      55%  { box-shadow: 0 0 0 10px rgba(163,45,45,0);    }
+      100% { box-shadow: 0 0 0 2px  rgba(163,45,45,0.55); }
+    }
+    @keyframes actPulseWatch {
+      0%   { box-shadow: 0 0 0 2px  rgba(186,117,23,0.55); }
+      55%  { box-shadow: 0 0 0 10px rgba(186,117,23,0);    }
+      100% { box-shadow: 0 0 0 2px  rgba(186,117,23,0.55); }
+    }
+    @keyframes actPulsePositive {
+      0%   { box-shadow: 0 0 0 2px  rgba(15,110,86,0.50); }
+      55%  { box-shadow: 0 0 0 10px rgba(15,110,86,0);    }
+      100% { box-shadow: 0 0 0 2px  rgba(15,110,86,0.50); }
+    }
+    @keyframes actPulseNeutral {
+      0%   { box-shadow: 0 0 0 2px  rgba(24,95,165,0.50); }
+      55%  { box-shadow: 0 0 0 10px rgba(24,95,165,0);    }
+      100% { box-shadow: 0 0 0 2px  rgba(24,95,165,0.50); }
+    }
+    .act-card[data-act-type="alert"]    { animation: actPulseAlert    2.2s ease-in-out infinite; }
+    .act-card[data-act-type="watch"]    { animation: actPulseWatch    2.4s ease-in-out infinite; }
+    .act-card[data-act-type="positive"] { animation: actPulsePositive 2.6s ease-in-out infinite; }
+    .act-card[data-act-type="neutral"]  { animation: actPulseNeutral  2.8s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .act-card[data-act-type="alert"],
+      .act-card[data-act-type="watch"],
+      .act-card[data-act-type="positive"],
+      .act-card[data-act-type="neutral"] { animation: none; }
+    }
     .summary-block .lead { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:1.25rem; max-width:820px; }
     .insight-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:1.25rem; }
     .insight { border-radius:var(--radius-md); padding:0.85rem 1rem; border-left:3px solid transparent; }
@@ -687,10 +719,10 @@
 
   /* ── Actions page type filter pills ── */
   .if-btn.if-active[data-act-type="all"]      { background:var(--text);  color:var(--surface); border-color:transparent; }
-  .if-btn.if-active[data-act-type="positive"] { background:#1b5e20; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-type="watch"]    { background:#bf360c; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-type="alert"]    { background:#7f0000; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-type="neutral"]  { background:#37474f; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-type="positive"] { background:#0F6E56; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-type="watch"]    { background:#BA7517; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-type="alert"]    { background:#A32D2D; color:#fff; border-color:transparent; }
+  .if-btn.if-active[data-act-type="neutral"]  { background:#185FA5; color:#fff; border-color:transparent; }
 
   /* ── Action item cards ── */
   .act-card { border-left:3px solid var(--act-clr, var(--border)); }
@@ -2127,12 +2159,12 @@
 
     <!-- ── FY26 DIVERSITY GOAL TRACKER ── -->
     <div class="collapse-section" style="margin-bottom:1.75rem;">
-      <button class="collapse-btn" onclick="toggleSection(this);refreshChartsInBody(this.nextElementSibling);" aria-expanded="false">
+      <button class="collapse-btn open" onclick="toggleSection(this);refreshChartsInBody(this.nextElementSibling);" aria-expanded="true">
         <span class="collapse-label">FY26 Diversity Goal Trackers — Monthly Progress</span>
         <span class="collapse-count">4 metrics</span>
         <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </button>
-      <div class="collapse-body">
+      <div class="collapse-body" style="max-height:none;">
         <p style="color:var(--text2);font-size:13px;margin:.75rem 0 .75rem;line-height:1.6;">Monthly tracking of four FY26 diversity targets from the Strategic Plan Tracker. Dashed red lines mark the FY26 goal for each metric. Data through February 2026. Black/AA is the only metric currently exceeding its goal.</p>
         <div class="two" style="margin-bottom:1rem;">
           <div class="card">
@@ -6201,31 +6233,49 @@ initAnalysisButtons();
     var activeType   = 'all';
     var INSIGHT_TYPES = ['positive','watch','alert','neutral'];
 
+    var TYPE_META = {
+      positive: { color:'#0F6E56', bg:'rgba(15,110,86,0.10)',  label:'✦ Strength' },
+      watch:    { color:'#BA7517', bg:'rgba(186,117,23,0.10)', label:'◉ Watch'    },
+      alert:    { color:'#A32D2D', bg:'rgba(163,45,45,0.10)',  label:'⚑ Risk'     },
+      neutral:  { color:'#185FA5', bg:'rgba(24,95,165,0.10)',  label:'◦ Context'  }
+    };
+
     function buildGrid(){
       if (!grid) return;
       grid.innerHTML = '';
       PILLAR_ORDER.forEach(function(pid){
-        var meta = PILLAR_META[pid];
-        var page = document.getElementById(pid);
+        var pmeta = PILLAR_META[pid];
+        var page  = document.getElementById(pid);
         if (!page) return;
         page.querySelectorAll('.action-line').forEach(function(al){
           var insight     = al.closest('.insight');
           var itag        = insight ? insight.querySelector('.itag') : null;
           var insightType = 'neutral';
           if (insight) INSIGHT_TYPES.forEach(function(t){ if (insight.classList.contains(t)) insightType = t; });
+          var tmeta = TYPE_META[insightType] || TYPE_META.neutral;
 
           var card = document.createElement('div');
           card.className = 'insight act-card';
           card.setAttribute('data-act-pid',  pid);
           card.setAttribute('data-act-type', insightType);
-          card.style.setProperty('--act-clr', meta.color);
+          // Border color = insight type (so risks are red, watches amber, etc.)
+          card.style.setProperty('--act-clr', tmeta.color);
 
-          // Pillar badge
-          var badge = document.createElement('div');
-          badge.className = 'itag';
-          badge.textContent = meta.icon + ' ' + meta.label;
-          badge.style.cssText = 'background:' + meta.color + '1a;color:' + meta.color + ';margin-bottom:6px;';
-          card.appendChild(badge);
+          // Type badge (top-left, styled like pillar insight cards)
+          var typeBadge = document.createElement('div');
+          typeBadge.className = 'itag';
+          typeBadge.textContent = tmeta.label;
+          typeBadge.style.cssText = 'background:' + tmeta.bg + ';color:' + tmeta.color + ';margin-bottom:5px;display:inline-block;margin-right:6px;';
+          card.appendChild(typeBadge);
+
+          // Pillar pill (secondary, smaller)
+          var pillarBadge = document.createElement('span');
+          pillarBadge.style.cssText = 'display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:' + pmeta.color + '18;color:' + pmeta.color + ';vertical-align:middle;margin-bottom:5px;';
+          pillarBadge.textContent = pmeta.icon + ' ' + pmeta.label;
+          card.appendChild(pillarBadge);
+
+          // Line break between badges and content
+          card.appendChild(document.createElement('br'));
 
           // Source insight label
           if (itag){
