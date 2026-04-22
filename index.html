@@ -497,9 +497,10 @@
       nav, .print-btn, .icon-btn, .toolbar-btns, .drill-badge, .tleg, .date-filter,
       .expl-controls, .stat-bar, footer, #active_drill_panel { display:none !important; }
       .page { display:none !important; }
-      body[data-print-page="demographics"] #demographics { display:block !important; }
-      body[data-print-page="fundraising"]  #fundraising  { display:block !important; }
-      body[data-print-page="explorer"]     #explorer     { display:block !important; }
+      body[data-print-page="demographics"]  #demographics  { display:block !important; }
+      body[data-print-page="fundraising"]   #fundraising   { display:block !important; }
+      body[data-print-page="explorer"]      #explorer      { display:block !important; }
+      body[data-print-page="experimental"]  #experimental  { display:block !important; }
       body:not([data-print-page]) .page.on { display:block !important; }
       .card { break-inside:avoid; box-shadow:none !important; }
       .print-header { display:flex !important; }
@@ -726,12 +727,15 @@
   <a class="nav-btn" onclick="return showPage('zipcodes',this,'active-expl')" href="#">
     <span class="pillar-pip">P4</span><span class="icon">🏛️</span> Organizational Strength &amp; Governance
   </a>
-  <a class="nav-btn" id="exec-nav-btn" onclick="return openExecGate(this)" href="#">
+  <a class="nav-btn" id="exec-nav-btn" onclick="return showPage('executive',this,'active-exec')" href="#">
     <span class="icon">📋</span> Executive Summary
   </a>
 
   <a class="nav-btn" onclick="return showPage('explorer',this,'active-zip')" href="#">
     <span class="icon">📊</span> Build a Graph
+  </a>
+  <a class="nav-btn" id="exp-nav-btn" onclick="return openExpGate(this)" href="#">
+    <span class="icon">⚗️</span> Experimental
   </a>
   <button class="print-btn" onclick="printCurrentPage()">🖨 Print / PDF</button>
 
@@ -765,7 +769,7 @@
 <div id="pw-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="pw-gate-title">
   <div id="pw-gate-box">
     <div class="pw-icon">🔒</div>
-    <h3 id="pw-gate-title">Executive Summary</h3>
+    <h3 id="pw-gate-title">Experimental</h3>
     <p>This section is password protected.</p>
     <input id="pw-gate-input" type="password" placeholder="Enter password" autocomplete="off"
            onkeydown="if(event.key==='Enter')checkExecPw(); if(event.key==='Escape')closeExecGate();">
@@ -846,7 +850,7 @@
     <div class="drill-kpi-bar n4" style="margin-bottom:1.75rem;">
       <div class="drill-kpi">
         <div class="dk-lbl">Total Cost per Child Served (FY25)</div>
-        <div class="dk-val" data-sf="$3,922">$3,922</div>
+        <div class="dk-val" data-sf="$3,920">$3,920</div>
         <div class="dk-badge up">↑ total expenses $655K ÷ 167 children</div>
         <div class="dk-sub">Revenue per child: $3,821 · Net cost gap: $99/child</div>
       </div>
@@ -971,9 +975,10 @@
       <div class="insight watch"><div class="itag">Watch — Donor Retention Risk</div><p>57% of FY25 donors (159 of 278) are giving for the first time. National first-year donor retention is ~19%, meaning ~130 could lapse without active stewardship — the most urgent FY26 fundraising risk.<span class="action-line">Assign each of the 71 multi-year donors a named board contact for a personal outreach call before May 30 — this cohort is the highest-return stewardship investment available right now.</span></p></div>
       <div class="insight alert"><div class="itag">Risk — Government Grant Concentration</div><p>Total program revenue in FY25 is $638K — against total expenses of $655K, for a -$17K operating deficit. Of that revenue, $499K (78%) comes from government grants; VOCA ($147K) and NJ State Pass-Thru ($230K) alone represent $377K, nearly 60% of the entire budget. A 20% cut to either stream would create a larger gap than losing every single major donor — and with the program already running a deficit, any revenue reduction hits harder than it would from a surplus position. The FY27 budget must model federal reduction scenarios before they become a crisis.<span class="action-line">Ask the Executive Director to brief the board on VOCA and NJ State Pass-Thru renewal timelines this quarter — and begin building a local foundation prospecting list of at least 5 targets to partially offset a potential federal reduction in FY27.</span></p></div>
       <div class="insight alert"><div class="itag">Risk — Donor Cash Concentration</div><p>Within the $107K raised from donors, 4 cash donors gave $5K+, representing 20% of all cash revenue ($21K). Two in-kind donors gave $5K+. This concentration creates vulnerability if major donors lapse — though the larger budget risk remains government grant dependency above.<span class="action-line">Initiate individual cultivation plans for the top 4 cash donors this quarter; simultaneously identify 3–5 mid-level prospects ($1K–$5K capacity) so donor revenue is not dependent on any single relationship.</span></p></div>
-      <div class="insight positive"><div class="itag">Strength — Total Program Investment Growing</div><p>Total cost per child served reached $3,922 in FY25 (total expenses $655K ÷ 167 children served) — a meaningful benchmark for funders and court stakeholders. Revenue per child is $3,821, producing a -$99 net gap per child in FY25. This full-picture investment figure is the most compelling metric for grant applications and board reports.</p></div>
+      <div class="insight positive"><div class="itag">Strength — Total Program Investment Growing</div><p>Total cost per child served reached $3,920 in FY25 (total expenses $655K ÷ 167 children served) — a meaningful benchmark for funders and court stakeholders. Revenue per child is $3,821, producing a -$99 net gap per child in FY25. This full-picture investment figure is the most compelling metric for grant applications and board reports.</p></div>
       <div class="insight watch"><div class="itag">Watch — 74 Children Eligible but Unserved</div><p>Of the 241 children in Middlesex County with an active out-of-home placement, only 167 have an assigned CASA advocate — leaving 74 children (31%) without one. This is the single most consequential gap in Pillar 1: every unserved child is navigating the court system without an independent adult advocate in their corner. Closing this gap is directly gated by volunteer recruitment — each new advocate sworn in reaches one additional child.<span class="action-line">Present the raw unserved count (74 children, not just the percentage) at every board meeting alongside the monthly sworn-in number — making the gap visible as a headcount, not a statistic, shifts it from a program metric to a moral imperative.</span></p></div>
       <div class="insight alert"><div class="itag">Risk — Aged-Out Rate Spiked to 12% in FY25</div><p>Six children aged out of foster care at 21 without family permanency in FY25 — 12% of all closures. This is the highest rate in the five-year dataset by a wide margin: the rate was 0% in FY23 and 1.5% in FY24. Each child who ages out represents a failure of the permanency system — transitioning to adulthood without a stable family. CASA should conduct an immediate proactive review of all children currently aged 17–18 on the active caseload to identify permanency barriers before they reach 21.<span class="action-line">Produce a list of all children currently aged 17–18 on the active caseload at the next Program Coordinator meeting — prioritize permanency planning for this cohort before June and report back to the board on the number identified and actions taken.</span></p></div>
+      <div class="insight watch"><div class="itag">Watch — P4 · PC-to-Case Ratio at Capacity Ceiling</div><p>At roughly 1 Program Coordinator per 48 active cases, the team is operating near the practical ceiling for effective individual case oversight. CASA National recommends a 1:50 maximum; with 126 active children and a 200-child YTD goal, there is limited buffer for caseload growth without additional staffing. This is the organizational constraint that directly caps how many children CASA can serve — making it the most important Governance signal for the board to monitor.<span class="action-line">Add PC-to-case ratio to the monthly executive report; if active cases exceed 145 before June, bring staffing options — including a part-time Program Coordinator or licensed intern — to the board for a decision before the caseload reaches the ceiling.</span></p></div>
     </div>
 
     <footer>Executive Summary · CASA Middlesex County · FY25 · Data through Feb 2026</footer>
@@ -2568,8 +2573,8 @@
         <div class="chart-toolbar"><div class="card-title">Total raised — with FY26 goal</div></div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
           <label style="font-size:12px;color:var(--text2);">FY26 fundraising target:</label>
-          <input id="xp_fund_goal" type="range" min="100000" max="300000" step="5000" value="175000" style="flex:1;min-width:80px;accent-color:#0F6E56;">
-          <input id="xp_fund_goal_num" type="number" min="100000" max="300000" step="5000" value="175000" style="width:80px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
+          <input id="xp_fund_goal_exp" type="range" min="100000" max="300000" step="5000" value="175000" style="flex:1;min-width:80px;accent-color:#0F6E56;">
+          <input id="xp_fund_goal_num_exp" type="number" min="100000" max="300000" step="5000" value="175000" style="width:80px;font-size:13px;padding:3px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);">
           <span style="font-size:12px;color:var(--text3);">dollars</span>
         </div>
         <div class="cw" style="height:180px"><canvas id="xp_c4_ex"></canvas></div>
@@ -2722,7 +2727,7 @@
     <div class="card" style="margin-bottom:1.75rem;">
       <div class="chart-toolbar"><div class="card-title">FY25 performance vs. CASA National benchmarks</div></div>
       <div class="chart-hint">Green = meeting or exceeding benchmark · Yellow = within 10% of threshold · Red = below benchmark</div>
-      <table id="scorecard_tbl" style="width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;">
+      <table id="scorecard_tbl_exp" style="width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;">
         <thead>
           <tr style="border-bottom:2px solid var(--border);">
             <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;">Metric</th>
@@ -2732,7 +2737,7 @@
             <th style="text-align:left;padding:8px 10px;color:var(--text2);font-weight:600;">Context</th>
           </tr>
         </thead>
-        <tbody id="scorecard_body"></tbody>
+        <tbody id="scorecard_body_exp"></tbody>
       </table>
       <p style="font-size:11px;color:var(--text3);margin-top:10px;">Benchmarks sourced from CASA National Program Standards and published sector research. Volunteer diversity benchmark reflects aspirational best practice, not a published minimum.</p>
     </div>
@@ -3052,10 +3057,10 @@ function toggleSection(btn) {
 }
 
 /* ═══ NAV ═══ */
-/* ── Executive Summary password gate ── */
-var _execNavEl = null;
-function openExecGate(el) {
-  _execNavEl = el;
+/* ── Experimental tab password gate ── */
+var _expNavEl = null;
+function openExpGate(el) {
+  _expNavEl = el;
   var overlay = document.getElementById('pw-gate-overlay');
   var input   = document.getElementById('pw-gate-input');
   var err     = document.getElementById('pw-gate-err');
@@ -3070,7 +3075,7 @@ function closeExecGate() {
   document.getElementById('pw-gate-overlay').classList.remove('open');
   document.getElementById('pw-gate-input').value = '';
   document.getElementById('pw-gate-err').textContent = '';
-  _execNavEl = null;
+  _expNavEl = null;
 }
 function checkExecPw() {
   var val = document.getElementById('pw-gate-input').value;
@@ -3078,12 +3083,12 @@ function checkExecPw() {
   var inp = document.getElementById('pw-gate-input');
   if (val.trim().toLowerCase() === 'casa') {
     document.getElementById('pw-gate-overlay').classList.remove('open');
-    showPage('executive', _execNavEl, 'active-exec');
-    _execNavEl = null;
+    showPage('experimental', _expNavEl, 'active-xlab');
+    _expNavEl = null;
   } else {
     err.textContent = 'Incorrect password. Please try again.';
     inp.classList.remove('shake');
-    void inp.offsetWidth; /* reflow to restart animation */
+    void inp.offsetWidth;
     inp.classList.add('shake');
     inp.value = '';
     setTimeout(function(){ inp.focus(); }, 50);
@@ -5502,6 +5507,126 @@ initAnalysisButtons();
 })();
 
 /* ══════════════════════════════════════════
+   EXPERIMENTAL PAGE — duplicate charts
+   (xp_c1_ex, xp_c3_ex, xp_c4_ex, xp_c5_ex)
+══════════════════════════════════════════ */
+(function(){
+  var TC = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#1a1a1a';
+  var GC = getComputedStyle(document.documentElement).getPropertyValue('--border').trim() || '#e2e2e2';
+
+  // xp_c1_ex — Children per volunteer FY21–FY25
+  var xpCdTotals = [168, 200, 203, 191, 167];
+  var xpCovRatio = xpCdTotals.map(function(c, i){ return Math.round(c / vTotal[i] * 100) / 100; });
+  new Chart(document.getElementById('xp_c1_ex'), {
+    type: 'line',
+    data: { labels: ['FY21','FY22','FY23','FY24','FY25'], datasets: [
+      { label:'Children per volunteer', data: xpCovRatio,
+        borderColor:'#C62828', backgroundColor:'rgba(198,40,40,0.08)', fill:true,
+        tension:0.3, pointRadius:6, pointBackgroundColor:'#C62828', borderWidth:2.5 },
+      { label:'Target threshold (1.5)', data:[1.5,1.5,1.5,1.5,1.5],
+        borderColor:'rgba(0,0,0,0.25)', borderDash:[5,5], borderWidth:1.5, pointRadius:0 }
+    ]},
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{ color:TC, font:{size:10}, boxWidth:12 }},
+                tooltip:{ callbacks:{ label:function(c){ return ' '+c.dataset.label+': '+c.raw; }}}},
+      scales:{ x:{ ticks:{color:TC}, grid:{display:false} },
+               y:{ ticks:{color:TC}, grid:{color:GC}, min:1.1, max:1.8,
+                   title:{display:true, text:'Children / Volunteer', color:TC, font:{size:10}} }}}
+  });
+
+  // xp_c3_ex — Volunteer headcount FY21–FY25 + FY26 goal slider
+  var xpVolGoalVal = 135;
+  var xpVolActual  = vTotal.slice().concat([null]);
+  var xpVolGoalArr = [null,null,null,null,null, xpVolGoalVal];
+  var xpVolChart = new Chart(document.getElementById('xp_c3_ex'), {
+    type: 'bar',
+    data: { labels: ['FY21','FY22','FY23','FY24','FY25','FY26 Goal'], datasets: [
+      { label:'Actual', data: xpVolActual, backgroundColor:'rgba(83,74,183,0.60)', borderRadius:4 },
+      { label:'Goal',   data: xpVolGoalArr, backgroundColor:'rgba(83,74,183,0.22)',
+        borderColor:'rgba(83,74,183,0.9)', borderWidth:2, borderRadius:4 }
+    ]},
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{ color:TC, font:{size:10}, boxWidth:10 }},
+                tooltip:{ callbacks:{ label:function(c){ return ' '+c.dataset.label+': '+(c.raw===null?'—':c.raw+' volunteers'); }}}},
+      scales:{ x:{ ticks:{color:TC, font:{size:10}}, grid:{display:false} },
+               y:{ ticks:{color:TC}, grid:{color:GC}, beginAtZero:false, min:90,
+                   title:{display:true, text:'Active Volunteers', color:TC, font:{size:10}} }}}
+  });
+
+  function syncVolGoal(v) {
+    v = Math.min(175, Math.max(100, parseInt(v) || 135));
+    var vg  = document.getElementById('xp_vol_goal');
+    var vgn = document.getElementById('xp_vol_goal_num');
+    if (vg)  vg.value  = v;
+    if (vgn) vgn.value = v;
+    xpVolChart.data.datasets[1].data[5] = v;
+    xpVolChart.update();
+  }
+  var vg  = document.getElementById('xp_vol_goal');
+  var vgn = document.getElementById('xp_vol_goal_num');
+  if (vg)  vg.addEventListener('input',  function(){ syncVolGoal(this.value); });
+  if (vgn) vgn.addEventListener('input', function(){ syncVolGoal(this.value); });
+
+  // xp_c4_ex — Total raised FY21–FY25 + FY26 goal slider (experimental copy)
+  var xpFundGoalExp = 175000;
+  var xpFundActualExp = fY.map(function(_,i){ return Math.round(fC[i] + fIK[i]); }).concat([null]);
+  var xpFundGoalArrExp = [null,null,null,null,null, xpFundGoalExp];
+  var xpFundChartExp = new Chart(document.getElementById('xp_c4_ex'), {
+    type: 'bar',
+    data: { labels: ['FY21','FY22','FY23','FY24','FY25','FY26 Goal'], datasets: [
+      { label:'Actual', data: xpFundActualExp, backgroundColor:'rgba(15,110,86,0.60)', borderRadius:4 },
+      { label:'Goal',   data: xpFundGoalArrExp, backgroundColor:'rgba(15,110,86,0.22)',
+        borderColor:'rgba(15,110,86,0.9)', borderWidth:2, borderRadius:4 }
+    ]},
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{ color:TC, font:{size:10}, boxWidth:10 }},
+                tooltip:{ callbacks:{ label:function(c){ return ' '+c.dataset.label+': '+(c.raw===null?'—':'$'+Math.round(c.raw/1000)+'k'); }}}},
+      scales:{ x:{ ticks:{color:TC, font:{size:10}}, grid:{display:false} },
+               y:{ ticks:{color:TC, callback:function(v){ return '$'+Math.round(v/1000)+'k'; }}, grid:{color:GC}, beginAtZero:true,
+                   title:{display:true, text:'Total Raised', color:TC, font:{size:10}} }}}
+  });
+
+  function syncFundGoalExp(v) {
+    v = Math.min(300000, Math.max(100000, parseInt(v) || 175000));
+    var fg  = document.getElementById('xp_fund_goal_exp');
+    var fgn = document.getElementById('xp_fund_goal_num_exp');
+    if (fg)  fg.value  = v;
+    if (fgn) fgn.value = v;
+    xpFundChartExp.data.datasets[1].data[5] = v;
+    xpFundChartExp.update();
+  }
+  var fg  = document.getElementById('xp_fund_goal_exp');
+  var fgn = document.getElementById('xp_fund_goal_num_exp');
+  if (fg)  fg.addEventListener('input',  function(){ syncFundGoalExp(this.value); });
+  if (fgn) fgn.addEventListener('input', function(){ syncFundGoalExp(this.value); });
+
+  // xp_c5_ex — Volunteer experience pyramid (duplicate of xp_c5)
+  var barColors = vYosVals.map(function(_, i){
+    var pct = i / 10;
+    var r = Math.round(144 + (26  - 144) * pct);
+    var g = Math.round(202 + (35  - 202) * pct);
+    var b = Math.round(249 + (126 - 249) * pct);
+    return 'rgb('+r+','+g+','+b+')';
+  });
+  new Chart(document.getElementById('xp_c5_ex'), {
+    type: 'bar',
+    data: { labels: vYosLabels, datasets:[{
+      label: 'Volunteers', data: vYosVals,
+      backgroundColor: barColors, borderRadius:4, borderSkipped:false
+    }]},
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false},
+                tooltip:{ callbacks:{ label:function(c){
+                  var pct = Math.round(c.raw / 121 * 100);
+                  return ' '+c.raw+' volunteer'+(c.raw!==1?'s':'')+' ('+pct+'% of corps)';
+                }}}},
+      scales:{ x:{ ticks:{color:TC, font:{size:11}}, grid:{display:false} },
+               y:{ ticks:{color:TC, font:{size:11}, stepSize:5}, grid:{color:GC}, beginAtZero:true,
+                   title:{display:true, text:'# Volunteers', color:TC, font:{size:11}} }}}
+  });
+})();
+
+/* ══════════════════════════════════════════
    FEATURE 1 — ANIMATED TIMELINE SLIDER
 ══════════════════════════════════════════ */
 (function(){
@@ -5924,10 +6049,10 @@ initAnalysisButtons();
     return r;
   };
 
-  /* ── Re-trigger when Executive Summary gate opens ── */
-  var _eg = window.openExecGate;
+  /* ── Re-trigger when Experimental gate opens ── */
+  var _eg = window.openExpGate;
   if (typeof _eg === 'function') {
-    window.openExecGate = function(btn){
+    window.openExpGate = function(btn){
       var r = _eg.call(this, btn);
       setTimeout(animatePage, 380);
       return r;
