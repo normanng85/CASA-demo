@@ -59,8 +59,6 @@
     .nav-btn.active-exec .icon { background:#C62828; color:#fff; }
     .nav-btn.active-xlab { background:#f0e8f8; color:#3a0a5a; border-color:#7B1FA2; border-width:2px; box-shadow:0 2px 8px rgba(123,31,162,0.22),0 0 0 3px rgba(123,31,162,0.12); font-weight:700; }
     .nav-btn.active-xlab .icon { background:#7B1FA2; color:#fff; }
-    .nav-btn.active-act { background:#fff8e1; color:#5f3800; border-color:#F57C00; border-width:2px; box-shadow:0 2px 8px rgba(245,124,0,0.22),0 0 0 3px rgba(245,124,0,0.12); font-weight:700; }
-    @media (prefers-color-scheme:dark) { .nav-btn.active-act { background:rgba(245,124,0,0.18); color:#ffcc80; border-color:#F57C00; } }
 
     @media (prefers-color-scheme: dark) {
       .nav-btn.active-demo  { background:rgba(59,139,212,0.22); color:#85B7EB; border-color:#3B8BD4; }
@@ -205,37 +203,6 @@
     .insight.alert { animation: alertPulse 2.2s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) { .insight.alert { animation:none; } }
 
-    /* ── Action card type pulses ── */
-    @keyframes actPulseAlert {
-      0%   { box-shadow: 0 0 0 2px  rgba(163,45,45,0.55); }
-      55%  { box-shadow: 0 0 0 10px rgba(163,45,45,0);    }
-      100% { box-shadow: 0 0 0 2px  rgba(163,45,45,0.55); }
-    }
-    @keyframes actPulseWatch {
-      0%   { box-shadow: 0 0 0 2px  rgba(186,117,23,0.55); }
-      55%  { box-shadow: 0 0 0 10px rgba(186,117,23,0);    }
-      100% { box-shadow: 0 0 0 2px  rgba(186,117,23,0.55); }
-    }
-    @keyframes actPulsePositive {
-      0%   { box-shadow: 0 0 0 2px  rgba(15,110,86,0.50); }
-      55%  { box-shadow: 0 0 0 10px rgba(15,110,86,0);    }
-      100% { box-shadow: 0 0 0 2px  rgba(15,110,86,0.50); }
-    }
-    @keyframes actPulseNeutral {
-      0%   { box-shadow: 0 0 0 2px  rgba(24,95,165,0.50); }
-      55%  { box-shadow: 0 0 0 10px rgba(24,95,165,0);    }
-      100% { box-shadow: 0 0 0 2px  rgba(24,95,165,0.50); }
-    }
-    .act-card[data-act-type="alert"]    { animation: actPulseAlert    2.2s ease-in-out infinite; }
-    .act-card[data-act-type="watch"]    { animation: actPulseWatch    2.4s ease-in-out infinite; }
-    .act-card[data-act-type="positive"] { animation: actPulsePositive 2.6s ease-in-out infinite; }
-    .act-card[data-act-type="neutral"]  { animation: actPulseNeutral  2.8s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) {
-      .act-card[data-act-type="alert"],
-      .act-card[data-act-type="watch"],
-      .act-card[data-act-type="positive"],
-      .act-card[data-act-type="neutral"] { animation: none; }
-    }
     .summary-block .lead { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:1.25rem; max-width:820px; }
     .insight-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:1.25rem; }
     .insight { border-radius:var(--radius-md); padding:0.85rem 1rem; border-left:3px solid transparent; }
@@ -709,35 +676,26 @@
                            font-size: 11.5px; opacity: 0.85; }
     #ui-tip .tip-list li:first-child { border-top: none; }
 
-  /* ── Actions page filter pills (pillar colors) ── */
-  .if-btn.if-active[data-act-pid="all"]          { background:var(--text);  color:var(--surface); border-color:transparent; }
-  .if-btn.if-active[data-act-pid="executive"]    { background:#C62828; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-pid="demographics"] { background:#3B8BD4; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-pid="volunteers"]   { background:#534AB7; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-pid="fundraising"]  { background:#0F6E56; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-pid="zipcodes"]     { background:#00838F; color:#fff; border-color:transparent; }
 
-  /* ── Actions page type filter pills ── */
-  .if-btn.if-active[data-act-type="all"]      { background:var(--text);  color:var(--surface); border-color:transparent; }
-  .if-btn.if-active[data-act-type="positive"] { background:#0F6E56; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-type="watch"]    { background:#BA7517; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-type="alert"]    { background:#A32D2D; color:#fff; border-color:transparent; }
-  .if-btn.if-active[data-act-type="neutral"]  { background:#185FA5; color:#fff; border-color:transparent; }
-
-  /* ── Action item cards ── */
-  .act-card { border-left:3px solid var(--act-clr, var(--border)); }
-  .act-card .itag { letter-spacing:0.04em; }
-  .act-source { font-size:11px; font-weight:600; color:var(--text3); margin:5px 0 6px; line-height:1.4; }
-  .act-body { font-size:13px; line-height:1.57; color:var(--text); margin:0; }
-  #act-count-bar { font-size:12px; color:var(--text3); margin:0 0 12px; }
-
-  /* ── Nav alert badges (Feature 2) ── */
-  .nav-alert-badge { display:inline-flex; align-items:center; justify-content:center; min-width:17px; height:16px; border-radius:8px; font-size:9.5px; font-weight:700; padding:0 5px; margin-left:5px; line-height:1; vertical-align:middle; }
-  .nab-alert { background:rgba(198,40,40,0.15); color:#c62828; }
-  .nab-watch { background:rgba(186,117,23,0.15); color:#885800; }
-  @media (prefers-color-scheme:dark) { .nab-alert{background:rgba(198,40,40,0.28);color:#ef9a9a;} .nab-watch{background:rgba(186,117,23,0.28);color:#ffcc80;} }
-
-  /* ── Action Items page ── */
+  /* ── Natural Language Chart Builder ── */
+  .nl-bar { background:linear-gradient(135deg,rgba(123,31,162,0.07) 0%,rgba(123,31,162,0.03) 100%); border:1.5px solid rgba(123,31,162,0.22); border-radius:var(--radius-md); padding:1rem 1.1rem 1rem; margin-bottom:1.25rem; }
+  .nl-bar-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:#7B1FA2; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+  .nl-input-row { display:flex; gap:8px; align-items:stretch; }
+  .nl-input { flex:1; padding:9px 13px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; background:var(--surface); color:var(--text); outline:none; transition:border-color .18s; }
+  .nl-input:focus { border-color:#7B1FA2; box-shadow:0 0 0 3px rgba(123,31,162,0.12); }
+  .nl-input::placeholder { color:var(--text3); font-style:italic; }
+  .nl-go-btn { padding:9px 18px; border-radius:8px; background:#7B1FA2; color:#fff; border:none; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition:background .15s; }
+  .nl-go-btn:hover { background:#6A1B9A; }
+  .nl-feedback { font-size:12px; margin-top:7px; min-height:18px; color:var(--text3); }
+  .nl-feedback.ok  { color:#0F6E56; }
+  .nl-feedback.err { color:#A32D2D; }
+  .nl-examples { display:flex; flex-wrap:wrap; gap:5px; margin-top:9px; }
+  .nl-ex { font-size:11px; padding:3px 9px; border-radius:20px; border:1px solid rgba(123,31,162,0.3); color:#7B1FA2; background:rgba(123,31,162,0.06); cursor:pointer; transition:background .14s; white-space:nowrap; }
+  .nl-ex:hover { background:rgba(123,31,162,0.14); }
+  @media (prefers-color-scheme:dark) {
+    .nl-bar { background:rgba(123,31,162,0.10); border-color:rgba(123,31,162,0.35); }
+    .nl-input { background:var(--surface); }
+  }
 
   /* ── Chart → table toggle (Feature 5) ── */
   .chart-tbl-btn { font-size:11px; }
@@ -775,7 +733,6 @@
   <a class="nav-btn" onclick="return showPage('explorer',this,'active-zip')" href="#">
     <span class="icon">📊</span> Build a Graph
   </a>
-  <a id="nav-actions-btn" class="nav-btn" onclick="return showPage('actions',this,'active-act')" href="#" style="margin-left:auto;">⚡ Action Items</a>
   <button class="print-btn" onclick="printCurrentPage()">🖨 Print / PDF</button>
 
   <!-- Pillar scroll-progress bar sits at bottom edge of sticky nav -->
@@ -1836,6 +1793,26 @@
       <p class="lead">Build your own chart by selecting any combination of variables from the demographics and fundraising datasets. Mix datasets, compare trends, and export anything you build.</p>
     </div>
 
+    <!-- Natural Language Builder -->
+    <div class="nl-bar">
+      <div class="nl-bar-label">✦ Describe your chart</div>
+      <div class="nl-input-row">
+        <input id="nl_input" class="nl-input" type="text" placeholder="e.g. &quot;show me Black and Hispanic volunteer counts as a bar chart&quot;" maxlength="200" />
+        <button class="nl-go-btn" onclick="nlBuildChart()">Generate →</button>
+      </div>
+      <div class="nl-feedback" id="nl_feedback"></div>
+      <div class="nl-examples">
+        <span class="nl-ex" onclick="nlFill(this)">volunteer counts by year</span>
+        <span class="nl-ex" onclick="nlFill(this)">compare Black and Hispanic volunteers</span>
+        <span class="nl-ex" onclick="nlFill(this)">cash gifts vs active donors</span>
+        <span class="nl-ex" onclick="nlFill(this)">total children monthly as a bar chart</span>
+        <span class="nl-ex" onclick="nlFill(this)">female vs male children trend</span>
+        <span class="nl-ex" onclick="nlFill(this)">age groups of volunteers</span>
+        <span class="nl-ex" onclick="nlFill(this)">fundraising total raised by year</span>
+        <span class="nl-ex" onclick="nlFill(this)">infant children monthly</span>
+      </div>
+    </div>
+
     <!-- Controls -->
     <div class="expl-controls">
       <div class="expl-row">
@@ -1951,14 +1928,14 @@
         </button>
         <div class="collapse-body">
           <div class="insight-grid">
-            <div class="insight positive"><div class="itag">Strength — diversity trajectory</div><p>Non-white volunteers grew from 39% in FY21 to 52% in FY25 — a 13-point shift in four years. White volunteers fell from 61% to 48%, while Asian representation declined slightly from 20% to 19% and Black/African American volunteers grew from 8% to 19%. This trajectory represents meaningful progress toward demographic alignment with the children CASA serves.</p></div>
+            <div class="insight positive"><div class="itag">Strength — diversity trajectory</div><p>Non-white volunteers grew from 39% in FY21 to 52% in FY25 — a 13-point shift in four years. White volunteers fell from 61% to 48%, while Asian representation declined slightly from 20% to 19% and Black/African American volunteers grew from 8% to 19%. This trajectory represents meaningful progress toward demographic alignment with the children CASA serves.<span class="action-line">Document and formalize the recruitment practices driving non-white growth; set a FY26 milestone of reaching 55% non-white to maintain momentum toward full demographic alignment with the children CASA serves.</span></p></div>
             <div class="insight watch"><div class="itag">Watch — ~23% annual attrition rate</div><p>Volunteer count peaked at 128 in FY24 and declined 5.5% to 121 in FY25. With 23 new advocates recruited in FY25 and a net loss of 7, approximately <strong>30 volunteers departed in FY25 — a ~23% annual attrition rate</strong>. This means the program must recruit and onboard roughly 30 advocates per year just to hold steady. At the current pace of 23 new recruits, the corps will continue to contract. The 3–7 year tenure band (58 volunteers) is the largest and most experienced segment — protecting this cohort through recognition and role variety is as important as new recruitment.<span class="action-line">Set a FY26 recruitment target of at least 30 new advocates to offset attrition and return to the FY24 peak, not just 20. Assign at least 2 board members as recruitment ambassadors for information sessions. Track the monthly sworn-in count at every board meeting as a leading indicator.</span></p></div>
-            <div class="insight positive"><div class="itag">Strength — volunteer retention</div><p>81% of FY25 volunteers have 2+ years of service (98 of 121), and 7 volunteers have 10+ years. This deep bench of experienced advocates is a critical organizational asset — long-tenured volunteers typically carry the most complex cases and provide informal mentorship to newer recruits.</p></div>
+            <div class="insight positive"><div class="itag">Strength — volunteer retention</div><p>81% of FY25 volunteers have 2+ years of service (98 of 121), and 7 volunteers have 10+ years. This deep bench of experienced advocates is a critical organizational asset — long-tenured volunteers typically carry the most complex cases and provide informal mentorship to newer recruits.<span class="action-line">Launch a formal tenure recognition program for 5+ year advocates to protect this experienced cohort; designate long-tenured volunteers as named mentors for incoming classes to institutionalize their knowledge and deepen their sense of investment in the program.</span></p></div>
             <div class="insight watch"><div class="itag">Watch — male representation slipping</div><p>The volunteer corps has maintained ~83% female since FY21, consistent with national CASA averages. However, FY26 YTD data shows male representation at 13–15% — a regression from FY25's 17% baseline and below the 17% strategic goal. Without deliberate outreach through fathers' groups, sports coaching networks, and professional associations, this gap will widen.<span class="action-line">Set a Q3 target of at least 3 new male advocates sworn in before June; brief 2 board members to attend the next information session as male role model ambassadors.</span></p></div>
-            <div class="insight positive"><div class="itag">Strength — growing younger cohort</div><p>The 21–29 age group grew from 19 volunteers in FY21 to 26 in FY25 — a 37% increase. Younger advocates typically remain active across multiple career transitions, build longer-term relationships with children, and provide the succession pipeline for experienced roles. This trend is one of the most encouraging long-term signals in the volunteer data.</p></div>
+            <div class="insight positive"><div class="itag">Strength — growing younger cohort</div><p>The 21–29 age group grew from 19 volunteers in FY21 to 26 in FY25 — a 37% increase. Younger advocates typically remain active across multiple career transitions, build longer-term relationships with children, and provide the succession pipeline for experienced roles. This trend is one of the most encouraging long-term signals in the volunteer data.<span class="action-line">Sustain momentum by deepening university and young-professional partnerships; set a FY26 goal of 28+ volunteers aged 21–29 and assign a staff point-person to maintain relationships with at least 3 campus or alumni network pipelines.</span></p></div>
             <div class="insight watch"><div class="itag">Watch — employment shift affects scheduling</div><p>The corps has shifted from a retiree-heavy composition toward full-time working professionals (54 of 121 in FY25, vs. 44 of 111 in FY21). This is good for diversity of professional perspective but means daytime availability for court hearings and training sessions is more constrained. Scheduling flexibility — evening cohort training, virtual onboarding options — should be evaluated against this trend.<span class="action-line">Survey the current cohort on preferred training times before scheduling the next class — the answer may differ meaningfully from assumptions made when the corps skewed toward retirees.</span></p></div>
             <div class="insight watch"><div class="itag">Watch — Spanish capacity dipped from peak</div><p>Spanish language capacity peaked at 20 volunteers in FY24 (14 fluent + 6 conversational), then declined to 18 in FY25 (15 fluent + 3 conversational). Conversational speakers dropped by half — from 6 to 3 — in a single year. With 07008 Carteret now the #1 zip code (30 children, one of the highest Hispanic/Latino concentrations in the county), this trend is moving in the wrong direction. Hindi (10), Urdu (4), and ASL (4) speakers remain stable and provide strong multilingual depth. Spanish recruitment specifically — in Carteret and Perth Amboy — should be a named FY26 priority.<span class="action-line">Target at least 2 new Spanish-speaking advocate recruits in FY26 through community partnerships in Carteret (07008) and Perth Amboy (08861), where the caseload concentration and language need are highest.</span></p></div>
-            <div class="insight positive"><div class="itag">Strength — bilingual goal achieved</div><p>As of February 2026, 13% of active advocates are bilingual Spanish speakers — meeting the FY26 13% strategic target. This is one of the few FY26 diversity goals fully achieved. Language-matched advocates improve communication with families, reduce interpreter dependency, and build trust in communities where Spanish is the primary language (notably Carteret and Perth Amboy, which together account for the largest share of the caseload).</p></div>
+            <div class="insight positive"><div class="itag">Strength — bilingual goal achieved</div><p>As of February 2026, 13% of active advocates are bilingual Spanish speakers — meeting the FY26 13% strategic target. This is one of the few FY26 diversity goals fully achieved. Language-matched advocates improve communication with families, reduce interpreter dependency, and build trust in communities where Spanish is the primary language (notably Carteret and Perth Amboy, which together account for the largest share of the caseload).<span class="action-line">Document the recruitment channels that produced bilingual advocates and replicate the model for other language gaps; set a stretch goal of 15% bilingual by end of FY26 to stay ahead of caseload demand in Carteret and Perth Amboy.</span></p></div>
             <div class="insight neutral"><div class="itag">Context — vs. National CASA averages</div><p>Nationally, CASA programs average ~84% female volunteers and ~16% male — this program’s 83%/17% split is closely aligned. Non-white volunteer representation nationally is approximately 25–30% and growing; at 52% non-white in FY25, this program substantially exceeds the national average, reflecting intentional diversity recruitment. Nationally, ~65–70% of CASA volunteers hold a bachelor’s degree or higher; this program’s ~76% with Bachelors or higher in FY25 is above average. The national volunteer-to-child ratio averages roughly 1:1 to 1:2; this program’s ratio supports its full caseload. (Source: National CASA/GAL Association annual data.)</p></div>
           </div>
         </div>
@@ -2151,7 +2128,7 @@
       <div class="cw" style="height:260px"><canvas id="v_equity"></canvas></div>
     </div>
     <div class="insight-grid" style="margin-bottom:1.75rem;">
-      <div class="insight positive"><div class="itag">Strength — Black/AA goal exceeded ✓</div><p>Black/African American volunteers now represent 21% of the active corps — <strong>exceeding the FY26 strategic goal of 20%</strong>. This is the only diversity metric that has crossed its target, and it represents a 13-point gain from just 8% in FY21 over four years of intentional recruitment. The direction is sustained and the goal is met. A meaningful gap to caseload representation (33%) remains, but the milestone itself deserves recognition and the recruitment strategy that produced it should be documented as a model for other pipeline goals.</p></div>
+      <div class="insight positive"><div class="itag">Strength — Black/AA goal exceeded ✓</div><p>Black/African American volunteers now represent 21% of the active corps — <strong>exceeding the FY26 strategic goal of 20%</strong>. This is the only diversity metric that has crossed its target, and it represents a 13-point gain from just 8% in FY21 over four years of intentional recruitment. The direction is sustained and the goal is met. A meaningful gap to caseload representation (33%) remains, but the milestone itself deserves recognition and the recruitment strategy that produced it should be documented as a model for other pipeline goals.<span class="action-line">Formally document the recruitment strategy behind the Black/AA milestone this quarter and apply it explicitly to the Hispanic/Latino and male advocate pipelines — the same tactics (community partnerships, targeted outreach, role-model ambassadors) are the most likely path to replicating this result.</span></p></div>
       <div class="insight watch"><div class="itag">Watch — Hispanic/Latino gap</div><p>Hispanic/Latino children represent 18% of the caseload but only 8% of volunteers — a 10-point gap. With 18 Spanish-speaking volunteers (15% of corps), language capacity partially bridges this gap, but demographic representation lags behind.<span class="action-line">Identify 2–3 community organizations in Carteret or Perth Amboy — a parish, an ESL program, or an employer network — for partnership outreach this quarter; one or two new bilingual Hispanic advocates would close the representation gap entirely.</span></p></div>
       <div class="insight neutral"><div class="itag">NJ Context — statewide benchmark</div><p>Across NJ's 11 CASA programs, 73% of volunteers identify as non-Hispanic white, while Black/African American children represent 48% of NJ children in out-of-home care — a structural equity challenge shared across the network. Middlesex's 48% non-white volunteer corps significantly outperforms the NJ average of ~27% non-white.</p></div>
     </div>
@@ -2801,54 +2778,6 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════
-     ACTION ITEMS — Full page
-══════════════════════════════════════════ -->
-<div id="actions" class="page">
-  <main>
-    <div class="print-header"><span class="ph-org">CASA — Action Items</span><span class="ph-date" id="ph_date_act"></span></div>
-    <div class="pillar-banner" style="border-left-color:#F57C00;">
-      <span class="pb-pillar" style="background:#F57C00;">⚡</span>
-      <span class="pb-name">Action Items — All Pillars</span>
-      <span class="pb-badge yellow">Board &amp; Staff Planning Reference</span>
-      <div class="pb-obj-row">
-        <span class="pb-obj"><span class="pb-dot g"></span>All recommended next steps in one place</span>
-        <span class="pb-obj"><span class="pb-dot g"></span>Filter by pillar to focus your review</span>
-        <span class="pb-obj"><span class="pb-dot y"></span>Each item links back to its source insight</span>
-      </div>
-    </div>
-
-    <div class="summary-block">
-      <h2>Consolidated Action Items</h2>
-      <p class="lead">Every recommended next step from across all four pillars and the executive summary, collected in one place. Use the pillar filters below to focus on a single area, or review all items for board meeting preparation. Each card shows the insight it came from and the specific action recommended.</p>
-    </div>
-
-    <!-- Filter bar -->
-    <div class="insight-filter" id="act-filter-bar" style="margin-bottom:6px;">
-      <span class="insight-filter-lbl">Pillar</span>
-      <button class="if-btn if-active" data-act-pid="all">All pillars</button>
-      <button class="if-btn" data-act-pid="executive" style="border-color:rgba(198,40,40,0.35);">📋 Executive</button>
-      <button class="if-btn" data-act-pid="demographics" style="border-color:rgba(59,139,212,0.35);">🎯 P1 — Program Quality</button>
-      <button class="if-btn" data-act-pid="volunteers" style="border-color:rgba(83,74,183,0.35);">🤝 P2 — Volunteer Engagement</button>
-      <button class="if-btn" data-act-pid="fundraising" style="border-color:rgba(15,110,86,0.35);">💰 P3 — Financial Sustainability</button>
-      <button class="if-btn" data-act-pid="zipcodes" style="border-color:rgba(0,131,143,0.35);">🏛️ P4 — Governance</button>
-    </div>
-    <div class="insight-filter" id="act-type-filter-bar" style="margin-bottom:8px;">
-      <span class="insight-filter-lbl">Type</span>
-      <button class="if-btn if-active" data-act-type="all">All types</button>
-      <button class="if-btn" data-act-type="positive">✦ Strengths</button>
-      <button class="if-btn" data-act-type="watch">◉ Watch</button>
-      <button class="if-btn" data-act-type="alert">⚑ Risks</button>
-      <button class="if-btn" data-act-type="neutral">◦ Context</button>
-    </div>
-    <div id="act-count-bar"></div>
-
-    <!-- Action cards grid — populated by JS -->
-    <div id="act-grid" class="insight-grid"></div>
-
-    <footer>Action Items · CASA Middlesex County · Generated from dashboard insights · FY25 data</footer>
-  </main>
-</div>
 
 
 <script>
@@ -3168,7 +3097,7 @@ document.addEventListener('click', function(e){
 
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab','active-act'); });
+  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -6182,175 +6111,6 @@ initAnalysisButtons();
 
 })();
 
-  /* ══════════════════════════════════════════════════════
-     FEATURE 2 — Alert badges on nav tabs
-  ══════════════════════════════════════════════════════ */
-  (function(){
-    var pageMap = {
-      'demographics': document.querySelector('[onclick*="demographics"]'),
-      'volunteers':   document.querySelector('[onclick*="volunteers"]'),
-      'fundraising':  document.querySelector('[onclick*="fundraising"]'),
-      'zipcodes':     document.querySelector('[onclick*="zipcodes"]'),
-      'executive':    document.getElementById('exec-nav-btn')
-    };
-    document.querySelectorAll('.page').forEach(function(page){
-      var btn = pageMap[page.id];
-      if (!btn) return;
-      var alerts  = page.querySelectorAll('.insight.alert').length;
-      var watches = page.querySelectorAll('.insight.watch').length;
-      if (alerts > 0) {
-        var ba = document.createElement('span');
-        ba.className = 'nav-alert-badge nab-alert';
-        ba.textContent = alerts + (alerts === 1 ? ' risk' : ' risks');
-        btn.appendChild(ba);
-      }
-      if (watches > 0) {
-        var bw = document.createElement('span');
-        bw.className = 'nav-alert-badge nab-watch';
-        bw.textContent = watches + ' watch';
-        btn.appendChild(bw);
-      }
-    });
-  })();
-
-  /* ══════════════════════════════════════════════════════
-     FEATURE 1 — Action Items full page
-  ══════════════════════════════════════════════════════ */
-  (function(){
-    var PILLAR_META = {
-      'executive':    { label:'Executive Summary',              color:'#C62828', icon:'📋' },
-      'demographics': { label:'P1 — Program Quality & Impact', color:'#3B8BD4', icon:'🎯' },
-      'volunteers':   { label:'P2 — Volunteer Engagement',     color:'#534AB7', icon:'🤝' },
-      'fundraising':  { label:'P3 — Financial Sustainability', color:'#0F6E56', icon:'💰' },
-      'zipcodes':     { label:'P4 — Organizational Strength',  color:'#00838F', icon:'🏛️' }
-    };
-    var PILLAR_ORDER = ['executive','demographics','volunteers','fundraising','zipcodes'];
-
-    var grid         = document.getElementById('act-grid');
-    var countBar     = document.getElementById('act-count-bar');
-    var built        = false;
-    var activePid    = 'all';
-    var activeType   = 'all';
-    var INSIGHT_TYPES = ['positive','watch','alert','neutral'];
-
-    var TYPE_META = {
-      positive: { color:'#0F6E56', bg:'rgba(15,110,86,0.10)',  label:'✦ Strength' },
-      watch:    { color:'#BA7517', bg:'rgba(186,117,23,0.10)', label:'◉ Watch'    },
-      alert:    { color:'#A32D2D', bg:'rgba(163,45,45,0.10)',  label:'⚑ Risk'     },
-      neutral:  { color:'#185FA5', bg:'rgba(24,95,165,0.10)',  label:'◦ Context'  }
-    };
-
-    function buildGrid(){
-      if (!grid) return;
-      grid.innerHTML = '';
-      PILLAR_ORDER.forEach(function(pid){
-        var pmeta = PILLAR_META[pid];
-        var page  = document.getElementById(pid);
-        if (!page) return;
-        page.querySelectorAll('.action-line').forEach(function(al){
-          var insight     = al.closest('.insight');
-          var itag        = insight ? insight.querySelector('.itag') : null;
-          var insightType = 'neutral';
-          if (insight) INSIGHT_TYPES.forEach(function(t){ if (insight.classList.contains(t)) insightType = t; });
-          var tmeta = TYPE_META[insightType] || TYPE_META.neutral;
-
-          var card = document.createElement('div');
-          card.className = 'insight act-card';
-          card.setAttribute('data-act-pid',  pid);
-          card.setAttribute('data-act-type', insightType);
-          // Border color = insight type (so risks are red, watches amber, etc.)
-          card.style.setProperty('--act-clr', tmeta.color);
-
-          // Type badge (top-left, styled like pillar insight cards)
-          var typeBadge = document.createElement('div');
-          typeBadge.className = 'itag';
-          typeBadge.textContent = tmeta.label;
-          typeBadge.style.cssText = 'background:' + tmeta.bg + ';color:' + tmeta.color + ';margin-bottom:5px;display:inline-block;margin-right:6px;';
-          card.appendChild(typeBadge);
-
-          // Pillar pill (secondary, smaller)
-          var pillarBadge = document.createElement('span');
-          pillarBadge.style.cssText = 'display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:' + pmeta.color + '18;color:' + pmeta.color + ';vertical-align:middle;margin-bottom:5px;';
-          pillarBadge.textContent = pmeta.icon + ' ' + pmeta.label;
-          card.appendChild(pillarBadge);
-
-          // Line break between badges and content
-          card.appendChild(document.createElement('br'));
-
-          // Source insight label
-          if (itag){
-            var src = document.createElement('div');
-            src.className   = 'act-source';
-            src.textContent = itag.textContent.trim();
-            card.appendChild(src);
-          }
-
-          // Action text
-          var body = document.createElement('p');
-          body.className   = 'act-body';
-          body.textContent = al.textContent.trim();
-          card.appendChild(body);
-
-          grid.appendChild(card);
-        });
-      });
-      built = true;
-    }
-
-    function applyFilters(){
-      if (!built) buildGrid();
-      var cards = grid.querySelectorAll('.act-card');
-      var shown = 0;
-      cards.forEach(function(c){
-        var pidMatch  = activePid  === 'all' || c.getAttribute('data-act-pid')  === activePid;
-        var typeMatch = activeType === 'all' || c.getAttribute('data-act-type') === activeType;
-        var visible   = pidMatch && typeMatch;
-        c.style.display = visible ? '' : 'none';
-        if (visible) shown++;
-      });
-      if (countBar){
-        var parts = [];
-        if (activePid  !== 'all') parts.push(PILLAR_META[activePid] ? PILLAR_META[activePid].label : activePid);
-        if (activeType !== 'all'){
-          var typeLabels = { positive:'Strengths', watch:'Watch', alert:'Risks', neutral:'Context' };
-          parts.push(typeLabels[activeType] || activeType);
-        }
-        countBar.textContent = shown + ' action item' + (shown !== 1 ? 's' : '') +
-          (parts.length ? ' — ' + parts.join(' · ') : ' across all pillars & types');
-      }
-    }
-
-    // Build grid on first load
-    setTimeout(function(){ buildGrid(); applyFilters(); }, 100);
-
-    // Wire pillar filter buttons
-    var filterBar = document.getElementById('act-filter-bar');
-    if (filterBar){
-      filterBar.querySelectorAll('.if-btn').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-          e.stopPropagation();
-          filterBar.querySelectorAll('.if-btn').forEach(function(b){ b.classList.remove('if-active'); });
-          btn.classList.add('if-active');
-          activePid = btn.getAttribute('data-act-pid') || 'all';
-          applyFilters();
-        });
-      });
-    }
-
-    // Wire type filter buttons
-    var typeBar = document.getElementById('act-type-filter-bar');
-    if (typeBar){
-      typeBar.querySelectorAll('.if-btn').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-          e.stopPropagation();
-          typeBar.querySelectorAll('.if-btn').forEach(function(b){ b.classList.remove('if-active'); });
-          btn.classList.add('if-active');
-          activeType = btn.getAttribute('data-act-type') || 'all';
-          applyFilters();
-        });
-      });
-    }
-  })();
 
   /* ══════════════════════════════════════════════════════
      FEATURE 5 — Chart → data table toggle
@@ -6447,6 +6207,236 @@ initAnalysisButtons();
     setTimeout(function(){
       document.querySelectorAll('.cw canvas').forEach(injectBtn);
     }, 500);
+  })();
+
+  /* ══════════════════════════════════════════════════════
+     Natural Language Chart Builder
+  ══════════════════════════════════════════════════════ */
+  (function(){
+
+    // ── Step 1: chart type detection ─────────────────────
+    var TYPE_RULES = [
+      { type:'bar',     rx:/\b(bar|column|histogram|grouped)\b/i },
+      { type:'scatter', rx:/\b(scatter|dot|point|correlation)\b/i }
+    ];
+    function detectChartType(q){
+      for(var i=0;i<TYPE_RULES.length;i++) if(TYPE_RULES[i].rx.test(q)) return TYPE_RULES[i].type;
+      return 'line';
+    }
+
+    // ── Step 2: noise stripping ───────────────────────────
+    // Remove filler phrases so they don't pollute variable detection
+    var NOISE_RX = /\b(show\s+me|show|display|give\s+me|plot|chart\s+of|graph\s+of|using\s+a?n?\s*(line|bar|scatter)?\s*(chart|graph)?|as\s+a?n?\s*(line|bar|scatter)?\s*(chart|graph)?|based\s+on|broken\s+down\s+by|breakdown\s+by|broken\s+by|by|over\s+time|over\s+the\s+years|over\s+years|per\s+year|annually|monthly|year\s+over\s+year|trend\s+of|trends?\s+in|a\s+line\s+graph|a\s+bar\s+chart|a\s+scatter)\b/gi;
+
+    // ── Step 3: dataset detection ─────────────────────────
+    var DS_RULES = [
+      { ds:'volunteer',   rx:/\bvolunteers?\b|\badvocates?\b|\brecruit|\battrition|\bcorps\b/i },
+      { ds:'fund',        rx:/\bdonors?\b|\bfundrais|\bcash\s+gift|\bcash\s+giving|\binkind\b|\bin-kind\b|\bdonated\s+service|\braised\b|\bgiving\b/i },
+      { ds:'zipcode',     rx:/\bzip\b|\bzipcode\b|\blocation\b|\bneighborhood\b|\bcarteret\b|\bperth\s+amboy\b|\bcity\b|\btown\b/i },
+      { ds:'childannual', rx:/\b(child|children|kids?|demograph)\b.*\b(annual|year|fy)\b|\b(annual|year|fy)\b.*\b(child|children|kids?|demograph)\b/i },
+      { ds:'demo',        rx:/\bchildren?\b|\bkids?\b|\bdemographic\b|\bmonthly\b|\bcensus\b|\binfant\b|\bbaby\b|\btoddler\b|\bteen\b|\bpetition\b|\badoption\b/i }
+    ];
+    function detectDataset(q){
+      for(var i=0;i<DS_RULES.length;i++) if(DS_RULES[i].rx.test(q)) return DS_RULES[i].ds;
+      return 'demo';
+    }
+
+    // ── Step 4: category shortcuts ────────────────────────
+    // "gender", "race/ethnicity", "age groups" expand to a sensible (y1, y2) pair
+    var SHORTCUTS = {
+      volunteer: [
+        { rx:/\bgender\b/i,                              y1:'female',  y2:'male'    },
+        { rx:/\b(race|ethnicity|racial|diversity)\b/i,   y1:'black',   y2:'hisp'    },
+        { rx:/\b(age\s+groups?|age\s+breakdown|ages?)\b/i, y1:'age2129', y2:'age3039' },
+        { rx:/\beducation\b|\bdegree\b/i,                y1:'bach',    y2:'masters' }
+      ],
+      demo: [
+        { rx:/\bgender\b/i,                              y1:'female',  y2:'male'    },
+        { rx:/\b(race|ethnicity|racial|diversity)\b/i,   y1:'black',   y2:'hisp'    },
+        { rx:/\b(age\s+groups?|age\s+breakdown|ages?)\b/i, y1:'age03',   y2:'age47'   }
+      ],
+      childannual: [
+        { rx:/\bgender\b/i,                              y1:'female',  y2:'male'    },
+        { rx:/\b(race|ethnicity|racial|diversity)\b/i,   y1:'black',   y2:'hisp'    }
+      ],
+      fund: [
+        { rx:/\bgift\s+type\b|\btypes?\s+of\s+gift\b/i, y1:'cash',    y2:'inkind'  }
+      ]
+    };
+    function checkShortcuts(q, ds){
+      var list = SHORTCUTS[ds] || [];
+      // Check each shortcut; if the FULL cleaned query hits one, return it
+      // If multiple shortcuts hit (e.g. "gender and ethnicity"), return the first one found
+      for(var i=0;i<list.length;i++) if(list[i].rx.test(q)) return { y1:list[i].y1, y2:list[i].y2 };
+      return null;
+    }
+
+    // ── Step 5: specific variable detection ───────────────
+    var VAR_RULES = {
+      volunteer: [
+        { key:'female',  rx:/\b(female|women|woman|girl)\b/i },
+        { key:'male',    rx:/\b(male|men|man|boy)\b/i },
+        { key:'white',   rx:/\b(white|caucasian)\b/i },
+        { key:'asian',   rx:/\b(asian)\b/i },
+        { key:'black',   rx:/\b(black|african)\b/i },
+        { key:'hisp',    rx:/\b(hispanic|latino|latina)\b/i },
+        { key:'twomore', rx:/\b(two\s+or\s+more|multiracial|mixed\s+race)\b/i },
+        { key:'age2129', rx:/\b(21.29|21-29|young\s+adult|youth)\b/i },
+        { key:'age3039', rx:/\b(30.39|30-39|thirties)\b/i },
+        { key:'age4049', rx:/\b(40.49|40-49|forties)\b/i },
+        { key:'age5059', rx:/\b(50.59|50-59|fifties)\b/i },
+        { key:'age60p',  rx:/\b(60\+|60\s*plus|senior|older|retired|retiree)\b/i },
+        { key:'bach',    rx:/\b(bachelor|bachelors|undergrad)\b/i },
+        { key:'masters', rx:/\b(master|masters|graduate\s+degree)\b/i },
+        { key:'total',   rx:/\b(total|all|count|active|number|overall)\b/i }
+      ],
+      fund: [
+        { key:'donors',  rx:/\b(donor|donors|donor\s+count|number\s+of\s+donor)\b/i },
+        { key:'cash',    rx:/\b(cash|cash\s+gift|cash\s+giving)\b/i },
+        { key:'inkind',  rx:/\b(in-kind|inkind|donated\s+service|non-cash)\b/i },
+        { key:'cashind', rx:/\b(individual\s+cash|personal\s+cash)\b/i },
+        { key:'cashorg', rx:/\b(org\s+cash|corporate|organization\s+cash)\b/i },
+        { key:'total',   rx:/\b(total|raised|revenue|giving|overall)\b/i }
+      ],
+      demo: [
+        { key:'female',  rx:/\b(female|girl|women)\b/i },
+        { key:'male',    rx:/\b(male|boy|men)\b/i },
+        { key:'black',   rx:/\b(black|african)\b/i },
+        { key:'hisp',    rx:/\b(hispanic|latino|latina)\b/i },
+        { key:'white',   rx:/\b(white|caucasian)\b/i },
+        { key:'asian',   rx:/\b(asian)\b/i },
+        { key:'twomore', rx:/\b(two\s+or\s+more|multiracial)\b/i },
+        { key:'age03',   rx:/\b(0-3|infant|baby|babies|toddler|newborn)\b/i },
+        { key:'age47',   rx:/\b(4-7|preschool)\b/i },
+        { key:'age811',  rx:/\b(8-11|middle\s+school)\b/i },
+        { key:'age1215', rx:/\b(12-15|teen|preteen)\b/i },
+        { key:'age1618', rx:/\b(16-18|older\s+youth|aging\s+out)\b/i },
+        { key:'fn',      rx:/\b(fn|foster\s+care\s+petition|foster)\b/i },
+        { key:'fg',      rx:/\b(fg|guardianship|guardian)\b/i },
+        { key:'adoption',rx:/\b(adoption|adopt)\b/i },
+        { key:'total',   rx:/\b(total|all|count|active|census)\b/i }
+      ],
+      childannual: [
+        { key:'female',  rx:/\b(female|girl)\b/i },
+        { key:'male',    rx:/\b(male|boy)\b/i },
+        { key:'black',   rx:/\b(black|african)\b/i },
+        { key:'hisp',    rx:/\b(hispanic|latino|latina)\b/i },
+        { key:'white',   rx:/\b(white|caucasian)\b/i },
+        { key:'asian',   rx:/\b(asian)\b/i },
+        { key:'adoption',rx:/\b(adoption|adopt)\b/i },
+        { key:'fg',      rx:/\b(fg|guardianship)\b/i },
+        { key:'fn',      rx:/\b(fn|foster)\b/i },
+        { key:'total',   rx:/\b(total|all|count)\b/i }
+      ],
+      zipcode: [
+        { key:'total',   rx:/\b(total|all|count|active|overall)\b/i }
+      ]
+    };
+
+    // Split tokens (only between two potential variable phrases, not inside them)
+    var SPLIT_RX = /\s+(?:vs\.?|versus|compared?\s+to|compared?\s+with)\s+/i;
+    // Softer split: "and" used between two distinct concepts
+    var SOFT_SPLIT_RX = /\s+and\s+/i;
+
+    function detectVar(q, ds){
+      var rules = VAR_RULES[ds] || VAR_RULES.demo;
+      for(var i=0;i<rules.length;i++) if(rules[i].rx.test(q)) return rules[i].key;
+      return null;
+    }
+
+    // ── Main parse + build ────────────────────────────────
+    window.nlBuildChart = function(){
+      var raw = (document.getElementById('nl_input').value || '').trim();
+      var fb  = document.getElementById('nl_feedback');
+      if(!raw){
+        fb.className = 'nl-feedback err';
+        fb.textContent = 'Please describe what you want to see.';
+        return;
+      }
+
+      // Detect chart type from RAW query (before noise stripping)
+      var chartType = detectChartType(raw);
+
+      // Strip noise, lowercase for matching
+      var q = raw.replace(NOISE_RX, ' ').replace(/\s{2,}/g,' ').trim();
+
+      // Detect dataset
+      var ds = detectDataset(raw); // use raw so dataset keywords aren't stripped
+
+      // Try hard split first (vs / versus / compared to)
+      var y1key = null, y2key = null;
+      var hardParts = q.split(SPLIT_RX);
+      if(hardParts.length >= 2){
+        y1key = detectVar(hardParts[0], ds);
+        y2key = detectVar(hardParts[hardParts.length-1], ds);
+      }
+
+      // If hard split didn't find both, try category shortcuts on full cleaned query
+      if(!y1key){
+        var sc = checkShortcuts(q, ds);
+        if(sc){ y1key = sc.y1; y2key = sc.y2; }
+      }
+
+      // If still no y1, try soft split on "and"
+      if(!y1key){
+        var softParts = q.split(SOFT_SPLIT_RX);
+        if(softParts.length >= 2){
+          var s1 = detectVar(softParts[0], ds);
+          var s2 = detectVar(softParts[softParts.length-1], ds);
+          if(s1){ y1key = s1; y2key = (s2 && s2!==s1) ? s2 : null; }
+        }
+      }
+
+      // Last resort: scan full query for any variable match
+      if(!y1key) y1key = detectVar(q, ds);
+
+      // Deduplicate y2
+      if(y2key === y1key) y2key = null;
+
+      if(!y1key){
+        fb.className = 'nl-feedback err';
+        fb.textContent = "Couldn't identify a variable to chart. Try being more specific — e.g. \"female volunteers\", \"cash gifts\", or \"Black children\".";
+        return;
+      }
+
+      // Set dropdowns
+      var dsSel   = document.getElementById('expl_dataset');
+      var y1Sel   = document.getElementById('expl_y1');
+      var y2Sel   = document.getElementById('expl_y2');
+      var typeSel = document.getElementById('expl_type');
+
+      dsSel.value = ds;
+      updateExplVars();
+
+      function setOption(sel, key){ for(var i=0;i<sel.options.length;i++) if(sel.options[i].value===key){ sel.selectedIndex=i; return true; } return false; }
+
+      var y1Found = setOption(y1Sel, y1key);
+      if(!y1Found) y1Sel.selectedIndex = 0;
+
+      var y2Found = y2key ? setOption(y2Sel, y2key) : false;
+      if(!y2Found) y2Sel.selectedIndex = 0;
+
+      typeSel.value = chartType;
+      buildExplChart();
+
+      // Feedback line
+      var y1Label = y1Sel.options[y1Sel.selectedIndex].text;
+      var y2Label = y2Found ? y2Sel.options[y2Sel.selectedIndex].text : null;
+      var dsLabels = { demo:'Child Demographics (monthly)', fund:'Fundraising', childannual:'Child Demographics (annual)', volunteer:'Volunteers', zipcode:'Zip Codes' };
+      fb.className = 'nl-feedback ok';
+      fb.textContent = '📊 ' + y1Label + (y2Label ? ' vs. ' + y2Label : '') + ' · ' + dsLabels[ds] + ' · ' + chartType + ' chart';
+    };
+
+    window.nlFill = function(el){
+      document.getElementById('nl_input').value = el.textContent;
+      document.getElementById('nl_feedback').textContent = '';
+      document.getElementById('nl_input').focus();
+    };
+
+    document.getElementById('nl_input').addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); window.nlBuildChart(); }
+    });
+
   })();
 
 </script>
