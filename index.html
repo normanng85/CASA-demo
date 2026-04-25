@@ -59,6 +59,8 @@
     .nav-btn.active-exec .icon { background:#C62828; color:#fff; }
     .nav-btn.active-xlab { background:#f0e8f8; color:#3a0a5a; border-color:#7B1FA2; border-width:2px; box-shadow:0 2px 8px rgba(123,31,162,0.22),0 0 0 3px rgba(123,31,162,0.12); font-weight:700; }
     .nav-btn.active-xlab .icon { background:#7B1FA2; color:#fff; }
+    .nav-btn.active-state { background:#d4f0e4; color:#0a3823; border-color:#1a7a50; border-width:2px; box-shadow:0 2px 8px rgba(26,122,80,0.22),0 0 0 3px rgba(26,122,80,0.12); font-weight:700; }
+    .nav-btn.active-state .icon { background:#1a7a50; color:#fff; }
 
     @media (prefers-color-scheme: dark) {
       .nav-btn.active-demo  { background:rgba(59,139,212,0.22); color:#85B7EB; border-color:#3B8BD4; }
@@ -68,7 +70,59 @@
       .nav-btn.active-zip   { background:rgba(0,131,143,0.22);  color:#4DD0E1; border-color:#00838F; }
       .nav-btn.active-exec  { background:rgba(198,40,40,0.22);  color:#F48FB1; border-color:#C62828; }
       .nav-btn.active-xlab  { background:rgba(123,31,162,0.22); color:#CE93D8; border-color:#7B1FA2; }
+      .nav-btn.active-state { background:rgba(26,122,80,0.22);  color:#6ECFA0; border-color:#1a7a50; }
     }
+
+    /* ── STATE CONTEXT — Interactive Comparison Panel ── */
+    .sci-panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px 14px; margin-bottom:1.5rem; }
+    .sci-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+    .sci-row-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--text3); width:52px; flex-shrink:0; }
+    .sci-pills { display:flex; flex-wrap:wrap; gap:6px; }
+    .sci-pill { background:var(--surface2); border:1.5px solid var(--border); border-radius:20px; padding:5px 13px; font-size:12.5px; font-weight:500; color:var(--text2); cursor:pointer; transition:all .15s; }
+    .sci-pill:hover { border-color:#1a7a50; color:#1a7a50; }
+    .sci-pill.active { background:#d4f0e4; border-color:#1a7a50; color:#0a3823; font-weight:600; }
+    .sci-pill-cat { font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text3); padding:4px 4px 0; align-self:center; white-space:nowrap; }
+    .sci-metric-sel { appearance:none; background:var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 10px center; border:1.5px solid var(--border); border-radius:8px; padding:7px 32px 7px 12px; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; min-width:220px; transition:border-color .15s; }
+    .sci-metric-sel:focus { outline:none; border-color:#1a7a50; }
+    .sci-metric-sel:hover { border-color:#1a7a50; }
+    .sci-divider { width:1px; height:24px; background:var(--border); margin:0 4px; flex-shrink:0; align-self:center; }
+    .sci-view-btns { display:flex; border:1.5px solid var(--border); border-radius:8px; overflow:hidden; }
+    .sci-vbtn { padding:6px 16px; font-size:12.5px; font-weight:500; color:var(--text2); background:var(--surface2); border:none; border-right:1.5px solid var(--border); cursor:pointer; transition:all .15s; white-space:nowrap; }
+    .sci-vbtn:last-child { border-right:none; }
+    .sci-vbtn.active { background:var(--text); color:var(--surface); font-weight:600; }
+    .sci-opt { display:flex; align-items:center; gap:7px; }
+    .sci-opt-label { font-size:12px; color:var(--text3); white-space:nowrap; }
+    .sci-sel { background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:5px 10px; font-size:12.5px; color:var(--text); cursor:pointer; }
+    .sci-stat-bar { display:flex; background:var(--surface2); border-radius:8px; margin:12px 0 14px; overflow:hidden; border:1px solid var(--border); }
+    .sci-stat { flex:1; padding:10px 14px; border-right:1px solid var(--border); min-width:0; }
+    .sci-stat:last-child { border-right:none; }
+    .sci-stat-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--text3); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .sci-stat-val { font-size:19px; font-weight:700; color:var(--text); line-height:1.2; }
+    .sci-stat-val.sci-green { color:#1a7a50; }
+    .sci-stat-sub { font-size:10.5px; color:var(--text3); }
+    .sci-chart-container { position:relative; }
+    .sci-chart-container canvas { position:absolute; top:0; left:0; width:100% !important; height:100% !important; }
+    .sci-note-bar { font-size:11px; color:var(--text3); margin-top:8px; line-height:1.5; padding-top:8px; border-top:1px solid var(--border); }
+    .sci-nodata { font-size:13px; color:var(--text3); padding:28px 20px; text-align:center; background:var(--surface2); border-radius:8px; border:1px dashed var(--border); }
+    .sci-rate-panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px 14px; margin-top:14px; }
+    .sci-rate-header { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+    .sci-rate-title { font-size:13px; font-weight:700; color:var(--text); }
+    .sci-rate-subtitle { font-size:11px; color:var(--text3); }
+    /* Heat table */
+    .heat-panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px 14px; margin-top:14px; }
+    .heat-header { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+    .heat-title { font-size:13px; font-weight:700; color:var(--text); }
+    .heat-subtitle { font-size:11px; color:var(--text3); }
+    .heat-table-wrap { overflow-x:auto; }
+    .heat-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .heat-table th { padding:5px 8px; text-align:center; font-weight:600; color:var(--text2); font-size:11px; white-space:nowrap; background:var(--surface2); border-bottom:1px solid var(--border); }
+    .heat-table th.ch-col { text-align:left; min-width:110px; }
+    .heat-table td { padding:5px 8px; text-align:center; font-size:11.5px; border-bottom:1px solid var(--border); transition:opacity .15s; }
+    .heat-table td.ch-name { text-align:left; font-weight:500; color:var(--text2); white-space:nowrap; }
+    .heat-table tr.mx-row td { font-weight:700; }
+    .heat-table tr.mx-row td.ch-name { color:#1a7a50; }
+    .heat-cell-null { color:var(--text3); font-style:italic; font-size:10px; }
+    @media (max-width:700px) { .sci-stat { padding:8px 10px; } .sci-stat-val { font-size:16px; } }
 
     /* ── Analysis button ── */
     .analysis-btn {
@@ -726,6 +780,9 @@
   </a>
   <a class="nav-btn" onclick="return showPage('zipcodes',this,'active-expl')" href="#">
     <span class="pillar-pip">P4</span><span class="icon">🏛️</span> Organizational Strength &amp; Governance
+  </a>
+  <a class="nav-btn" onclick="return showPage('state',this,'active-state')" href="#">
+    <span class="icon">🗺️</span> NJ CASA Dashboard
   </a>
   <a class="nav-btn" id="exec-nav-btn" onclick="return showPage('executive',this,'active-exec')" href="#">
     <span class="icon">📋</span> Executive Summary
@@ -2617,8 +2674,179 @@
   </main>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════
+     NJ STATE CONTEXT PAGE
+     Source: NJ CASA Monthly Metrics FY2026 (Jul 2025 – Mar 2026)
+     ═══════════════════════════════════════════════════════════ -->
+<div id="state" class="page">
+  <main style="max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 3rem;">
 
+    <!-- ▸ PILLAR BANNER -->
+    <div class="pillar-banner">
+      <span class="pb-pillar">NJ Network</span>
+      <span class="pb-name">State Context — Middlesex in the NJ CASA Network</span>
+      <span class="pb-badge green">🟢 Strength — Consistent Volunteer Coverage</span>
+      <div class="pb-obj-row">
+        <span class="pb-obj"><span class="pb-dot g"></span>9 months · Jul 2025 – Mar 2026</span>
+        <span class="pb-obj"><span class="pb-dot g"></span>10 peer chapters · NJ CASA Monthly Metrics</span>
+        <span class="pb-obj"><span class="pb-dot y"></span>Caseload below state average — growth opportunity</span>
+      </div>
+    </div>
 
+    <!-- ▸ SUMMARY + INTERACTIVE PANEL -->
+    <div class="summary-block">
+      <h2>NJ CASA Dashboard — Interactive Comparison</h2>
+      <p class="lead">Explore how CASA Middlesex compares to the full New Jersey CASA network. Pick a metric, then switch between a cross-chapter snapshot and Middlesex's month-over-month trend. For Total Children Served, all 10 chapters × all 9 months are fully confirmed; other metrics show Middlesex's complete trend with cross-chapter snapshots where data is available.</p>
+
+      <!-- ═══ INTERACTIVE PANEL ═══ -->
+      <div class="sci-panel">
+
+        <!-- Row 1: Metric pills -->
+        <div class="sci-row">
+          <div class="sci-row-label">Metric</div>
+          <select id="sci_metric_sel" class="sci-metric-sel">
+            <optgroup label="── Children">
+              <option value="total" selected>Children Served</option>
+              <option value="volpct">Volunteer Coverage %</option>
+              <option value="new_served">New Intakes</option>
+              <option value="new_ooh">New OOH Placements</option>
+            </optgroup>
+            <optgroup label="── Visit Compliance">
+              <option value="novisit">Without Visit ↓</option>
+              <option value="exc_total">Exceptions: Total (stacked) ↓</option>
+            </optgroup>
+            <optgroup label="── Court">
+              <option value="court">Court Hearings</option>
+              <option value="reports">Reports Submitted</option>
+            </optgroup>
+            <optgroup label="── Child Contacts">
+              <option value="contacts">Total Contacts (stacked)</option>
+            </optgroup>
+            <optgroup label="── Outreach &amp; Advocacy">
+              <option value="dcpp">DCP&amp;P Contact</option>
+              <option value="family">Family of Origin</option>
+              <option value="legal">Legal Professional</option>
+              <option value="team_meeting">Team Meetings</option>
+              <option value="other_svc">Other Services</option>
+              <option value="placement">Resource/Placement Contact</option>
+              <option value="education">Educational Advocacy</option>
+              <option value="medical">Medical Advocacy</option>
+              <option value="mental">Mental Health Advocacy</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Row 2: View toggle + options -->
+        <div class="sci-row">
+          <div class="sci-row-label">View</div>
+          <div class="sci-view-btns" id="sci_view_btns">
+            <button class="sci-vbtn active" data-v="compare">📊 Chapter Comparison</button>
+            <button class="sci-vbtn" data-v="trend">📈 Middlesex Trend</button>
+          </div>
+          <div class="sci-divider"></div>
+          <div class="sci-opt" id="sci_month_opt">
+            <span class="sci-opt-label">Month:</span>
+            <select id="sci_month_sel" class="sci-sel"></select>
+          </div>
+          <div class="sci-opt" id="sci_compare_opt" style="display:none">
+            <span class="sci-opt-label">vs. Chapter:</span>
+            <select id="sci_compare_sel" class="sci-sel"></select>
+          </div>
+        </div>
+
+        <!-- Stat bar -->
+        <div class="sci-stat-bar" id="sci_stat_bar"></div>
+
+        <!-- Chart area -->
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;">
+          <button class="icon-btn" onclick="exportChart('sci_chart','nj-casa-comparison')">⬇ PNG</button>
+        </div>
+        <div class="sci-chart-container" id="sci_chart_container" style="height:340px;">
+          <canvas id="sci_chart"></canvas>
+          <div id="sci_nodata_msg" class="sci-nodata" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;align-items:center;justify-content:center;flex-direction:column;"></div>
+        </div>
+
+        <!-- Data note -->
+        <div class="sci-note-bar" id="sci_note"></div>
+
+      </div><!-- /sci-panel -->
+
+      <!-- ▸ RATE-NORMALIZED COMPARISON PANEL -->
+      <div class="sci-rate-panel" id="sci_rate_panel">
+        <div class="sci-rate-header">
+          <span class="sci-rate-title">📐 Rate View</span>
+          <span class="sci-rate-subtitle">Same metric · same month · normalized per 100 children served — removes caseload-size bias when ranking chapters</span>
+        </div>
+        <div class="sci-stat-bar" id="sci_rate_stat_bar"></div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;">
+          <button class="icon-btn" onclick="exportChart('sci_rate_chart','nj-casa-rate-view')">⬇ PNG</button>
+        </div>
+        <div class="sci-chart-container" id="sci_rate_chart_container" style="height:340px;margin-top:4px;">
+          <canvas id="sci_rate_chart"></canvas>
+          <div id="sci_rate_nodata_msg" class="sci-nodata" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:6px;"></div>
+        </div>
+        <div class="sci-note-bar" id="sci_rate_note"></div>
+      </div><!-- /sci-rate-panel -->
+
+      <!-- ▸ NETWORK HEAT TABLE -->
+      <div class="collapse-section" style="margin-top:14px;">
+        <button class="collapse-btn open" onclick="toggleSection(this)" aria-expanded="true">
+          <span class="collapse-label">🗂 Network Heat Table — all 10 chapters × 9 months</span>
+          <span class="collapse-count" style="font-size:10px;color:var(--text3);">updates with metric selector</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body open">
+          <div class="heat-panel" style="margin-top:0;border-top-left-radius:0;border-top-right-radius:0;">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <button class="icon-btn" onclick="exportHeatTable()" style="font-size:11px;">⬇ CSV</button>
+            </div>
+            <div class="heat-table-wrap">
+              <table class="heat-table" id="sci_heat_table">
+                <thead id="sci_heat_thead"></thead>
+                <tbody id="sci_heat_tbody"></tbody>
+              </table>
+            </div>
+            <div class="sci-note-bar" id="sci_heat_note"></div>
+          </div>
+        </div>
+      </div><!-- /heat collapse -->
+
+      <!-- ▸ KEY OBSERVATIONS -->
+      <div class="collapse-section">
+        <button class="collapse-btn open" onclick="toggleSection(this)" aria-expanded="true">
+          <span class="collapse-label">Key Observations — Middlesex vs. State</span>
+          <span class="collapse-count">5 insights</span>
+          <span class="collapse-chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="collapse-body open">
+          <div class="insight strength">
+            <div class="itag">Strength — Volunteer Coverage Rate</div>
+            <p>Middlesex maintains a consistent <strong>92–93% volunteer coverage rate</strong> across all 9 months — above the confirmed network median of ~89% (Aug 2025 snapshot). Essex County, the state's most urban chapter, operates at ~57% coverage due to rapid intake volume. Middlesex's consistency signals strong case management and volunteer retention practices.</p>
+          </div>
+          <div class="insight strength">
+            <div class="itag">Strength — In-Person Visit Improvement</div>
+            <p>Children without an in-person visit dropped from <strong>47 in July 2025 to a low of 27 in January 2026</strong> — a 43% reduction. February ticked up to 44 (reflecting elevated court activity) before improving to 33 in March, still 30% below the July baseline. The overall downward trend across 9 months signals meaningful, sustained improvement in direct child contact.</p>
+          </div>
+          <div class="insight watch">
+            <div class="itag">Watch — Caseload Size vs. Peers</div>
+            <p>At <strong>127 children in March 2026</strong>, Middlesex ranks 8th of 10 consistent chapters and operates at 75% of the 10-chapter average (170). With 241 eligible children in Middlesex County not receiving CASA services, the gap is not demand — it's volunteer capacity. Each advocate recruited translates directly to a child served.</p>
+          </div>
+          <div class="insight strength">
+            <div class="itag">Strength — Advocacy Engagement Depth</div>
+            <p>Total child contacts grew from 83 in October to <strong>124 in January and 118 in March</strong>, with in-person contacts climbing from 58 in October to 84 in March. Middlesex shows strong DCP&amp;P engagement (38–79/month) and a notable educational advocacy surge in Jan–Feb 2026 (68 and 62 contacts), indicating active school-system advocacy on behalf of children in care.</p>
+          </div>
+          <div class="insight watch">
+            <div class="itag">Watch — Court Activity Uptick (Feb–Mar 2026)</div>
+            <p>Court hearings hit a low of <strong>15 in February 2026</strong> before rebounding to <strong>28 in March</strong> — back near the program's 9-month average of 26. While the February dip may reflect scheduling gaps, the March recovery alongside 27 reports submitted signals active case progression. If the pace continues into Q4, a workload check-in with active advocates is advisable to prevent burnout.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /summary-block -->
+
+    <footer>NJ State Context · CASA Middlesex County · FY2026 · Source: CASA of NJ Monthly Metrics (Jul 2025 – Mar 2026) · For internal planning use</footer>
+  </main>
+</div>
 
 <script>
 /* ══════════════════════════════════════════
@@ -2937,7 +3165,7 @@ document.addEventListener('click', function(e){
 
 function showPage(id, el, cls) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab'); });
+  document.querySelectorAll('.nav-btn').forEach(function(a){ a.classList.remove('active-demo','active-fund','active-expl','active-vol','active-zip','active-exec','active-xlab','active-state'); });
   document.getElementById(id).classList.add('on');
   if (el) el.classList.add(cls);
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -6286,6 +6514,1361 @@ initAnalysisButtons();
     });
 
   })();
+
+/* ═══════════════════════════════════════════════════
+   NJ STATE CONTEXT — Interactive Comparison Panel
+   ═══════════════════════════════════════════════════ */
+(function(){
+
+  /* ─── ALL DATA ─────────────────────────────────── */
+  var SC_MONTHS = ['Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26'];
+
+  /* 10 chapters present across all 9 months */
+  var SC_CHAPTERS = ['ACC','Bergen','Essex','Hudson','Middlesex','Monmouth','Morris/Sussex','Ocean','Passaic/Union','SHaW'];
+
+  /* Total Children Served — all 10 chapters × 9 months (Excel-verified) */
+  var SC_TOTAL = {
+    'ACC':          [277,274,274,267,265,272,268,285,279],
+    'Bergen':       [101,100, 97, 98,100, 95, 93, 98, 99],
+    'Essex':        [274,269,277,276,262,260,262,267,269],
+    'Hudson':       [138,132,128,117,120,113,109,110,117],
+    'Middlesex':    [126,127,125,120,120,120,116,126,127],
+    'Monmouth':     [182,169,161,159,157,161,145,157,158],
+    'Morris/Sussex':[117,112,110,111,109,107,116,115,121],
+    'Ocean':        [115,117,117,134,142,141,140,138,138],
+    'Passaic/Union':[306,308,307,305,307,299,308,302,298],
+    'SHaW':         [115,114,117,112,113,109,102, 99, 96]
+  };
+
+  /* Volunteer Coverage % — all 10 chapters × 9 months (Excel-verified) */
+  var SC_VOLPCT = {
+    'ACC':          [83.8,84.7,84.7,84.3,89.1,89.3,89.2,88.8,90.3],
+    'Bergen':       [95.0,95.0,95.9,95.9,96.0,98.9,97.8,98.0,99.0],
+    'Essex':        [56.2,56.5,56.0,57.6,59.5,64.6,63.4,61.4,61.7],
+    'Hudson':       [98.6,99.2,99.2,100.0,99.2,98.2,98.2,98.2,99.1],
+    'Middlesex':    [92.9,92.9,92.8,91.7,91.7,92.5,93.1,92.1,92.9],
+    'Monmouth':     [96.7,97.0,98.1,100.0,100.0,100.0,100.0,98.7,100.0],
+    'Morris/Sussex':[95.7,98.2,97.3,96.4,97.2,97.2,94.8,98.3,95.0],
+    'Ocean':        [90.4,92.3,84.6,78.4,75.4,80.1,80.7,81.2,72.5],
+    'Passaic/Union':[85.6,85.7,86.6,86.9,87.3,88.6,89.0,87.4,86.2],
+    'SHaW':         [100.0,100.0,100.0,99.1,99.1,100.0,100.0,100.0,100.0]
+  };
+
+  /* Total Child Contacts — all 10 chapters × 9 months (Ocean Mar 26 unavailable — OCR error) */
+  var SC_CONTACTS = {
+    'ACC':          [239,236,212,245,233,249,232,217,243],
+    'Bergen':       [104, 91,107,111, 97,114, 98,103,137],
+    'Essex':        [195,224,232,248,209,268,225,221,253],
+    'Hudson':       [134,124,105, 74, 47,121, 67, 32, 92],
+    'Middlesex':    [100,100, 97, 83, 86,100,124,100,118],
+    'Monmouth':     [135,102,109,103,100,123,113,119,139],
+    'Morris/Sussex':[167,193,221,193,147,195,197,186,207],
+    'Ocean':        [ 74, 81, 72, 73, 57, 78, 72, 63, 73],
+    'Passaic/Union':[338,358,382,382,355,374,294,264,323],
+    'SHaW':         [ 99,114,104,117,103,112, 80, 91, 93]
+  };
+
+  /* Court Hearings — all 10 chapters × 9 months (Excel-verified) */
+  var SC_COURT = {
+    'ACC':          [ 48, 40, 52, 41, 29, 53, 47, 40, 52],
+    'Bergen':       [ 26, 25, 24, 26, 20, 21, 36, 19, 21],
+    'Essex':        [ 67, 50, 79, 75, 54, 78, 57, 81, 71],
+    'Hudson':       [ 37, 26, 42, 23, 10, 36, 22, 31, 20],
+    'Middlesex':    [ 30, 27, 36, 25, 18, 25, 29, 15, 28],
+    'Monmouth':     [ 23, 31, 23, 22, 24, 12, 28, 22, 11],
+    'Morris/Sussex':[ 23, 30, 25, 24, 21, 26, 16, 21, 30],
+    'Ocean':        [ 22, 12, 21, 18, 11, 21, 19, 18, 23],
+    'Passaic/Union':[ 95, 79, 85,110, 64, 53,102, 94, 74],
+    'SHaW':         [ 24, 20, 37, 16, 23, 37, 21, 22, 37]
+  };
+
+  /* Children Without Visit — all 10 chapters × 9 months (Excel-verified) */
+  var SC_NOVISIT = {
+    'ACC':          [ 80, 72, 82, 55, 51, 39, 67, 90, 36],
+    'Bergen':       [ 30, 30, 31, 29, 23, 16, 31, 35, 26],
+    'Essex':        [119,117,124,111, 98, 71,112,101, 80],
+    'Hudson':       [ 40, 42, 55, 62, 69, 22, 53, 77, 43],
+    'Middlesex':    [ 47, 39, 50, 46, 40, 37, 27, 44, 33],
+    'Monmouth':     [ 91, 77, 77, 66, 73, 50, 72, 76, 58],
+    'Morris/Sussex':[ 37, 18, 20, 24, 29, 23, 33, 25, 24],
+    'Ocean':        [ 40, 36, 49, 59, 79, 61, 66, 79, 63],
+    'Passaic/Union':[ 49, 42, 56, 43, 62, 42, 77, 80, 39],
+    'SHaW':         [ 21, 24, 48, 19, 29, 32, 36, 32, 18]
+  };
+
+  /* New Children in OOH Placement — monthly */
+  var SC_NEW_OOH = {
+    'ACC':          [31,22,22,23,18,43,30,32,null],
+    'Bergen':       [ 2, 3, 3,10, 1, 4,10, 4,null],
+    'Essex':        [15,14,14, 9,12,10,12, 6,null],
+    'Hudson':       [ 5, 6, 8, 6, 7, 5, 9,13,null],
+    'Middlesex':    [ 7, 6, 7,11, 3, 7, 6, 7,null],
+    'Monmouth':     [ 4, 3, 6, 8,11,13, 9, 4,null],
+    'Morris/Sussex':[ 8, 4, 3, 5, 1, 4, 9, 2,null],
+    'Ocean':        [ 2, 7, 1, 5, 1, 4, 1, 4,null],
+    'Passaic/Union':[13,23,11,15,11,14, 5,15,null],
+    'SHaW':         [ 2, 2, 7, 2, 0, 4, 1, 0,null]
+  };
+
+  /* New Children Served (new intakes) — monthly */
+  var SC_NEW_SERVED = {
+    'ACC':          [ 0, 7,15, 9, 5,11,13,27, 9],
+    'Bergen':       [ 3, 2, 5, 2, 5, 7, 1, 5, 6],
+    'Essex':        [12, 0,10, 7, 0, 3, 9, 8, 0],
+    'Hudson':       [ 1, 1, 2, 1, 4, 0, 1, 2,13],
+    'Middlesex':    [10, 4, 4, 1, 2, 6, 5,12, 3],
+    'Monmouth':     [ 0, 4, 5, 3, 0, 4, 0,13,18],
+    'Morris/Sussex':[ 7, 1, 6, 5, 0, 2,11, 2, 9],
+    'Ocean':        [ 3, 2, 0, 3, 0, 1, 1, 0, 3],
+    'Passaic/Union':[ 7, 9, 5, 5,13,18,12, 0, 8],
+    'SHaW':         [ 2, 1, 3, 3, 1, 0, 5, 0, 2]
+  };
+
+  /* Reports Submitted for Hearings */
+  var SC_REPORTS = {
+    'ACC':          [37,37,37,36,24,48,35,34,46],
+    'Bergen':       [24,21,23,20,14,20,32,16,20],
+    'Essex':        [64,47,69,72,53,78,53,76,69],
+    'Hudson':       [33,17,41,16, 5,34,12,26,16],
+    'Middlesex':    [25,21,33,22,16,21,28,12,27],
+    'Monmouth':     [23,30,22,20,24, 8,27,21,11],
+    'Morris/Sussex':[23,29,23,23,17,24,16,20,29],
+    'Ocean':        [20,10,19,17,11,21,19,12,20],
+    'Passaic/Union':[89,73,80,103,50,46,92,85,70],
+    'SHaW':         [20,19,34,16,20,32,20,19,34]
+  };
+
+  /* Visit Exceptions — total */
+  var SC_EXC_TOTAL = {
+    'ACC':          [33,26,26,20,30,18,25,25,24],
+    'Bergen':       [30,29, 4,13,14,10,15,17,13],
+    'Essex':        [98,97,96,90,79,60,86,84,64],
+    'Hudson':       [23,26,39, 7, 2,13,11, 5,26],
+    'Middlesex':    [32,34,24,22,14,23,20,29,22],
+    'Monmouth':     [45,35,34,20,31,30,35,49,38],
+    'Morris/Sussex':[22,16,18,20,22,12,18,15,17],
+    'Ocean':        [27,25,15, 5,20,24, 7, 7,37],
+    'Passaic/Union':[38,34,31,34,50,32,53,58,31],
+    'SHaW':         [14,17,13, 6, 5,21,17,14,12]
+  };
+  var SC_EXC_CASA = {
+    'ACC':          [13, 8, 5, 9, 8, 2, 3, 6, 2],
+    'Bergen':       [10, 7, 2, 3, 4, 0, 3, 2, 6],
+    'Essex':        [ 7,16,10, 7,12, 5,19,21, 6],
+    'Hudson':       [ 4, 7,12, 3, 1, 3, 5, 0, 5],
+    'Middlesex':    [15,19,13,13,10, 8,10,11,10],
+    'Monmouth':     [ 6, 1, 4, 3, 4, 4, 5, 3, 3],
+    'Morris/Sussex':[ 2, 1, 4, 5, 7, 2, 4, 2, 3],
+    'Ocean':        [10,10, 8, 0, 4, 4, 2, 2,20],
+    'Passaic/Union':[12, 7, 6, 5, 7, 5,11,19, 4],
+    'SHaW':         [ 1, 3, 3, 0, 1, 1, 2, 3, 0]
+  };
+  var SC_EXC_CHILD = {
+    'ACC':          [ 5, 4, 6, 4, 4, 7, 9, 2, 5],
+    'Bergen':       [ 9, 9, 1, 4, 6, 5, 3, 3, 2],
+    'Essex':        [21,30,19,24,21,23,22,21,18],
+    'Hudson':       [ 6, 6,10, 3, 1, 3, 4, 2, 3],
+    'Middlesex':    [ 5, 3, 2, 3, 1, 8, 3, 7, 5],
+    'Monmouth':     [ 5, 1, 5, 4, 3, 6,10,20, 7],
+    'Morris/Sussex':[ 5, 5, 4, 6, 7, 5, 5, 5, 3],
+    'Ocean':        [ 4, 3, 1, 0, 1, 2, 0, 0, 0],
+    'Passaic/Union':[ 8, 8, 9,10,15,10,13,13,11],
+    'SHaW':         [10,10, 4, 4, 3,12, 8, 5, 6]
+  };
+  var SC_EXC_NEWCLOSED = {
+    'ACC':          [ 4, 1,10, 6, 5, 3, 7, 8, 8],
+    'Bergen':       [ 4, 2, 0, 1, 0, 4, 2, 5, 1], /* Mar26: confirmed from Excel */
+    'Essex':        [ 9, 2,10, 8, 2, 5, 5, 7, 1],
+    'Hudson':       [ 1, 2, 2, 1, 0, 2, 0, 1, 8],
+    'Middlesex':    [ 4, 5, 2, 2, 0, 3, 1, 5, 1],
+    'Monmouth':     [14,13, 6, 2, 5,11, 5,14,15],
+    'Morris/Sussex':[ 5, 3, 4, 2, 2, 2, 3, 3, 5],
+    'Ocean':        [ 1, 2, 1, 4, 8,14, 2, 3,12],
+    'Passaic/Union':[ 4, 3, 1, 4, 3, 2, 9, 2, 2],
+    'SHaW':         [ 1, 0, 2, 2, 0, 4, 2, 3, 1]
+  };
+  var SC_EXC_PARTNER = {
+    'ACC':          [ 9, 6, 5, 1,10, 4, 6, 8, 7],
+    'Bergen':       [ 5, 6, 0, 2, 3, 0, 4, 3, 2],
+    'Essex':        [48,41,47,42,36,20,32,27,31],
+    'Hudson':       [ 9, 7,12, 0, 0, 2, 1, 1, 8],
+    'Middlesex':    [ 4, 5, 5, 3, 2, 4, 2, 2, 4],
+    'Monmouth':     [ 9,13, 9, 5,11, 6,10, 7, 5],
+    'Morris/Sussex':[ 5, 3, 2, 3, 2, 1, 0, 3, 4],
+    'Ocean':        [ 8, 7, 4, 1, 3, 2, 3, 2, 2],
+    'Passaic/Union':[ 8,10, 3, 4,14, 5, 8,12, 6],
+    'SHaW':         [ 1, 2, 2, 0, 0, 2, 2, 1, 2]
+  };
+  var SC_EXC_DISTANCE = {
+    'ACC':          [ 2, 1, 0, 0, 3, 2, 0, 1, 2],
+    'Bergen':       [ 2, 5, 1, 3, 1, 1, 3, 4, 2], /* Mar26: confirmed from Excel */
+    'Essex':        [13, 8,10, 9, 8, 7, 8, 8, 8], /* Mar26: inferred 64-6-18-1-31=8 */
+    'Hudson':       [ 3, 4, 3, 0, 0, 3, 1, 1, 2],
+    'Middlesex':    [ 4, 2, 2, 1, 1, 0, 4, 4, 2], /* Mar 26: inferred 22-10-5-1-4=2 */
+    'Monmouth':     [11, 7,10, 6, 8, 3, 5, 5, 8],
+    'Morris/Sussex':[ 5, 4, 4, 4, 4, 1, 6, 2, 2],
+    'Ocean':        [ 4, 3, 1, 0, 4, 2, 0, 0, 3],
+    'Passaic/Union':[ 6, 6,12,11,11,10,12,12, 8],
+    'SHaW':         [ 1, 2, 2, 0, 1, 2, 3, 2, 3]
+  };
+
+  /* In-person vs remote child contacts */
+  var SC_CONTACTS_IP = {
+    'ACC':          [200,188,176,209,204,222,181,181,214],
+    'Bergen':       [ 65, 60, 75, 67, 68, 87, 63, 65, 82],
+    'Essex':        [135,145,148,162,146,183,141,146,177],
+    'Hudson':       [ 89, 78, 61, 47, 36, 78, 40, 22, 60],
+    'Middlesex':    [ 70, 69, 61, 58, 67, 69, 76, 73, 84],
+    'Monmouth':     [ 78, 72, 72, 65, 63, 87, 61, 68, 85],
+    'Morris/Sussex':[104,121,126,104, 92,109, 95, 92,117],
+    'Ocean':        [ 66, 68, 55, 57, 48, 65, 61, 47, 59],
+    'Passaic/Union':[232,260,233,252,234,274,207,193,226],
+    'SHaW':         [ 78, 80, 69, 83, 77, 80, 61, 63, 77]
+  };
+  var SC_CONTACTS_NIP = {
+    'ACC':          [39,48,36,36,29,27,51,36,29],
+    'Bergen':       [39,31,32,44,29,27,35,38,55],
+    'Essex':        [60,79,84,86,63,85,84,75,76],
+    'Hudson':       [45,46,44,27,11,43,27,10,32],
+    'Middlesex':    [30,31,36,25,19,31,48,27,34],
+    'Monmouth':     [57,30,37,38,37,36,52,51,54],
+    'Morris/Sussex':[63,72,95,89,55,86,102,94,90],
+    'Ocean':        [ 8,13,17,16, 9,13,11,16,14],
+    'Passaic/Union':[106,98,149,130,121,100,87,71,97],
+    'SHaW':         [21,34,35,34,26,32,19,28,16]
+  };
+
+  /* Activity type contact counts */
+  var SC_TEAM_MEETING = {
+    'ACC':          [ 8, 8, 7, 6, 4, 6,15, 8, 8],
+    'Bergen':       [ 4, 6, 7, 8, 4, 6, 7, 6, 4],
+    'Essex':        [22,10,13,19,20,16,26,19,30],
+    'Hudson':       [ 6, 8, 8, 7, 3, 9, 8, 3, 8],
+    'Middlesex':    [ 8, 4, 6, 8, 3, 7, 6, 5, 8],
+    'Monmouth':     [ 9,11, 7,10, 5, 6, 7, 5,11],
+    'Morris/Sussex':[10,11,18,14, 9,19, 9, 9, 8],
+    'Ocean':        [ 2,10, 6, 7, 6, 6, 6, 4, 4],
+    'Passaic/Union':[18, 9,22,12,10, 5,18,13,20],
+    'SHaW':         [19,12,12,12,12, 8, 9,16, 7]
+  };
+  var SC_FAMILY = {
+    'ACC':          [48,54,48,57,65,61,51,62,62],
+    'Bergen':       [36,24,29,26,21,19,36,26,30],
+    'Essex':        [10,11,10,19,20,25,26,26,22],
+    'Hudson':       [45,26,39,26,10,13,14, 9,24],
+    'Middlesex':    [20,20,17, 9, 9,11,19,30,24],
+    'Monmouth':     [32,26,27,20,25,31,24,23,45],
+    'Morris/Sussex':[45,29,25,38,47,23,30,15,38],
+    'Ocean':        [ 1, 3, 3, 2, 1, 1, 0, 0, 9],
+    'Passaic/Union':[135,127,126,125,122,124,122,87,126],
+    'SHaW':         [55,48,40,51,35,31,30,39,37]
+  };
+  var SC_DCPP = {
+    'ACC':          [264,195,192,196,151,170,214,180,233],
+    'Bergen':       [ 85, 65, 81, 76, 45, 59, 59, 83, 94],
+    'Essex':        [137,114,130,141, 95, 86, 94,103,126],
+    'Hudson':       [ 67, 53, 76, 22, 20, 32, 21, 29, 53],
+    'Middlesex':    [ 71, 62, 61, 52, 39, 38, 79, 64, 78],
+    'Monmouth':     [ 78, 61, 52, 55, 41, 56, 64, 55, 84],
+    'Morris/Sussex':[111,124,156,134,101, 73,118,133,155],
+    'Ocean':        [ 26,null, 31, 43, 27, 37, 33, 33, 29],
+    'Passaic/Union':[372,338,371,381,277,270,328,241,333],
+    'SHaW':         [ 59, 69, 78, 49, 47, 30, 70, 32, 59]
+  };
+  var SC_LEGAL = {
+    'ACC':          [32,25,12,13,19,14,36,31,31],
+    'Bergen':       [45,26,35,27,13,22,43,25,30],
+    'Essex':        [65,46,67,49,67,89,64,44,24],
+    'Hudson':       [21,43,36,19,11,18,15,19,27],
+    'Middlesex':    [28,21, 1,17,13,17,27,22,37],
+    'Monmouth':     [13, 7, 7,11,10,11,10,11,10],
+    'Morris/Sussex':[30,33,45,43,18,22,36,29,31],
+    'Ocean':        [ 3, 6, 1, 6, 6, 2, 4, 3, 1],
+    'Passaic/Union':[35,44,52,39,34,40,32,19,34],
+    'SHaW':         [ 6,13,20, 7, 4, 6, 3, 2,10]
+  };
+  var SC_OTHER_SVC = {
+    'ACC':          [26,31,17,26,26,25,24,19,31],
+    'Bergen':       [13,20,17, 9, 8, 5,11, 9,22],
+    'Essex':        [ 9, 8, 8,18,21,14,14,19,22],
+    'Hudson':       [16,21,25, 6, 2,13, 4, 7, 8],
+    'Middlesex':    [29,16,19,16,10,15,14,10,15],
+    'Monmouth':     [36,null,19,17,12,19,24,12,21],
+    'Morris/Sussex':[43,51,41,33,23,19,22, 5,17],
+    'Ocean':        [ 3, 0, 3, 1, 0, 1, 1, 0, 0],
+    'Passaic/Union':[85,60,63,65,38,40,50,48,78],
+    'SHaW':         [31,34,41,23,18,29,36,34,38]
+  };
+  var SC_PLACEMENT = {
+    'ACC':          [287,270,237,237,237,208,258,224,275],
+    'Bergen':       [ 83, 85,121,125, 87, 81, 93, 84,109],
+    'Essex':        [154,156,175,182,153,198,158,160,194],
+    'Hudson':       [142, 81,118, 59, 42, 82, 52, 32, 71],
+    'Middlesex':    [ 42, 44, 33, 70, 38, 48, 46, 79, 56],
+    'Monmouth':     [ 58, 59, 51, 82, 43, 50, 64, 38, 64],
+    'Morris/Sussex':[109,140,133,103, 97,112,149,173,147],
+    'Ocean':        [ 49, 37, 35, 44, 43, 42, 52, 35, 36],
+    'Passaic/Union':[403,399,379,384,367,468,354,304,335],
+    'SHaW':         [ 78,100,118, 82, 71, 84, 83, 79, 95]
+  };
+  var SC_EDUCATION = {
+    'ACC':          [12,16,65,83,48,31,67,43,92],
+    'Bergen':       [26,25,46,68,39,44,54,59,54],
+    'Essex':        [30,31,150,126,120,117,105,98,166],
+    'Hudson':       [12, 6,42,20,28,18,25,26,27],
+    'Middlesex':    [13,16,39,31,20,35,68,62,64],
+    'Monmouth':     [26,11,47,49,24,29,29,36,38],
+    'Morris/Sussex':[44,45,127,85,87,79,136,121,90],
+    'Ocean':        [16,32,33,15,22,18,19,16,29],
+    'Passaic/Union':[72,90,173,212,111,101,159,107,141],
+    'SHaW':         [42,34,98,92,91,28,60,62,72]
+  };
+  var SC_MEDICAL = {
+    'ACC':          [10, 7,17, 5, 9, 5,14, 4, 6],
+    'Bergen':       [20,14,19,15, 9,15,17,13,26],
+    'Essex':        [24,23,32,30,22,73,24,40,25],
+    'Hudson':       [13, 6,15, 2, 1, 2, 6, 3, 2],
+    'Middlesex':    [ 2, 4, 1, 3, 2, 7, 4,10,13],
+    'Monmouth':     [ 4, 0, 2, 3, 4,10, 8, 5, 4],
+    'Morris/Sussex':[37,25,62,13,22,25,46,47,53],
+    'Ocean':        [ 8,14, 8, 2, 4, 3, 3, 1, 3],
+    'Passaic/Union':[ 7,12,10, 6, 8,16,20,14,17],
+    'SHaW':         [10, 5,12, 3,14, 8, 7, 5, 7]
+  };
+  var SC_MENTAL = {
+    'ACC':          [11, 8,10, 7, 4, 5,16, 3, 3],
+    'Bergen':       [27,16,27,21,14,16,37,28,33],
+    'Essex':        [77,69,68,95,43,22,75,65,91],
+    'Hudson':       [ 8, 6,10,10, 1, 4, 3, 4,14],
+    'Middlesex':    [ 3, 1, 6, 8, 4, 2,12,16,20],
+    'Monmouth':     [ 4, 0, 5, 6, 9,11, 1, 1, 0],
+    'Morris/Sussex':[12,15,16,28,20,17,32,33,17],
+    'Ocean':        [12,14,13, 5,11, 6, 7, 5, 5],
+    'Passaic/Union':[30,28,31,25,15,20,21,23,24],
+    'SHaW':         [12,17,11,16,14,11,12,16,19]
+  };
+
+  /* Middlesex 9-month data (Excel-verified) */
+  var MX = {
+    total:        [126,127,125,120,120,120,116,126,127],
+    volpct:       [92.9,92.9,92.8,91.7,91.7,92.5,93.1,92.1,92.9],
+    new_ooh:      [  7,  6,  7, 11,  3,  7,  6,  7,null],
+    new_served:   [ 10,  4,  4,  1,  2,  6,  5, 12,  3],
+    contacts:     [100,100, 97, 83, 86,100,124,100,118],
+    contacts_ip:  [ 70, 69, 61, 58, 67, 69, 76, 73, 84],
+    contacts_nip: [ 30, 31, 36, 25, 19, 31, 48, 27, 34],
+    court:        [ 30, 27, 36, 25, 18, 25, 29, 15, 28],
+    reports:      [ 25, 21, 33, 22, 16, 21, 28, 12, 27],
+    novisit:      [ 47, 39, 50, 46, 40, 37, 27, 44, 33],
+    exc_total:    [ 32, 34, 24, 22, 14, 23, 20, 29, 22],
+    exc_casa:     [ 15, 19, 13, 13, 10,  8, 10, 11, 10],
+    exc_child:    [  5,  3,  2,  3,  1,  8,  3,  7,  5],
+    exc_newclosed:[  4,  5,  2,  2,  0,  3,  1,  5,  1],
+    exc_partner:  [  4,  5,  5,  3,  2,  4,  2,  2,  4],
+    exc_distance: [  4,  2,  2,  1,  1,  0,  4,  4,  2], /* Mar 26 inferred from total */
+    team_meeting: [  8,  4,  6,  8,  3,  7,  6,  5,  8],
+    family:       [ 20, 20, 17,  9,  9, 11, 19, 30, 24],
+    dcpp:         [ 71, 62, 61, 52, 39, 38, 79, 64, 78],
+    legal:        [ 28, 21,  1, 17, 13, 17, 27, 22, 37],
+    other_svc:    [ 29, 16, 19, 16, 10, 15, 14, 10, 15],
+    placement:    [ 42, 44, 33, 70, 38, 48, 46, 79, 56],
+    education:    [ 13, 16, 39, 31, 20, 35, 68, 62, 64],
+    medical:      [  2,  4,  1,  3,  2,  7,  4, 10, 13],
+    mental:       [  3,  1,  6,  8,  4,  2, 12, 16, 20]
+  };
+
+  /* Lookup: metric key → cross-chapter data object */
+  var SC_MAP = {
+    total:SC_TOTAL, volpct:SC_VOLPCT, new_ooh:SC_NEW_OOH, new_served:SC_NEW_SERVED,
+    contacts:SC_CONTACTS, contacts_ip:SC_CONTACTS_IP, contacts_nip:SC_CONTACTS_NIP,
+    court:SC_COURT, reports:SC_REPORTS,
+    novisit:SC_NOVISIT,
+    exc_total:SC_EXC_TOTAL, exc_casa:SC_EXC_CASA, exc_child:SC_EXC_CHILD,
+    exc_newclosed:SC_EXC_NEWCLOSED, exc_partner:SC_EXC_PARTNER, exc_distance:SC_EXC_DISTANCE,
+    team_meeting:SC_TEAM_MEETING, family:SC_FAMILY, dcpp:SC_DCPP,
+    legal:SC_LEGAL, other_svc:SC_OTHER_SVC, placement:SC_PLACEMENT,
+    education:SC_EDUCATION, medical:SC_MEDICAL, mental:SC_MENTAL
+  };
+
+  /* Metric config */
+  function n(v){ return v; }
+  function pct(v){ return v != null ? v.toFixed(1)+'%' : 'N/A'; }
+  var METRICS = {
+    /* ── Children ── */
+    total:         { label:'Children Served',           yLabel:'Children',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Total children served during month. All 10 chapters × 9 months.', noteTrend:'State average from all 10 chapters.' },
+    volpct:        { label:'Volunteer Coverage %',      yLabel:'Coverage %',  fmt:pct, loBetter:false, hasCompare:true, noteCompare:'Children served by volunteer ÷ total children. All 10 chapters × 9 months.', noteTrend:'Higher = more children have assigned volunteer advocates.' },
+    new_served:    { label:'New Children Served',       yLabel:'Children',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'New intakes during the month.', noteTrend:'Monthly new intakes for Middlesex.' },
+    new_ooh:       { label:'New Children (OOH)',        yLabel:'Children',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'New children placed in out-of-home care during the month.', noteTrend:'Monthly new OOH placements for Middlesex.' },
+    /* ── Visit Compliance ── */
+    novisit:       { label:'Without Visit ↓',           yLabel:'# Children',  fmt:n,   loBetter:true,  hasCompare:true, noteCompare:'Children who did not receive an in-person visit. Lower = better.', noteTrend:'Lower is better.' },
+    exc_total:     { label:'Visit Exceptions: Total ↓', yLabel:'# Cases',     fmt:n,   loBetter:true,  hasCompare:true, noteCompare:'Total documented exceptions explaining why a visit did not occur. Lower = better.', noteTrend:'Lower is better.' },
+    exc_casa:      { label:'Exceptions: CASA ↓',        yLabel:'# Cases',     fmt:n,   loBetter:true,  hasCompare:true, noteCompare:'Visit exceptions due to CASA volunteer issues. Lower = better.', noteTrend:'Lower is better.' },
+    exc_child:     { label:'Exceptions: Child ↓',       yLabel:'# Cases',     fmt:n,   loBetter:true,  hasCompare:true, noteCompare:'Visit exceptions due to child-related reasons. Lower = better.', noteTrend:'Lower is better.' },
+    exc_newclosed: { label:'Exceptions: New/Closed ↓',  yLabel:'# Cases',     fmt:n,   loBetter:true,  hasCompare:true, noteCompare:'Visit exceptions due to new or recently closed cases. Lower = better.', noteTrend:'Lower is better.' },
+    exc_partner:   { label:'Exceptions: Partner ↓',     yLabel:'# Cases',     fmt:n,   loBetter:true,  hasCompare:true, noteCompare:'Visit exceptions due to partner agency reasons. Lower = better.', noteTrend:'Lower is better.' },
+    exc_distance:  { label:'Exceptions: Distance ↓',    yLabel:'# Cases',     fmt:n,   loBetter:true,  hasCompare:true, noteCompare:'Visit exceptions due to distance. Lower = better.', noteTrend:'Lower is better.' },
+    /* ── Court ── */
+    court:         { label:'Court Hearings',            yLabel:'Hearings',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Court hearings attended. All 10 chapters × 9 months.', noteTrend:'All months available for cross-chapter comparison.' },
+    reports:       { label:'Reports Submitted',         yLabel:'Reports',     fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Reports submitted for court hearings.', noteTrend:'All months available.' },
+    /* ── Child Contacts ── */
+    contacts:      { label:'Total Contacts',            yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Total child contacts (in-person + remote).', noteTrend:'Includes in-person and remote contacts.' },
+    contacts_ip:   { label:'In-Person Contacts',        yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'In-person child contacts only.', noteTrend:'All months available.' },
+    contacts_nip:  { label:'Remote Contacts',           yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Non in-person (phone/virtual) child contacts.', noteTrend:'All months available.' },
+    /* ── Outreach & Advocacy ── */
+    dcpp:          { label:'DCP&P Contact',             yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Contacts with Division of Child Protection and Permanency.', noteTrend:'All months available.' },
+    family:        { label:'Family of Origin',          yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Contacts with child\'s family of origin.', noteTrend:'All months available.' },
+    legal:         { label:'Legal Professional',        yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Contacts with legal professionals (attorneys, GAL, etc.).', noteTrend:'All months available.' },
+    team_meeting:  { label:'Team Meetings',             yLabel:'Meetings',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Team meetings attended.', noteTrend:'All months available.' },
+    other_svc:     { label:'Other Services',            yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Contacts with other service providers.', noteTrend:'All months available.' },
+    placement:     { label:'Resource/Placement Contact',yLabel:'Contacts',    fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Contacts with resource, relative, or facility placements. Mar 26 data unavailable.', noteTrend:'Mar 26 unavailable.' },
+    education:     { label:'Educational Advocacy',      yLabel:'Activities',  fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Educational advocacy and contact activities.', noteTrend:'All months available.' },
+    medical:       { label:'Medical Advocacy',          yLabel:'Activities',  fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Medical advocacy and contact activities.', noteTrend:'All months available.' },
+    mental:        { label:'Mental Health Advocacy',    yLabel:'Activities',  fmt:n,   loBetter:false, hasCompare:true, noteCompare:'Mental health advocacy and contact activities.', noteTrend:'All months available.' }
+  };
+
+  /* ─── UI STATE ─────────────────────────────────── */
+  var uiState = { metric:'total', view:'compare', monthIdx:8 /* Mar 26 */, compareChapter:'' };
+  var sciChart = null;
+
+  /* ─── HELPERS ──────────────────────────────────── */
+  var GRN   = '#1a7a50';
+  var GRN_A = 'rgba(26,122,80,0.14)';
+  var BLU   = '#3B8BD4';
+  var BLU_A = 'rgba(59,139,212,0.14)';
+  var GRY   = '#888';
+  var RED_A = 'rgba(198,40,40,0.12)';
+
+  function avg(arr){ return arr.reduce(function(s,v){return s+v;},0)/arr.length; }
+  function stateAvgByMonth(metric){
+    var sc = SC_MAP[metric] || SC_TOTAL;
+    return SC_MONTHS.map(function(_,i){
+      var vals = SC_CHAPTERS.map(function(ch){ return sc[ch] ? sc[ch][i] : null; }).filter(function(v){ return v != null; });
+      if (!vals.length) return null;
+      return Math.round( vals.reduce(function(s,v){return s+v;},0) / vals.length * 10 ) / 10;
+    });
+  }
+
+  /* ─── RENDER STAT BAR ─────────────────────────── */
+  function renderStats(items){
+    var bar = document.getElementById('sci_stat_bar');
+    if (!bar) return;
+    bar.innerHTML = items.map(function(it){
+      return '<div class="sci-stat">' +
+        '<div class="sci-stat-lbl">' + it.label + '</div>' +
+        '<div class="sci-stat-val' + (it.green ? ' sci-green' : '') + '">' + it.val + '</div>' +
+        '<div class="sci-stat-sub">' + it.sub + '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  /* ─── RENDER CHART ─────────────────────────────── */
+  function render(){
+    var m   = uiState.metric;
+    var v   = uiState.view;
+    var cfg = METRICS[m];
+
+    /* ── Always clean up from any previous no-data state ── */
+    var canvas    = document.getElementById('sci_chart');
+    var container = document.getElementById('sci_chart_container');
+    var noDataMsg = document.getElementById('sci_nodata_msg');
+    if (canvas)    canvas.style.display = '';                   /* always show canvas */
+    if (noDataMsg) noDataMsg.style.display = 'none';           /* hide stale message */
+    if (container) container.style.height = '340px';           /* reset to default */
+
+    /* Show/hide controls */
+    var monthOpt   = document.getElementById('sci_month_opt');
+    var compareOpt = document.getElementById('sci_compare_opt');
+    if (monthOpt)   monthOpt.style.display  = (v==='compare') ? '' : 'none';
+    if (compareOpt) compareOpt.style.display = (v==='trend') ? '' : 'none';
+
+    if (!canvas) return;
+    if (sciChart){ sciChart.destroy(); sciChart = null; }
+
+    if (v === 'compare') renderCompare(canvas, m, cfg);
+    else                  renderTrend(canvas, m, cfg);
+  }
+
+  /* ─── SHARED HELPERS ───────────────────────────── */
+  /* Build chapter label with ▲/▼ delta vs previous month */
+  function chLabel(ch, currVal, prevVal, midx){
+    var base = ch === 'Middlesex' ? 'Middlesex  ✦' : ch;
+    if (midx === 0 || currVal == null || prevVal == null) return base;
+    var d = currVal - prevVal;
+    if (d === 0) return base + '  –';
+    return base + '  ' + (d > 0 ? '▲' : '▼') + Math.abs(d);
+  }
+
+  /* ─── EXCEPTION SUBCATEGORY DEFINITIONS ──────── */
+  var EXC_SUBS = [
+    { key:'exc_casa',      label:'CASA',       sc:SC_EXC_CASA,      color:'rgba(59,130,246,0.85)',  colorDim:'rgba(59,130,246,0.50)'  },
+    { key:'exc_child',     label:'Child',      sc:SC_EXC_CHILD,     color:'rgba(245,158,11,0.85)',  colorDim:'rgba(245,158,11,0.50)'  },
+    { key:'exc_newclosed', label:'New/Closed', sc:SC_EXC_NEWCLOSED, color:'rgba(139,92,246,0.85)',  colorDim:'rgba(139,92,246,0.50)'  },
+    { key:'exc_partner',   label:'Partner',    sc:SC_EXC_PARTNER,   color:'rgba(20,184,166,0.85)',  colorDim:'rgba(20,184,166,0.50)'  },
+    { key:'exc_distance',  label:'Distance',   sc:SC_EXC_DISTANCE,  color:'rgba(239,68,68,0.85)',   colorDim:'rgba(239,68,68,0.50)'   }
+  ];
+
+  /* ─── EXCEPTIONS STACKED — COMPARE VIEW ────── */
+  function renderExcCompare(canvas){
+    var midx = uiState.monthIdx;
+    var snapshotLabel = SC_MONTHS[midx];
+    var prevIdx = Math.max(0, midx-1);
+    var totals = {}, prevTotals = {};
+    SC_CHAPTERS.forEach(function(ch){
+      totals[ch]     = SC_EXC_TOTAL[ch] ? SC_EXC_TOTAL[ch][midx]    : null;
+      prevTotals[ch] = SC_EXC_TOTAL[ch] ? SC_EXC_TOTAL[ch][prevIdx] : null;
+    });
+    var sorted = SC_CHAPTERS.slice().sort(function(a,b){
+      var va = totals[a]!=null ? totals[a] : Infinity;
+      var vb = totals[b]!=null ? totals[b] : Infinity;
+      return va - vb;
+    });
+    var labels = sorted.map(function(ch){ return chLabel(ch, totals[ch], prevTotals[ch], midx); });
+    var datasets = EXC_SUBS.map(function(sub){
+      return {
+        label: sub.label,
+        data: sorted.map(function(ch){ return sub.sc[ch] ? sub.sc[ch][midx] : null; }),
+        backgroundColor: sorted.map(function(ch){ return ch==='Middlesex' ? sub.color : sub.colorDim; }),
+        borderWidth: 0, borderRadius: 0
+      };
+    });
+    var mxVal = totals['Middlesex'];
+    var validVals = SC_CHAPTERS.map(function(ch){ return totals[ch]; }).filter(function(v){ return v!=null; });
+    var stAvg = avg(validVals);
+    var mxRank = sorted.indexOf('Middlesex') + 1;
+    var pctVsAvg = mxVal!=null ? Math.round((mxVal-stAvg)/stAvg*100) : 0;
+    renderStats([
+      { label:'Middlesex', val:n(mxVal), sub:snapshotLabel+' · total exceptions', green:true },
+      { label:'State Average', val:n(Math.round(stAvg*10)/10), sub:validVals.length+' chapters' },
+      { label:'Middlesex Rank', val:mxRank+' of '+sorted.length, sub:(pctVsAvg>=0?'+':'')+pctVsAvg+'% vs avg' },
+      { label:'Best (Lowest)', val:n(totals[sorted[0]]), sub:sorted[0] }
+    ]);
+    var container = document.getElementById('sci_chart_container');
+    if (container) container.style.height = (sorted.length * 36 + 72) + 'px';
+    sciChart = new Chart(canvas, {
+      type:'bar',
+      data:{ labels:labels, datasets:datasets },
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        animation:{ duration:550, easing:'easeOutCubic' },
+        plugins:{
+          legend:{ display:true, position:'bottom', labels:{ font:{size:11}, boxWidth:12, padding:10 } },
+          tooltip:{ callbacks:{
+            label:function(ctx){ return '  '+ctx.dataset.label+': '+n(ctx.raw); },
+            footer:function(items){ return 'Total: '+n(items.reduce(function(s,i){ return s+(i.raw||0); },0)); }
+          }}
+        },
+        scales:{
+          x:{ stacked:true, grid:{ color:'rgba(0,0,0,0.06)' }, ticks:{ font:{size:11} } },
+          y:{ stacked:true, grid:{ display:false }, ticks:{ font:{size:12},
+              color:function(ctx){ return sorted[ctx.index]==='Middlesex'?GRN:'#888'; } } }
+        }
+      }
+    });
+    document.getElementById('sci_note').textContent = '* Each bar shows the breakdown of exception reasons. Sorted ascending — lower total = fewer exceptions. ↓ lower is better.';
+  }
+
+  /* ─── EXCEPTIONS STACKED — TREND VIEW ────────── */
+  function renderExcTrend(canvas){
+    var datasets = EXC_SUBS.map(function(sub){
+      return {
+        label: sub.label,
+        data: MX[sub.key],
+        backgroundColor: sub.color,
+        borderColor: sub.color,
+        borderWidth: 0, borderRadius: 2
+      };
+    });
+    var mxTotal = MX.exc_total;
+    var mxLast  = mxTotal[mxTotal.length-1];
+    var mxFirst = mxTotal[0];
+    var delta   = mxLast - mxFirst;
+    var mxAvg   = Math.round(avg(mxTotal)*10)/10;
+    renderStats([
+      { label:'Middlesex (Mar 26)', val:n(mxLast), sub:'total exceptions', green:true },
+      { label:'Jul → Mar Change', val:(delta>=0?'+':'')+n(delta), sub:'9-month shift', green:delta<0 },
+      { label:'Period Average', val:n(mxAvg), sub:'Jul 25 – Mar 26' },
+      { label:'Mar 26 Breakdown', val:'CASA '+MX.exc_casa[8]+' · Child '+MX.exc_child[8], sub:'NC '+MX.exc_newclosed[8]+' · Prtnr '+MX.exc_partner[8]+' · Dist '+MX.exc_distance[8] }
+    ]);
+    var container = document.getElementById('sci_chart_container');
+    if (container) container.style.height = '340px';
+    sciChart = new Chart(canvas, {
+      type:'bar',
+      data:{ labels:SC_MONTHS, datasets:datasets },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        animation:{ duration:550, easing:'easeOutCubic' },
+        plugins:{
+          legend:{ display:true, position:'bottom', labels:{ font:{size:11}, boxWidth:12, padding:10 } },
+          tooltip:{ callbacks:{
+            label:function(ctx){ return '  '+ctx.dataset.label+': '+n(ctx.raw); },
+            footer:function(items){ return 'Total: '+n(items.reduce(function(s,i){ return s+(i.raw||0); },0)); }
+          }}
+        },
+        scales:{
+          x:{ stacked:true, grid:{ color:'rgba(0,0,0,0.05)' }, ticks:{ font:{size:11} } },
+          y:{ stacked:true, beginAtZero:true, grid:{ color:'rgba(0,0,0,0.07)' }, ticks:{ font:{size:11} } }
+        }
+      }
+    });
+    document.getElementById('sci_note').textContent = '* Stacked bars show breakdown of visit exception reasons for Middlesex over time. Lower total is better.';
+  }
+
+  /* ─── CONTACTS STACKED — COMPARE VIEW ─────────── */
+  function renderContactsCompare(canvas){
+    var midx = uiState.monthIdx;
+    var prevIdx = Math.max(0, midx-1);
+    var snapshotLabel = SC_MONTHS[midx];
+    var totals = {}, prevTotals = {};
+    SC_CHAPTERS.forEach(function(ch){
+      totals[ch]     = SC_CONTACTS[ch] ? SC_CONTACTS[ch][midx]    : null;
+      prevTotals[ch] = SC_CONTACTS[ch] ? SC_CONTACTS[ch][prevIdx] : null;
+    });
+    var sorted = SC_CHAPTERS.slice().sort(function(a,b){
+      var va = totals[a]!=null ? totals[a] : -Infinity;
+      var vb = totals[b]!=null ? totals[b] : -Infinity;
+      return vb - va;   /* hi-better: descending */
+    });
+    var labels = sorted.map(function(ch){ return chLabel(ch, totals[ch], prevTotals[ch], midx); });
+    var CON_SUBS = [
+      { label:'In-Person',  sc:SC_CONTACTS_IP,  color:'rgba(26,122,80,0.85)',   colorDim:'rgba(26,122,80,0.45)'  },
+      { label:'Remote',     sc:SC_CONTACTS_NIP, color:'rgba(59,139,212,0.85)',  colorDim:'rgba(59,139,212,0.45)' }
+    ];
+    var datasets = CON_SUBS.map(function(sub){
+      return {
+        label: sub.label,
+        data: sorted.map(function(ch){ return sub.sc[ch] ? sub.sc[ch][midx] : null; }),
+        backgroundColor: sorted.map(function(ch){ return ch==='Middlesex' ? sub.color : sub.colorDim; }),
+        borderWidth: 0, borderRadius: 0
+      };
+    });
+    var mxVal = totals['Middlesex'];
+    var validVals = SC_CHAPTERS.map(function(ch){ return totals[ch]; }).filter(function(v){ return v!=null; });
+    var stAvg = avg(validVals);
+    var mxRank = sorted.indexOf('Middlesex') + 1;
+    var pctVsAvg = mxVal!=null ? Math.round((mxVal-stAvg)/stAvg*100) : 0;
+    var mxIP  = SC_CONTACTS_IP['Middlesex']  ? SC_CONTACTS_IP['Middlesex'][midx]  : null;
+    var mxNIP = SC_CONTACTS_NIP['Middlesex'] ? SC_CONTACTS_NIP['Middlesex'][midx] : null;
+    var ipPct = (mxIP!=null && mxVal) ? Math.round(mxIP/mxVal*100) : null;
+    renderStats([
+      { label:'Middlesex', val:n(mxVal), sub:snapshotLabel+' · total contacts', green:true },
+      { label:'In-Person', val:n(mxIP), sub:ipPct!=null ? ipPct+'% of contacts' : '' },
+      { label:'Middlesex Rank', val:mxRank+' of '+sorted.length, sub:(pctVsAvg>=0?'+':'')+pctVsAvg+'% vs avg' },
+      { label:'State Average', val:n(Math.round(stAvg*10)/10), sub:validVals.length+' chapters' }
+    ]);
+    var container = document.getElementById('sci_chart_container');
+    if (container) container.style.height = (sorted.length * 36 + 72) + 'px';
+    sciChart = new Chart(canvas, {
+      type:'bar',
+      data:{ labels:labels, datasets:datasets },
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        animation:{ duration:550, easing:'easeOutCubic' },
+        plugins:{
+          legend:{ display:true, position:'bottom', labels:{ font:{size:11}, boxWidth:12, padding:10 } },
+          tooltip:{ callbacks:{
+            label:function(ctx){ return '  '+ctx.dataset.label+': '+n(ctx.raw); },
+            footer:function(items){ return 'Total: '+n(items.reduce(function(s,i){ return s+(i.raw||0); },0)); }
+          }}
+        },
+        scales:{
+          x:{ stacked:true, grid:{ color:'rgba(0,0,0,0.06)' }, ticks:{ font:{size:11} } },
+          y:{ stacked:true, grid:{ display:false }, ticks:{ font:{size:12},
+              color:function(ctx){ return sorted[ctx.index]==='Middlesex'?GRN:'#888'; } } }
+        }
+      }
+    });
+    document.getElementById('sci_note').textContent = '* Bars show in-person vs. remote child contacts per chapter. Sorted descending — higher total = more contact.';
+  }
+
+  /* ─── CONTACTS STACKED — TREND VIEW ────────────── */
+  function renderContactsTrend(canvas){
+    var CON_SUB_DEFS = [
+      { key:'contacts_ip',  label:'In-Person', color:'rgba(26,122,80,0.85)'  },
+      { key:'contacts_nip', label:'Remote',    color:'rgba(59,139,212,0.85)' }
+    ];
+    var datasets = CON_SUB_DEFS.map(function(sub){
+      return {
+        label: sub.label,
+        data: MX[sub.key],
+        backgroundColor: sub.color,
+        borderColor: sub.color,
+        borderWidth: 0, borderRadius: 2
+      };
+    });
+    var mxTotal = MX.contacts;
+    var mxLast  = mxTotal[mxTotal.length-1];
+    var mxFirst = mxTotal[0];
+    var delta   = mxLast - mxFirst;
+    var mxAvg   = Math.round(avg(mxTotal)*10)/10;
+    var ipLast  = MX.contacts_ip[MX.contacts_ip.length-1];
+    var ipPct   = mxLast ? Math.round(ipLast/mxLast*100) : null;
+    renderStats([
+      { label:'Middlesex (Mar 26)', val:n(mxLast), sub:'total contacts', green:true },
+      { label:'Jul → Mar Change', val:(delta>=0?'+':'')+n(delta), sub:'9-month shift', green:delta>0 },
+      { label:'Period Average', val:n(mxAvg), sub:'Jul 25 – Mar 26' },
+      { label:'Mar 26 Mix', val:n(ipLast)+' in-person', sub:(ipPct!=null?ipPct+'% of contacts':'')+' · '+n(MX.contacts_nip[8])+' remote' }
+    ]);
+    var container = document.getElementById('sci_chart_container');
+    if (container) container.style.height = '340px';
+    sciChart = new Chart(canvas, {
+      type:'bar',
+      data:{ labels:SC_MONTHS, datasets:datasets },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        animation:{ duration:550, easing:'easeOutCubic' },
+        plugins:{
+          legend:{ display:true, position:'bottom', labels:{ font:{size:11}, boxWidth:12, padding:10 } },
+          tooltip:{ callbacks:{
+            label:function(ctx){ return '  '+ctx.dataset.label+': '+n(ctx.raw); },
+            footer:function(items){ return 'Total: '+n(items.reduce(function(s,i){ return s+(i.raw||0); },0)); }
+          }}
+        },
+        scales:{
+          x:{ stacked:true, grid:{ color:'rgba(0,0,0,0.05)' }, ticks:{ font:{size:11} } },
+          y:{ stacked:true, beginAtZero:true, grid:{ color:'rgba(0,0,0,0.07)' }, ticks:{ font:{size:11} } }
+        }
+      }
+    });
+    document.getElementById('sci_note').textContent = '* Stacked bars show in-person vs. remote child contacts for Middlesex over time. Higher total is better.';
+  }
+
+  /* ─── COMPARISON VIEW ──────────────────────────── */
+  function renderCompare(canvas, m, cfg){
+    /* Special: stacked subcategory charts */
+    if (m === 'exc_total')  { renderExcCompare(canvas);       return; }
+    if (m === 'contacts')   { renderContactsCompare(canvas);  return; }
+
+    /* If no cross-chapter data, show friendly message and fall through to trend */
+    if (!cfg.hasCompare) {
+      if (sciChart){ sciChart.destroy(); sciChart = null; }
+      var container = document.getElementById('sci_chart_container');
+      if (container) container.style.height = '100px';
+      canvas.style.display = 'none';
+      var noDataEl = document.getElementById('sci_nodata_msg');
+      if (noDataEl) {
+        noDataEl.style.display = 'flex';
+        noDataEl.innerHTML =
+          '<strong>Cross-chapter data not available for "' + cfg.label + '"</strong><br>' +
+          'Switch to <strong>📈 Middlesex Trend</strong> to see the full picture.';
+      }
+      renderStats([
+        { label:'Middlesex (Mar 26)', val:cfg.fmt(MX[m][8]), sub:'most recent', green:true },
+        { label:'9-Month Change', val:(MX[m][8]-MX[m][0]>=0?'+':'')+cfg.fmt(MX[m][8]-MX[m][0]), sub:'Jul 25 → Mar 26' },
+        { label:'Period Average', val:cfg.fmt(Math.round(avg(MX[m])*10)/10), sub:'Jul 25 – Mar 26' },
+        { label:'Data Source', val:'Middlesex only', sub:'no cross-chapter available' }
+      ]);
+      document.getElementById('sci_note').textContent = '* ' + cfg.noteTrend;
+      return;
+    }
+
+    var data = {}, prevData = {};
+    var snapshotLabel = '';
+    var midx = uiState.monthIdx;
+    var prevIdx = Math.max(0, midx-1);
+
+    var sc = SC_MAP[m];
+    SC_CHAPTERS.forEach(function(ch){
+      data[ch]     = (sc && sc[ch]) ? sc[ch][midx]    : null;
+      prevData[ch] = (sc && sc[ch]) ? sc[ch][prevIdx] : null;
+    });
+    snapshotLabel = SC_MONTHS[midx];
+
+    /* Sort ascending lo-better, descending hi-better (nulls last) */
+    var sorted = SC_CHAPTERS.slice().sort(function(a,b){
+      var va = data[a] != null ? data[a] : (cfg.loBetter ? Infinity : -Infinity);
+      var vb = data[b] != null ? data[b] : (cfg.loBetter ? Infinity : -Infinity);
+      return cfg.loBetter ? va - vb : vb - va;
+    });
+    var vals     = sorted.map(function(ch){ return data[ch] != null ? data[ch] : null; });
+    var labels   = sorted.map(function(ch){ return chLabel(ch, data[ch], prevData[ch], midx); });
+    var bgColors = sorted.map(function(ch){ return ch==='Middlesex' ? GRN : 'rgba(26,122,80,0.25)'; });
+
+    var mxVal    = data['Middlesex'];
+    var mxRank   = sorted.indexOf('Middlesex') + 1;
+    var validVals = vals.filter(function(v){ return v != null; });
+    var stAvg    = avg(validVals);
+    var pctVsAvg = mxVal != null ? Math.round((mxVal - stAvg) / stAvg * 100) : 0;
+
+    var bestLabel = cfg.loBetter ? 'Best (Lowest)' : 'Highest';
+    var bestVal   = cfg.loBetter ? Math.min.apply(null,validVals) : Math.max.apply(null,validVals);
+    var bestCh    = cfg.loBetter ? sorted[0] : sorted[0];
+    renderStats([
+      { label:'Middlesex', val: mxVal != null ? cfg.fmt(mxVal) : 'N/A', sub:snapshotLabel + ' · confirmed', green:true },
+      { label:'State Average', val:cfg.fmt(Math.round(stAvg*10)/10), sub:validVals.length + ' chapters' },
+      { label:'Middlesex Rank', val:mxRank + ' of ' + sorted.length, sub:(pctVsAvg>=0?'+':'')+pctVsAvg+'% vs avg' },
+      { label:bestLabel, val:cfg.fmt(bestVal), sub:bestCh }
+    ]);
+
+    /* Adjust container height for horizontal bar */
+    var container = document.getElementById('sci_chart_container');
+    if (container) container.style.height = (sorted.length * 36 + 48) + 'px';
+
+    sciChart = new Chart(canvas, {
+      type:'bar',
+      data:{ labels:labels, datasets:[{
+        label:cfg.label + ' — ' + snapshotLabel,
+        data:vals, backgroundColor:bgColors, borderRadius:4,
+        borderColor:bgColors.map(function(c){ return c===GRN?GRN:GRN; }), borderWidth:0
+      }]},
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        animation:{ duration:550, easing:'easeOutCubic' },
+        plugins:{
+          legend:{ display:false },
+          tooltip:{ callbacks:{ label:function(ctx){ return '  '+cfg.fmt(ctx.raw)+(m==='volpct' ? ' — of children w/ assigned volunteer' : ''); } } }
+        },
+        scales:{
+          x:{ grid:{ color:'rgba(0,0,0,0.06)' }, ticks:{ font:{size:11}, callback:function(v){ return m==='volpct'?v+'%':v; } } },
+          y:{ grid:{ display:false }, ticks:{ font:{size:12}, color:function(ctx){ return sorted[ctx.index]==='Middlesex'?GRN:'#888'; } } }
+        }
+      }
+    });
+
+    document.getElementById('sci_note').textContent = '* ' + cfg.noteCompare + (cfg.loBetter ? ' Arrow ↓ = lower is better.' : '');
+  }
+
+  /* ─── TREND VIEW ──────────────────────────────── */
+  function renderTrend(canvas, m, cfg){
+    /* Special: stacked subcategory charts */
+    if (m === 'exc_total') { renderExcTrend(canvas);       return; }
+    if (m === 'contacts')  { renderContactsTrend(canvas);  return; }
+
+    var mxData = MX[m];
+    var datasets = [{
+      label:'Middlesex',
+      data: mxData,
+      borderColor: GRN, backgroundColor: GRN_A,
+      tension:0.35, fill: (m!=='total'), pointRadius:5,
+      pointBackgroundColor: GRN, borderWidth:2.5
+    }];
+
+    /* State average overlay (all metrics) */
+    datasets.push({
+      label:'10-Chapter State Average',
+      data: stateAvgByMonth(m),
+      borderColor:GRY, backgroundColor:'transparent',
+      tension:0.35, fill:false, borderDash:[5,4], pointRadius:3, borderWidth:1.5
+    });
+    /* Optional comparison chapter */
+    var compCh = uiState.compareChapter;
+    var sc = SC_MAP[m];
+    if (compCh && sc && sc[compCh]){
+      datasets.push({
+        label:compCh,
+        data:sc[compCh],
+        borderColor:BLU, backgroundColor:BLU_A,
+        tension:0.35, fill:false, pointRadius:4, borderWidth:2
+      });
+    }
+
+    var mxLast  = mxData[mxData.length-1];
+    var mxFirst = mxData[0];
+    var delta   = mxLast - mxFirst;
+    var mxAvg   = Math.round(avg(mxData)*10)/10;
+    var mxMin   = Math.min.apply(null,mxData);
+    var mxMax   = Math.max.apply(null,mxData);
+
+    renderStats([
+      { label:'Middlesex (Mar 26)', val:cfg.fmt(mxLast), sub:'most recent', green:true },
+      { label:'Jul → Mar Change', val:(delta>=0?'+':'')+cfg.fmt(delta), sub:'9-month shift', green:cfg.loBetter?(delta<0):(delta>0) },
+      { label:'Period Average', val:cfg.fmt(mxAvg), sub:'Jul 25 – Mar 26' },
+      { label:'Range', val:cfg.fmt(mxMin)+' – '+cfg.fmt(mxMax), sub:cfg.loBetter?'high – low (lower=better)':'low – high' }
+    ]);
+
+    var container = document.getElementById('sci_chart_container');
+    if (container) container.style.height = '340px';
+
+    var yOpts = { grid:{ color:'rgba(0,0,0,0.07)' }, ticks:{ font:{size:11}, callback:function(v){ return m==='volpct'?v+'%':v; } } };
+    if (m==='volpct'){ yOpts.min=85; yOpts.max=100; }
+    if (cfg.loBetter){ yOpts.min=0; }
+
+    sciChart = new Chart(canvas, {
+      type:'line',
+      data:{ labels:SC_MONTHS, datasets:datasets },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        animation:{ duration:550, easing:'easeOutCubic' },
+        plugins:{ legend:{ labels:{ font:{size:12}, boxWidth:14, padding:12 } } },
+        scales:{ x:{ grid:{ color:'rgba(0,0,0,0.05)' }, ticks:{ font:{size:11} } }, y:yOpts }
+      }
+    });
+
+    document.getElementById('sci_note').textContent = '* ' + cfg.noteTrend + (cfg.loBetter ? ' Lower values are better.' : '');
+  }
+
+  /* ─── RATE-NORMALIZED COMPARISON ───────────────── */
+  var sciRateChart = null;
+
+  function renderRateStats(stats){
+    var bar = document.getElementById('sci_rate_stat_bar');
+    if (!bar) return;
+    bar.innerHTML = stats.map(function(s){
+      return '<div class="sci-stat">'
+        +'<div class="sci-stat-label">'+s.label+'</div>'
+        +'<div class="sci-stat-val'+(s.green?' sci-green':'')+'">'+s.val+'</div>'
+        +'<div class="sci-stat-sub">'+s.sub+'</div>'
+        +'</div>';
+    }).join('');
+  }
+
+  function rateOf(raw, total){
+    if (raw==null || total==null || total===0) return null;
+    return Math.round(raw/total*1000)/10;  /* per 100 children, 1 decimal */
+  }
+
+  /* Rate trend: Middlesex rate over 9 months + state avg rate */
+  function renderRateTrend(){
+    var m      = uiState.metric;
+    var canvas = document.getElementById('sci_rate_chart');
+    var container = document.getElementById('sci_rate_chart_container');
+    var noteEl = document.getElementById('sci_rate_note');
+    if (!canvas) return;
+    if (sciRateChart){ sciRateChart.destroy(); sciRateChart = null; }
+    canvas.style.display = '';
+    if (container) container.style.height = '320px';
+
+    if (m === 'total' || m === 'volpct'){
+      var noDataMsg = document.getElementById('sci_rate_nodata_msg');
+      if (container) container.style.height = '72px';
+      canvas.style.display = 'none';
+      if (noDataMsg){ noDataMsg.style.display='flex';
+        noDataMsg.innerHTML = m==='volpct'
+          ? '<strong>Volunteer Coverage % is already a rate metric</strong><br>See the trend above.'
+          : '<strong>Rate view not applicable for total caseload</strong>'; }
+      renderRateStats([]);
+      if (noteEl) noteEl.textContent = '';
+      return;
+    }
+
+    var cfg = METRICS[m];
+    /* Middlesex rate per month */
+    var mxRates = SC_MONTHS.map(function(_,i){
+      var raw = MX[m] ? MX[m][i] : null;
+      var tot = MX.total[i];
+      return (raw!=null && tot) ? Math.round(raw/tot*1000)/10 : null;
+    });
+    /* State avg rate per month */
+    var stRates = SC_MONTHS.map(function(_,i){
+      var sc = SC_MAP[m];
+      if (!sc) return null;
+      var vals = SC_CHAPTERS.map(function(ch){
+        var raw = sc[ch] ? sc[ch][i] : null;
+        var tot = SC_TOTAL[ch] ? SC_TOTAL[ch][i] : null;
+        return (raw!=null && tot) ? raw/tot*100 : null;
+      }).filter(function(v){ return v!=null; });
+      return vals.length ? Math.round(vals.reduce(function(s,v){return s+v;},0)/vals.length*10)/10 : null;
+    });
+
+    /* Stacked rate trend for exc_total */
+    if (m === 'exc_total'){
+      var datasets = EXC_SUBS.map(function(sub){
+        return {
+          label: sub.label,
+          data: SC_MONTHS.map(function(_,i){ return rateOf(MX[sub.key]?MX[sub.key][i]:null, MX.total[i]); }),
+          backgroundColor: sub.color, borderColor: sub.color, borderWidth:0, borderRadius:2
+        };
+      });
+      sciRateChart = new Chart(canvas,{
+        type:'bar', data:{labels:SC_MONTHS, datasets:datasets},
+        options:{ responsive:true, maintainAspectRatio:false, animation:{duration:450},
+          plugins:{ legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:12,padding:10}},
+            tooltip:{callbacks:{ label:function(ctx){return '  '+ctx.dataset.label+': '+ctx.raw+' per 100';},
+              footer:function(items){return 'Total: '+Math.round(items.reduce(function(s,i){return s+(i.raw||0);},0)*10)/10+' per 100';} }}},
+          scales:{ x:{stacked:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:11}}},
+            y:{stacked:true,beginAtZero:true,grid:{color:'rgba(0,0,0,0.07)'},ticks:{font:{size:11}}} } }
+      });
+      if (noteEl) noteEl.textContent = '* Exception rate per 100 children served — Middlesex trend over 9 months by subcategory. Lower is better.';
+      renderRateStats([
+        { label:'Current Rate (Mar 26)', val:(mxRates[8]!=null?mxRates[8]:'N/A')+' per 100', sub:'exceptions per 100 children', green:true },
+        { label:'Jul 25 Rate', val:(mxRates[0]!=null?mxRates[0]:'N/A')+' per 100', sub:'starting baseline' },
+        { label:'9-Month Change', val:(mxRates[8]!=null&&mxRates[0]!=null?(mxRates[8]-mxRates[0]>=0?'+':'')+Math.round((mxRates[8]-mxRates[0])*10)/10:'N/A')+' per 100', sub:'rate shift', green:mxRates[8]<mxRates[0] },
+        { label:'State Avg (Mar 26)', val:(stRates[8]!=null?stRates[8]:'N/A')+' per 100', sub:'10-chapter average' }
+      ]);
+      return;
+    }
+    /* Stacked rate trend for contacts */
+    if (m === 'contacts'){
+      var conSubs = [
+        {key:'contacts_ip',label:'In-Person',color:'rgba(26,122,80,0.85)'},
+        {key:'contacts_nip',label:'Remote',color:'rgba(59,139,212,0.85)'}
+      ];
+      var datasets = conSubs.map(function(sub){
+        return {
+          label:sub.label,
+          data:SC_MONTHS.map(function(_,i){ return rateOf(MX[sub.key]?MX[sub.key][i]:null, MX.total[i]); }),
+          backgroundColor:sub.color, borderColor:sub.color, borderWidth:0, borderRadius:2
+        };
+      });
+      sciRateChart = new Chart(canvas,{
+        type:'bar', data:{labels:SC_MONTHS, datasets:datasets},
+        options:{ responsive:true, maintainAspectRatio:false, animation:{duration:450},
+          plugins:{ legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:12,padding:10}},
+            tooltip:{callbacks:{ label:function(ctx){return '  '+ctx.dataset.label+': '+ctx.raw+' per 100';},
+              footer:function(items){return 'Total: '+Math.round(items.reduce(function(s,i){return s+(i.raw||0);},0)*10)/10+' per 100';} }}},
+          scales:{ x:{stacked:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:11}}},
+            y:{stacked:true,beginAtZero:true,grid:{color:'rgba(0,0,0,0.07)'},ticks:{font:{size:11}}} } }
+      });
+      if (noteEl) noteEl.textContent = '* Contacts per 100 children served — Middlesex trend. Values above 100 = multiple contacts per child that month.';
+      renderRateStats([
+        { label:'Current Rate (Mar 26)', val:(mxRates[8]!=null?mxRates[8]:'N/A')+' per 100', sub:'contacts per 100 children', green:true },
+        { label:'In-Person Rate', val:rateOf(MX.contacts_ip[8],MX.total[8])+' per 100', sub:'Mar 26' },
+        { label:'9-Month Change', val:(mxRates[8]!=null&&mxRates[0]!=null?(mxRates[8]-mxRates[0]>=0?'+':'')+Math.round((mxRates[8]-mxRates[0])*10)/10:'N/A')+' per 100', sub:'rate shift', green:mxRates[8]>mxRates[0] },
+        { label:'State Avg (Mar 26)', val:(stRates[8]!=null?stRates[8]:'N/A')+' per 100', sub:'10-chapter average' }
+      ]);
+      return;
+    }
+    /* Standard line */
+    var mxLast = mxRates[mxRates.length-1];
+    var stLast = stRates[stRates.length-1];
+    var delta  = (mxLast!=null&&mxRates[0]!=null) ? Math.round((mxLast-mxRates[0])*10)/10 : null;
+    renderRateStats([
+      { label:'Current Rate (Mar 26)', val:(mxLast!=null?mxLast:'N/A')+' per 100', sub:'Middlesex · per 100 children', green:true },
+      { label:'9-Month Change', val:(delta!=null?(delta>=0?'+':'')+delta:'N/A')+' per 100', sub:'Jul 25 → Mar 26', green:delta!=null?(cfg.loBetter?delta<0:delta>0):false },
+      { label:'State Avg (Mar 26)', val:(stLast!=null?stLast:'N/A')+' per 100', sub:'10-chapter average' },
+      { label:'vs State Avg', val:(mxLast!=null&&stLast!=null?(Math.round((mxLast-stLast)*10)/10>=0?'+':'')+Math.round((mxLast-stLast)*10)/10:'N/A')+' per 100', sub:cfg.loBetter?(mxLast<stLast?'✓ below avg':'▲ above avg'):(mxLast>stLast?'✓ above avg':'▼ below avg') }
+    ]);
+    sciRateChart = new Chart(canvas,{
+      type:'line',
+      data:{ labels:SC_MONTHS, datasets:[
+        { label:'Middlesex Rate', data:mxRates, borderColor:GRN, backgroundColor:GRN_A,
+          tension:0.35, fill:true, pointRadius:5, pointBackgroundColor:GRN, borderWidth:2.5 },
+        { label:'State Avg Rate', data:stRates, borderColor:GRY, backgroundColor:'transparent',
+          tension:0.35, fill:false, borderDash:[5,4], pointRadius:3, borderWidth:1.5 }
+      ]},
+      options:{ responsive:true, maintainAspectRatio:false, animation:{duration:450},
+        plugins:{ legend:{labels:{font:{size:12},boxWidth:14,padding:12}} },
+        scales:{
+          x:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:11}}},
+          y:{beginAtZero:cfg.loBetter, grid:{color:'rgba(0,0,0,0.07)'},
+             ticks:{font:{size:11},callback:function(v){return v+'/100';}}}
+        }
+      }
+    });
+    if (noteEl) noteEl.textContent = '* Rate = '+cfg.label+' ÷ total children served × 100 for each month. Green = Middlesex; dashed = 10-chapter state average.'+(cfg.loBetter?' Lower is better.':'');
+  }
+
+  function renderRate(){
+    /* Branch on view: trend → rate-over-time line; compare → rate-normalized bar */
+    if (uiState.view === 'trend'){ renderRateTrend(); return; }
+
+    var m    = uiState.metric;
+    var midx = uiState.monthIdx;
+    var canvas    = document.getElementById('sci_rate_chart');
+    var container = document.getElementById('sci_rate_chart_container');
+    var noDataMsg = document.getElementById('sci_rate_nodata_msg');
+    var noteEl    = document.getElementById('sci_rate_note');
+    if (!canvas) return;
+    if (sciRateChart){ sciRateChart.destroy(); sciRateChart = null; }
+    canvas.style.display = '';
+    if (noDataMsg) noDataMsg.style.display = 'none';
+
+    /* ── Metrics where a per-100-children rate is not meaningful ── */
+    var noRate = { total:1, volpct:1, new_ooh:0 };
+    if (m === 'total' || m === 'volpct'){
+      if (container) container.style.height = '72px';
+      canvas.style.display = 'none';
+      if (noDataMsg){ noDataMsg.style.display='flex';
+        noDataMsg.innerHTML = m==='volpct'
+          ? '<strong>Volunteer Coverage % is already a rate metric</strong><br>The comparison above shows the percentage directly.'
+          : '<strong>Rate view not applicable for total caseload</strong><br>Total children served is the denominator used by all other rate calculations.';
+      }
+      renderRateStats([]);
+      if (noteEl) noteEl.textContent = '';
+      return;
+    }
+
+    /* ── Per-chapter totals (denominator) ── */
+    var totals = {};
+    SC_CHAPTERS.forEach(function(ch){ totals[ch] = SC_TOTAL[ch] ? SC_TOTAL[ch][midx] : null; });
+    if (container) container.style.height = (SC_CHAPTERS.length * 36 + 72) + 'px';
+
+    /* ── Stacked: exceptions ── */
+    if (m === 'exc_total'){
+      var sorted = SC_CHAPTERS.slice().sort(function(a,b){
+        var ra = rateOf(SC_EXC_TOTAL[a]?SC_EXC_TOTAL[a][midx]:null, totals[a]);
+        var rb = rateOf(SC_EXC_TOTAL[b]?SC_EXC_TOTAL[b][midx]:null, totals[b]);
+        ra = ra!=null?ra:Infinity; rb = rb!=null?rb:Infinity;
+        return ra - rb;
+      });
+      var labels = sorted.map(function(ch){ return ch==='Middlesex'?'Middlesex  ✦':ch; });
+      var datasets = EXC_SUBS.map(function(sub){
+        return {
+          label: sub.label,
+          data: sorted.map(function(ch){ return rateOf(sub.sc[ch]?sub.sc[ch][midx]:null, totals[ch]); }),
+          backgroundColor: sorted.map(function(ch){ return ch==='Middlesex'?sub.color:sub.colorDim; }),
+          borderWidth:0
+        };
+      });
+      var mxTot  = rateOf(SC_EXC_TOTAL['Middlesex']?SC_EXC_TOTAL['Middlesex'][midx]:null, totals['Middlesex']);
+      var allTots = SC_CHAPTERS.map(function(ch){ return rateOf(SC_EXC_TOTAL[ch]?SC_EXC_TOTAL[ch][midx]:null,totals[ch]); }).filter(function(v){return v!=null;});
+      var stAvg  = Math.round(avg(allTots)*10)/10;
+      var mxRank = sorted.indexOf('Middlesex')+1;
+      var pct    = mxTot!=null ? Math.round((mxTot-stAvg)/stAvg*100) : 0;
+      renderRateStats([
+        { label:'Middlesex Rate', val:(mxTot!=null?mxTot:'N/A')+' per 100', sub:SC_MONTHS[midx]+' · raw: '+(SC_EXC_TOTAL['Middlesex']?SC_EXC_TOTAL['Middlesex'][midx]:'?')+' of '+totals['Middlesex'], green:true },
+        { label:'State Avg Rate', val:stAvg+' per 100', sub:allTots.length+' chapters' },
+        { label:'Middlesex Rank', val:mxRank+' of '+sorted.length, sub:(pct>=0?'+':'')+pct+'% vs avg' },
+        { label:'Best (Lowest)', val:Math.min.apply(null,allTots)+' per 100', sub:sorted[0] }
+      ]);
+      sciRateChart = new Chart(canvas,{
+        type:'bar', data:{labels:labels,datasets:datasets},
+        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+          animation:{duration:550,easing:'easeOutCubic'},
+          plugins:{
+            legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:12,padding:10}},
+            tooltip:{callbacks:{
+              label:function(ctx){return '  '+ctx.dataset.label+': '+ctx.raw+' per 100';},
+              footer:function(items){return 'Total: '+Math.round(items.reduce(function(s,i){return s+(i.raw||0);},0)*10)/10+' per 100';}
+            }}
+          },
+          scales:{
+            x:{stacked:true,grid:{color:'rgba(0,0,0,0.06)'},ticks:{font:{size:11},callback:function(v){return v;}}},
+            y:{stacked:true,grid:{display:false},ticks:{font:{size:12},color:function(ctx){return sorted[ctx.index]==='Middlesex'?GRN:'#888';}}}
+          }
+        }
+      });
+      if (noteEl) noteEl.textContent = '* Rate = exceptions ÷ total children served × 100. Subcategory breakdown maintained. Sorted ascending — lower rate = fewer exceptions per child. ↓ lower is better.';
+      return;
+    }
+
+    /* ── Stacked: contacts ── */
+    if (m === 'contacts'){
+      var CON_RATE_SUBS = [
+        {label:'In-Person', sc:SC_CONTACTS_IP,  color:'rgba(26,122,80,0.85)',  colorDim:'rgba(26,122,80,0.45)'},
+        {label:'Remote',    sc:SC_CONTACTS_NIP, color:'rgba(59,139,212,0.85)', colorDim:'rgba(59,139,212,0.45)'}
+      ];
+      var sorted = SC_CHAPTERS.slice().sort(function(a,b){
+        var ra = rateOf(SC_CONTACTS[a]?SC_CONTACTS[a][midx]:null, totals[a]);
+        var rb = rateOf(SC_CONTACTS[b]?SC_CONTACTS[b][midx]:null, totals[b]);
+        ra = ra!=null?ra:-Infinity; rb = rb!=null?rb:-Infinity;
+        return rb - ra;
+      });
+      var labels = sorted.map(function(ch){ return ch==='Middlesex'?'Middlesex  ✦':ch; });
+      var datasets = CON_RATE_SUBS.map(function(sub){
+        return {
+          label: sub.label,
+          data: sorted.map(function(ch){ return rateOf(sub.sc[ch]?sub.sc[ch][midx]:null, totals[ch]); }),
+          backgroundColor: sorted.map(function(ch){ return ch==='Middlesex'?sub.color:sub.colorDim; }),
+          borderWidth:0
+        };
+      });
+      var mxRate = rateOf(SC_CONTACTS['Middlesex']?SC_CONTACTS['Middlesex'][midx]:null, totals['Middlesex']);
+      var allRates = SC_CHAPTERS.map(function(ch){ return rateOf(SC_CONTACTS[ch]?SC_CONTACTS[ch][midx]:null,totals[ch]); }).filter(function(v){return v!=null;});
+      var stAvg = Math.round(avg(allRates)*10)/10;
+      var mxRank = sorted.indexOf('Middlesex')+1;
+      var pct = mxRate!=null ? Math.round((mxRate-stAvg)/stAvg*100) : 0;
+      var mxIPRate = rateOf(SC_CONTACTS_IP['Middlesex']?SC_CONTACTS_IP['Middlesex'][midx]:null, totals['Middlesex']);
+      renderRateStats([
+        { label:'Middlesex Rate', val:(mxRate!=null?mxRate:'N/A')+' per 100', sub:SC_MONTHS[midx]+' · '+mxIPRate+' in-person per 100', green:true },
+        { label:'State Avg Rate', val:stAvg+' per 100', sub:allRates.length+' chapters' },
+        { label:'Middlesex Rank', val:mxRank+' of '+sorted.length, sub:(pct>=0?'+':'')+pct+'% vs avg' },
+        { label:'Highest Rate', val:Math.max.apply(null,allRates)+' per 100', sub:sorted[0] }
+      ]);
+      sciRateChart = new Chart(canvas,{
+        type:'bar', data:{labels:labels,datasets:datasets},
+        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+          animation:{duration:550,easing:'easeOutCubic'},
+          plugins:{
+            legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:12,padding:10}},
+            tooltip:{callbacks:{
+              label:function(ctx){return '  '+ctx.dataset.label+': '+ctx.raw+' per 100';},
+              footer:function(items){return 'Total: '+Math.round(items.reduce(function(s,i){return s+(i.raw||0);},0)*10)/10+' per 100';}
+            }}
+          },
+          scales:{
+            x:{stacked:true,grid:{color:'rgba(0,0,0,0.06)'},ticks:{font:{size:11}}},
+            y:{stacked:true,grid:{display:false},ticks:{font:{size:12},color:function(ctx){return sorted[ctx.index]==='Middlesex'?GRN:'#888';}}}
+          }
+        }
+      });
+      if (noteEl) noteEl.textContent = '* Rate = contacts ÷ total children served × 100. Values above 100 mean multiple contacts per child in the month. Sorted descending — higher = more contact per child.';
+      return;
+    }
+
+    /* ── Standard single-bar rate ── */
+    var cfg = METRICS[m];
+    var sc  = SC_MAP[m];
+    var rates = {};
+    SC_CHAPTERS.forEach(function(ch){
+      var raw = sc && sc[ch] ? sc[ch][midx] : null;
+      rates[ch] = rateOf(raw, totals[ch]);
+    });
+    var sorted = SC_CHAPTERS.slice().sort(function(a,b){
+      var va = rates[a]!=null ? rates[a] : (cfg.loBetter?Infinity:-Infinity);
+      var vb = rates[b]!=null ? rates[b] : (cfg.loBetter?Infinity:-Infinity);
+      return cfg.loBetter ? va-vb : vb-va;
+    });
+    var vals      = sorted.map(function(ch){ return rates[ch]; });
+    var labels    = sorted.map(function(ch){ return ch==='Middlesex'?'Middlesex  ✦':ch; });
+    var bgColors  = sorted.map(function(ch){ return ch==='Middlesex'?GRN:'rgba(26,122,80,0.25)'; });
+    var mxRate    = rates['Middlesex'];
+    var validRates= vals.filter(function(v){ return v!=null; });
+    var stAvg     = Math.round(avg(validRates)*10)/10;
+    var mxRank    = sorted.indexOf('Middlesex')+1;
+    var pct       = mxRate!=null ? Math.round((mxRate-stAvg)/stAvg*100) : 0;
+    var mxRaw     = sc && sc['Middlesex'] ? sc['Middlesex'][midx] : null;
+    renderRateStats([
+      { label:'Middlesex Rate', val:(mxRate!=null?mxRate:'N/A')+' per 100', sub:SC_MONTHS[midx]+(mxRaw!=null?' · raw: '+mxRaw+' of '+totals['Middlesex']:''), green:true },
+      { label:'State Avg Rate', val:stAvg+' per 100', sub:validRates.length+' chapters' },
+      { label:'Middlesex Rank', val:mxRank+' of '+sorted.length, sub:(pct>=0?'+':'')+pct+'% vs avg' },
+      { label:(cfg.loBetter?'Best (Lowest)':'Highest')+' Rate', val:(cfg.loBetter?Math.min:Math.max).apply(null,validRates)+' per 100', sub:sorted[0] }
+    ]);
+    sciRateChart = new Chart(canvas,{
+      type:'bar',
+      data:{labels:labels, datasets:[{
+        label:cfg.label+' rate — '+SC_MONTHS[midx],
+        data:vals, backgroundColor:bgColors, borderRadius:4, borderWidth:0
+      }]},
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        animation:{duration:550,easing:'easeOutCubic'},
+        plugins:{
+          legend:{display:false},
+          tooltip:{callbacks:{label:function(ctx){return '  '+ctx.raw+' per 100 children';}}}
+        },
+        scales:{
+          x:{grid:{color:'rgba(0,0,0,0.06)'},ticks:{font:{size:11}}},
+          y:{grid:{display:false},ticks:{font:{size:12},color:function(ctx){return sorted[ctx.index]==='Middlesex'?GRN:'#888';}}}
+        }
+      }
+    });
+    if (noteEl) noteEl.textContent = '* Rate = '+cfg.label+' ÷ total children served × 100. Adjusts for caseload size — a chapter with 300 children and 60 exceptions (20 per 100) ranks differently than one with 100 children and 30 exceptions (30 per 100).'+(cfg.loBetter?' ↓ lower is better.':'');
+  }
+
+  /* ─── NETWORK HEAT TABLE ───────────────────────── */
+  function renderHeatTable(){
+    var m   = uiState.metric;
+    var cfg = METRICS[m];
+    var sc  = SC_MAP[m];
+    var thead = document.getElementById('sci_heat_thead');
+    var tbody = document.getElementById('sci_heat_tbody');
+    var noteEl= document.getElementById('sci_heat_note');
+    if (!thead || !tbody) return;
+
+    /* Header row */
+    var hdr = '<tr><th class="ch-col">Chapter</th>';
+    SC_MONTHS.forEach(function(mo){ hdr += '<th>'+mo+'</th>'; });
+    hdr += '</tr>';
+    thead.innerHTML = hdr;
+
+    /* Collect all non-null values across all chapters × months for colour scale */
+    var allVals = [];
+    SC_CHAPTERS.forEach(function(ch){
+      SC_MONTHS.forEach(function(_,i){
+        var v = sc && sc[ch] ? sc[ch][i] : null;
+        if (v != null) allVals.push(v);
+      });
+    });
+    var lo = allVals.length ? Math.min.apply(null,allVals) : 0;
+    var hi = allVals.length ? Math.max.apply(null,allVals) : 1;
+
+    function cellColor(v){
+      if (v == null) return '';
+      var t = hi===lo ? 0.5 : (v - lo)/(hi - lo);  /* 0=lo, 1=hi */
+      if (cfg.loBetter) t = 1 - t;                  /* flip: lo=green for loBetter */
+      /* green (good) → white → red (bad) */
+      if (t >= 0.5){
+        var r = Math.round(255*(1-(t-0.5)*2*0.45));
+        return 'background:rgba('+r+',200,'+r+',0.55)';
+      } else {
+        var g = Math.round(200 + t*2*55);
+        return 'background:rgba(255,'+g+','+g+',0.55)';
+      }
+    }
+
+    /* For stacked metrics, sum subcategories for colour scaling */
+    function getVal(ch, i){
+      return sc && sc[ch] ? sc[ch][i] : null;
+    }
+
+    var rows = '';
+    SC_CHAPTERS.forEach(function(ch){
+      var isMX = ch === 'Middlesex';
+      rows += '<tr class="'+(isMX?'mx-row':'')+'"><td class="ch-name">'+(isMX?'★ ':'')+ch+'</td>';
+      SC_MONTHS.forEach(function(_,i){
+        var v = getVal(ch,i);
+        var style = cellColor(v);
+        var display = v != null ? (m==='volpct' ? v+'%' : v) : '<span class="heat-cell-null">n/a</span>';
+        rows += '<td style="'+style+'">'+display+'</td>';
+      });
+      rows += '</tr>';
+    });
+    tbody.innerHTML = rows;
+
+    if (noteEl) noteEl.textContent = '* Colour scale: green = favourable end of range · red = unfavourable · based on min–max across all 10 chapters and 9 months for this metric. ★ = Middlesex.';
+  }
+
+  function exportHeatTable(){
+    var m  = uiState.metric;
+    var sc = SC_MAP[m];
+    var rows = [['Chapter'].concat(SC_MONTHS)];
+    SC_CHAPTERS.forEach(function(ch){
+      var row = [ch];
+      SC_MONTHS.forEach(function(_,i){
+        var v = sc && sc[ch] ? sc[ch][i] : '';
+        row.push(v!=null?v:'');
+      });
+      rows.push(row);
+    });
+    var csv = rows.map(function(r){ return r.join(','); }).join('\n');
+    var blob = new Blob([csv], {type:'text/csv'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'nj-casa-'+m+'-network.csv';
+    a.click();
+  }
+  window.exportHeatTable = exportHeatTable;
+
+  /* ─── EVENT WIRING ─────────────────────────────── */
+
+  /* Metric dropdown */
+  var metricSel = document.getElementById('sci_metric_sel');
+  if (metricSel) metricSel.addEventListener('change', function(){
+    uiState.metric = this.value;
+    render(); renderRate(); renderHeatTable();
+  });
+
+  /* View toggle */
+  var viewBtns = document.getElementById('sci_view_btns');
+  if (viewBtns) viewBtns.addEventListener('click', function(e){
+    var btn = e.target.closest('.sci-vbtn');
+    if (!btn) return;
+    viewBtns.querySelectorAll('.sci-vbtn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    uiState.view = btn.dataset.v;
+    render(); renderRate(); renderHeatTable();
+  });
+
+  /* Month selector — build + wire */
+  var monthSel = document.getElementById('sci_month_sel');
+  if (monthSel){
+    SC_MONTHS.forEach(function(mo, i){
+      var opt = document.createElement('option');
+      opt.value = i; opt.textContent = mo;
+      if (i === 8) opt.selected = true;
+      monthSel.appendChild(opt);
+    });
+    monthSel.addEventListener('change', function(){ uiState.monthIdx = parseInt(this.value); render(); renderRate(); renderHeatTable(); });
+  }
+
+  /* Compare chapter selector — build + wire */
+  var compareSel = document.getElementById('sci_compare_sel');
+  if (compareSel){
+    var noneOpt = document.createElement('option');
+    noneOpt.value=''; noneOpt.textContent='— none —';
+    compareSel.appendChild(noneOpt);
+    SC_CHAPTERS.filter(function(ch){ return ch!=='Middlesex'; }).forEach(function(ch){
+      var opt = document.createElement('option');
+      opt.value=ch; opt.textContent=ch;
+      compareSel.appendChild(opt);
+    });
+    compareSel.addEventListener('change', function(){ uiState.compareChapter=this.value; render(); renderRate(); renderHeatTable(); });
+  }
+
+  /* Initial render */
+  render(); renderRate(); renderHeatTable();
+
+})();
 
 </script>
 </body>
