@@ -775,11 +775,11 @@
   <a class="nav-btn" onclick="return showPage('volunteers',this,'active-vol')" href="#">
     <span class="pillar-pip">P2</span><span class="icon">🤝</span> Volunteer &amp; Leadership Pipeline
   </a>
-  <a class="nav-btn" onclick="return showPage('fundraising',this,'active-fund')" href="#">
-    <span class="pillar-pip">P3</span><span class="icon">💰</span> Financial Sustainability &amp; Community Partnerships
-  </a>
   <a class="nav-btn" onclick="return showPage('zipcodes',this,'active-expl')" href="#">
-    <span class="pillar-pip">P4</span><span class="icon">🏛️</span> Organizational Strength &amp; Governance
+    <span class="pillar-pip">P3</span><span class="icon">🏛️</span> Organizational Strength &amp; Governance
+  </a>
+  <a class="nav-btn" onclick="return showPage('fundraising',this,'active-fund')" href="#">
+    <span class="pillar-pip">P4</span><span class="icon">💰</span> Financial Sustainability &amp; Community Partnerships
   </a>
   <a class="nav-btn" onclick="return showPage('state',this,'active-state')" href="#">
     <span class="icon">🗺️</span> NJ CASA Dashboard
@@ -962,19 +962,6 @@
       <div class="psc-row">
         <div class="psc-head">
           <span class="psc-pillar">Pillar 3</span>
-          <span class="psc-name">Financial Sustainability</span>
-        </div>
-        <div class="psc-kpi">
-          <span class="pb-badge yellow" style="margin-bottom:4px;">🟡 Watch</span><br>
-          <strong>$125.2K</strong> raised of $128K goal (98%) &nbsp;·&nbsp; <strong>$260.5K</strong> grants awarded + $228.8K pending &nbsp;·&nbsp; FY25 operating net: <strong>-$17K</strong> (Rev $638K · Exp $655K)
-        </div>
-        <div class="psc-detail">Fundraising objectives on track<br>3 risks: operating deficit · donor retention · federal grant concentration</div>
-        <a class="psc-link" onclick="return showPage('fundraising',document.querySelector('[onclick*=fundraising]'),'active-fund')" href="#">Drill in →</a>
-      </div>
-
-      <div class="psc-row">
-        <div class="psc-head">
-          <span class="psc-pillar">Pillar 4</span>
           <span class="psc-name">Organizational &amp; Governance</span>
         </div>
         <div class="psc-kpi">
@@ -983,6 +970,19 @@
         </div>
         <div class="psc-detail">Governance KPIs being formalized<br>Strong operational stability</div>
         <a class="psc-link" onclick="return showPage('zipcodes',document.querySelector('[onclick*=zipcodes]'),'active-expl')" href="#">Drill in →</a>
+      </div>
+
+      <div class="psc-row">
+        <div class="psc-head">
+          <span class="psc-pillar">Pillar 4</span>
+          <span class="psc-name">Financial Sustainability</span>
+        </div>
+        <div class="psc-kpi">
+          <span class="pb-badge yellow" style="margin-bottom:4px;">🟡 Watch</span><br>
+          <strong>$125.2K</strong> raised of $128K goal (98%) &nbsp;·&nbsp; <strong>$260.5K</strong> grants awarded + $228.8K pending &nbsp;·&nbsp; FY25 operating net: <strong>-$17K</strong> (Rev $638K · Exp $655K)
+        </div>
+        <div class="psc-detail">Fundraising objectives on track<br>3 risks: operating deficit · donor retention · federal grant concentration</div>
+        <a class="psc-link" onclick="return showPage('fundraising',document.querySelector('[onclick*=fundraising]'),'active-fund')" href="#">Drill in →</a>
       </div>
 
     </div>
@@ -1428,7 +1428,7 @@
   <main>
     <div class="print-header"><span class="ph-org">CASA — Financial Sustainability &amp; Community Partnerships</span><span class="ph-date" id="ph_date_fund"></span></div>
     <div class="pillar-banner">
-      <span class="pb-pillar">Pillar 3</span>
+      <span class="pb-pillar">Pillar 4</span>
       <span class="pb-name">Financial Sustainability &amp; Community Partnerships</span>
       <span class="pb-badge yellow">🟡 Watch — FY25 operating deficit</span>
       <div class="pb-obj-row">
@@ -1966,7 +1966,7 @@
     <div class="print-header"><span class="ph-org">CASA — Volunteer &amp; Leadership Pipeline Dashboard</span><span class="ph-date" id="ph_date_vol"></span></div>
     <div class="pillar-banner">
       <span class="pb-pillar">Pillar 2</span>
-      <span class="pb-name">Volunteer Engagement &amp; Retention</span>
+      <span class="pb-name">Volunteer &amp; Leadership Pipeline</span>
       <span class="pb-badge yellow">🟡 Watch — recruitment below pace</span>
       <div class="pb-obj-row">
         <span class="pb-obj"><span class="pb-dot y"></span>New advocates — below 20/yr goal</span>
@@ -2244,7 +2244,7 @@
   <main>
     <div class="print-header"><span class="ph-org">CASA — Organizational Strength &amp; Governance</span><span class="ph-date" id="ph_date_zip"></span></div>
     <div class="pillar-banner">
-      <span class="pb-pillar">Pillar 4</span>
+      <span class="pb-pillar">Pillar 3</span>
       <span class="pb-name">Organizational Strength &amp; Governance</span>
       <span class="pb-badge green">🟢 On Track — stable operations</span>
       <div class="pb-obj-row">
@@ -2267,10 +2267,10 @@
         </button>
         <div class="collapse-body">
           <div class="insight-grid">
-            <div class="insight positive"><div class="itag">Strength — zero staff attrition in FY26</div><p>No Program Coordinator turnover year-to-date is the single most important Pillar 4 signal. Each PC departure historically creates a 60–90 day gap in case coverage and increased volunteer burden. Maintaining a stable team preserves institutional knowledge, volunteer relationships, and case continuity — all critical given the 241-child eligible pool and the 200-child YTD serving goal.</p></div>
+            <div class="insight positive"><div class="itag">Strength — zero staff attrition in FY26</div><p>No Program Coordinator turnover year-to-date is the single most important Pillar 3 signal. Each PC departure historically creates a 60–90 day gap in case coverage and increased volunteer burden. Maintaining a stable team preserves institutional knowledge, volunteer relationships, and case continuity — all critical given the 241-child eligible pool and the 200-child YTD serving goal.</p></div>
             <div class="insight watch"><div class="itag">Watch — PC-to-case ratio approaching ceiling</div><p>At roughly 1 PC per 48 active cases, the team operates near CASA National's recommended 1:50 maximum. With rolling children served growing from 126 (Jul) to 160 (Feb), the ratio will tighten further as CASA approaches its 200-child annual target. Additional staffing or intern support should be modeled before caseload reaches 150+ active cases.<span class="action-line">Add PC-to-case ratio to the monthly report; if active cases exceed 145 before June, bring staffing options to the board before it becomes a crisis.</span></p></div>
             <div class="insight neutral"><div class="itag">Context — NJ network financial position</div><p>Across NJ's 11 CASA programs, 5 are operating with deficits and 10 maintain 4+ months of cash reserves. Middlesex's FY26 fundraising trajectory ($125.2K of $128K goal) and grants pipeline ($260.5K awarded of $489K submitted) position it among the financially stronger NJ programs — a meaningful stabilizing factor for board and funder confidence.</p></div>
-            <div class="insight neutral"><div class="itag">Action — formalize quarterly governance KPIs</div><p>The FY27–28 Strategic Framework identifies board meeting attendance, SOP checklist completion, and board pipeline count as Pillar 4 KPIs — but none currently have a tracking mechanism. Establishing a simple monthly log for these three metrics this quarter would provide a baseline for FY27 reporting and demonstrate to funders that governance is actively managed rather than assumed.<span class="action-line">Assign one staff member to collect board attendance and SOP completion data at each meeting, starting next month — the infrastructure is a one-page spreadsheet, not a system implementation.</span></p></div>
+            <div class="insight neutral"><div class="itag">Action — formalize quarterly governance KPIs</div><p>The FY27–28 Strategic Framework identifies board meeting attendance, SOP checklist completion, and board pipeline count as Pillar 3 KPIs — but none currently have a tracking mechanism. Establishing a simple monthly log for these three metrics this quarter would provide a baseline for FY27 reporting and demonstrate to funders that governance is actively managed rather than assumed.<span class="action-line">Assign one staff member to collect board attendance and SOP completion data at each meeting, starting next month — the infrastructure is a one-page spreadsheet, not a system implementation.</span></p></div>
           </div>
         </div>
       </div>
@@ -2302,7 +2302,7 @@
 
     <!-- ── PILLAR 4 GOVERNANCE METRICS ── -->
     <div id="p4-governance" class="section-title">Organizational Health — Governance &amp; Operations (FY26 YTD)</div>
-    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Core operational and governance metrics for Pillar 4. Staff stability and compliance data reflect FY26 year-to-date (through Feb 2026). Board metrics are tracked quarterly.</p>
+    <p style="color:var(--text2);font-size:13.5px;margin:-4px 0 14px;line-height:1.6;">Core operational and governance metrics for Pillar 3. Staff stability and compliance data reflect FY26 year-to-date (through Feb 2026). Board metrics are tracked quarterly.</p>
     <div class="drill-kpi-bar n4" style="margin-bottom:18px;">
       <div class="drill-kpi">
         <div class="dk-lbl">Staff attrition (FY26 YTD)</div>
@@ -2326,7 +2326,7 @@
       </div>
     </div>
     <div class="insight-grid" style="margin-bottom:1.75rem;">
-      <div class="insight positive"><div class="itag">Strength — Zero staff attrition</div><p>No Program Coordinator turnover in FY26 year-to-date is the most important Pillar 4 signal. Each PC departure historically creates a 60–90 day gap in case coverage and increased volunteer burden. Maintaining a stable team preserves institutional knowledge and volunteer relationships — both critical for program continuity given the 241-child eligible pool.</p></div>
+      <div class="insight positive"><div class="itag">Strength — Zero staff attrition</div><p>No Program Coordinator turnover in FY26 year-to-date is the most important Pillar 3 signal. Each PC departure historically creates a 60–90 day gap in case coverage and increased volunteer burden. Maintaining a stable team preserves institutional knowledge and volunteer relationships — both critical for program continuity given the 241-child eligible pool.</p></div>
       <div class="insight watch"><div class="itag">Watch — PC-to-case ratio at capacity ceiling</div><p>At roughly 1 PC per 48 active cases, the team is operating near the practical ceiling for effective individual case oversight. CASA National recommends a 1:50 maximum; Middlesex's current 126 active children leaves limited buffer for caseload growth without additional staffing. Reaching the 200-child YTD goal will require monitoring this ratio monthly.<span class="action-line">Add PC-to-case ratio to the monthly executive report; if active cases exceed 145 before June, bring staffing options — including a part-time Program Coordinator or licensed intern — to the board for a decision before the caseload reaches the ceiling.</span></p></div>
       <div class="insight positive"><div class="itag">Strength — coordinator pipeline on schedule</div><p>Monthly coordinator meetings have been completed on time in 8 of 9 months (89%), and 1-year coordinator attrition is 0% against a maximum 20% target. Three new peer coordinators are targeted for training in spring 2026 — a leadership pipeline investment that directly expands supervisory capacity for a growing caseload. This organizational stability rarely shows up in program metrics but is the infrastructure that makes all other outcomes possible.</p></div>
       <div class="insight positive"><div class="itag">Strength — community outreach doubles goal</div><p>22 community events completed through February against a 10+ full-year target — more than double the annual goal with four months remaining. Combined with consistent social media output (11 posts/month vs. 8 goal), CASA Middlesex's community presence is significantly above plan and building the long-term awareness pipeline for volunteers and donors.<span class="action-line">Document which event types generated the most volunteer inquiries or donor leads — a one-page event ROI summary would help the board allocate outreach resources for FY27.</span></p></div>
@@ -2350,19 +2350,19 @@
     </div>
     <div class="two" style="margin-bottom:1.75rem;">
       <div class="card">
-        <div class="chart-toolbar"><div class="card-title">Pillar 3 — Donor giving (cash + in-kind, $K) FY21–FY25</div></div>
+        <div class="chart-toolbar"><div class="card-title">Pillar 4 — Donor giving (cash + in-kind, $K) FY21–FY25</div></div>
         <div class="chart-hint">Donor-database giving only · FY25: $149K · Total program revenue incl. grants: $638K</div>
         <div class="cw" style="height:180px"><canvas id="p4_sp_p3"></canvas></div>
       </div>
       <div class="card">
-        <div class="chart-toolbar"><div class="card-title">Pillar 4 — Children served (annual active) FY21–FY25</div></div>
+        <div class="chart-toolbar"><div class="card-title">Pillar 3 — Children served (annual active) FY21–FY25</div></div>
         <div class="chart-hint">Annual active caseload · FY26 goal: 200 rolling YTD</div>
         <div class="cw" style="height:180px"><canvas id="p4_sp_p4"></canvas></div>
       </div>
     </div>
     <div class="insight-grid" style="margin-bottom:1.75rem;">
       <div class="insight positive"><div class="itag">Pattern — Three pillars are trending up</div><p>Program outcomes (closure rate), financial sustainability (total program revenue), and caseload (children served) have all improved over five years. Volunteer headcount is the one pillar moving in the wrong direction: after peaking at 128 in FY24, it declined to 121. Since volunteer capacity directly constrains caseload growth, the Pillar 2 plateau is the single most important trend to reverse if CASA intends to serve the full 241-child eligible pool.</p></div>
-      <div class="insight watch"><div class="itag">Pillar 2 is the binding constraint on Pillar 1 and 4</div><p>The positive closure rate (Pillar 1) and children served (Pillar 4) are both limited by how many active volunteers exist (Pillar 2). The current 1:1.38 volunteer-to-child ratio is healthy, but reaching 200 children served while volunteer count is declining means the ratio will tighten. Every advocate recruited directly expands the program's ability to serve children — making the recruitment target the single highest-leverage input across all four pillars.<span class="action-line">Present this four-pillar view at the next board meeting to make the volunteer constraint visible — it connects the dots between a "volunteer recruitment" problem and the program's ability to hit its service goals.</span></p></div>
+      <div class="insight watch"><div class="itag">Pillar 2 is the binding constraint on Pillar 1 and 3</div><p>The positive closure rate (Pillar 1) and children served (Pillar 3) are both limited by how many active volunteers exist (Pillar 2). The current 1:1.38 volunteer-to-child ratio is healthy, but reaching 200 children served while volunteer count is declining means the ratio will tighten. Every advocate recruited directly expands the program's ability to serve children — making the recruitment target the single highest-leverage input across all four pillars.<span class="action-line">Present this four-pillar view at the next board meeting to make the volunteer constraint visible — it connects the dots between a "volunteer recruitment" problem and the program's ability to hit its service goals.</span></p></div>
     </div>
 
     <!-- ── FY27-28 STRATEGIC KPI TABLE ── -->
@@ -2408,7 +2408,7 @@
           </tr>
           <!-- PILLAR 2: Volunteer Engagement -->
           <tr style="background:var(--bg2);">
-            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 2 — Volunteer Engagement &amp; Retention</td>
+            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 2 — Volunteer &amp; Leadership Pipeline</td>
           </tr>
           <tr style="border-bottom:0.5px solid var(--border);">
             <td style="padding:8px 10px;font-size:13px;">New advocates sworn in / year</td>
@@ -2438,9 +2438,20 @@
             <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">21% (Feb)</td>
             <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Meeting goal</td>
           </tr>
-          <!-- PILLAR 3: Financial & Community -->
+          <!-- PILLAR 3: Organizational Strength & Governance -->
           <tr style="background:var(--bg2);">
-            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 3 — Financial Sustainability &amp; Community Partnerships</td>
+            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 3 — Organizational Strength &amp; Governance</td>
+          </tr>
+          <tr style="border-bottom:0.5px solid var(--border);">
+            <td style="padding:8px 10px;font-size:13px;">Program Coordinator attrition</td>
+            <td style="text-align:center;padding:8px 10px;">&lt;20%</td>
+            <td style="text-align:center;padding:8px 10px;">&lt;20%</td>
+            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">0% (FY26 YTD)</td>
+            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Stable staff — no attrition this year</td>
+          </tr>
+          <!-- PILLAR 4: Financial Sustainability & Community Partnerships -->
+          <tr style="background:var(--bg2);">
+            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 4 — Financial Sustainability &amp; Community Partnerships</td>
           </tr>
           <tr style="border-bottom:0.5px solid var(--border);">
             <td style="padding:8px 10px;font-size:13px;">Unrestricted fundraising raised</td>
@@ -2455,17 +2466,6 @@
             <td style="text-align:center;padding:8px 10px;">&ge;2</td>
             <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">$260.5K awarded</td>
             <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Strong pipeline; $228.8K pending</td>
-          </tr>
-          <!-- PILLAR 4: Organizational Strength -->
-          <tr style="background:var(--bg2);">
-            <td colspan="5" style="padding:6px 10px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Pillar 4 — Organizational Strength &amp; Governance</td>
-          </tr>
-          <tr style="border-bottom:0.5px solid var(--border);">
-            <td style="padding:8px 10px;font-size:13px;">Program Coordinator attrition</td>
-            <td style="text-align:center;padding:8px 10px;">&lt;20%</td>
-            <td style="text-align:center;padding:8px 10px;">&lt;20%</td>
-            <td style="text-align:center;padding:8px 10px;font-weight:600;color:#2e7d32;">0% (FY26 YTD)</td>
-            <td style="padding:8px 10px;font-size:12px;color:var(--text2);">Stable staff — no attrition this year</td>
           </tr>
         </tbody>
       </table>
@@ -3014,7 +3014,7 @@ var CHART_ANALYSIS = {
   'Strategic KPI targets \u2014 all four pillars':
     'The table shows CASA tracking above target on program outcomes (88% positive closures vs. 75% goal) and fundraising (98% to unrestricted goal), while new advocate recruitment (~12 vs. 20+ goal) and % eligible children served (73\u201379% vs. 80% goal) are the two active watch items for FY26. The four-pillar balanced scorecard structure \u2014 Program Quality, Volunteer Engagement, Fundraising, and Organizational Strength \u2014 catches cross-functional risks before they compound. FY27\u201328 targets escalate across all pillars, making current-year gaps the highest-priority items for board planning and resource allocation.',
 
-  /* ── Pillar 3 revenue new charts ── */
+  /* ── Pillar 4 revenue new charts ── */
   'Total program revenue by category \u2014 FY22 to FY25':
     'Total program revenue (excluding imputed volunteer services) grew from $388K in FY22 to $638K in FY25 \u2014 a 64% increase in four years. Government grants (blue) dominate at 78% in FY25: VOCA and NJ State Pass-Thru alone represent $377K, nearly 60% of the entire budget. Unrestricted fundraising (green) grew from a negligible $41K in FY22 to $196K at its FY24 peak before declining to $139K in FY25. The orange dashed line shows donated volunteer services ($168\u2013$193K/year) \u2014 an imputed non-cash value representing volunteer advocacy hours, recorded in the financial statements but not a cash revenue line. The core strategic implication: the program\u2019s financial sustainability is more dependent on government grant renewals than on donor development. Building the unrestricted base is the most important long-term financial resilience strategy.',
   'Government grant streams by type \u2014 FY22 to FY25':
@@ -3022,20 +3022,20 @@ var CHART_ANALYSIS = {
   'Unrestricted fundraising by source \u2014 FY22 to FY25':
     'The Toast Gala (red) is CASA\u2019s most reliable event: $51,347 \u2192 $54,983 \u2192 $55,035 across three years with under 4% variance. It is the cornerstone of the unrestricted budget and deserves disproportionate investment and protection. Holiday Appeal (blue) generates $26\u201337K annually but has declined from its FY23 high. Corporate/Foundation giving (green) peaked at $40K in FY24 and fell sharply to $16K in FY25 \u2014 the largest year-over-year decline in any channel. Individual Donations (purple) spiked to $35K in FY24 before falling to $10K in FY25 \u2014 consistent with the broad donor cohort that drove the 157% donor count increase being mostly first-time small givers. Interest Income (amber) at $17K in FY25 reflects healthy reserves but should not be forecast as growing. FY22\u2019s \u201cOther/Events\u201d column represents the pre-itemized catch-all for all unrestricted giving before line-item tracking was established.',
 
-  /* ── Pillar 3 donor charts ── */
+  /* ── Pillar 4 donor charts ── */
   'Average cash gift per donor vs. total donors \u2014 FY21 to FY25':
     'Average cash gift per donor peaked at $871 in FY23 when only 75 donors were active, and has declined to $386 in FY25 as the donor base expanded to 278. This is not a crisis \u2014 it is the expected math of rapid base growth, where many first-time donors give smaller amounts. The risk is structural: if total revenue growth depends on adding new donors each year rather than deepening existing relationships, the program is perpetually on an acquisition treadmill. The strategic lever for FY26 is mid-range upgrades \u2014 identifying the 97 donors in the $100\u2013$499 tier and making personal cultivation calls to move 20 of them into the $500+ range. That single action would add approximately $5\u20138K in cash without any new donor acquisition.',
   'In-kind revenue by year \u2014 FY21 to FY25':
     'In-kind donor gifts were stable at $7\u20138K for three years (FY21\u2013FY23), then spiked to $61.6K in FY24 driven by a concentration of organizational in-kind donors (16 organizations gave $55K combined), before declining to $42K in FY25. The 8\u00d7 swing between FY22 and FY24 makes in-kind structurally unreliable as a donor-giving budget line without active concentration risk management. At 28% of FY25 donor giving, in-kind is in a healthy range \u2014 but in context it represents just 6.6% of the full $638K program budget, so the primary financial risk remains government grant concentration, not in-kind volatility. The FY24 spike should not be treated as a new baseline. The top 3\u20135 in-kind donors almost certainly represent the majority of this revenue and each relationship warrants named board stewardship and a defined ask level. A diversified in-kind pipeline of 10+ smaller organizational contributors would reduce single-donor concentration risk significantly.',
 
-  /* ── Pillar 4 Four Pillar Pulse charts ── */
+  /* ── Pillar 3 Four Pillar Pulse charts ── */
   'Pillar 1 \u2014 Positive closure rate (%) FY21\u2013FY25':
     'Positive closure rate (reunification + adoption + KLG + judge released CASA \u00f7 total closures) has held above 78% in every year of the dataset and exceeded 88% in four of five years. FY23 reached 91% \u2014 the highest recorded. The consistent performance well above the \u226575% benchmark is the strongest program quality signal in the dashboard and reflects sustained advocacy effectiveness. The main risk to watch in FY25 and beyond is the aged-out rate: 6 children (12% of FY25 closures) aged out without family permanency \u2014 a spike from 0\u20131.5% in prior years. A proactive case review for children currently aged 17\u201318 is the highest-priority action to protect this metric in FY26.',
   'Pillar 2 \u2014 Active volunteer headcount FY21\u2013FY25':
-    'Active volunteers grew from 111 in FY21 to a peak of 128 in FY24 \u2014 then declined to 121 in FY25. This is the only pillar trending in the wrong direction. With approximately 30 departures estimated in FY25 (23 new recruits minus a net loss of 7 = ~23% annual attrition), the program must recruit roughly 30 advocates per year just to hold steady. At the FY25 pace of 23 new advocates, the corps will continue to contract unless attrition is reduced or recruitment is accelerated. Since volunteer capacity directly constrains both children served (Pillar 4) and case quality (Pillar 1), this is the binding constraint across all four pillars.',
-  'Pillar 3 \u2014 Donor giving (cash + in-kind, $K) FY21\u2013FY25':
+    'Active volunteers grew from 111 in FY21 to a peak of 128 in FY24 \u2014 then declined to 121 in FY25. This is the only pillar trending in the wrong direction. With approximately 30 departures estimated in FY25 (23 new recruits minus a net loss of 7 = ~23% annual attrition), the program must recruit roughly 30 advocates per year just to hold steady. At the FY25 pace of 23 new advocates, the corps will continue to contract unless attrition is reduced or recruitment is accelerated. Since volunteer capacity directly constrains both children served (Pillar 3) and case quality (Pillar 1), this is the binding constraint across all four pillars.',
+  'Pillar 4 \u2014 Donor giving (cash + in-kind, $K) FY21\u2013FY25':
     'Donor giving (cash + in-kind from individual and organizational donors) has grown from $49K (FY21) to $149K (FY25) \u2014 a 204% increase over five years. This represents the development-team-controlled slice of the total $638K FY25 budget; government grants account for another $499K. The FY22 year was the lowest donor-giving year ($45K); FY23 marked the first strong year ($73K); FY24\u2013FY25 represent a step-change acceleration. FY24\u2019s spike to $130K was partially driven by organizational in-kind ($62K vs. $8K in FY23), which normalized to $42K in FY25. Cash giving has grown more sustainably: $42K \u2192 $36K \u2192 $65K \u2192 $68K \u2192 $107K. The FY26 goal of $128K unrestricted is 98% achieved through February, positioning FY26 for the program\u2019s strongest back-to-back years of donor fundraising.',
-  'Pillar 4 \u2014 Children served (annual active) FY21\u2013FY25':
+  'Pillar 3 \u2014 Children served (annual active) FY21\u2013FY25':
     'Annual active caseload has grown steadily from 143 children (FY21) to 167 (FY25) \u2014 a 17% increase over five years. The FY26 goal of 200 rolling YTD children is tracking well at 160 through February. Growth has been consistent and orderly, with no single-year spikes that would strain capacity. The key constraint on serving more children is not referrals \u2014 241 children are currently eligible and not receiving CASA advocacy \u2014 but volunteer capacity. Each advocate added directly translates to an additional child served, making the Pillar 2 headcount trajectory the most important single lever for closing the 241-child gap.',
 
   /* ── Explorer ── */
